@@ -13,7 +13,7 @@
     /** Fichier de configuration, contient l'autoloader **/
     /***************************************************/
 	require_once("./configuration.php");
-	
+	// Allo le monde
    /***************************************************/
     /** Initialisation des variables **/
     /***************************************************/
