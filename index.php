@@ -13,7 +13,7 @@
     /** Fichier de configuration, contient l'autoloader **/
     /***************************************************/
 	require_once("./configuration.php");
-	// Allo le monde
+	
    /***************************************************/
     /** Initialisation des variables **/
     /***************************************************/
@@ -25,4 +25,6 @@
 	$oCtl = new Controleur();
 	$oCtl->gerer();
 
+	
+	// Ajout d'une ligne dans index.php
 ?>
