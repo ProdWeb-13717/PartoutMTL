@@ -13,7 +13,11 @@
     /** Fichier de configuration, contient l'autoloader **/
     /***************************************************/
 	require_once("./configuration.php");
+
 	// Voici un changement
+
+	// Allo le monde
+
    /***************************************************/
     /** Initialisation des variables **/
     /***************************************************/
@@ -22,7 +26,9 @@
    /***************************************************/
     /** Démarrage du controleur **/
     /***************************************************/
+	// Ajout d'un commentaire ici
 	$oCtl = new Controleur();
 	$oCtl->gerer();
+	// Ajout d'un commentaire ici
 
 ?>
