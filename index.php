@@ -22,9 +22,14 @@
    /***************************************************/
     /** Démarrage du controleur **/
     /***************************************************/
+	// Ajout d'un commentaire ici
 	$oCtl = new Controleur();
 	$oCtl->gerer();
+<<<<<<< HEAD
 	
 	echo "allo";
+=======
+	// Ajout d'un commentaire ici
+>>>>>>> UpStream/master
 
 ?>
