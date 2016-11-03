@@ -1,5 +1,4 @@
 <?php
-	
 	abstract class TemplateBase
 	{
 		protected $connexion;
@@ -56,6 +55,8 @@
 			}
 		}
 		
+		
+		/*
 		public function supprimer($valeur, $cle = null)
 		{
 			try
@@ -108,7 +109,7 @@
 				return 0;
 			}
 		}
-	
+	*/
 	
 	}
 ?>
