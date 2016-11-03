@@ -56,7 +56,6 @@
 		}
 		
 		
-		/*
 		public function supprimer($valeur, $cle = null)
 		{
 			try
@@ -65,9 +64,6 @@
 				{
 					$cle = $this->getPrimaryKey();
 				}
-				$stmt = $this->connexion->prepare("delete from choix where idJoueurChoix = :valeur");
-				$stmt->bindParam(":valeur", $valeur);
-				$stmt->execute();
 				$stmt = $this->connexion->prepare("delete from " . $this->getTable() . " where " . $cle . " = :valeur");
 				$stmt->bindParam(":valeur", $valeur);
 				$stmt->execute();
@@ -79,37 +75,7 @@
 			}
 		}
 		
-		public function compteRanges(){
-			
-			try
-			{	
-			
-				$stmt = $this->connexion->prepare("SELECT COUNT(*) AS quantite FROM " . $this->getTable());
-				$stmt->execute();
-				return $stmt->fetch();
-			}
-			catch(Exception $exc)
-			{
-				return false;
-			}
-			
-		}
-		
-		
-		public function modifierStats($id, $buts, $pass)
-		{
-			try
-			{
-				$stmt = $this->connexion->prepare("update joueurs set nombreButs= :buts,nombrePass= :pass where idJoueur =:id");
-				$stmt->execute(array(":buts" => $buts, ":pass" => $pass, ":id" => $id ));
-				return 1;
-			}
-			catch(Exception $exc)
-			{
-				return 0;
-			}
-		}
-	*/
+	
 	
 	}
 ?>
