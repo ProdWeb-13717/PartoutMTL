@@ -15,7 +15,7 @@
 		{
 			try
 			{
-				$this->connexion = new PDO("mysql:dbname=partout;host=localhost", "root", "");
+				$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=107.180.109.70:3306", "partout", "equipeDeCourse5");
 			}
 			catch(Exception $exc)
 			{
