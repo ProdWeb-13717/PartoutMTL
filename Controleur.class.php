@@ -32,6 +32,11 @@ class Controleur
 				case 'importationok':
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
+                    
+                case 'listeArtiste':
+					$this->afficheListe(); // option quand get requete n'existe pas
+					break;
+                    
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;
@@ -71,6 +76,28 @@ class Controleur
 			
 			$oVue->afficheEntete();
 			$oVue->afficheImportationok();
+			$oVue->affichePied();
+		}
+    
+        //Fonction pour afficher une liste (artiste ou oeuvres)
+        function afficheListe()
+		{
+			$oVue = new Vue();
+            $oVueListe = new vueListe();
+            
+			$oVue->afficheEntete();
+			
+            if($_GET['requete'] == "listeArtiste")
+            {
+                $oVueListe->;  
+            }
+            
+            else if($_GET['requete'] == "listeArtiste")
+            {
+                
+            }
+            
+            
 			$oVue->affichePied();
 		}
 }
