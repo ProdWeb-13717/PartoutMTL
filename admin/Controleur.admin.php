@@ -23,17 +23,8 @@ class Controleur
 		{
 			
 			switch ($_GET['requete']) {
-				
 				case 'accueil':
 					$this->accueil(); // option quand get requete est accueil
-					break;
-				
-				case 'admin' : 
-					$this->admin();
-					break;
-				
-				case 'autentificationAdmin':
-					$this->autentificationAdmin();
 					break;
 					/*
 				case 'importation':
@@ -43,7 +34,6 @@ class Controleur
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
 					*/
-					
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;
@@ -51,41 +41,16 @@ class Controleur
 		}
 		private function accueil()
 		{
-			$oVue = new VueAdmin();
+			$oVue = new Vue();
 			
 			$oVue->afficheEntete();
-			$oVue->afficheFormAutentificationAdmin();
+			$oVue->afficheAccueil();
 			$oVue->affichePied();
 		}
 		
-		private function autentificationAdmin()
+		private function autentification()
 		{
-			$oVue = new VueAdmin();
-			$admin = new Admin();
-			$resulta = $admin->verifFormAutentifiAdmin();
 			
-			
-			$oVue->afficheEntete();
-			
-			if($resulta)
-			{
-				$oVue->afficherAcceuilAdmin();
-			}
-			else
-			{
-				$oVue->afficheFormAutentificationAdmin();
-			}
-			
-			$oVue->affichePied();
-		}
-		
-		private function admin()
-		{
-			$oVue = new VueAdmin();
-			
-			$oVue->afficheEntete();
-			$oVue->verifFormAutentifiAdmin();
-			$oVue->affichePied();
 		}
 		// Placer les méthodes du controleur.
 		/*

@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Class Controleur
+ * Gère les requêtes a la Base de donnees
+ * 
+ * @author Guillaume Harvey
+ * @version 1.0
+ * 
+ */
+ 
+ 
+ 
 	abstract class TemplateBase
 	{
 		protected $connexion;
