@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Class Controleur
  * Gère les requêtes HTTP
@@ -30,7 +30,14 @@ class Controleur
 					$this->importation(); // option quand get requete n'existe pas
 					break;
 				case 'importationok':
-					$this->importationok(); // option quand get requete n'existe pas
+					
+					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
+					//$connexionBD = $this->obtenirconnexionBD();//cet variable contienne la connexion à la BD neccesaire pour faire les querys
+					$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
+					
+					//echo $publicJson[0]->Artistes[0]->Nom;
+				
+					$this->importationok(); // avant de montrer la vue, je dois aller chercher le donnes avec le modele
 					break;
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
@@ -39,30 +46,56 @@ class Controleur
 		}
 		private function accueil()
 		{
-			$oVue = new Vue();
+			$oVue = new Vueimportation();
 			
 			$oVue->afficheEntete();
 			$oVue->afficheAccueil();
 			$oVue->affichePied();
 		}
 		// Placer les méthodes du controleur.
-		function importation()
+		private function importation()
 		{
-			$oVue = new Vue();
+			$oVue = new Vueimportation();
 			
 			$oVue->afficheEntete();
 			$oVue->afficheformImportation();
 			$oVue->affichePied();
 		}
 		
-		function importationok()
+		private function importationok()
 		{
-			$oVue = new Vue();
 			
+			$oVue = new Vueimportation();
 			$oVue->afficheEntete();
 			$oVue->afficheImportationok();
 			$oVue->affichePied();
 		}
+		
+		// fucntions/modeles pour traitement sans affichage
+		
+		private function obtenirJSON()
+		{
+			$oRemote = new Donnesremote();
+			return $oRemote->getpublicJSON();
+			
+		}
+		
+		/*private function obtenirconnexionBD()
+		{
+			$oArtistes = new Artistes();
+			return $oArtistes->connexionBD();
+			
+		}*/
+		
+		private function traiterDonnees($jsonSite){
+			
+			$oArtistes = new Artistes();
+			$data = $oArtistes->compteRanges();
+			$nomArtistesBD = $data["quantite"];
+			echo $nomArtistesBD;
+			echo "<br>";
+		}
+		
 }
 ?>
 
