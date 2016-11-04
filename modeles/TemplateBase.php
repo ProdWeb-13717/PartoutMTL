@@ -1,4 +1,16 @@
 <?php
+
+/**
+ * Class Controleur
+ * Gère les requêtes a la Base de donnees
+ * 
+ * @author Guillaume Harvey
+ * @version 1.0
+ * 
+ */
+ 
+ 
+ 
 	abstract class TemplateBase
 	{
 		protected $connexion;
@@ -30,6 +42,7 @@
 				{
 					$cle = $this->getPrimaryKey();
 				}
+				
 				$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where " . $cle . " = :valeur");
 				$stmt->bindParam(":valeur", $valeur);
 				$stmt->execute();
