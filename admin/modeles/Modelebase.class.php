@@ -52,7 +52,7 @@ abstract class Modelebase {
 		
 		try
 			{
-				$connexion = new PDO("mysql:dbname=partoutMTL;host=localhost", "root", "");
+				$connexion = new PDO("mysql:dbname=partoutMTL;host=localhost", "root", "",array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));//derniere attribut necessaire pour garder les donnees en UTF-8 
 				return $connexion;
 			
 			}

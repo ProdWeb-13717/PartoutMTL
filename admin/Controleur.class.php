@@ -81,9 +81,9 @@ class Controleur
 			
 			$nomOuvres = count($jsonSite);
 			
-			for($i=0;$i<20;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<$nomOuvres;$i++){// for pour parcourir tout les oeuvres
 				
-				//***traitement des artistes*** esto podria ir en una funcion..despues lo probamos//
+				//***traitement des artistes***
 				
 				foreach($jsonSite[$i]->Artistes as $artiste){
 					
@@ -116,7 +116,6 @@ class Controleur
 				
 				//*** traitement des arrondissements
 				
-				//echo $i." - ".$jsonSite[$i]->Arrondissement ."<br>";
 				
 				//confirmation qu'un arrondissement n'est pas dans la BD et ajout si necessaire
 					
@@ -125,11 +124,55 @@ class Controleur
 					
 					$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
 				}
+				//fin traitement des arrondissements
+				
+				
+				//*** traitement des categories
+				
+				//echo $jsonSite[$i]->SousCategorieObjet;
+				//echo "<br>";
+				
+				
+				//confirmation qu'une categorie n'est pas dans la BD et ajout si necessaire
+					
+				$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet);
+				if(!$ilExiste){
+					
+					$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
+				}
+				
+				
+				//fin traitement des categories
+				
+				
+				
+				//*** traitement des oeuvres
+				
+				//echo $jsonSite[$i]->SousCategorieObjet;
+				//echo "<br>";
+				
+				
+				//confirmation qu'une categorie n'est pas dans la BD et ajout si necessaire
+					
+				/*echo $jsonSite[$i]->Titre;
+				echo " - ";
+				echo $jsonSite[$i]->TitreVariante;
+				echo " - ";*/
+				echo $jsonSite[$i]->NumeroAccession;
+				echo "<br>";
+				
+				
+				//fin traitement des oeuvres
+				
+				
+				
+				
 				
 				
 			}
 			
 		}
+		//***** functions par rapport à des traitement des artistes
 		
 		private function verifierArtiste($nom,$prenom,$collectif)
 		{
@@ -148,6 +191,10 @@ class Controleur
 			
 		}
 		
+		
+		//***** functions par rapport à des traitement des arrondissements
+		
+		
 		private function verifierArrondissement($arrondissement)
 		{
 			
@@ -164,6 +211,28 @@ class Controleur
 			$data = $oArrondissements->insererArrondissement($arrondissement);
 			
 		}
+		
+		//***** functions par rapport à des traitement des categories
+		
+		
+		private function verifierCategorie($categorie)
+		{
+			
+			$oCategorie = new Categories();
+			$data = $oCategorie->obtenirCategorie($categorie);
+			return $data;
+			
+		}
+		
+		private function inclureCategorie($categorie)
+		{
+			
+			$oCategorie = new Categories();
+			$data = $oCategorie->insererCategorie($categorie);
+			
+		}
+		
+		
 }
 ?>
 

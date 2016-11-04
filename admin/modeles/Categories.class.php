@@ -11,7 +11,7 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Artistes extends Modelebase {
+class Categories extends Modelebase {
 	
     
 	function __construct ()
@@ -32,18 +32,16 @@ class Artistes extends Modelebase {
 	 
 	public function getTable()
 	{
-		return "artistes";
+		return "categories";
 	}
 	
-	public function obtenirArtiste($nom,$prenom,$collectif)
+	public function obtenirCategorie($categorie)
 	{		
 		try
 		{	
 			$connexion = $this->connexionBD();
-			$stmt = $connexion->prepare("select * from " . $this->getTable() . " where nomArtiste = :nom and prenomArtiste = :prenom and collectif = :collectif");
-			$stmt->bindParam(":nom", $nom);
-			$stmt->bindParam(":prenom", $prenom);
-			$stmt->bindParam(":collectif", $collectif);
+			$stmt = $connexion->prepare("select * from " . $this->getTable() . " where nomCategorie = :categorie");
+			$stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			return $stmt->fetch();
 		}
@@ -53,15 +51,13 @@ class Artistes extends Modelebase {
 		}
 	}
 	
-	public function insererArtiste($nom,$prenom,$collectif)
+	public function insererCategorie($categorie)
 	{		
 		try
 		{	
 			$connexion = $this->connexionBD();
-			$stmt = $connexion->prepare("insert into ". $this->getTable() ." (nomArtiste, prenomArtiste,collectif) values(:nom, :prenom, :collectif)");
-			$stmt->bindParam(":nom", $nom);
-			$stmt->bindParam(":prenom", $prenom);
-			$stmt->bindParam(":collectif", $collectif);
+			$stmt = $connexion->prepare("insert into ". $this->getTable() ." (nomCategorie) values(:categorie)");
+			$stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			return 1;
 		}
