@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS Arrondissements(
 
 CREATE TABLE IF NOT EXISTS Artistes(
     idArtiste int AUTO_INCREMENT NOT NULL,
-	noInterne int, 
+    noInterne int, 
     prenomArtiste VARCHAR(50),
     nomArtiste VARCHAR(50),
     collectif VARCHAR(100),
