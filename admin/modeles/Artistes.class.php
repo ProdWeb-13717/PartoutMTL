@@ -30,10 +30,46 @@ class Artistes extends Modelebase {
 	 * @return Array
 	 */
 	 
-	 public function getTable()
-		{
-			return "artistes";
+	public function getTable()
+	{
+		return "artistes";
+	}
+	
+	public function obtenirArtiste($nom,$prenom,$collectif)
+	{		
+		try
+		{	
+			$connexion = $this->connexionBD();
+			$stmt = $connexion->prepare("select * from " . $this->getTable() . " where nomArtiste = :nom and prenomArtiste = :prenom and collectif = :collectif");
+			$stmt->bindParam(":nom", $nom);
+			$stmt->bindParam(":prenom", $prenom);
+			$stmt->bindParam(":collectif", $collectif);
+			$stmt->execute();
+			return $stmt->fetch();
 		}
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	public function insererArtiste($nom,$prenom,$collectif)
+	{		
+		try
+		{	
+			$connexion = $this->connexionBD();
+			$stmt = $connexion->prepare("insert into ". $this->getTable() ." (nomArtiste, prenomArtiste,collectif) values(:nom, :prenom, :collectif)");
+			$stmt->bindParam(":nom", $nom);
+			$stmt->bindParam(":prenom", $prenom);
+			$stmt->bindParam(":collectif", $collectif);
+			$stmt->execute();
+			return 1;
+		}
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+	}
 	
 }
 

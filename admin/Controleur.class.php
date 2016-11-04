@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Class Controleur
  * Gère les requêtes HTTP
@@ -32,10 +32,7 @@ class Controleur
 				case 'importationok':
 					
 					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-					//$connexionBD = $this->obtenirconnexionBD();//cet variable contienne la connexion à la BD neccesaire pour faire les querys
 					$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
-					
-					//echo $publicJson[0]->Artistes[0]->Nom;
 				
 					$this->importationok(); // avant de montrer la vue, je dois aller chercher le donnes avec le modele
 					break;
@@ -80,22 +77,93 @@ class Controleur
 			
 		}
 		
-		/*private function obtenirconnexionBD()
-		{
-			$oArtistes = new Artistes();
-			return $oArtistes->connexionBD();
-			
-		}*/
-		
 		private function traiterDonnees($jsonSite){
 			
-			$oArtistes = new Artistes();
-			$data = $oArtistes->compteRanges();
-			$nomArtistesBD = $data["quantite"];
-			echo $nomArtistesBD;
-			echo "<br>";
+			$nomOuvres = count($jsonSite);
+			
+			for($i=0;$i<20;$i++){// for pour parcourir tout les oeuvres
+				
+				//***traitement des artistes*** esto podria ir en una funcion..despues lo probamos//
+				
+				foreach($jsonSite[$i]->Artistes as $artiste){
+					
+					// verification des donnees null
+					if($artiste->Nom == null){
+						
+						$artiste->Nom = "";
+					}
+					if($artiste->Prenom == null){
+						
+						$artiste->Prenom = "";
+					}
+					if($artiste->NomCollectif == null){
+						
+						$artiste->NomCollectif = "";
+					}
+					
+					//confirmation qu'un artiste n'est pas dans la BD et ajout si necessaire
+					
+					$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+					if(!$ilExiste){
+						
+						$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+					}
+				}
+				//fin traitement des artistes
+				
+				
+				
+				
+				//*** traitement des arrondissements
+				
+				//echo $i." - ".$jsonSite[$i]->Arrondissement ."<br>";
+				
+				//confirmation qu'un arrondissement n'est pas dans la BD et ajout si necessaire
+					
+				$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement);
+				if(!$ilExiste){
+					
+					$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
+				}
+				
+				
+			}
+			
 		}
 		
+		private function verifierArtiste($nom,$prenom,$collectif)
+		{
+			
+			$oArtistes = new Artistes();
+			$data = $oArtistes->obtenirArtiste($nom,$prenom,$collectif);
+			return $data;
+			
+		}
+		
+		private function inclureArtiste($nom,$prenom,$collectif)
+		{
+			
+			$oArtistes = new Artistes();
+			$data = $oArtistes->insererArtiste($nom,$prenom,$collectif);
+			
+		}
+		
+		private function verifierArrondissement($arrondissement)
+		{
+			
+			$oArrondissements = new Arrondissements();
+			$data = $oArrondissements->obtenirArrondissement($arrondissement);
+			return $data;
+			
+		}
+		
+		private function inclureArrondissement($arrondissement)
+		{
+			
+			$oArrondissements = new Arrondissements();
+			$data = $oArrondissements->insererArrondissement($arrondissement);
+			
+		}
 }
 ?>
 
