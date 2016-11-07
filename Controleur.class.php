@@ -26,9 +26,11 @@ class Controleur
 				case 'accueil':
 					$this->accueil(); // option quand get requete est accueil
 					break;
+					
 				case 'importation':
 					$this->importation(); // option quand get requete n'existe pas
 					break;
+					
 				case 'importationok':
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
@@ -36,21 +38,17 @@ class Controleur
                 case 'listeArtiste':
 					$this->afficheListe(); // option quand get requete n'existe pas
 					break;
+					
+				case 'listeOeuvres':
+					$this->afficheListe(); // option quand get requete n'existe pas
+					break;
+					
                     
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;
 			}
-			
-			
-			
-			switch ($_GET['id']) {
-				default:
-					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
-					break;
-			}
-				
-				
+
 		}
 		private function accueil()
 		{
@@ -89,10 +87,10 @@ class Controleur
 			
             if($_GET['requete'] == "listeArtiste")
             {
-                $oVueListe->;  
+				
             }
             
-            else if($_GET['requete'] == "listeArtiste")
+            else if($_GET['requete'] == "listeOeuvres")
             {
                 
             }

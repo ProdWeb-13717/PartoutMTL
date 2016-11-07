@@ -60,9 +60,19 @@ class vueListe{
 				?>
 						<li>
 							<ul class="resultatOeuvre">
-								<li><img src="<?php echo $oeuvre["urlPhoto"]?>"/></li>
+								<li><img src="<?php echo $oeuvre["lienPhoto"]?>"/></li>
 								<li><?php echo "Titre: "$oeuvre["titre"]?></li>
-								<li><?php echo "Auteur: "$oeuvre["prenomArtiste"]." ".$oeuvre["nomArtiste"]?></li>
+								<li><?php echo "Auteur: "?>$oeuvre["prenomArtiste"]." ".$oeuvre["nomArtiste"]?>
+									<ul>
+									<?php
+										$idPiece = $oeuvre["artisteNo"];
+										foreach($rechercheResultat as $Auteur)
+										{
+											if($Auteur["artisteNo"] = )
+										}
+									?>
+									</ul>
+								</li>
 								<li><?php echo "Année: "$oeuvre["dateFinProduction"]?></li>
 							</ul>
 						</li>  
