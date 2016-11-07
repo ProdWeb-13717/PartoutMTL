@@ -11,10 +11,10 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Categories extends Modelebase {
+class Categories extends TemplateBase {
 	
     
-	function __construct ()
+	/*function __construct ()
 	{
 		
 	}
@@ -22,7 +22,7 @@ class Categories extends Modelebase {
 	function __destruct ()
 	{
 		
-	}
+	}*/
 	
 		
 	/**
@@ -39,8 +39,8 @@ class Categories extends Modelebase {
 	{		
 		try
 		{	
-			$connexion = $this->connexionBD();
-			$stmt = $connexion->prepare("select * from " . $this->getTable() . " where nomCategorie = :categorie");
+		
+			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where nomCategorie = :categorie");
 			$stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -55,8 +55,8 @@ class Categories extends Modelebase {
 	{		
 		try
 		{	
-			$connexion = $this->connexionBD();
-			$stmt = $connexion->prepare("insert into ". $this->getTable() ." (nomCategorie) values(:categorie)");
+			//$connexion = $this->connexionBD();
+			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomCategorie) values(:categorie)");
 			$stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			return 1;

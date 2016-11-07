@@ -11,10 +11,10 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Arrondissements extends Modelebase {
+class Arrondissements extends TemplateBase {
 	
     
-	function __construct ()
+	/*function __construct ()
 	{
 		
 	}
@@ -22,7 +22,7 @@ class Arrondissements extends Modelebase {
 	function __destruct ()
 	{
 		
-	}
+	}*/
 	
 		
 	/**
@@ -39,8 +39,7 @@ class Arrondissements extends Modelebase {
 	{		
 		try
 		{	
-			$connexion = $this->connexionBD();
-			$stmt = $connexion->prepare("select * from " . $this->getTable() . " where nomArrondissement = :arrondissement");
+			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where nomArrondissement = :arrondissement");
 			$stmt->bindParam(":arrondissement", $arrondissement);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -55,8 +54,8 @@ class Arrondissements extends Modelebase {
 	{		
 		try
 		{	
-			$connexion = $this->connexionBD();
-			$stmt = $connexion->prepare("insert into ". $this->getTable() ." (nomArrondissement) values(:arrondissement)");
+			//$connexion = $this->connexionBD();
+			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomArrondissement) values(:arrondissement)");
 			$stmt->bindParam(":arrondissement", $arrondissement);
 			$stmt->execute();
 			return 1;

@@ -79,9 +79,9 @@ class Controleur
 		
 		private function traiterDonnees($jsonSite){
 			
-			$nomOuvres = count($jsonSite);
+			$nomOeuvres = count($jsonSite);
 			
-			for($i=0;$i<$nomOuvres;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<$nomOeuvres;$i++){// for pour parcourir tout les oeuvres
 				
 				//***traitement des artistes***
 				
