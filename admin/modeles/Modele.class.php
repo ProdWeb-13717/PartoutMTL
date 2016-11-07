@@ -12,18 +12,7 @@
  * 
  */
 class Modele {
-	
-    
-	function __construct ()
-	{
-		
-	}
-	
-	function __destruct ()
-	{
-		
-	}
-	
+
 		
 	/**
 	 * @access public
