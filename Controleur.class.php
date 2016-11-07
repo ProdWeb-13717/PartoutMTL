@@ -38,13 +38,13 @@ class Controleur
 			}
 			
 			
-			
+			/*
 			switch ($_GET['id']) {
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;
 			}
-				
+			*/	
 				
 		}
 		private function accueil()
