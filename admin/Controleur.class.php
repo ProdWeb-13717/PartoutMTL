@@ -81,7 +81,7 @@ class Controleur
 			
 			$nomOeuvres = count($jsonSite);
 			
-			for($i=0;$i<$nomOeuvres;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<5;$i++){// for pour parcourir tout les oeuvres
 				
 				//***traitement des artistes***
 				
@@ -101,12 +101,14 @@ class Controleur
 						$artiste->NomCollectif = "";
 					}
 					
+					
 					//confirmation qu'un artiste n'est pas dans la BD et ajout si necessaire
 					
 					$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
 					if(!$ilExiste){
 						
-						$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+						$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif,$artiste->NoInterne);
+						
 					}
 				}
 				//fin traitement des artistes
@@ -148,6 +150,15 @@ class Controleur
 				
 				//*** traitement des oeuvres
 				
+				$ilExiste = $this->verifierOeuvre($jsonSite[$i]->NoInterne);
+				if(!$ilExiste){
+					
+					$this->inclureOeuvre($jsonSite[$i]);
+					//echo "paila no esta";
+					//echo "<br>";
+				}
+				
+				
 				//echo $jsonSite[$i]->SousCategorieObjet;
 				//echo "<br>";
 				
@@ -158,8 +169,8 @@ class Controleur
 				echo " - ";
 				echo $jsonSite[$i]->TitreVariante;
 				echo " - ";*/
-				echo $jsonSite[$i]->NumeroAccession;
-				echo "<br>";
+				//echo $jsonSite[$i]->NumeroAccession;
+				//echo "<br>";
 				
 				
 				//fin traitement des oeuvres
@@ -183,11 +194,11 @@ class Controleur
 			
 		}
 		
-		private function inclureArtiste($nom,$prenom,$collectif)
+		private function inclureArtiste($nom,$prenom,$collectif,$nointerne)
 		{
 			
 			$oArtistes = new Artistes();
-			$data = $oArtistes->insererArtiste($nom,$prenom,$collectif);
+			$data = $oArtistes->insererArtiste($nom,$prenom,$collectif,$nointerne);
 			
 		}
 		
@@ -229,6 +240,25 @@ class Controleur
 			
 			$oCategorie = new Categories();
 			$data = $oCategorie->insererCategorie($categorie);
+			
+		}
+		
+		//***** functions par rapport à des traitement des oeuvres
+		
+		private function verifierOeuvre($noInterne)
+		{
+			
+			$oOeuvre = new Oeuvres();
+			$data = $oOeuvre->obtenirOeuvre($noInterne);
+			return $data;
+			
+		}
+		
+		private function inclureOeuvre($oeuvre)
+		{
+			
+			$oOeuvres = new Oeuvres();
+			$data = $oOeuvres->insererOeuvre($oeuvre);
 			
 		}
 		

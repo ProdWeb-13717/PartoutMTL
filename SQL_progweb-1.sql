@@ -26,7 +26,6 @@ CREATE TABLE IF NOT EXISTS MiseAJours(
 
 CREATE TABLE IF NOT EXISTS Soumissions(
     idSoumission int AUTO_INCREMENT NOT NULL,
-	titre VARCHAR(100),
     parc VARCHAR(200), 
     adresseCivique VARCHAR(200),
     descritpion TEXT,
@@ -49,6 +48,7 @@ CREATE TABLE IF NOT EXISTS Arrondissements(
 
 CREATE TABLE IF NOT EXISTS Artistes(
     idArtiste int AUTO_INCREMENT NOT NULL,
+    noInterne int, 
     prenomArtiste VARCHAR(50),
     nomArtiste VARCHAR(50),
     collectif VARCHAR(100),
@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS Oeuvres(
     idOeuvre int AUTO_INCREMENT NOT NULL,
     titre VARCHAR(50) NOT NULL,
     titreVariante VARCHAR(50),
-    dateFinProduction VARCHAR(60),
-    dateAquisition VARCHAR(60),
+    dateFinProduction DATETIME,
+    dateAquisition DATETIME,
     nomCollection VARCHAR(50),
     modeAquisition VARCHAR(50),
     materiaux VARCHAR(200),
@@ -69,26 +69,18 @@ CREATE TABLE IF NOT EXISTS Oeuvres(
     parc VARCHAR(100),
     batiment VARCHAR(100),
     adresseCivique VARCHAR(200),
-    latitude float,
-    longitude float,
+    latitude int,
+    longitude int,
     description TEXT,
+    urlPhoto TEXT,
     idCategorie int,
     idArrondissement int,
     numeroAccession VARCHAR(30),
+	noInterne int,
     PRIMARY KEY (idOeuvre),
     FOREIGN KEY (idCategorie) REFERENCES Categories(idCategorie),
     FOREIGN KEY (idArrondissement) REFERENCES Arrondissements(idArrondissement)
 );
-
-
-CREATE TABLE IF NOT EXISTS Photos(
-    idPhoto int AUTO_INCREMENT NOT NULL,
-	urlPhoto TEXT,
-	idOeuvre int,
-    PRIMARY KEY (idPhoto),
-    FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
-);
-
 
 CREATE TABLE IF NOT EXISTS ArtistesOeuvres(
     idArtiste int NOT NULL,
@@ -98,12 +90,10 @@ CREATE TABLE IF NOT EXISTS ArtistesOeuvres(
     FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
 );
 
-CREATE TABLE IF NOT EXISTS Carroussel(
-    idCaroussel int AUTO_INCREMENT NOT NULL,
+CREATE TABLE IF NOT EXISTS ImagesCarroussel(
+    idImgCaroussel int AUTO_INCREMENT NOT NULL,
     position int,
-	urlPhoto TEXT,
-	urlLien TEXT,
-	description TEXT,
-	titre VARCHAR(200),
-    PRIMARY KEY (idCaroussel)
+    idOeuvre int NOT NULL,
+    PRIMARY KEY (idImgCaroussel),
+    FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
 );

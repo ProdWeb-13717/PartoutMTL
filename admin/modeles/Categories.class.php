@@ -32,7 +32,7 @@ class Categories extends TemplateBase {
 	 
 	public function getTable()
 	{
-		return "categories";
+		return "Categories";
 	}
 	
 	public function obtenirCategorie($categorie)

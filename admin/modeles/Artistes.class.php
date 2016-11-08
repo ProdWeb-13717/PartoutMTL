@@ -32,7 +32,7 @@ class Artistes extends TemplateBase {
 	 
 	public function getTable()
 	{
-		return "artistes";
+		return "Artistes";
 	}
 	
 	public function obtenirArtiste($nom,$prenom,$collectif)
@@ -53,12 +53,13 @@ class Artistes extends TemplateBase {
 		}
 	}
 	
-	public function insererArtiste($nom,$prenom,$collectif)
+	public function insererArtiste($nom,$prenom,$collectif,$nointerne)
 	{		
 		try
 		{	
 			//$connexion = $this->connexionBD();
-			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomArtiste, prenomArtiste,collectif) values(:nom, :prenom, :collectif)");
+			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (noInterne,nomArtiste,prenomArtiste,collectif) values(:noInterne, :nom, :prenom, :collectif)");
+			$stmt->bindParam(":noInterne", $nointerne);
 			$stmt->bindParam(":nom", $nom);
 			$stmt->bindParam(":prenom", $prenom);
 			$stmt->bindParam(":collectif", $collectif);

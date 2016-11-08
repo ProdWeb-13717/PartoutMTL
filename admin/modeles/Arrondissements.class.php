@@ -32,7 +32,7 @@ class Arrondissements extends TemplateBase {
 	 
 	public function getTable()
 	{
-		return "arrondissements";
+		return "Arrondissements";
 	}
 	
 	public function obtenirArrondissement($arrondissement)
