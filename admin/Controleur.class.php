@@ -81,7 +81,7 @@ class Controleur
 			
 			$nomOeuvres = count($jsonSite);
 			
-			for($i=0;$i<5;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<10;$i++){// for pour parcourir tout les oeuvres
 				
 				//***traitement des artistes***
 				
@@ -107,7 +107,7 @@ class Controleur
 					$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
 					if(!$ilExiste){
 						
-						$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif,$artiste->NoInterne);
+						//$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif,$artiste->NoInterne);
 						
 					}
 				}
@@ -124,7 +124,7 @@ class Controleur
 				$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement);
 				if(!$ilExiste){
 					
-					$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
+					//$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
 				}
 				//fin traitement des arrondissements
 				
@@ -140,7 +140,7 @@ class Controleur
 				$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet);
 				if(!$ilExiste){
 					
-					$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
+					//$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
 				}
 				
 				
