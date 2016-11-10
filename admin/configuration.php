@@ -11,9 +11,10 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-	define('MODELE_DIR', 'modeles/');	// Chemin vers les modèles
-	define('VUES_DIR', 'vues/');			// Chemin vers les vues
-	define('LIB_DIR', 'lib/');			// Chemin vers les librairies
+	define('MODELE_DIR', '../modeles/');	     // Chemin vers les modèles
+    define('ADMINMODELE_DIR', 'modeles/');	     // Chemin vers les modèles
+    define('VUES_DIR', 'vues/');			     // Chemin vers les vues
+	define('LIB_DIR', 'lib/');			         // Chemin vers les librairies
 	
 	
 	
@@ -25,7 +26,7 @@
 	 */
 	function chargeurDeClasse($sClasse) 
 	{
-		$aDossierClasse = array(MODELE_DIR, VUES_DIR, LIB_DIR, '' );
+		$aDossierClasse = array(MODELE_DIR, ADMINMODELE_DIR, VUES_DIR, LIB_DIR, '' );
 		
 		foreach ($aDossierClasse as $sDossier) 
 		{
