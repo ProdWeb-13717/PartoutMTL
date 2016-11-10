@@ -43,13 +43,12 @@ class Controleur
 					$this->afficheListe(); // option quand get requete n'existe pas
 					break;
 					
-                    
-				default:
+                default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
-					break;
+					break;  
 			}
-
 		}
+
 		private function accueil()
 		{
 			$oVue = new Vue();

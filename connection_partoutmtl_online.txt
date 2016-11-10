@@ -1,0 +1,5 @@
+1- aller sur : partoutmtl.ca
+2- clicker sur le lien
+3- 	login = partoutmtl (sans majuscules)
+	mot de passe = equipeDeCourse%
+4- aller sur l'icone de phpMyAdmin
