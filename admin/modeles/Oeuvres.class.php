@@ -56,9 +56,72 @@ class Oeuvres extends TemplateBase {
 		//traitement des donnes d'oeuvre (ojo...para evitar tanta conexion lo que se puede hacer meter los datos a los cuales no toca hacerle tratamiento en una consulta y despues los otros)
 		
 		// no se puede dato a dato con insert, porque se crea una celda con cada insert...toca insertar los datos que mas se puedan y despues mirar el tratamiento de los datos especiales
-		//echo $oeuvre->Titre;
-		//echo "<br>";
+		echo $oeuvre->CoordonneeLongitude;
+		echo "<br>";
 		//$insertion = $this->insererDonne("Titre",$oeuvre->Titre);//insertion de Titre
+		
+		
+		
+		//verification pour savoir si le TitreVariante est rempli ou pas
+		if($oeuvre->TitreVariante == null){
+						
+			$oeuvre->TitreVariante = "";
+		}
+		
+		//verification pour savoir si le DateFinProduction est rempli ou pas
+		if($oeuvre->DateFinProduction == null){
+						
+			$oeuvre->DateFinProduction = "";
+		}
+		
+		//verification pour savoir si le DateAccession est rempli ou pas
+		if($oeuvre->DateAccession == null){
+						
+			$oeuvre->DateAccession = "";
+		}
+		
+		//verification pour savoir si le ModeAcquisition est rempli ou pas
+		if($oeuvre->ModeAcquisition == null){
+						
+			$oeuvre->ModeAcquisition = "";
+		}
+		
+		//verification pour savoir si le Materiaux est rempli ou pas
+		if($oeuvre->Materiaux == null){
+						
+			$oeuvre->Materiaux = "";
+		}
+		
+		//verification pour savoir si le Materiaux est rempli ou pas
+		if($oeuvre->Technique == null){
+						
+			$oeuvre->Technique = "";
+		}
+		
+		//verification pour savoir si le Dimensions est rempli ou pas
+		if($oeuvre->DimensionsGenerales == null){
+						
+			$oeuvre->DimensionsGenerales = "";
+		}
+		
+		//verification pour savoir si le Parc est rempli ou pas
+		if($oeuvre->Parc == null){
+						
+			$oeuvre->Parc = "";
+		}
+		
+		//verification pour savoir si le Batiment est rempli ou pas
+		if($oeuvre->Batiment == null){
+						
+			$oeuvre->Batiment = "";
+		}
+		
+		//verification pour savoir si le AdresseCivique est rempli ou pas
+		if($oeuvre->AdresseCivique == null){
+						
+			$oeuvre->AdresseCivique = "";
+		}
+		
 		
 		//echo $oeuvre->TitreVariante;
 		//echo "<br>";
@@ -101,11 +164,10 @@ class Oeuvres extends TemplateBase {
 			Conversion de date en format UNIX to Y-m-d
 		*/
 		
-		echo $oeuvre->DateFinProduction;
-		
+		/*echo $oeuvre->DateFinProduction;
 		$str = $oeuvre->DateFinProduction;
 		preg_match( "#/Date\((\d{10})\d{3}(.*?)\)/#", $str, $match );
-		//echo date( "r", $match[1] );
+		echo date( "r", $match[1] );
 		echo $match[1];
 		
 		//echo $oeuvre->DateFinProduction;
@@ -113,7 +175,7 @@ class Oeuvres extends TemplateBase {
 		
 		echo "<br>";
 		
-		return 0;
+		return 0;*/
 		
 		/*try
 		{	

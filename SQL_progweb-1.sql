@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS MiseAJours(
 
 CREATE TABLE IF NOT EXISTS Soumissions(
     idSoumission int AUTO_INCREMENT NOT NULL,
+	titre VARCHAR(100),
     parc VARCHAR(200), 
     adresseCivique VARCHAR(200),
     descritpion TEXT,
@@ -48,7 +49,6 @@ CREATE TABLE IF NOT EXISTS Arrondissements(
 
 CREATE TABLE IF NOT EXISTS Artistes(
     idArtiste int AUTO_INCREMENT NOT NULL,
-    noInterne int, 
     prenomArtiste VARCHAR(50),
     nomArtiste VARCHAR(50),
     collectif VARCHAR(100),
@@ -59,28 +59,37 @@ CREATE TABLE IF NOT EXISTS Oeuvres(
     idOeuvre int AUTO_INCREMENT NOT NULL,
     titre VARCHAR(50) NOT NULL,
     titreVariante VARCHAR(50),
-    dateFinProduction DATETIME,
-    dateAquisition DATETIME,
+    dateFinProduction VARCHAR(60),
+    dateAccession VARCHAR(60),
     nomCollection VARCHAR(50),
-    modeAquisition VARCHAR(50),
+    modeAcquisition VARCHAR(50),
     materiaux VARCHAR(200),
     technique VARCHAR(100),
     dimensions VARCHAR(50),
     parc VARCHAR(100),
     batiment VARCHAR(100),
     adresseCivique VARCHAR(200),
-    latitude int,
-    longitude int,
+    latitude float,
+    longitude float,
     description TEXT,
-    urlPhoto TEXT,
+    numeroAccession VARCHAR(30),
+    noInterne int,
     idCategorie int,
     idArrondissement int,
-    numeroAccession VARCHAR(30),
-	noInterne int,
     PRIMARY KEY (idOeuvre),
     FOREIGN KEY (idCategorie) REFERENCES Categories(idCategorie),
     FOREIGN KEY (idArrondissement) REFERENCES Arrondissements(idArrondissement)
 );
+
+
+CREATE TABLE IF NOT EXISTS Photos(
+    idPhoto int AUTO_INCREMENT NOT NULL,
+	urlPhoto TEXT,
+	idOeuvre int,
+    PRIMARY KEY (idPhoto),
+    FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
+);
+
 
 CREATE TABLE IF NOT EXISTS ArtistesOeuvres(
     idArtiste int NOT NULL,
@@ -90,10 +99,34 @@ CREATE TABLE IF NOT EXISTS ArtistesOeuvres(
     FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
 );
 
-CREATE TABLE IF NOT EXISTS ImagesCarroussel(
-    idImgCaroussel int AUTO_INCREMENT NOT NULL,
+CREATE TABLE IF NOT EXISTS Carroussel(
+    idCaroussel int AUTO_INCREMENT NOT NULL,
+	urlPhoto TEXT,
+	urlLien TEXT,
+	titre VARCHAR(200),
+    description TEXT,
     position int,
-    idOeuvre int NOT NULL,
-    PRIMARY KEY (idImgCaroussel),
-    FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
+    PRIMARY KEY (idCaroussel)
 );
+
+
+INSERT into Categories (nomCategorie) VALUES 
+			("Sculpture"),
+			("Installation"),
+			("Vitrail"),
+			("Peinture"),
+			("Mosaique")
+			;
+            
+INSERT into Arrondissements (nomArrondissement) VALUES 
+			("Côte-des-Neiges–Notre-Dame-de-Grâce"),
+			("Ville-Marie"),
+			("Rosemont–La Petite-Patrie"),
+			("Le Plateau-Mont-Royal"),
+			("Le Sud-Ouest")
+			;
+            
+
+
+
+
