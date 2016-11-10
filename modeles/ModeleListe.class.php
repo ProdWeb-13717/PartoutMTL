@@ -12,35 +12,29 @@
  * 
  */
 class ModeleListe extends TemplateBase{
-	
-    
-	/*public function __construct ()
-	{
-			try
-			{
-				$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=107.180.109.70:3306", "partout", "equipeDeCourse5");
-			}
-			catch(Exception $exc)
-			{
-				die("Connexion à la base de données impossible.");
-			}
-	}*/
-	
-	function __destruct ()
-	{
-		
-	}
-	
 		
 	/**
 	 * @access public
 	 * @return Array
 	 */
+	 
+	protected function getPrimaryKey()
+	{
+		return "Je ne sert à rien dans cette classe";
+	} 
+		
+	protected  function getTable()
+	{
+		return "Je ne sert à rien dans cette classe";
+	}
+	 
 	public function getArtisteTout() 
 	{
 			try
 			{
+				//$stmt = $this->connexion->prepare("SELECT Artistes.idArtiste AS noArtiste, prenomArtiste, nomArtiste, COUNT(ArtistesOeuvres.idArtiste) AS NbreOeuvres FROM Artistes JOIN ArtistesOeuvres ON Artistes.idArtiste = ArtistesOeuvres.idArtiste GROUP BY noArtiste");
 				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste FROM Artistes");
+				$stmt->execute();
 				return $stmt->fetchAll();
 			}	
 			catch(Exception $exc)
@@ -64,6 +58,7 @@ class ModeleListe extends TemplateBase{
 				ON Artiste-Oeuvre.idOeuvre = Oeuvres.idOeuvre
 				INNER JOIN Artistes
 				ON Artiste-Oeuvre.idArtiste = Artistes.idArtiste");
+				$stmt->execute();
 				return $stmt->fetchAll();
 			}	
 			catch(Exception $exc)

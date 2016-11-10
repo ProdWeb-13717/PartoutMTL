@@ -55,7 +55,8 @@ class Vue {
 			<div>
 			<a href="index.php?requete=importation">Allez ver l'importation de donnés</a>
 			<!--Lien vers teste  des listes-->
-			<a href="index.php?requete=importation">Allez ver l'importation de donnés</a>
+			<a href="index.php?requete=listeArtiste">Afficher liste d'artistes</a>
+
 			</div>
 		<?php
 		

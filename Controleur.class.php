@@ -80,13 +80,15 @@ class Controleur
         function afficheListe()
 		{
 			$oVue = new Vue();
-            $oVueListe = new vueListe();
+            $objListe = new Liste();
             
 			$oVue->afficheEntete();
 			
             if($_GET['requete'] == "listeArtiste")
             {
-				
+				$modeleListe = new ModeleListe();
+				$data = $modeleListe->getArtisteTout();
+				$objListe->afficheListeArtiste($data);
             }
             
             else if($_GET['requete'] == "listeOeuvres")

@@ -15,7 +15,7 @@
 	{
 		protected $connexion;
 		
-		abstract protected getPrimaryKey(); //exemple pour Oeuvres = getPrimaryKey(){ return "idOeuvre"}
+		abstract protected function getPrimaryKey(); //exemple pour Oeuvres = getPrimaryKey(){ return "idOeuvre"}
 		
 		abstract protected function getTable(); //exemple pour Oeuvres = getTable(){ return "Oeuvres"}
 		
