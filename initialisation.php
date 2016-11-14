@@ -20,4 +20,9 @@ if(empty($_GET['requete']))
 	$_GET['requete'] = '';
 }
 
+if(empty($_GET['id']))
+{
+	$_GET['id'] = '';
+}
+
 ?>

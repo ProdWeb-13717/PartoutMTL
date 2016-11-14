@@ -20,6 +20,12 @@ if(empty($_GET['requete']))
 	$_GET['requete'] = '';
 }
 
+<<<<<<< HEAD
+if(empty($_GET['soumissionAdmin']))
+{
+	$_GET['soumissionAdmin'] = '';
+}
+=======
 
 // ADMIN ///////////////////////////////////////
 
@@ -40,5 +46,6 @@ if(empty($_GET['requete']))
 
 ////////////////////////////////////////////////
 
+>>>>>>> upstream/master
 
 ?>
