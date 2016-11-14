@@ -51,13 +51,13 @@ class Oeuvres extends TemplateBase {
 		}
 	}
 	
-	public function insererOeuvre($oeuvre)
+	public function traiterOeuvre($oeuvre)
 	{		
 		//traitement des donnes d'oeuvre (ojo...para evitar tanta conexion lo que se puede hacer meter los datos a los cuales no toca hacerle tratamiento en una consulta y despues los otros)
 		
 		// no se puede dato a dato con insert, porque se crea una celda con cada insert...toca insertar los datos que mas se puedan y despues mirar el tratamiento de los datos especiales
-		echo $oeuvre->CoordonneeLongitude;
-		echo "<br>";
+		//echo $oeuvre->NoInterne;
+		//echo "<br>";
 		//$insertion = $this->insererDonne("Titre",$oeuvre->Titre);//insertion de Titre
 		
 		
@@ -122,61 +122,11 @@ class Oeuvres extends TemplateBase {
 			$oeuvre->AdresseCivique = "";
 		}
 		
-		
-		//echo $oeuvre->TitreVariante;
-		//echo "<br>";
-		//$insertion = $this->insererDonne("TitreVariante",$oeuvre->TitreVariante);//insertion de TitreVariante
-		
-		//echo $oeuvre->TitreVariante;
-		//echo "<br>";
+		$insertion = $this->insererOeuvre($oeuvre->Titre,$oeuvre->TitreVariante,$oeuvre->DateFinProduction,$oeuvre->DateAccession,$oeuvre->NomCollection,$oeuvre->ModeAcquisition,$oeuvre->Materiaux,$oeuvre->Technique,$oeuvre->DimensionsGenerales,$oeuvre->Parc,$oeuvre->Batiment,$oeuvre->AdresseCivique,$oeuvre->CoordonneeLatitude,$oeuvre->CoordonneeLongitude,$oeuvre->NumeroAccession,$oeuvre->NoInterne);
+		echo $insertion;
 		
 		
-		/*echo $oeuvre->TitreVariante;
-		echo "<br>";
-		$insertion = this->insererDonne("Titre",$oeuvre->Titre);//insertion de TitreVariante*/
-		
-		/*	Source: stackoverflow.com
-			Url: http://stackoverflow.com/questions/16749778/php-date-format-date1365004652303-0500
-			Auteur: Farkie
-			Conversion de date en format UNIX to Y-m-d
-		*/
-		
-		
-		
-		/*var_dump(date('Y-m-d H:i:s', '1365004652303'/1000));
-		$str = '/Date(1365004652303-0500)/';
-		
-		$match = preg_match('/\/Date\((\d+)([-+])(\d+)\)\//', $str, $date);
-		
-		$timestamp = $date[1]/1000;
-		$operator = $date[2];
-		$hours = $date[3]*36; // Get the seconds
-		
-		$datetime = new DateTime();
-		
-		$datetime->setTimestamp($timestamp);
-		$datetime->modify($operator . $hours . ' seconds');
-		var_dump($datetime->format('Y-m-d H:i:s'));*/
-		
-		/*	Source: stackoverflow.com
-			Url: http://stackoverflow.com/questions/16749778/php-date-format-date1365004652303-0500
-			Auteur: hjpotter92
-			Conversion de date en format UNIX to Y-m-d
-		*/
-		
-		/*echo $oeuvre->DateFinProduction;
-		$str = $oeuvre->DateFinProduction;
-		preg_match( "#/Date\((\d{10})\d{3}(.*?)\)/#", $str, $match );
-		echo date( "r", $match[1] );
-		echo $match[1];
-		
-		//echo $oeuvre->DateFinProduction;
-		echo "<br>";
-		
-		echo "<br>";
-		
-		return 0;*/
-		
+		//Il manque les querys avec update pour le Id categorie, Id arrondissement et la table artistes oeuvres
 		/*try
 		{	
 			
@@ -194,7 +144,39 @@ class Oeuvres extends TemplateBase {
 		}*/
 	}
 	
-	public function insererDonne($nomCologne,$donnee){
+	public function insererOeuvre($titre,$titrevar,$dateFin,$dateAcc,$nomCol,$modeAcq,$material,$tech,$dimension,$parc,$batiment,$addCiv,$lat,$longu,$numAcc,$numInt){
+		
+		try
+		{	
+			
+			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ."(titre,titreVariante,dateFinProduction,dateAccession,nomCollection,modeAcquisition,materiaux,technique,dimensions,parc,batiment,adresseCivique,latitude,longitude,numeroAccession,noInterne) values(:titre,:titreVariante,:dateFinProduction,:dateAccession,:nomCollection,:modeAcquisition,:materiaux,:technique,:dimensions,:parc,:batiment,:adresseCivique,:latitude,:longitude,:numeroAccession,:noInterne)");
+			$stmt->bindParam(":titre", $titre);
+			$stmt->bindParam(":titreVariante", $titrevar);
+			$stmt->bindParam(":dateFinProduction", $dateFin);
+			$stmt->bindParam(":dateAccession", $dateAcc);
+			$stmt->bindParam(":nomCollection", $nomCol);
+			$stmt->bindParam(":modeAcquisition", $modeAcq);
+			$stmt->bindParam(":materiaux", $material);
+			$stmt->bindParam(":technique", $tech);
+			$stmt->bindParam(":dimensions", $dimension);
+			$stmt->bindParam(":parc", $parc);
+			$stmt->bindParam(":batiment", $batiment);
+			$stmt->bindParam(":adresseCivique", $addCiv);
+			$stmt->bindParam(":latitude", $lat);
+			$stmt->bindParam(":longitude", $longu);
+			$stmt->bindParam(":numeroAccession", $numAcc);
+			$stmt->bindParam(":noInterne", $numInt);
+			$stmt->execute();
+			return 1;
+		}
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+		
+	}
+	
+	/*public function insererDonne($nomCologne,$donnee){
 		
 		try
 		{	
@@ -209,7 +191,8 @@ class Oeuvres extends TemplateBase {
 			return 0;
 		}
 		
-	}
+	}*/
+	
 	
 	
 	

@@ -81,7 +81,7 @@ class Controleur
 			
 			$nomOeuvres = count($jsonSite);
 			
-			for($i=0;$i<$nomOeuvres;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<8;$i++){// for pour parcourir tout les oeuvres
 				
 				//***traitement des artistes***
 				
@@ -152,7 +152,7 @@ class Controleur
 				
 				$ilExiste = $this->verifierOeuvre($jsonSite[$i]->NoInterne);
 				if(!$ilExiste){
-					echo $i+1 ." ";
+					//echo $i+1 ." ";
 					$this->inclureOeuvre($jsonSite[$i]);
 					//echo "paila no esta";
 					//echo "<br>";
@@ -258,7 +258,7 @@ class Controleur
 		{
 			
 			$oOeuvres = new Oeuvres();
-			$data = $oOeuvres->insererOeuvre($oeuvre);
+			$data = $oOeuvres->traiterOeuvre($oeuvre);
 			
 		}
 		
