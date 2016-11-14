@@ -50,14 +50,15 @@ class ModeleListe extends TemplateBase{
 	{/*INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;*/
 			try
 			{
-				$stmt = $this->connexion->prepare(
-				"SELECT Oeuvres.idOeuvre AS oeuvreNo, titre, dateFinProduction, Photos.urlPhoto AS lienPhoto, Artistes.idArtiste AS artisteNo, prenomArtiste, nomArtiste
-				FROM Oeuvres INNER JOIN Photos
+				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction FROM Oeuvres");
+				/*"SELECT Oeuvres.idOeuvre AS oeuvreNo, titre, dateFinProduction, Photos.urlPhoto AS lienPhoto, Artistes.idArtiste AS artisteNo, prenomArtiste, nomArtiste
+				FROM Oeuvres 
+				OUTER JOIN Photos
 				ON Photos.idOeuvre = Oeuvres.idOeuvre
-				INNER JOIN Artiste-Oeuvre
-				ON Artiste-Oeuvre.idOeuvre = Oeuvres.idOeuvre
-				INNER JOIN Artistes
-				ON Artiste-Oeuvre.idArtiste = Artistes.idArtiste");
+				OUTER JOIN ArtistesOeuvres
+				ON ArtistesOeuvres.idOeuvre = Oeuvres.idOeuvre
+				OUTER JOIN Artistes
+				ON ArtistesOeuvres.idArtiste = Artistes.idArtiste");*/
 				$stmt->execute();
 				return $stmt->fetchAll();
 			}	
