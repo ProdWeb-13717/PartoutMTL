@@ -140,15 +140,26 @@ class Controleur
 		{
 			
 			switch ($_GET['requete']) {
+				
 				case 'accueil':
 					$this->accueil();              // option quand get requete est accueil
 					break;
+				
+				case 'admin' : 
+					$this->admin();
+					break;
+				
+				case 'autentificationAdmin':
+					$this->autentificationAdmin();
+					break;
+					/*
 				case 'importation':
 					$this->importation();          // option quand get requete n'existe pas
 					break;
 				case 'importationok':
 					$this->importationok();        // option quand get requete n'existe pas
 					break;
+<<<<<<< HEAD
                  case 'soumission':
                     $this->soumissionAdmin();
                     break;
@@ -252,6 +263,10 @@ class Controleur
 				        
                     break;
                 
+=======
+					*/
+					
+>>>>>>> upstream/master
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;
@@ -259,13 +274,44 @@ class Controleur
 		}
 		private function accueil()
 		{
-			$oVue = new Vue();
+			$oVue = new VueAdmin();
 			
 			$oVue->afficheEntete();
-			$oVue->afficheAccueil();
+			$oVue->afficheFormAutentificationAdmin();
+			$oVue->affichePied();
+		}
+		
+		private function autentificationAdmin()
+		{
+			$oVue = new VueAdmin();
+			$admin = new Admin();
+			$resulta = $admin->verifFormAutentifiAdmin();
+			
+			
+			$oVue->afficheEntete();
+			
+			if($resulta)
+			{
+				$oVue->afficherAcceuilAdmin();
+			}
+			else
+			{
+				$oVue->afficheFormAutentificationAdmin();
+			}
+			
+			$oVue->affichePied();
+		}
+		
+		private function admin()
+		{
+			$oVue = new VueAdmin();
+			
+			$oVue->afficheEntete();
+			$oVue->verifFormAutentifiAdmin();
 			$oVue->affichePied();
 >>>>>>> origin
 		}
+<<<<<<< HEAD
 	}
     
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -273,6 +319,11 @@ class Controleur
     ////////////////////////////////////////////////////////////////////////////////////////////
     
     protected function afficheVue($nomVue, $data = null)
+=======
+		// Placer les méthodes du controleur.
+		/*
+		function importation()
+>>>>>>> upstream/master
 		{
 			$cheminVue = "vues/" . $nomVue . ".php";
 			
@@ -325,6 +376,7 @@ class Controleur
 			$oVue->afficheImportationok();
 			$oVue->affichePied();
 		}
+<<<<<<< HEAD
     
         private function soumissionAdmin()
 		{
@@ -353,6 +405,9 @@ class Controleur
 >>>>>>> origin
     
     
+=======
+		*/
+>>>>>>> upstream/master
 }
 ?>
 

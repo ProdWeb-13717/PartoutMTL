@@ -20,9 +20,32 @@ if(empty($_GET['requete']))
 	$_GET['requete'] = '';
 }
 
+<<<<<<< HEAD
 if(empty($_GET['soumissionAdmin']))
 {
 	$_GET['soumissionAdmin'] = '';
 }
+=======
+
+// ADMIN ///////////////////////////////////////
+
+	if(empty($_GET['usagerAdmin']))
+	{
+		$_GET['usagerAdmin'] = '';
+	}
+
+	if(empty($_GET['passAdmin']))
+	{
+		$_GET['passAdmin'] = '';
+	}
+
+	if(empty($_SESSION['idAdmin']))
+	{
+		$_SESSION['idAdmin'] = '';
+	}
+
+////////////////////////////////////////////////
+
+>>>>>>> upstream/master
 
 ?>

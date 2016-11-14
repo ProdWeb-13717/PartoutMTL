@@ -1,14 +1,23 @@
 <?php
+
+/**
+ * Class Controleur
+ * Gère les requêtes a la Base de donnees
+ * 
+ * @author Guillaume Harvey
+ * @version 1.0
+ * 
+ */
+ 
+ 
+ 
 	abstract class TemplateBase
 	{
 		protected $connexion;
 		
-		protected function getPrimaryKey()
-		{
-			return "id";			
-		}
+		abstract protected getPrimaryKey(); //exemple pour Oeuvres = getPrimaryKey(){ return "idOeuvre"}
 		
-		abstract protected function getTable();
+		abstract protected function getTable(); //exemple pour Oeuvres = getTable(){ return "Oeuvres"}
 		
 		public function __construct()
 		{
@@ -30,6 +39,7 @@
 				{
 					$cle = $this->getPrimaryKey();
 				}
+				
 				$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where " . $cle . " = :valeur");
 				$stmt->bindParam(":valeur", $valeur);
 				$stmt->execute();

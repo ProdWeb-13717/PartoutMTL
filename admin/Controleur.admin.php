@@ -26,26 +26,18 @@ class Controleur
 				case 'accueil':
 					$this->accueil(); // option quand get requete est accueil
 					break;
+					/*
 				case 'importation':
 					$this->importation(); // option quand get requete n'existe pas
 					break;
 				case 'importationok':
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
+					*/
 				default:
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;
 			}
-			
-			
-			/*
-			switch ($_GET['id']) {
-				default:
-					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
-					break;
-			}
-			*/	
-				
 		}
 		private function accueil()
 		{
@@ -55,7 +47,13 @@ class Controleur
 			$oVue->afficheAccueil();
 			$oVue->affichePied();
 		}
+		
+		private function autentification()
+		{
+			
+		}
 		// Placer les méthodes du controleur.
+		/*
 		function importation()
 		{
 			$oVue = new Vue();
@@ -73,6 +71,7 @@ class Controleur
 			$oVue->afficheImportationok();
 			$oVue->affichePied();
 		}
+		*/
 }
 ?>
 
