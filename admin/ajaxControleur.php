@@ -15,6 +15,43 @@
 	
 	
 	// Mettre ici le code de gestion de la requête AJAX
-	
+	public function gerer()
+		{
+			
+			switch ($_GET['requete']) {
+				
+                case "insereSoumission":
+                        
+                    $obj = json_decode($nouvelleSoumission);
+                        
+                        print_r($obj);
+                        
+                        /*
+                        $modele = new Modele();
+                        $nouvelleSoumission = $params["soumissionAdmin"];
+                        $obj = json_decode($nouvelleSoumission);
+                        
+                        if(isset($obj->titreOeuvreAjoutAdmin)){	
+				            $valide = $modele->insererSoumission($obj->titreOeuvreAjoutAdmin, $obj->titreVarianteOeuvreAjoutAdmin);
+				            
+                            if($valide){									
+				                //echo "merci";	
+                                print_r("merci");
+				            }
+				            else{
+				                echo "ERROR";
+				            }
+				        }
+				        else{													
+				            echo "ERROR";
+				        }*/
+                    
+                break;
+                
+				default:
+					//$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
+					break;
+			}
+		}
 
 ?>
