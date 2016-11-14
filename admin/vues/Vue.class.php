@@ -42,17 +42,10 @@ class Vue {
             <!-- Javascript -------------> 
             <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
             <script src="./js/plugins.js"></script>
-<<<<<<< HEAD
             <script src="./js/soumissionAdmin.js"></script>
             
             <!-- JQUERY -----------------> 
             <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->
-=======
-            <script src="./js/main.js"></script>
-            
-            <!-- JQUERY -----------------> 
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
->>>>>>> origin
 	</head>
 
 	<body>
@@ -118,10 +111,9 @@ class Vue {
 		<a href="index.php?requete=importation">Allez ver l'importation de donnés</a>
 		</div>
 	<?php
-<<<<<<< HEAD
+
 	}   
-=======
-	}
+
     
     public function afficheSoumissionAdmin()
     {
@@ -221,6 +213,6 @@ class Vue {
 	<?php
 	}
     
->>>>>>> origin
+
 }
 ?>

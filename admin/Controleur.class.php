@@ -14,7 +14,6 @@
 
 class Controleur 
 {
-<<<<<<< HEAD
        /**
 	 * Traite la requête
 	 * @return void
