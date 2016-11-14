@@ -14,7 +14,11 @@
 		{
 			try
 			{
+<<<<<<< HEAD
 				$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=107.180.109.70:3306", "partout", "equipeDeCourse5", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+=======
+				$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=107.180.109.70:3306", "partout", "equipeDeCourse5");
+>>>>>>> origin
 			}
 			catch(Exception $exc)
 			{
