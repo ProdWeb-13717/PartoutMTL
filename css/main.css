@@ -1,3 +1,78 @@
-/********
-* Votre CSS
-********/
+/*  TABLE DES MATIÈRES
+    - Global
+    - Entête 
+    - Soumission
+    -
+    -
+-------------------------------------------------------------*/
+
+/* Global
+-------------------------------------------------------------*/
+
+*{
+    font-family: 'Fjalla One', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* Entête
+-------------------------------------------------------------*/
+
+#logo{
+    font-size : 3.5em;
+    color : #016737;
+    margin-top : 40px;
+    margin-left : 40px;
+}
+
+#noir{
+    color : black;
+}
+
+#menuUser{
+    margin-top : -39px;
+}
+
+#menuUser ul{
+    background-color : #016737;
+    padding-top : 50px;
+}
+
+#menuUser li{
+    display : inline-block;
+    list-style-type : none;
+    margin-top : 30px;
+    margin-right : 10px;
+    width : 130px;
+    padding-top : 15px;
+    text-align:center;
+    background-color : white;
+    //background-color : #547968;
+    //border : solid black 2px;
+}
+
+#menuUser a{
+    text-decoration: none;
+    color : black; 
+}
+
+#menuUser a:hover{
+    color : #016737;
+}
+
+#menuUser .actif { 
+    display : inline-block;
+    padding-top : 40px;
+    color: black;
+    pointer-events:none;
+    //border : solid black 1px;
+}
+
+#titreUser{
+    position: absolute;
+    color : white;
+    top: 97px;
+	font-style: italic;
+	font-weight:normal;
+    margin-left : 150px;
+    letter-spacing: 4px;   
+}

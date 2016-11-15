@@ -33,7 +33,7 @@ class ModeleListe extends TemplateBase{
 			try
 			{
 				//$stmt = $this->connexion->prepare("SELECT Artistes.idArtiste AS noArtiste, prenomArtiste, nomArtiste, COUNT(ArtistesOeuvres.idArtiste) AS NbreOeuvres FROM Artistes JOIN ArtistesOeuvres ON Artistes.idArtiste = ArtistesOeuvres.idArtiste GROUP BY noArtiste");
-				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste FROM Artistes");
+				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes");
 				$stmt->execute();
 				return $stmt->fetchAll();
 			}	
