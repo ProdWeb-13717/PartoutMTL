@@ -117,10 +117,12 @@ class modeleSoumission extends TemplateBase {
         {
             $stmt = $this->connexion->prepare("INSERT INTO Oeuvres (titre, 
                                                                     titreVariante,
+                                                                    description,
                                                                     idCategorie,
                                                                     idArrondissement) 
                                                             VALUES (:titre, 
                                                                     :titreVariante,
+                                                                    :description,
                                                                     :idCategorie,
                                                                     :idArrondissement)");
             
@@ -128,6 +130,7 @@ class modeleSoumission extends TemplateBase {
             extract($param);
             $stmt->execute(array(":titre"             => $titre, 
                                  ":titreVariante"     => $titreVariante,
+                                 "description"        => $description,
                                  ":idCategorie"       => $idCategorie,
                                  "idArrondissement"   => $idArrondissement));
             return 1;		     

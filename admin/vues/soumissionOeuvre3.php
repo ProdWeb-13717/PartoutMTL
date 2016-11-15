@@ -13,5 +13,11 @@
     <label for="longitudeOeuvreAjoutAdmin">LONGITUDE : </label>
     <input type="text" name="longitudeOeuvreAjout" id="longitudeOeuvreAjoutAdmin"/><br/>
     
+    <label for="urlPhotoOeuvreAjoutAdmin">URL PHOTO : </label>
+    <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"/><br/>
+    
     <label for="descriptionOeuvreAjoutAdmin">DESCRIPTION : </label>
-    <input type="text" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"/><br/>
+    <textarea rows="4" cols="40" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"></textarea><br/>
+    <br/>
+    <span id="msgErreurSoumision"></span>
+    <br/>

@@ -37,7 +37,7 @@
                     //var valeurAdresseCivique = document.querySelector("[name=adresseCiviqueOeuvreAjout]").value;
                     //var valeurLatitude = document.querySelector("[name=latitudeOeuvreAjout]").value;
                     //var valeurLongitude = document.querySelector("[name=longitudeOeuvreAjout]").value;
-                    //var valeurDescription = document.querySelector("[name=descriptionOeuvreAjout]").value;
+                    var valeurDescription = document.querySelector("[name=descriptionOeuvreAjout]").value;
                     
                     /*-- ARTISTES -----------------------------------------------------------------*/
                     var valeurPrenomArtiste = document.querySelector("[name=prenomArtisteOeuvreAjout]").value;
@@ -76,8 +76,9 @@
                                                adresseCivique    : valeurAdresseCivique,
                                                latitude          : valeurLatitude,
                                                longitude         : valeurLongitude,
-                                               description       : valeurDescription,                                            
-                                                */
+                                               */
+                                               
+                                               description       : valeurDescription,
                                                prenomArtiste     : valeurPrenomArtiste,
                                                nomArtiste        : valeurNomArtiste,
                                                collectif         : valeurCollectif,
@@ -134,8 +135,17 @@
         }
         
         
-        /* TIME STAMP */
         
+        /*  regex latitude - longitude source : 
+            http://stackoverflow.com/questions/3518504/regular-expression-for-matching-latitude-longitude-coordinates
+            
+            latitude : ^(\+|-)?(?:90(?:(?:\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\.[0-9]{1,6})?))$
+            longitude : ^(\+|-)?(?:180(?:(?:\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\.[0-9]{1,6})?))$
+            
+            protected static final String LATITUDE_PATTERN="^(\\+|-)?(?:90(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-8][0-9])(?:(?:\\.[0-9]{1,6})?))$";
+            
+            protected static final String LONGITUDE_PATTERN="^(\\+|-)?(?:180(?:(?:\\.0{1,6})?)|(?:[0-9]|[1-9][0-9]|1[0-7][0-9])(?:(?:\\.[0-9]{1,6})?))$";
+        */
         
         if (valid){
             return true;
