@@ -116,7 +116,7 @@
     left: 75.5%;
     padding: 15px 35px;
     margin-top : 20px;
-    margin-bottom: 30px;
+    margin-bottom : 30px;
     color : white;
     background-color: #016737;
     border: none;
@@ -125,4 +125,10 @@
 #boutonSoumission:hover{
     color : #016737; 
     background-color: white; 
+}
+
+#msgErreurSoumision{
+    color : brown;
+    margin-left : 37%;
+
 }

@@ -41,7 +41,6 @@ class Controleur
             case 'soumission':                                                             // page formulaire de soumission administrateur
                 //$this->soumissionAdmin();
 
-                
                 $vue = "soumissionOeuvre1";
 				$this->afficheVue($vue);
             
@@ -79,8 +78,12 @@ class Controleur
                 var_dump($tableauContenu);
                 extract($tableauContenu);
                 
+                var_dump ("var_dump");
                 var_dump ($titre);
                 var_dump ($titreVariante);
+                var_dump ($prenomArtiste);
+                var_dump ($nomArtiste);
+                var_dump ($collectif);
                 var_dump ($idCategorie);
                 var_dump ($idArrondissement);
                 var_dump ($urlPhoto);
@@ -108,18 +111,22 @@ class Controleur
                 
                 /*-- TABLE Artistes -------------------------------------------------------*/
                 $modele = new modeleSoumission();
-                $valide = $modele->insererSoumissionArtiste($tableauContenu);
-                
-                if($valide){									
-                    echo "merci";	
-                }else{
-                    echo "ERROR";
+                $existe = $modele->verifierArtiste($tableauContenu);
+                var_dump ("existe ????");
+                var_dump ($existe);
+                if($existe == NULL){
+                    $modele = new modeleSoumission();
+                    $valide = $modele->insererSoumissionArtiste($tableauContenu);
+                    if($valide){									
+                        echo "merci";	
+                    }else{
+                        echo "ERROR";
+                    }
                 }
                 
                 /*-- TABLE ArtistesOeuvres ------------------------------------------------*/
                 $modele = new modeleSoumission();
-                $valide = $modele->insererSoumissionArtisteOeuvres();
-                
+                $valide = $modele->insererSoumissionArtisteOeuvres($existe);
                 if($valide){									
                     echo "merci";	
                 }else{
@@ -131,67 +138,56 @@ class Controleur
 				break;
         }
 }
-		
-		private function accueil()
-		{
-			$oVue = new VueAdmin();
-			
-			$oVue->afficheEntete();
-			$oVue->afficheFormAutentificationAdmin();
-			$oVue->affichePied();
-		}
-		
-		private function autentificationAdmin()
-		{
-			$oVue = new VueAdmin();
-			$admin = new Admin();
-			$resulta = $admin->verifFormAutentifiAdmin();
-			
-			
-			$oVue->afficheEntete();
-			
-			if($resulta)
-			{
-				$oVue->afficherAcceuilAdmin();
-			}
-			else
-			{
-				$oVue->afficheFormAutentificationAdmin();
-			}
-			
-			$oVue->affichePied();
-		}
-		
-		private function admin()
-		{
-			$oVue = new VueAdmin();
-			
-			$oVue->afficheEntete();
-			$oVue->verifFormAutentifiAdmin();
-			$oVue->affichePied();
-		}
-
-  
+    
     ////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////     MÉTHODES DU CONTROLEUR     ////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
+		
     
-        protected function afficheVue($nomVue, $data = null)
-		{
-			$cheminVue = "vues/" . $nomVue . ".php";
-			
-			if(file_exists($cheminVue))
-			{
-				include($cheminVue); 
-			}
-			else
-			{
-				die("Erreur 404! La vue n'existe pas.");				
-			}
-		}
+    protected function afficheVue($nomVue, $data = null)
+    {
+        $cheminVue = "vues/" . $nomVue . ".php";
+        
+        if(file_exists($cheminVue))
+        {
+            include($cheminVue); 
+        }
+        else
+        {
+            die("Erreur 404! La vue n'existe pas.");				
+        }
+    }
     
+    private function autentificationAdmin()
+    {
+        $oVue = new VueAdmin();
+        $admin = new Admin();
+        $resulta = $admin->verifFormAutentifiAdmin();
+        
+        
+        $oVue->afficheEntete();
+        
+        if($resulta)
+        {
+            $oVue->afficherAcceuilAdmin();
+        }
+        else
+        {
+            $oVue->afficheFormAutentificationAdmin();
+        }
+        
+        $oVue->affichePied();
+    }
     
-    /*
+    private function admin()
+    {
+        $oVue = new VueAdmin();
+        
+        $oVue->afficheEntete();
+        $oVue->verifFormAutentifiAdmin();
+        $oVue->affichePied();
+    }
+
     private function accueil()
     {
         $oVue = new Vue();
@@ -221,8 +217,6 @@ class Controleur
     }
     
 
-
-		*/
 
 }
 ?>
