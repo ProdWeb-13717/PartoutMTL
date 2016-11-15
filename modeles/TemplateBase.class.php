@@ -1,22 +1,15 @@
 <?php
-
-/**
- * Class Controleur
- * Gère les requêtes a la Base de donnees
- * 
- * @author Guillaume Harvey
- * @version 1.0
- * 
- */
- 
 	abstract class TemplateBase
 	{
 		protected $connexion;
 		
 
-		abstract protected getPrimaryKey(); //exemple pour Oeuvres = getPrimaryKey(){ return "idOeuvre"}
+		protected function getPrimaryKey()
+		{
+			return "id";			
+		}
 		
-		abstract protected function getTable(); //exemple pour Oeuvres = getTable(){ return "Oeuvres"}
+		abstract protected function getTable();
 		
 		public function __construct()
 		{
@@ -26,7 +19,7 @@
 			}
 			catch(Exception $exc)
 			{
-				die("Connexion à la base de données impossible.");
+				die("Connexion Ã  la base de donnÃ©es impossible.");
 			}
 		}
 	
