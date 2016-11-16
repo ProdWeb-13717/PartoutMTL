@@ -20,26 +20,56 @@ class Controleur
 	 */
 	public function gerer()
 	{
-		
         $vue = "head";
         $this->afficheVue($vue);
         
+		
         $vue = "enteteAdmin";
         $this->afficheVue($vue);
+		
         
         switch ($_GET['requete']) 
         {
 			case 'accueil':
 				$this->accueil();                                                          // option quand get requete est accueil
 				break;
+				
+			case 'accueilAdmin':
+				break;
+				
+			case 'formAutentificationAdmin':
+				$vue = 'FormAutentificationAdmin';
+				$this->afficheVue($vue);
+				break;
+				
+			case 'autentificationAdmin':
+				$admin = new Admin();
+				$resulta = $admin->verificationAutentificationAdmin();
+				if($resulta === true)
+				{
+					
+				}
+				else
+				{
+					$vue = 'FormAutentificationAdmin';
+					$this->afficheVue($vue);
+				}
+				break;
+				
+				/*
 			case 'importation':
-				$this->importation();                                                      // option quand get requete n'existe pas
+				$this->importation();                                                      
 				break;
+				
 			case 'importationok':
-				$this->importationok();                                                    // option quand get requete n'existe pas
+				$this->importationok();                                                    
 				break;
+				*/
+				
             case 'soumission':                                                             // page formulaire de soumission administrateur
                 //$this->soumissionAdmin();
+				
+				//$this->afficherEnteteAdmin();
 
                 $vue = "soumissionOeuvre1";
 				$this->afficheVue($vue);
@@ -71,6 +101,7 @@ class Controleur
                 
 
                 break;
+				
             case "insereSoumission":                                                       // à l'envoi du formulaire
                 /*-- paramètres dirigés vers la table Oeuvres -----------------------------*/
             
@@ -133,6 +164,7 @@ class Controleur
                     echo "ERROR";
                 }
                 break;
+				
             default:
 				$this->accueil();
 				break;
@@ -157,7 +189,25 @@ class Controleur
             die("Erreur 404! La vue n'existe pas.");				
         }
     }
+	
+	public function afficherFormAutentificationAdmin()
+	{
+		$vue = "boutonSoumission";
+        $this->afficheVue($vue);
+		
+		
+	}
+	
+	protected function afficherEnteteAdmin()
+	{
+        
+        $vue = "enteteAdmin";
+        $this->afficheVue($vue);
+	}
     
+	
+	
+	/*
     private function autentificationAdmin()
     {
         $oVue = new VueAdmin();
@@ -187,7 +237,9 @@ class Controleur
         $oVue->verifFormAutentifiAdmin();
         $oVue->affichePied();
     }
-
+	*/
+	
+	
     private function accueil()
     {
         $oVue = new Vue();
@@ -197,6 +249,8 @@ class Controleur
         $oVue->affichePied();
     }
 
+	
+	/*
     function importation()
     {
         $oVue = new Vue();
@@ -215,6 +269,8 @@ class Controleur
         $oVue->afficheImportationok();
         $oVue->affichePied();
     }
+	
+	*/
     
 
 

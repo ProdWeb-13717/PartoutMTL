@@ -33,6 +33,7 @@ class Admin extends TemplateBase{
 		
 		return $aDonnees;
 	}
+	/*
 	
 	private function autentificationAdmin()
 	{
@@ -56,6 +57,7 @@ class Admin extends TemplateBase{
 		return $retour;
 		
 	}
+	*/
 	
 	public function deconnectionAdmin()
 	{
@@ -91,7 +93,74 @@ class Admin extends TemplateBase{
 
 ///// APPEL A LA BASE DE DONNEES ///////////////////////////////////
 
-
+	public function verificationAutentificationAdmin()
+	{
+		if((isset($_POST["usager"]) && isset($_POST["pass"]))&& isset($_SESSION["grainDeSel"]))
+		{
+			$motDePasseMD5 = $this->ObtenirMotDePasseAdmin($_POST["usager"]);
+			$motDePasseGrainSel = md5($motDePasseMD5 . $_SESSION["grainDeSel"]);
+		
+			if($motDePasseGrainSel == $_POST["pass"])
+			{
+				$_SESSION["authentifie"] = $_POST["usager"];
+				echo $_SESSION["authentifie"];
+				$location = "register";
+				$_SESSION["requete"] = "register";
+				//header("Location: index.php?requete=accueilAdmin");
+				//echo "SESSION['authentifie']";
+				return true;
+			}
+			else
+			{
+				return false;
+				//$message = "Mauvaise combinaison usager/pass";
+			}
+		}
+	}
+	/*
+	public function AutentificationAdmin($usager, $pass)
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare('SELECT motPasseAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager');
+			$stmt->bindParam(":usager", $usager);
+			$stmt->execute();
+			$stmt->fetch();
+			return $stmt['motPasseAdmin'];
+		}
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	*/
+	
+	
+	public function ObtenirMotDePasseAdmin($usager)
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare('SELECT motPasseAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager');
+			$stmt->bindParam(":usager", $usager);
+			$stmt->execute();
+			$stmt->fetch();
+			return $stmt['motPasseAdmin'];
+		}
+		catch(Exception $exc)
+		{
+			return false;
+		}
+		
+		/*
+		global $connexion;
+		$requete = "SELECT motPasseAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager";
+		echo  mysqli_real_escape_string($connexion, $username);
+		$resultat = ExecuteRequete($requete);
+		$motDePasse = mysqli_fetch_assoc($resultat)["pass"];
+		return $motDePasse;
+		*/
+	}
 
 
 
