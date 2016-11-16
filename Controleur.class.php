@@ -35,7 +35,7 @@ class Controleur
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
                     
-                case 'listeArtiste':
+                case 'listeArtistes':
 					$this->afficheListe(); // option quand get requete n'existe pas
 					break;
 					
@@ -84,7 +84,7 @@ class Controleur
             
 			$oVue->afficheEntete();
 			
-            if($_GET['requete'] == "listeArtiste")
+            if($_GET['requete'] == "listeArtistes")
             {
 				$modeleListe = new ModeleListe();
 				$data = $modeleListe->getArtisteTout();
@@ -93,7 +93,9 @@ class Controleur
             
             else if($_GET['requete'] == "listeOeuvres")
             {
-                
+                $modeleListe = new ModeleListe();
+				$data = $modeleListe->getOeuvresTout();
+				$objListe->afficheListeOeuvre($data);
             }
             
             

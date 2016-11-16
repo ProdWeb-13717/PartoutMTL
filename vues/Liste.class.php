@@ -53,35 +53,26 @@ class Liste{
 	public function afficheListeOeuvre($rechercheResultat) {
      ?>
         <section class="liste">
-			<ul>
+			<Table>
+				<tr>
+					<th><?php echo "ID"?><th>
+					<th><?php echo "Titre"?><th>
+					<th><?php echo "Année"?><th>
+				</tr>
 				<?php
 					foreach($rechercheResultat as $oeuvre)
 					{
 				?>
-						<li>
-							<ul class="resultatOeuvre">
-								<li><img src="<?php echo $oeuvre["lienPhoto"]?>"/></li>
-								<li><?php echo "Titre: ".$oeuvre["titre"]?></li>
-								<li><?php echo "Auteur: ".$oeuvre["prenomArtiste"]." ".$oeuvre["nomArtiste"]?>?>
-									<ul>
-									<?php
-										$idPiece = $oeuvre["artisteNo"];
-										foreach($rechercheResultat as $Auteur)
-										{
-											//if($Auteur["artisteNo"] = )
-										}
-									?>
-									</ul>
-								</li>
-								<li><?php echo "Année: ".$oeuvre["dateFinProduction"]?></li>
-							</ul>
-						</li>  
+				<tr>
+					<td><?php echo $oeuvre["noOeuvre"]?></td>
+					<td><?php echo $oeuvre["titre"]?></td>
+					<td><?php echo $oeuvre["dateFinProduction"]?></td>
+				</tr>
 				<?php
 					}
 				?>
-			</ul>
+			</Table>
 		</section>
-
 	<?php
 	}
 		
