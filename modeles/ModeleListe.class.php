@@ -47,10 +47,16 @@ class ModeleListe extends TemplateBase{
 	}
 	
 	public function getOeuvresTout() 
-	{/*INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;*/
+	{
 			try
 			{
-				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto FROM Oeuvres LEFT JOIN Photos ON Photos.idOeuvre = Oeuvres.idOeuvre");
+				//$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto FROM Oeuvres LEFT JOIN Photos ON Photos.idOeuvre = Oeuvres.idOeuvre");
+				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto, Artistes.prenomArtiste AS prenom, Artistes.nomArtiste AS nom, Artistes.collectif AS collectif 
+												   FROM Photos 
+												   RIGHT JOIN Oeuvres ON Photos.idOeuvre = Oeuvres.idOeuvre 
+												   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre 
+												   LEFT JOIN Artistes ON ArtistesOeuvres.idArtiste =  Artistes.idArtiste 
+												   ORDER BY noOeuvre");
 				$stmt->execute();
 				return $stmt->fetchAll();
 			}	
