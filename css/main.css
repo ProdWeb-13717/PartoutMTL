@@ -13,3 +13,109 @@
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
 }
+
+/* Entête
+-------------------------------------------------------------*/
+
+#logo{
+    font-size : 3.5em;
+    color : #016737;
+    margin-top : 40px;
+    margin-left : 40px;
+}
+
+#noir{
+    color : black;
+}
+
+#menuUser{
+    margin-top : -39px;
+}
+
+#menuUser ul{
+    background-color : #016737;
+    padding-top : 50px;
+}
+
+#menuUser li{
+    display : inline-block;
+    list-style-type : none;
+    margin-top : 30px;
+    margin-right : 10px;
+    width : 130px;
+    padding-top : 15px;
+    text-align:center;
+    background-color : white;
+    //background-color : #547968;
+    //border : solid black 2px;
+}
+
+#menuUser a{
+    text-decoration: none;
+    color : black; 
+}
+
+#menuUser a:hover{
+    color : #016737;
+}
+
+#menuUser .actif { 
+    display : inline-block;
+    padding-top : 40px;
+    color: black;
+    pointer-events:none;
+    //border : solid black 1px;
+}
+
+#titreUser{
+    position: absolute;
+    color : white;
+    top: 97px;
+	font-style: italic;
+	font-weight:normal;
+    margin-left : 150px;
+    letter-spacing: 4px;   
+}
+
+/* Entête
+-------------------------------------------------------------*/
+
+span.catElemListe{
+	color: #016737;
+	font-weight: bold;
+}
+
+.elemListe{
+	border: 2px solid #016737;
+	border-radius:10px 0 10px 0;
+	max-width: 50%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items:center;
+	padding:15px 30px;
+	margin: 0 0 15px 30px;
+	box-shadow: 5px 5px 5px #888888;	
+}
+
+.elemListe ul{
+	max-width: 50%;
+	margin: 0;
+	padding:0;
+}
+
+.elemListe img{
+	height:auto;
+	max-width:90px;
+	border: 2px solid #016737;
+	border-radius:10px 0 10px 0;
+	margin-right :45px;
+}
+
+.elemListe .rondListe{
+	height:15px;
+	width:15px;
+	background-color:#016737;
+	border-radius:100%;
+	margin-right :45px;
+}
