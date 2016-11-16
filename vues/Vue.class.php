@@ -23,6 +23,7 @@ class Vue {
 	public function afficheEntete() {
 		?>
 		<!DOCTYPE html>
+
 <html lang="fr">
 	<head>
 		<title>Partout</title>
@@ -40,9 +41,10 @@ class Vue {
 		<script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
 		<script src="./js/plugins.js"></script>
 		<script src="./js/main.js"></script>
+		<script src="./js/rechercheAJAX.js"></script>
 	</head>
 
-	<body>
+			<body>
 		<?php
 	}
 	
@@ -56,6 +58,10 @@ class Vue {
 		?>
 			<div>
 			<a href="index.php?requete=importation">Allez ver l'importation de donnés</a>
+			<!--Lien vers teste  des listes-->
+			<a href="index.php?requete=listeArtistes">Afficher liste d'artistes</a>
+			<a href="index.php?requete=listeOeuvres">Afficher liste d'oeuvres</a>
+
 			</div>
 		<?php
 		
@@ -70,14 +76,14 @@ class Vue {
 	public function affichePied()
 	{
 		?>
-		<div id="footer">
+			<div id="footer">
 					Certains droits réservés @ Jonathan Martel (2013)<br>
 					Sous licence Creative Commons (BY-NC 3.0)
 				</div>
 			</div>	
 		</body>
-	</html>
-	<?php
+		</html>
+		<?php
 	}
 	
 	/**
