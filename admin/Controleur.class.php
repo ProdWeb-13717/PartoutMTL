@@ -22,11 +22,10 @@ class Controleur
 	{
         $vue = "head";
         $this->afficheVue($vue);
-        
-		
+/*
         $vue = "enteteAdmin";
         $this->afficheVue($vue);
-		
+		*/
         
         switch ($_GET['requete']) 
         {
@@ -34,29 +33,37 @@ class Controleur
 				$this->accueil();                                                          // option quand get requete est accueil
 				break;
 				
-			case 'accueilAdmin':
-				break;
-				
 			case 'formAutentificationAdmin':
 				$vue = 'FormAutentificationAdmin';
 				$this->afficheVue($vue);
 				break;
 				
-			case 'autentificationAdmin':
+			case 'AutentificationAdmin':
 				$admin = new Admin();
 				$resulta = $admin->verificationAutentificationAdmin();
-				if($resulta === true)
+				if($resulta)
 				{
-					
+					unset($_POST['usager']);
+					unset($_POST['pass']);
 				}
-				else
+				$_GET['requete'] = "accueil";
+				
+				if($resulta == false)
 				{
 					$vue = 'FormAutentificationAdmin';
 					$this->afficheVue($vue);
 				}
+				else
+				{
+					$this->accueil();
+				}
 				break;
 				
-				/*
+			case 'deconnectionAdmin':
+				session_unset();
+				$this->accueil();  	
+				break;
+				
 			case 'importation':
 				$this->importation();                                                      
 				break;
@@ -64,12 +71,12 @@ class Controleur
 			case 'importationok':
 				$this->importationok();                                                    
 				break;
-				*/
+				
 				
             case 'soumission':                                                             // page formulaire de soumission administrateur
                 //$this->soumissionAdmin();
 				
-				//$this->afficherEnteteAdmin();
+				$this->afficherEnteteAdmin();
 
                 $vue = "soumissionOeuvre1";
 				$this->afficheVue($vue);
@@ -97,9 +104,7 @@ class Controleur
 				$this->afficheVue($vue);
             
                 $vue = "boutonSoumission";
-                $this->afficheVue($vue);
-                
-
+                $this->afficheVue($vue);                
                 break;
 				
             case "insereSoumission":                                                       // à l'envoi du formulaire
@@ -200,9 +205,9 @@ class Controleur
 	
 	protected function afficherEnteteAdmin()
 	{
-        
-        $vue = "enteteAdmin";
-        $this->afficheVue($vue);
+        $this->afficheVue("enteteAdmin");
+        $this->afficheVue("boutonDeconnectionAdmin");
+		
 	}
     
 	
@@ -242,15 +247,24 @@ class Controleur
 	
     private function accueil()
     {
-        $oVue = new Vue();
+        //$oVue = new Vue();
         
         //$oVue->afficheEntete();
-        $oVue->afficheAccueil();
-        $oVue->affichePied();
+        //$oVue->afficheAccueil();
+		if(!isset($_SESSION['authentifie']))
+		{
+			$vue = 'FormAutentificationAdmin';
+			$this->afficheVue($vue);
+		}
+		else
+		{
+			$this->afficherEnteteAdmin();
+		}
+        //$oVue->affichePied();
     }
 
 	
-	/*
+	
     function importation()
     {
         $oVue = new Vue();
@@ -270,7 +284,7 @@ class Controleur
         $oVue->affichePied();
     }
 	
-	*/
+	
     
 
 

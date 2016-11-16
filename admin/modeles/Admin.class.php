@@ -12,16 +12,6 @@
  */
 class Admin extends TemplateBase{
 	
-    
-	function __construct ()
-	{
-		
-	}
-	
-	function __destruct ()
-	{
-		
-	}
 	
 	/**
 	 * @access public
@@ -33,35 +23,20 @@ class Admin extends TemplateBase{
 		
 		return $aDonnees;
 	}
-	/*
 	
-	private function autentificationAdmin()
+	protected function getPrimaryKey()
 	{
-		$admins = $this->obtenirTous();
-		$retour = false;
-		foreach($admin in $admins)
-		{
-			if($admin['nomUsagerAdmin'] === $_GET['usagerAdmin'])
-			{
-				if($admin['motPasseAdmin'] === $_GET['passAdmin'])
-				{
-					$_SESSION["idAdmin"] = $admin['idAdmin'];
-					$retour = true;
-				}
-				else
-				{
-					break;
-				}
-			}
-		}
-		return $retour;
-		
+		return "nomUsagerAdmin";
 	}
-	*/
+	
+	protected function getTable()
+	{
+		return "Administrateurs";
+	}
 	
 	public function deconnectionAdmin()
 	{
-		
+		unset($_SESSION['authentifie']);
 	}
 	public function test()
 	{
@@ -79,16 +54,6 @@ class Admin extends TemplateBase{
 			return false;
 		}
 	}
-	
-	private function getPrimaryKey()
-	{
-		return "idAdmin";
-	}
-	
-	private function getTable()
-	{
-		return "Administrateurs";
-	}
 
 
 ///// APPEL A LA BASE DE DONNEES ///////////////////////////////////
@@ -103,11 +68,7 @@ class Admin extends TemplateBase{
 			if($motDePasseGrainSel == $_POST["pass"])
 			{
 				$_SESSION["authentifie"] = $_POST["usager"];
-				echo $_SESSION["authentifie"];
-				$location = "register";
-				$_SESSION["requete"] = "register";
-				//header("Location: index.php?requete=accueilAdmin");
-				//echo "SESSION['authentifie']";
+				//header("Location: index.php?requete=accueil");
 				return true;
 			}
 			else
@@ -117,24 +78,7 @@ class Admin extends TemplateBase{
 			}
 		}
 	}
-	/*
-	public function AutentificationAdmin($usager, $pass)
-	{
-		try
-		{
-			$stmt = $this->connexion->prepare('SELECT motPasseAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager');
-			$stmt->bindParam(":usager", $usager);
-			$stmt->execute();
-			$stmt->fetch();
-			return $stmt['motPasseAdmin'];
-		}
-		catch(Exception $exc)
-		{
-			return false;
-		}
-	}
 	
-	*/
 	
 	
 	public function ObtenirMotDePasseAdmin($usager)
@@ -144,22 +88,14 @@ class Admin extends TemplateBase{
 			$stmt = $this->connexion->prepare('SELECT motPasseAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager');
 			$stmt->bindParam(":usager", $usager);
 			$stmt->execute();
-			$stmt->fetch();
-			return $stmt['motPasseAdmin'];
+			$resulta = $stmt->fetch();
+			return $resulta['motPasseAdmin'];
 		}
 		catch(Exception $exc)
 		{
 			return false;
 		}
 		
-		/*
-		global $connexion;
-		$requete = "SELECT motPasseAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager";
-		echo  mysqli_real_escape_string($connexion, $username);
-		$resultat = ExecuteRequete($requete);
-		$motDePasse = mysqli_fetch_assoc($resultat)["pass"];
-		return $motDePasse;
-		*/
 	}
 
 

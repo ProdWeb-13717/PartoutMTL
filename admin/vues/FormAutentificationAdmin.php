@@ -33,16 +33,20 @@
 	}
 	*/
 ?>	
-	<script type="text/javascript" src="md5.js"></script>
+	<script type="text/javascript" src="./js/md5.js"></script>
 	<script type="text/javascript"> 
 		(function()
 		{
-			windows.addEventListener('load', function()
+			window.addEventListener('load', function()
 			{
 				document.getElementById('encrypte').addEventListener('click', encrypte);
 			});
 	
-			function encrypte()
+		})();
+		
+		function encrypte()
+		{
+			if((document.autentificationForm.pass.value != "" && document.autentificationForm.pass.value != null) && (document.autentificationForm.usager.value != "" && document.autentificationForm.usager.value != null))
 			{
 				var passEncrypte = md5(document.autentificationForm.pass.value);
 				var grainSel = document.autentificationForm.grainSel.value;
@@ -54,13 +58,13 @@
 				document.formEncrypte.usager.value = usager;
 				document.formEncrypte.submit();			
 			}
-		});
+		}
 		
 		
 	</script>
 	<form name="autentificationForm" method="POST">
 		NOM USAGER : <input type="text" name="usager"/>		
-		MOT DE PASSE :  <input type="pass" name="pass"/>	
+		MOT DE PASSE :  <input type="password" name="pass"/>	
 		<input type="hidden" name="grainSel" value="<?php echo $_SESSION["grainDeSel"];?>"/>
 		<input type="button" value="soumettre" id="encrypte"/>
 	</form>
