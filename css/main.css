@@ -84,6 +84,10 @@ span.catElemListe{
 	color: #016737;
 	font-weight: bold;
 }
+.liRecherche{
+	display:block;
+	margin-left: 20px;
+}
 
 .elemListe{
 	border: 2px solid #016737;
