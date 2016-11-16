@@ -21,7 +21,6 @@ if(empty($_GET['requete']))
 }
 
 
-// ADMIN ///////////////////////////////////////
 
 	if(empty($_GET['usagerAdmin']))
 	{
@@ -38,7 +37,6 @@ if(empty($_GET['requete']))
 		$_SESSION['idAdmin'] = '';
 	}
 
-////////////////////////////////////////////////
 
 
 ?>

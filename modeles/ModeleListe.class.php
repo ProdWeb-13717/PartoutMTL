@@ -33,7 +33,7 @@ class ModeleListe extends TemplateBase{
 			try
 			{
 				//$stmt = $this->connexion->prepare("SELECT Artistes.idArtiste AS noArtiste, prenomArtiste, nomArtiste, COUNT(ArtistesOeuvres.idArtiste) AS NbreOeuvres FROM Artistes JOIN ArtistesOeuvres ON Artistes.idArtiste = ArtistesOeuvres.idArtiste GROUP BY noArtiste");
-				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste FROM Artistes");
+				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes");
 				$stmt->execute();
 				return $stmt->fetchAll();
 			}	
@@ -50,15 +50,7 @@ class ModeleListe extends TemplateBase{
 	{/*INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;*/
 			try
 			{
-				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction FROM Oeuvres");
-				/*"SELECT Oeuvres.idOeuvre AS oeuvreNo, titre, dateFinProduction, Photos.urlPhoto AS lienPhoto, Artistes.idArtiste AS artisteNo, prenomArtiste, nomArtiste
-				FROM Oeuvres 
-				OUTER JOIN Photos
-				ON Photos.idOeuvre = Oeuvres.idOeuvre
-				OUTER JOIN ArtistesOeuvres
-				ON ArtistesOeuvres.idOeuvre = Oeuvres.idOeuvre
-				OUTER JOIN Artistes
-				ON ArtistesOeuvres.idArtiste = Artistes.idArtiste");*/
+				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto FROM Oeuvres LEFT JOIN Photos ON Photos.idOeuvre = Oeuvres.idOeuvre");
 				$stmt->execute();
 				return $stmt->fetchAll();
 			}	

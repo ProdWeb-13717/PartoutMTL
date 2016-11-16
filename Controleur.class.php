@@ -22,6 +22,13 @@ class Controleur
 		public function gerer()
 		{
 			
+			$vue = "head";
+			$this->afficheVue($vue);
+        
+			$vue = "enteteUser";
+			$this->afficheVue($vue);
+			
+			
 			switch ($_GET['requete']) {
 				case 'accueil':
 					$this->accueil(); // option quand get requete est accueil
@@ -36,11 +43,21 @@ class Controleur
 					break;
                     
                 case 'listeArtistes':
-					$this->afficheListe(); // option quand get requete n'existe pas
+				
+					$vue = "listeArtistes";
+					$modeleListe = new ModeleListe();
+					$data = $modeleListe->getArtisteTout();
+					$this->afficheVue($vue,$data);
+					
 					break;
 					
 				case 'listeOeuvres':
-					$this->afficheListe(); // option quand get requete n'existe pas
+					
+					$vue = "listeOeuvres";
+					$modeleListe = new ModeleListe();
+					$data = $modeleListe->getOeuvresTout();
+					$this->afficheVue($vue,$data);
+					
 					break;
 					
                 default:
@@ -49,6 +66,25 @@ class Controleur
 			}
 		}
 
+	////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////     MÉTHODES DU CONTROLEUR     ////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    
+        protected function afficheVue($nomVue, $data = null)
+		{
+			$cheminVue = "vues/" . $nomVue . ".php";
+			
+			if(file_exists($cheminVue))
+			{
+				include($cheminVue); 
+			}
+			else
+			{
+				die("Erreur 404! La vue n'existe pas.");				
+			}
+		}
+		
+		
 		private function accueil()
 		{
 			$oVue = new Vue();
@@ -73,32 +109,6 @@ class Controleur
 			
 			$oVue->afficheEntete();
 			$oVue->afficheImportationok();
-			$oVue->affichePied();
-		}
-    
-        //Fonction pour afficher une liste (artiste ou oeuvres)
-        function afficheListe()
-		{
-			$oVue = new Vue();
-            $objListe = new Liste();
-            
-			$oVue->afficheEntete();
-			
-            if($_GET['requete'] == "listeArtistes")
-            {
-				$modeleListe = new ModeleListe();
-				$data = $modeleListe->getArtisteTout();
-				$objListe->afficheListeArtiste($data);
-            }
-            
-            else if($_GET['requete'] == "listeOeuvres")
-            {
-                $modeleListe = new ModeleListe();
-				$data = $modeleListe->getOeuvresTout();
-				$objListe->afficheListeOeuvre($data);
-            }
-            
-            
 			$oVue->affichePied();
 		}
 }
