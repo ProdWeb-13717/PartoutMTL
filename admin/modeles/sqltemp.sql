@@ -1,0 +1,1 @@
+insert into Oeuvres (dateFinProduction) values ('2012-06-18');

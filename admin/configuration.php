@@ -12,10 +12,12 @@
  * 
  */
 
+
 	define('MODELE_DIR', '../modeles/');	     // Chemin vers les modèles
     define('ADMINMODELE_DIR', 'modeles/');	     // Chemin vers les modèles
     define('VUES_DIR', 'vues/');			     // Chemin vers les vues
 	define('LIB_DIR', 'lib/');			         // Chemin vers les librairies
+
 	
 	
 	/**

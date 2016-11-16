@@ -17,9 +17,12 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         
         <!-- Javascript -------------> 
+		<!--
+		-->
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="./js/plugins.js"></script>
-        <script src="./js/soumissionAdmin.js"></script>
+        <script src="./js/rechercheAJAX.js"></script>
+        <script src="./js/main.js"></script>
         
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->
