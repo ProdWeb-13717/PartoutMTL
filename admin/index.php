@@ -12,6 +12,8 @@
 	 /***************************************************/
     /** Fichier de configuration, contient l'autoloader **/
     /***************************************************/
+
+	
 	require_once("./configuration.php");
 
 	// Voici un changement

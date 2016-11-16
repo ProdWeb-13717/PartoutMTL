@@ -1,9 +1,4 @@
-/* NOM DE LA BASE DE DONNER : PartoutMTL */
-
-
-
 CREATE TABLE IF NOT EXISTS Administrateurs(
-
     nomUsagerAdmin VARCHAR(50) NOT NULL,
     motPasseAdmin VARCHAR(50) NOT NULL,
     courrielAdmin VARCHAR(200) NOT NULL,
@@ -11,8 +6,9 @@ CREATE TABLE IF NOT EXISTS Administrateurs(
     prenomAdmin VARCHAR(50), 
     nomAdmin VARCHAR(50),
     PRIMARY KEY (nomUsagerAdmin)
-
 );
+
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 
 
 CREATE TABLE IF NOT EXISTS MiseAJours(
@@ -27,7 +23,6 @@ CREATE TABLE IF NOT EXISTS MiseAJours(
 
 CREATE TABLE IF NOT EXISTS Soumissions(
     idSoumission int AUTO_INCREMENT NOT NULL,
-	titre VARCHAR(100),
     parc VARCHAR(200), 
     adresseCivique VARCHAR(200),
     descritpion TEXT,
@@ -50,6 +45,7 @@ CREATE TABLE IF NOT EXISTS Arrondissements(
 
 CREATE TABLE IF NOT EXISTS Artistes(
     idArtiste int AUTO_INCREMENT NOT NULL,
+    noInterne int, 
     prenomArtiste VARCHAR(50),
     nomArtiste VARCHAR(50),
     collectif VARCHAR(100),
@@ -60,37 +56,27 @@ CREATE TABLE IF NOT EXISTS Oeuvres(
     idOeuvre int AUTO_INCREMENT NOT NULL,
     titre VARCHAR(50) NOT NULL,
     titreVariante VARCHAR(50),
-    dateFinProduction DATE,
-    dateAccession DATE,
+    dateFinProduction DATETIME,
+    dateAquisition DATETIME,
     nomCollection VARCHAR(50),
-    modeAcquisition VARCHAR(50),
+    modeAquisition VARCHAR(50),
     materiaux VARCHAR(200),
     technique VARCHAR(100),
     dimensions VARCHAR(50),
     parc VARCHAR(100),
     batiment VARCHAR(100),
     adresseCivique VARCHAR(200),
-    latitude float,
-    longitude float,
+    latitude int,
+    longitude int,
     description TEXT,
-    numeroAccession VARCHAR(30),
-    noInterne int,
+    urlPhoto TEXT,
     idCategorie int,
     idArrondissement int,
+    numeroAccession VARCHAR(30),
     PRIMARY KEY (idOeuvre),
     FOREIGN KEY (idCategorie) REFERENCES Categories(idCategorie),
     FOREIGN KEY (idArrondissement) REFERENCES Arrondissements(idArrondissement)
 );
-
-
-CREATE TABLE IF NOT EXISTS Photos(
-    idPhoto int AUTO_INCREMENT NOT NULL,
-	urlPhoto TEXT,
-	idOeuvre int,
-    PRIMARY KEY (idPhoto),
-    FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
-);
-
 
 CREATE TABLE IF NOT EXISTS ArtistesOeuvres(
     idArtiste int NOT NULL,
@@ -100,33 +86,13 @@ CREATE TABLE IF NOT EXISTS ArtistesOeuvres(
     FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
 );
 
-CREATE TABLE IF NOT EXISTS Carroussel(
-    idCaroussel int AUTO_INCREMENT NOT NULL,
-	urlPhoto TEXT,
-	urlLien TEXT,
-	titre VARCHAR(200),
-    description TEXT,
+CREATE TABLE IF NOT EXISTS ImagesCarroussel(
+    idImgCaroussel int AUTO_INCREMENT NOT NULL,
     position int,
-    PRIMARY KEY (idCaroussel)
+    idOeuvre int NOT NULL,
+    PRIMARY KEY (idImgCaroussel),
+    FOREIGN KEY (idOeuvre) REFERENCES Oeuvres(idOeuvre)
 );
 
 
-INSERT into Categories (nomCategorie) VALUES 
-			("Sculpture"),
-			("Installation"),
-			("Vitrail"),
-			("Peinture"),
-			("Mosaique")
-			;
-            
-INSERT into Arrondissements (nomArrondissement) VALUES 
-			("Côte-des-Neiges–Notre-Dame-de-Grâce"),
-			("Ville-Marie"),
-			("Rosemont–La Petite-Patrie"),
-			("Le Plateau-Mont-Royal"),
-			("Le Sud-Ouest")
-			;
-
-
-
-
+INSERT INTO Categories(nomCategorie) VALUE("dsafsegf");

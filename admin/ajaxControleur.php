@@ -15,6 +15,18 @@
 	
 	
 	// Mettre ici le code de gestion de la requête AJAX
-	
+	public function gerer()
+		{
+			
+			switch ($_GET['requete']) {
+				
+                
+                break;
+                
+				default:
+					//$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
+					break;
+			}
+		}
 
 ?>

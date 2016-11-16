@@ -14,10 +14,31 @@
  * Faire l'assignation des variables ici avec les isset() ou !empty()
  */
   
-   
-if(empty($_GET['requete']))
-{
-	$_GET['requete'] = '';
-}
+	session_start();
+  
+  
+	if(empty($_GET['requete']))
+	{
+		$_GET['requete'] = '';
+	}
+
+
+
+	if(empty($_GET['usagerAdmin']))
+	{
+		$_GET['usagerAdmin'] = '';
+	}
+
+	if(empty($_GET['passAdmin']))
+	{
+		$_GET['passAdmin'] = '';
+	}
+
+	if(empty($_SESSION['idAdmin']))
+	{
+		$_SESSION['idAdmin'] = '';
+	}
+
+
 
 ?>

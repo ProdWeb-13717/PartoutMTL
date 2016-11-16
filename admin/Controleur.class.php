@@ -14,41 +14,204 @@
 
 class Controleur 
 {
+       /**
+	 * Traite la requête
+	 * @return void
+	 */
+	public function gerer()
+	{
+        $this->afficheVue("head");
+        
+        switch ($_GET['requete']) 
+        {
+			case 'accueil':
+				$this->accueil();                                                          // option quand get requete est accueil
+				break;
+				
+			case 'formAutentificationAdmin':
+				$vue = 'FormAutentificationAdmin';
+				$this->afficheVue($vue);
+				break;
+				
+			case 'AutentificationAdmin':
+				$admin = new Admin();
+				$resulta = $admin->verificationAutentificationAdmin();
+				if($resulta)
+				{
+					unset($_POST['usager']);
+					unset($_POST['pass']);
+				}
+				
+				$_GET['requete'] = "accueil";
+				
+				if($resulta == false)
+				{
+					$vue = 'FormAutentificationAdmin';
+					$this->afficheVue($vue);
+				}
+				else
+				{
+					$this->accueil();
+				}
+				break;
+				
+			case 'deconnectionAdmin':
+				session_unset();
+				$this->accueil();  	
+				break;
+				
+			case 'importation':
+				$vue = "enteteAdmin";
+				$this->afficheVue($vue);
+				$this->importation();                                                      
+				break;
+				
+			case 'importationok':
+			
+				$vue = "enteteAdmin";
+				$this->afficheVue($vue);
+				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
+				$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
+				$this->importationok();                                                    
+				break;
+				
+				
+            case 'soumission':// page formulaire de soumission administrateur
+                //$this->soumissionAdmin();
+				
+				$this->afficherEnteteAdmin();
+
+                $vue = "soumissionOeuvre1";
+				$this->afficheVue($vue);
+            
+                $vue = "soumissionArtiste";
+				$this->afficheVue($vue);
+                
+                $modeleSoumisionAdmin = new modeleSoumission();
+				$data = $modeleSoumisionAdmin->obtenirCategories();
+                $vue = "soumissionCategorie";
+                $this->afficheVue($vue, $data);
+            
+                $vue = "soumissionOeuvre2";
+				$this->afficheVue($vue);
+            
+                $modeleSoumisionAdmin = new modeleSoumission();
+				$data = $modeleSoumisionAdmin->obtenirArrondissements();
+                $vue = "soumissionArrondissement";
+                $this->afficheVue($vue, $data);
+            
+                $vue = "soumissionOeuvre3";
+				$this->afficheVue($vue);
+            
+                $vue = "soumissionPhoto";
+				$this->afficheVue($vue);
+            
+                $vue = "boutonSoumission";
+                $this->afficheVue($vue);                
+                break;
+				
+            case "insereSoumission":                                                       // à l'envoi du formulaire
+                /*-- paramètres dirigés vers la table Oeuvres -----------------------------*/
+            
+                $tableauContenu = json_decode (file_get_contents('php://input'), true);
+                var_dump($tableauContenu);
+                extract($tableauContenu);
+                
+                var_dump ("var_dump");
+                var_dump ($titre);
+                var_dump ($titreVariante);
+                var_dump ($prenomArtiste);
+                var_dump ($nomArtiste);
+                var_dump ($collectif);
+                var_dump ($idCategorie);
+                var_dump ($idArrondissement);
+                var_dump ($urlPhoto);
+               
+                /*-- TABLE Oeuvres --------------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $valide = $modele->insererSoumissionOeuvre($tableauContenu);
+                                                           
+                if($valide){									
+                    echo "merci";	
+                    //print_r("merci");
+                }else{
+                    echo "ERROR";
+                }
+            
+                /*-- TABLE Photos ---------------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $valide = $modele->insererUrlPhoto($tableauContenu);
+                if($valide){									
+                    echo "merci";	
+                    //print_r("merci");
+                }else{
+                    echo "ERROR";
+                }
+                
+                /*-- TABLE Artistes -------------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $existe = $modele->verifierArtiste($tableauContenu);
+                var_dump ("existe ????");
+                var_dump ($existe);
+                if($existe == NULL){
+                    $modele = new modeleSoumission();
+                    $valide = $modele->insererSoumissionArtiste($tableauContenu);
+                    if($valide){									
+                        echo "merci";	
+                    }else{
+                        echo "ERROR";
+                    }
+                }
+                
+                /*-- TABLE ArtistesOeuvres ------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $valide = $modele->insererSoumissionArtisteOeuvres($existe);
+                if($valide){									
+                    echo "merci";	
+                }else{
+                    echo "ERROR";
+                }
+                break;
+				
+            default:
+				$this->accueil();
+				break;
+        }
+}
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////     MÉTHODES DU CONTROLEUR     ////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////
+		
+    
+    protected function afficheVue($nomVue, $data = null)
+    {
+        $cheminVue = "vues/" . $nomVue . ".php";
+        
+        if(file_exists($cheminVue))
+        {
+            include($cheminVue); 
+        }
+        else
+        {
+            die("Erreur 404! La vue n'existe pas.");				
+        }
+    }
 	
+
 		/**
 		 * Traite la requête
 		 * @return void
 		 */
-		public function gerer()
-		{
-			
-			switch ($_GET['requete']) {
-				case 'accueil':
-					$this->accueil(); // option quand get requete est accueil
-					break;
-				case 'importation':
-					$this->importation(); // option quand get requete n'existe pas
-					break;
-				case 'importationok':
-					
-					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-					$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
-				
-					$this->importationok(); // avant de montrer la vue, je dois aller chercher le donnes avec le modele
-					break;
-				default:
-					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
-					break;
-			}
-		}
-		private function accueil()
+		
+		/*private function accueil()
 		{
 			$oVue = new Vueimportation();
 			
 			$oVue->afficheEntete();
 			$oVue->afficheAccueil();
 			$oVue->affichePied();
-		}
+		}*/
 		// Placer les méthodes du controleur.
 		private function importation()
 		{
@@ -59,6 +222,43 @@ class Controleur
 			$oVue->affichePied();
 		}
 		
+	public function afficherFormAutentificationAdmin()
+	{
+		$vue = "boutonSoumission";
+        $this->afficheVue($vue);
+		
+		
+	}
+	
+	protected function afficherEnteteAdmin()
+	{
+        $this->afficheVue("enteteAdmin");
+        $this->afficheVue("boutonDeconnectionAdmin");
+		
+	}
+    
+	
+	
+    private function accueil()
+    {
+
+		if(!isset($_SESSION['authentifie']))
+		{
+			$vue = 'FormAutentificationAdmin';
+			$this->afficheVue($vue);
+		}
+		else
+		{
+			$this->afficherEnteteAdmin();
+		}
+
+    }
+
+	
+	
+   
+		
+
 		private function importationok()
 		{
 			
@@ -262,7 +462,7 @@ class Controleur
 			
 		}
 		
-		
+
 }
 ?>
 
