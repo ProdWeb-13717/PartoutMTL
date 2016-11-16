@@ -81,7 +81,7 @@ class Controleur
 			
 			$nomOeuvres = count($jsonSite);
 			
-			for($i=0;$i<8;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<16;$i++){// for pour parcourir tout les oeuvres
 				
 				//***traitement des artistes***
 				
@@ -107,7 +107,7 @@ class Controleur
 					$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
 					if(!$ilExiste){
 						
-						//$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif,$artiste->NoInterne);
+						$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
 						
 					}
 				}
@@ -124,7 +124,7 @@ class Controleur
 				$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement);
 				if(!$ilExiste){
 					
-					//$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
+					$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
 				}
 				//fin traitement des arrondissements
 				
@@ -140,7 +140,7 @@ class Controleur
 				$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet);
 				if(!$ilExiste){
 					
-					//$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
+					$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
 				}
 				
 				
@@ -194,11 +194,11 @@ class Controleur
 			
 		}
 		
-		private function inclureArtiste($nom,$prenom,$collectif,$nointerne)
+		private function inclureArtiste($nom,$prenom,$collectif)
 		{
 			
 			$oArtistes = new Artistes();
-			$data = $oArtistes->insererArtiste($nom,$prenom,$collectif,$nointerne);
+			$data = $oArtistes->insererArtiste($nom,$prenom,$collectif);
 			
 		}
 		

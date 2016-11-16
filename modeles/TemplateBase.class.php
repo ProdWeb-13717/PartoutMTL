@@ -13,31 +13,24 @@
 		
 		public function __construct()
 		{
-			try
+			/*try
 			{
 				$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=localhost", "root", "",array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 			}
 			catch(Exception $exc)
 			{
 				die("Connexion à la base de données impossible.");
-			}
-		}
-		
-		/*public function connexionBD() 
-		{
+			}*/
 			
 			try
-				{
-					$connexion = new PDO("mysql:dbname=partoutMTL;host=localhost", "root", "",array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));//derniere attribut necessaire pour garder les donnees en UTF-8 
-					return $connexion;
-				
-				}
-				catch(Exception $exc)
-				{
-					die("Connexion à la base de données impossible.");
-				}
-		}*/
-		
+			{
+				$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=107.180.109.70:3306", "partout", "equipeDeCourse5", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+			}
+			catch(Exception $exc)
+			{
+				die("Connexion à la base de données impossible.");
+			}
+		}
 		
 	
 		public function obtenir($valeur, $cle = null)

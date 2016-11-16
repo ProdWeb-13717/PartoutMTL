@@ -53,13 +53,6 @@ class Oeuvres extends TemplateBase {
 	
 	public function traiterOeuvre($oeuvre)
 	{		
-		//traitement des donnes d'oeuvre (ojo...para evitar tanta conexion lo que se puede hacer meter los datos a los cuales no toca hacerle tratamiento en una consulta y despues los otros)
-		
-		// no se puede dato a dato con insert, porque se crea una celda con cada insert...toca insertar los datos que mas se puedan y despues mirar el tratamiento de los datos especiales
-		//echo $oeuvre->NoInterne;
-		//echo "<br>";
-		//$insertion = $this->insererDonne("Titre",$oeuvre->Titre);//insertion de Titre
-		
 		
 		
 		//verification pour savoir si le TitreVariante est rempli ou pas
@@ -69,16 +62,23 @@ class Oeuvres extends TemplateBase {
 		}
 		
 		//verification pour savoir si le DateFinProduction est rempli ou pas
-		if($oeuvre->DateFinProduction == null){
+		/*if($oeuvre->DateFinProduction == null){
 						
 			$oeuvre->DateFinProduction = "";
-		}
+		}*/
 		
 		//verification pour savoir si le DateAccession est rempli ou pas
-		if($oeuvre->DateAccession == null){
+		/*if($oeuvre->DateAccession == null){
 						
 			$oeuvre->DateAccession = "";
-		}
+		}*/
+		
+		
+		// asignation temporel de date par default
+		
+		$oeuvre->DateFinProduction = "2012-06-18";
+		$oeuvre->DateAccession = "2012-06-18";
+		
 		
 		//verification pour savoir si le ModeAcquisition est rempli ou pas
 		if($oeuvre->ModeAcquisition == null){
@@ -123,25 +123,44 @@ class Oeuvres extends TemplateBase {
 		}
 		
 		$insertion = $this->insererOeuvre($oeuvre->Titre,$oeuvre->TitreVariante,$oeuvre->DateFinProduction,$oeuvre->DateAccession,$oeuvre->NomCollection,$oeuvre->ModeAcquisition,$oeuvre->Materiaux,$oeuvre->Technique,$oeuvre->DimensionsGenerales,$oeuvre->Parc,$oeuvre->Batiment,$oeuvre->AdresseCivique,$oeuvre->CoordonneeLatitude,$oeuvre->CoordonneeLongitude,$oeuvre->NumeroAccession,$oeuvre->NoInterne);
-		echo $insertion;
+		//echo $insertion;
 		
 		
-		//Il manque les querys avec update pour le Id categorie, Id arrondissement et la table artistes oeuvres
-		/*try
-		{	
+		//Il manque les querys avec update pour l'id categorie et l'id arrondissement dans la table Oeuvres
+		
+		$oCategorie = new Categories();
+		$idCat = $oCategorie->obtenirCategorie($oeuvre->SousCategorieObjet);
+		//echo $idCat["idCategorie"][0];//voici mon id de categorie
+		
+		$oArrondissements = new Arrondissements();
+		$idArron = $oArrondissements->obtenirArrondissement($oeuvre->Arrondissement);
+		//echo $idArron["idArrondissement"][0];
+		
+		
+		// une fois que je viens d'obtenir les Id necessaires, on va finir l'insertion de donnés pour l'oeuvre respective
+		
+		$insertion = $this->completerOeuvre($oeuvre->NoInterne,$idCat["idCategorie"],$idArron["idArrondissement"]);
+		
+		
+		//insertion de donnes sur la table artistesoeuvres
+		
+		
+		foreach($oeuvre->Artistes as $artiste){
 			
-			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (noInterne,nomArtiste,prenomArtiste,collectif) values(:noInterne, :nom, :prenom, :collectif)");
-			$stmt->bindParam(":noInterne", $nointerne);
-			$stmt->bindParam(":nom", $nom);
-			$stmt->bindParam(":prenom", $prenom);
-			$stmt->bindParam(":collectif", $collectif);
-			$stmt->execute();
-			return 1;
+			$oArtistes = new Artistes();
+			$idArt = $oArtistes->obtenirArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+			$idOeuvre = $this->obtenirOeuvre($oeuvre->NoInterne);
+			echo $idOeuvre["idOeuvre"] ."-";
+			echo $idArt["idArtiste"];
+			echo "<br>";
+			
+			$insertion = $this->insererArtistesOeuvres($idArt["idArtiste"],$idOeuvre["idOeuvre"]);
+			
 		}
-		catch(Exception $exc)
-		{
-			return 0;
-		}*/
+		
+		
+		
+		
 	}
 	
 	public function insererOeuvre($titre,$titrevar,$dateFin,$dateAcc,$nomCol,$modeAcq,$material,$tech,$dimension,$parc,$batiment,$addCiv,$lat,$longu,$numAcc,$numInt){
@@ -175,6 +194,46 @@ class Oeuvres extends TemplateBase {
 		}
 		
 	}
+	
+	public function completerOeuvre($numInt,$idCat,$idArron){
+		
+		try
+		{	
+			
+			$stmt = $this->connexion->prepare("update ". $this->getTable() ." set idCategorie = :idCat, idArrondissement= :idArron where noInterne = :numInt");
+			$stmt->bindParam(":idCat", $idCat);
+			$stmt->bindParam(":idArron", $idArron);
+			$stmt->bindParam(":numInt", $numInt);
+			$stmt->execute();
+			return 1;
+		}
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+		
+	}
+	
+	public function insererArtistesOeuvres($idArt,$idOeuvre){
+		
+		try
+		{	
+			
+			$stmt = $this->connexion->prepare("insert into ArtistesOeuvres (idArtiste,idOeuvre) values (:idArt, :idOeuvre)");
+			$stmt->bindParam(":idArt", $idArt);
+			$stmt->bindParam(":idOeuvre", $idOeuvre);
+			$stmt->execute();
+			return 1;
+		}
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+		
+	}
+	
+	
+	
 	
 	/*public function insererDonne($nomCologne,$donnee){
 		

@@ -53,13 +53,11 @@ class Artistes extends TemplateBase {
 		}
 	}
 	
-	public function insererArtiste($nom,$prenom,$collectif,$nointerne)
+	public function insererArtiste($nom,$prenom,$collectif)
 	{		
 		try
 		{	
-			//$connexion = $this->connexionBD();
-			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (noInterne,nomArtiste,prenomArtiste,collectif) values(:noInterne, :nom, :prenom, :collectif)");
-			$stmt->bindParam(":noInterne", $nointerne);
+			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomArtiste,prenomArtiste,collectif) values(:nom, :prenom, :collectif)");
 			$stmt->bindParam(":nom", $nom);
 			$stmt->bindParam(":prenom", $prenom);
 			$stmt->bindParam(":collectif", $collectif);
