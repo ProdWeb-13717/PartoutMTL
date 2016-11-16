@@ -86,6 +86,27 @@ class modeleSoumission extends TemplateBase {
         }   
     }
     
+    public function verifierArtiste($param)
+	{		
+		try
+		{	
+			$stmt = $this->connexion->prepare("SELECT * 
+                                               FROM Artistes 
+                                               WHERE prenomArtiste = :prenomArtiste AND nomArtiste = :nomArtiste AND collectif = :collectif");
+            extract($param);
+            $stmt->execute(array(":prenomArtiste" => $prenomArtiste,
+                                 ":nomArtiste"    => $nomArtiste,
+                                 ":collectif"     => $collectif));
+			
+            $data = $stmt->fetch();
+            return $data['idArtiste'];
+		}
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+	}
+    
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      INSERT     //////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -96,18 +117,20 @@ class modeleSoumission extends TemplateBase {
         {
             $stmt = $this->connexion->prepare("INSERT INTO Oeuvres (titre, 
                                                                     titreVariante,
+                                                                    description,
                                                                     idCategorie,
                                                                     idArrondissement) 
                                                             VALUES (:titre, 
                                                                     :titreVariante,
+                                                                    :description,
                                                                     :idCategorie,
                                                                     :idArrondissement)");
             
             //référence : http://php.net/manual/en/function.extract.php
             extract($param);
-            
             $stmt->execute(array(":titre"             => $titre, 
                                  ":titreVariante"     => $titreVariante,
+                                 "description"        => $description,
                                  ":idCategorie"       => $idCategorie,
                                  "idArrondissement"   => $idArrondissement));
             return 1;		     
@@ -146,17 +169,22 @@ class modeleSoumission extends TemplateBase {
     {
         try
         {
-            $stmt = $this->connexion->prepare("INSERT INTO Artistes (prenomArtiste,
+            //extract($param);
+            //$existe = $this->verifierArtiste($prenomArtiste, $nomArtiste, $collectif);
+            
+            //if(!$existe){
+                $stmt = $this->connexion->prepare("INSERT INTO Artistes (prenomArtiste,
                                                                      nomArtiste,
                                                                      collectif)
                                                               VALUE (:prenomArtiste,
                                                                      :nomArtiste, 
                                                                      :collectif)");
-            extract($param);
-            $stmt->execute(array(":prenomArtiste" => $prenomArtiste,
-                                 ":nomArtiste"    => $nomArtiste,
-                                 ":collectif"     => $collectif));
-            return 1;		     
+                extract($param);
+                $stmt->execute(array(":prenomArtiste" => $prenomArtiste,
+                                     ":nomArtiste"    => $nomArtiste,
+                                     ":collectif"     => $collectif));
+                return 1;		     
+            //}
         }	
         catch(Exception $exc)
         {
