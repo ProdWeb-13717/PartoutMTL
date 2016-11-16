@@ -30,6 +30,12 @@ class Oeuvres extends TemplateBase {
 	 * @return Array
 	 */
 	 
+	protected function getPrimaryKey()
+	{
+		return "Je ne sert à rien dans cette classe";
+	} 
+	
+	
 	public function getTable()
 	{
 		return "Oeuvres";
@@ -150,9 +156,9 @@ class Oeuvres extends TemplateBase {
 			$oArtistes = new Artistes();
 			$idArt = $oArtistes->obtenirArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
 			$idOeuvre = $this->obtenirOeuvre($oeuvre->NoInterne);
-			echo $idOeuvre["idOeuvre"] ."-";
+			/*echo $idOeuvre["idOeuvre"] ."-";
 			echo $idArt["idArtiste"];
-			echo "<br>";
+			echo "<br>";*/
 			
 			$insertion = $this->insererArtistesOeuvres($idArt["idArtiste"],$idOeuvre["idOeuvre"]);
 			

@@ -281,7 +281,8 @@ class Controleur
 			
 			$nomOeuvres = count($jsonSite);
 			
-			for($i=0;$i<16;$i++){// for pour parcourir tout les oeuvres
+			for($i=0;$i<=14;$i++)// for pour parcourir tout les oeuvres
+			{
 				
 				//***traitement des artistes***
 				

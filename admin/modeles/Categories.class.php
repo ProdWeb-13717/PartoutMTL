@@ -29,7 +29,12 @@ class Categories extends TemplateBase {
 	 * @access public
 	 * @return Array
 	 */
-	 
+	
+	protected function getPrimaryKey()
+	{
+		return "Je ne sert à rien dans cette classe";
+	} 
+	
 	public function getTable()
 	{
 		return "Categories";

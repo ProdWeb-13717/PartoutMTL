@@ -24,6 +24,11 @@ class Artistes extends TemplateBase {
 		
 	}*/
 	
+	protected function getPrimaryKey()
+	{
+		return "Je ne sert à rien dans cette classe";
+	} 
+	
 		
 	/**
 	 * @access public

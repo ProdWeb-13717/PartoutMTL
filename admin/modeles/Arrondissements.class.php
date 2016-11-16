@@ -30,6 +30,11 @@ class Arrondissements extends TemplateBase {
 	 * @return Array
 	 */
 	 
+	protected function getPrimaryKey()
+	{
+		return "Je ne sert à rien dans cette classe";
+	}  
+	 
 	public function getTable()
 	{
 		return "Arrondissements";
