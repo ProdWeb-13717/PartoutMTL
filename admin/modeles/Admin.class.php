@@ -98,11 +98,6 @@ class Admin extends TemplateBase{
 		
 	}
 
-
-
-
-
-
 }
 
 ?>

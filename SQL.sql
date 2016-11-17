@@ -8,8 +8,6 @@ CREATE TABLE IF NOT EXISTS Administrateurs(
     PRIMARY KEY (nomUsagerAdmin)
 );
 
-INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
-
 
 CREATE TABLE IF NOT EXISTS MiseAJours(
     idMiseAJour int AUTO_INCREMENT NOT NULL,
@@ -96,3 +94,9 @@ CREATE TABLE IF NOT EXISTS ImagesCarroussel(
 
 
 INSERT INTO Categories(nomCategorie) VALUE("dsafsegf");
+
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) 
+VALUE 
+("1", MD5("1"), "un@hotmail.com", 1),
+("NL", MD5("NL123"), "nl@hotmail.com", 1);
+

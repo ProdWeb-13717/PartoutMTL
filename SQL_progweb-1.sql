@@ -127,6 +127,6 @@ INSERT into Arrondissements (nomArrondissement) VALUES
 			("Le Sud-Ouest")
 			;
 
-
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 
 

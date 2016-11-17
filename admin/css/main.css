@@ -32,10 +32,28 @@
     letter-spacing: 4px;   
 }
 
+/*
 #boutonDeconnectionAdmin{
+	//position: absolute;
+	//top: 10px;
+	//margin-left : 90%;
+	color : #016737; 
+    background-color: white; 
+}
+*/
+
+div#connectionAdmin{
 	position: absolute;
-	top: 100px;
-	margin-right : 50px;
+	top: 10px;
+	right: 50px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap:nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: flex-end;
+	color : #016737; 
+    background-color: white; 
 }
 
 #noir{
