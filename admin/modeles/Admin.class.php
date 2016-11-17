@@ -101,25 +101,6 @@ class Admin extends TemplateBase{
 
 
 
-///// NOEMI LEGAULT  * TRAVAIL NON TERMINER EN EN ATTENTE //////////
-/*
-	private function obtenirTousAdminsNomsUsagers()
-	{
-		try
-		{	
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable());
-			$stmt->execute();
-			return $stmt->fetchAll();
-		}
-		catch(Exception $exc)
-		{
-			return false;
-		}
-	}
-*/
-////////////////////////////////////////////////////////////////////
-
-
 
 }
 
