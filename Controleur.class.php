@@ -22,19 +22,19 @@ class Controleur
 		public function gerer()
 		{
 			// j'ai suprimé cette partie parce que ca cause des problems pour afficher la resultat de recherche (case 'txtRecherche') et j'ai mit dans une function-SARA
-			//$vue = "head";
 			//$this->afficheVue($vue);
             //
 			//$vue = "enteteUser";
 			//$this->afficheVue($vue);
 			
+			$this->afficheVue("head");
+			
 			
 			switch ($_GET['requete']) {
 				case 'accueil':
-					$this->entete();
 					$this->accueil(); // option quand get requete est accueil
 					break;
-					
+				/*	
 				case 'importation':
 					$this->entete();
 					$this->importation(); // option quand get requete n'existe pas
@@ -44,6 +44,7 @@ class Controleur
 					$this->entete();
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
+					*/
                     
                 case 'listeArtistes':
 					$this->entete();
@@ -74,7 +75,6 @@ class Controleur
 						$oRecherche = new Recherche();
 						$data = $oRecherche->rechercheOeuvres($valeur,"titre"); // cle = titre 
 						$oVueRecherche = new VueRecherche();
-			
 						$oVueRecherche->resltatDataRecherche($data);
 						
 					}
@@ -104,27 +104,20 @@ class Controleur
 			{
 				die("Erreur 404! La vue n'existe pas.");				
 			}
+
 		}
 		
 		
 		private function accueil()
 		{
-			$oVue = new Vue();
 			
-			$oVue->afficheEntete();
-			$oVue->afficheAccueil();
-			$oVue->affichePied();
 		}
 		// Placer les méthodes du controleur.
 		function entete() // pour afficher le head et entete d'usager
 		{
-			$vue = "head";
-			$this->afficheVue($vue);
-			
-			$vue = "enteteUser";
-			$this->afficheVue($vue);
+			$this->afficheVue("enteteUser");
 		}
-		
+		/*
 		function importation()
 		{
 			$oVue = new Vue();
@@ -142,12 +135,14 @@ class Controleur
 			$oVue->afficheImportationok();
 			$oVue->affichePied();
 		}
+		*/
+		
 		function rechercheOeuvreTitre() // la fonction pour la recherche d'oeuvre par son titre
 		{
 			$oVue = new Vue();
 			$oVueRecherche = new VueRecherche();
 			
-			$oVue->afficheEntete();
+			//$oVue->afficheEntete();
 			$oVueRecherche->afficheRechercheOeuvreTitre();
 			$oVue->affichePied();
 		}

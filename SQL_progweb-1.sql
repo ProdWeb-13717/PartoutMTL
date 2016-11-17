@@ -3,6 +3,7 @@
 
 
 CREATE TABLE IF NOT EXISTS Administrateurs(
+
     nomUsagerAdmin VARCHAR(50) NOT NULL,
     motPasseAdmin VARCHAR(50) NOT NULL,
     courrielAdmin VARCHAR(200) NOT NULL,
@@ -10,6 +11,7 @@ CREATE TABLE IF NOT EXISTS Administrateurs(
     prenomAdmin VARCHAR(50), 
     nomAdmin VARCHAR(50),
     PRIMARY KEY (nomUsagerAdmin)
+
 );
 
 
@@ -126,6 +128,5 @@ INSERT into Arrondissements (nomArrondissement) VALUES
 			;
 
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
-
 
 
