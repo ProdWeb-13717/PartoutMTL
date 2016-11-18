@@ -13,6 +13,7 @@ $precendent = "";
 					$precendent = $oeuvre["noOeuvre"];
 		?>		
 				<div class="elemListe">
+
 					<input type="hidden" class="idOeuvre" value="<?php echo $oeuvre["noOeuvre"]?>"/>
 					<img src="
 					<?php 
@@ -38,11 +39,13 @@ $precendent = "";
 							?>
 								<li>
 							<?php
+
 										if($artiste["prenom"] != "")
 										{
 											echo $artiste["prenom"];
 											
 											if($artiste["nom"] != "")
+
 											{
 												echo " ".$artiste["nom"];
 											}
@@ -61,6 +64,7 @@ $precendent = "";
 							</ul>
 						</li>
 					</ul>
+
 				</div>
 		<?php
 				}
