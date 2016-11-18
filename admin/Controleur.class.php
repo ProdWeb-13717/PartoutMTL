@@ -29,8 +29,8 @@ class Controleur
 				break;
 				
 			case 'formAutentificationAdmin':
-				$vue = 'FormAutentificationAdmin';
-				$this->afficheVue($vue);
+				$this->afficheVue("enteteAdmin");
+				$this->afficheVue('FormAutentificationAdmin');
 				break;
 				
 			case 'AutentificationAdmin':
@@ -46,8 +46,8 @@ class Controleur
 				
 				if($resulta == false)
 				{
-					$vue = 'FormAutentificationAdmin';
-					$this->afficheVue($vue);
+					$this->afficheVue("enteteAdmin");
+					$this->afficheVue('FormAutentificationAdmin');
 				}
 				else
 				{
@@ -215,24 +215,29 @@ class Controleur
 		// Placer les méthodes du controleur.
 		private function importation()
 		{
+			
 			$oVue = new Vueimportation();
 			
 			$oVue->afficheEntete();
 			$oVue->afficheformImportation();
 			$oVue->affichePied();
-		}
 		
+		}
+		/*
 	public function afficherFormAutentificationAdmin()
 	{
+		$this->afficheVue("enteteAdmin");
 		$vue = "boutonSoumission";
         $this->afficheVue($vue);
 		
 		
 	}
+	*/
 	
 	protected function afficherEnteteAdmin()
 	{
         $this->afficheVue("enteteAdmin");
+        $this->afficheVue("menuAdmin");
         $this->afficheVue("boutonDeconnectionAdmin");
 		
 	}
@@ -244,6 +249,7 @@ class Controleur
 
 		if(!isset($_SESSION['authentifie']))
 		{
+			$this->afficheVue("enteteAdmin");
 			$vue = 'FormAutentificationAdmin';
 			$this->afficheVue($vue);
 		}
