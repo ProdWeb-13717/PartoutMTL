@@ -89,6 +89,13 @@ span.catElemListe{
 	margin-left: 20px;
 }
 
+span.inconnu{
+	font-family:arial;
+	font-style:italic;
+	color:red;
+	font-size:0.8em;
+}
+
 .elemListe{
 	border: 2px solid #016737;
 	border-radius:10px 0 10px 0;
@@ -122,4 +129,12 @@ span.catElemListe{
 	background-color:#016737;
 	border-radius:100%;
 	margin-right :45px;
+}
+
+ul.listeAuteur{
+	margin:0 0 0 20px;
+}
+
+li, ul{
+	width:100%;
 }
