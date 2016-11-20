@@ -32,7 +32,6 @@ class ModeleListe extends TemplateBase{
 	{
 			try
 			{
-				//$stmt = $this->connexion->prepare("SELECT Artistes.idArtiste AS noArtiste, prenomArtiste, nomArtiste, COUNT(ArtistesOeuvres.idArtiste) AS NbreOeuvres FROM Artistes JOIN ArtistesOeuvres ON Artistes.idArtiste = ArtistesOeuvres.idArtiste GROUP BY noArtiste");
 				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes");
 				$stmt->execute();
 				return $stmt->fetchAll();
@@ -46,16 +45,34 @@ class ModeleListe extends TemplateBase{
 		return $aDonnees;
 	}
 	
-	public function getOeuvresTout() 
+	public function getOeuvresParAuteur() 
 	{
 			try
 			{
-				//$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto FROM Oeuvres LEFT JOIN Photos ON Photos.idOeuvre = Oeuvres.idOeuvre");
-				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto, Artistes.prenomArtiste AS prenom, Artistes.nomArtiste AS nom, Artistes.collectif AS collectif 
-												   FROM Oeuvres 
+				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre,Artistes.prenomArtiste AS prenom, Artistes.nomArtiste AS nom, Artistes.collectif AS collectif
+												   FROM Oeuvres
+												   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+												   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+												   ORDER BY noOeuvre");
+				$stmt->execute();
+				return $stmt->fetchAll();
+			}	
+			catch(Exception $exc)
+			{
+				return 0;
+			}
+		$aDonnees = array('');
+		
+		return $aDonnees;
+	}
+	
+	public function getOeuvresParPhotos() 
+	{
+			try
+			{
+				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto
+												   FROM Oeuvres
 												   LEFT JOIN Photos ON Oeuvres.idOeuvre = Photos.idOeuvre
-												   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre 
-												   LEFT JOIN Artistes ON ArtistesOeuvres.idArtiste =  Artistes.idArtiste 
 												   ORDER BY noOeuvre");
 				$stmt->execute();
 				return $stmt->fetchAll();

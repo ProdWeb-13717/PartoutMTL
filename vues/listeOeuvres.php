@@ -1,17 +1,18 @@
 <?php
-$precendent = "";
+$precendent = 0;
 
 ?>
 
 <section class="liste">
 	<h1>Liste des oeuvres</h1>
 		<?php
-			foreach($data as $oeuvre)
+			foreach($data[0] as $oeuvre)
 			{	
-				if($precendent != $oeuvre["noOeuvre"])
+				if($oeuvre["noOeuvre"] != $precendent)
 				{
 					$precendent = $oeuvre["noOeuvre"];
 		?>		
+				<hr>
 				<div class="elemListe">
 
 					<input type="hidden" class="idOeuvre" value="<?php echo $oeuvre["noOeuvre"]?>"/>
@@ -21,7 +22,7 @@ $precendent = "";
 						{
 							echo $oeuvre["urlPhoto"];
 						}
-						else if($oeuvre["urlPhoto"] == null)
+						else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
 						{
 							echo "http://galaxy.mobity.net/uploads/148/logo/1399898656.png";
 						}
@@ -32,7 +33,7 @@ $precendent = "";
 						<li><span class="catElemListe">Auteur(s):</span>
 							<ul class="listeAuteur">
 							<?php
-								foreach($data as $artiste)
+								foreach($data[1] as $artiste)
 								{	
 									if($artiste["noOeuvre"] == $precendent)
 									{
@@ -53,7 +54,7 @@ $precendent = "";
 										
 										if($artiste["collectif"] != "" && ($artiste["prenom"] == "" && $artiste["nom"] == ""))
 										{
-											echo $artiste["collectif"];
+											echo $artiste["collectif"]." (collectif)";
 										}
 							?>
 								</li>
@@ -64,7 +65,6 @@ $precendent = "";
 							</ul>
 						</li>
 					</ul>
-
 				</div>
 		<?php
 				}
