@@ -5,6 +5,7 @@
 			foreach($data as $artiste)
 			{
 		?>
+		<hr>
 		<div class="elemListe">
 			<input type="hidden" class="idArtiste" value="<?php echo $artiste["idArtiste"]?>">
 			<div class="rondListe"></div>

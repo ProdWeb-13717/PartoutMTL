@@ -77,8 +77,16 @@
     letter-spacing: 4px;   
 }
 
-/* Entête
+/* Listes
 -------------------------------------------------------------*/
+section.liste{
+	padding-left:2em;
+	
+}
+
+section.liste hr{
+	border-top:3px solid #ccc;
+}
 
 span.catElemListe{
 	color: #016737;
@@ -97,16 +105,16 @@ span.inconnu{
 }
 
 .elemListe{
-	border: 2px solid #016737;
-	border-radius:10px 0 10px 0;
-	max-width: 50%;
+	/*border: 2px solid #016737;*/
+	/*//border-radius:10px 0 10px 0;*/
+	min-width: 50%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items:center;
 	padding:15px 30px;
 	margin: 0 0 15px 30px;
-	box-shadow: 5px 5px 5px #888888;	
+	/*box-shadow: 5px 5px 5px #888888;*/	
 }
 
 .elemListe ul{
@@ -117,10 +125,11 @@ span.inconnu{
 
 .elemListe img{
 	height:auto;
-	max-width:90px;
+	max-width:10em;
 	border: 2px solid #016737;
 	border-radius:10px 0 10px 0;
 	margin-right :45px;
+	box-shadow: 5px 5px 5px #888888;
 }
 
 .elemListe .rondListe{
