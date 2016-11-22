@@ -18,8 +18,6 @@ class Controleur
 	 * Traite la requête
 	 * @return void
 	 */
-    
-    
 	public function gerer()
 	{
         //$this->afficheVue("head");
@@ -81,85 +79,106 @@ class Controleur
 				break;
 				
 				
-            case 'soumission':                                                          // page formulaire de soumission administrateur
+            case 'soumission':// page formulaire de soumission administrateur
+                //$this->soumissionAdmin();
 				
 				$this->afficherEnteteAdmin();
 
-                $vue = "soumissionOeuvre1";                                             // input : titre et titre variante
+                $vue = "soumissionOeuvre1";
 				$this->afficheVue($vue);
             
-                $vue = "soumissionArtiste";                                             // input : prénom, nom, collectif artiste
+                $vue = "soumissionArtiste";
 				$this->afficheVue($vue);
                 
-                $modeleSoumisionAdmin = new modeleSoumission();                         // appelle modeleSoumission
-				$data = $modeleSoumisionAdmin->obtenirCategories();                     // récupère la table Categories
-                $vue = "soumissionCategorie";                                           // select : catégories
+                $modeleSoumisionAdmin = new modeleSoumission();
+				$data = $modeleSoumisionAdmin->obtenirCategories();
+                $vue = "soumissionCategorie";
                 $this->afficheVue($vue, $data);
             
-                $vue = "soumissionOeuvre2";                                             // input : fin production, accession, matériaux, 
-				$this->afficheVue($vue);                                                //         technique, dimension
+                $vue = "soumissionOeuvre2";
+				$this->afficheVue($vue);
             
-                $modeleSoumisionAdmin = new modeleSoumission();                         // appelle modeleSoumission
-				$data = $modeleSoumisionAdmin->obtenirArrondissements();                // récupère la table Arrondissements
-                $vue = "soumissionArrondissement";                                      // select : arrondissements
+                $modeleSoumisionAdmin = new modeleSoumission();
+				$data = $modeleSoumisionAdmin->obtenirArrondissements();
+                $vue = "soumissionArrondissement";
                 $this->afficheVue($vue, $data);
             
-                $vue = "soumissionOeuvre3";                                             // inputs : parc, batiment, adresse, latitude, 
-				$this->afficheVue($vue);                                                //          longitude
+                $vue = "soumissionOeuvre3";
+				$this->afficheVue($vue);
             
-                $vue = "boutonSoumission";                                              // bouton soumission
-                $this->afficheVue($vue);               
+                $vue = "soumissionPhoto";
+				$this->afficheVue($vue);
+            
+                $vue = "boutonSoumission";
+                $this->afficheVue($vue);                
                 break;
 				
-            case "insereSoumission":                                                    // à l'envoi du formulaire
+            case "insereSoumission":                                                       // à l'envoi du formulaire
+                /*-- paramètres dirigés vers la table Oeuvres -----------------------------*/
+            
+                $tableauContenu = json_decode (file_get_contents('php://input'), true);
+                var_dump($tableauContenu);
+                extract($tableauContenu);
                 
-                /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-                $tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-                extract($tableauContenu);                                               // convertit le JSON en variables
-                
-                /*-- INSERT TABLE Oeuvres -------------------------------------------------*/
-                $modeleSoumisionAdmin = new modeleSoumission();
-                $valide = $modeleSoumisionAdmin->insererSoumissionOeuvre($tableauContenu);                                       
-                if(!$valide){                                                           // si non réussi
-                    $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-                    break;
+                var_dump ("var_dump");
+                var_dump ($titre);
+                var_dump ($titreVariante);
+                var_dump ($prenomArtiste);
+                var_dump ($nomArtiste);
+                var_dump ($collectif);
+                var_dump ($idCategorie);
+                var_dump ($idArrondissement);
+                var_dump ($urlPhoto);
+               
+                /*-- TABLE Oeuvres --------------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $valide = $modele->insererSoumissionOeuvre($tableauContenu);
+                                                           
+                if($valide){									
+                    echo "merci";	
+                    //print_r("merci");
+                }else{
+                    echo "ERROR";
                 }
             
-                /*-- INSERT TABLE Photos ---------------------------------------------------*/
-                $modeleSoumisionAdmin = new modeleSoumission();
-                $valide = $modeleSoumisionAdmin->insererUrlPhoto($tableauContenu);
-                if(!$valide){                                                           // si non réussi
-                    $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-                    break;
+                /*-- TABLE Photos ---------------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $valide = $modele->insererUrlPhoto($tableauContenu);
+                if($valide){									
+                    echo "merci";	
+                    //print_r("merci");
+                }else{
+                    echo "ERROR";
                 }
                 
-                /*-- INSERT TABLE Artistes -------------------------------------------------*/
-                $modeleSoumisionAdmin = new modeleSoumission();
-                $existe = $modeleSoumisionAdmin->verifierArtiste($tableauContenu);      // vérifie si l'artiste existe dans la db
-                if($existe == NULL){                                                    // s'il n'existe pas
+                /*-- TABLE Artistes -------------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $existe = $modele->verifierArtiste($tableauContenu);
+                var_dump ("existe ????");
+                var_dump ($existe);
+                if($existe == NULL){
                     $modele = new modeleSoumission();
                     $valide = $modele->insererSoumissionArtiste($tableauContenu);
-                    if(!$valide){                                                       // si non réussi
-                        $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-                        break;
+                    if($valide){									
+                        echo "merci";	
+                    }else{
+                        echo "ERROR";
                     }
                 }
                 
-                /*-- INSERT TABLE ArtistesOeuvres ------------------------------------------*/
-                $modeleSoumisionAdmin = new modeleSoumission();
-                $valide = $modeleSoumisionAdmin->insererSoumissionArtisteOeuvres($existe);
-                if(!$valide){                                                             // si non réussi
-                    $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-                    break;
+                /*-- TABLE ArtistesOeuvres ------------------------------------------------*/
+                $modele = new modeleSoumission();
+                $valide = $modele->insererSoumissionArtisteOeuvres($existe);
+                if($valide){									
+                    echo "merci";	
+                }else{
+                    echo "ERROR";
                 }
-                
-                $vue = "afficheSoumission";
-                $this->afficheVue($vue, $tableauContenu);    
                 break;
 				
             default:
 				$this->accueil();
-				break;   
+				break;
         }
 }
     
@@ -168,14 +187,16 @@ class Controleur
     ////////////////////////////////////////////////////////////////////////////////////////////
 		
     
-    protected function afficheVue($nomVue, $data = null)                                    // affiche la vue 
+    protected function afficheVue($nomVue, $data = null)
     {
-        $cheminVue = "vues/" . $nomVue . ".php";       
+        $cheminVue = "vues/" . $nomVue . ".php";
+        
         if(file_exists($cheminVue))
         {
             include($cheminVue); 
         }
-        else{
+        else
+        {
             die("Erreur 404! La vue n'existe pas.");				
         }
     }
@@ -453,12 +474,7 @@ class Controleur
 			$data = $oOeuvres->traiterOeuvre($oeuvre);
 			
 		}
-    
-    // source : http://stackoverflow.com/questions/13837375/how-to-show-an-alert-box-in-php
-    public function phpAlert($message)
-    {
-        echo '<script type="text/javascript">window.alert("' . $message . '")</script>';
-    }	
+		
 
 }
 ?>
