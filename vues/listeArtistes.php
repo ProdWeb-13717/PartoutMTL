@@ -13,11 +13,13 @@
 				<li><span class="catElemListe">Prénom : </span>
 				<?php
 					if($artiste["prenomArtiste"] != null)
+
 					{
 						echo $artiste["prenomArtiste"];
 					}
 					else if($artiste["prenomArtiste"] == "")
 					{
+
 						echo $inconnu;
 					}
 				?>
@@ -37,6 +39,7 @@
 				<?php
 					if($artiste["collectif"] != null)
 					{
+
 						?>
 						<li><span class="catElemListe">Collectif : </span>
 						<?php				
@@ -44,8 +47,10 @@
 						?>
 						</li>
 						<?php
+
 					}
 				?>
+				</li>
 			</ul>
 		</div>
 		<?php

@@ -27,6 +27,7 @@ class Controleur
 				case 'accueil':
 					$this->accueil(); // option quand get requete est accueil
 					break;
+
                 case 'listeArtistes':
 					$data = [];
   					$this->entete();
@@ -37,6 +38,7 @@ class Controleur
 					array_push($data,$modeleListe->getOeuvresParAuteur());
 					$this->afficheVue($vue,$data);
 					break;
+
 					
 				case 'listeOeuvres':
 					$data = [];
@@ -93,7 +95,6 @@ class Controleur
 		
 		private function accueil()
 		{
-			
 			$this->afficheVue("head");
 			
 			$oVue = new Vue();

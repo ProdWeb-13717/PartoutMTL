@@ -112,7 +112,6 @@ class Controleur
                 break;
 				
             case "insereSoumission":                                                    // à l'envoi du formulaire
-                
                 /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
                 $tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
                 extract($tableauContenu);                                               // convertit le JSON en variables
@@ -244,11 +243,6 @@ class Controleur
 		}
 
     }
-
-	
-	
-   
-		
 
 		private function importationok()
 		{
@@ -459,7 +453,6 @@ class Controleur
     {
         echo '<script type="text/javascript">window.alert("' . $message . '")</script>';
     }	
-
 }
 ?>
 

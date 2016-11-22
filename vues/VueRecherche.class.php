@@ -23,7 +23,7 @@ class VueRecherche {
 	}
 	
 	
-	public function resultatDataRecherche($data) ///********************** function pour afficher la resultat de rechercher 
+	public function resltatDataRecherche($data) ///********************** function pour afficher la resultat de rechercher 
 	{
 		
 		//echo json_encode($data);
