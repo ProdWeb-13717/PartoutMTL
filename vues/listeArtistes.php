@@ -4,9 +4,9 @@
 			$inconnu="<span class='inconnu'>(non-applicable)</span>";
 			foreach($data as $artiste)
 			{
-		?>
-		<hr>
-		<div class="elemListe">
+			?>
+			<hr>
+			<div class="elemListe">
 			<input type="hidden" class="idArtiste" value="<?php echo $artiste["idArtiste"]?>">
 			<div class="rondListe"></div>
 			<ul>
@@ -37,13 +37,15 @@
 				<?php
 					if($artiste["collectif"] != null)
 					{
-				?>
-				<li><span class="catElemListe">Collectif : </span>
-				<?php				
+						?>
+						<li><span class="catElemListe">Collectif : </span>
+						<?php				
 						echo $artiste["collectif"];
+						?>
+						</li>
+						<?php
 					}
 				?>
-				</li>
 			</ul>
 		</div>
 		<?php
