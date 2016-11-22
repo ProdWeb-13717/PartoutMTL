@@ -11,7 +11,8 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class ModeleListe extends TemplateBase{
+class ModeleListe extends TemplateBase
+{
 		
 	/**
 	 * @access public
@@ -20,70 +21,61 @@ class ModeleListe extends TemplateBase{
 	 
 	protected function getPrimaryKey()
 	{
-		return "Je ne sert à rien dans cette classe";
+		return ""; //Je ne sert à rien dans cette classe
 	} 
 		
 	protected  function getTable()
 	{
-		return "Je ne sert à rien dans cette classe";
+		return "";  // Je ne sert à rien dans cette classe
 	}
 	 
 	public function getArtisteTout() 
 	{
-			try
-			{
-				$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes");
-				$stmt->execute();
-				return $stmt->fetchAll();
-			}	
-			catch(Exception $exc)
-			{
-				return 0;
-			}
-		$aDonnees = array('');
-		
-		return $aDonnees;
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return 0;
+		}
 	}
 	
 	public function getOeuvresParAuteur() 
 	{
-			try
-			{
-				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre,Artistes.prenomArtiste AS prenom, Artistes.nomArtiste AS nom, Artistes.collectif AS collectif
-												   FROM Oeuvres
-												   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
-												   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
-												   ORDER BY noOeuvre");
-				$stmt->execute();
-				return $stmt->fetchAll();
-			}	
-			catch(Exception $exc)
-			{
-				return 0;
-			}
-		$aDonnees = array('');
-		
-		return $aDonnees;
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre,Artistes.prenomArtiste AS prenom, Artistes.nomArtiste AS nom, Artistes.collectif AS collectif
+											   FROM Oeuvres
+											   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+											   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											   ORDER BY noOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return 0;
+		}
 	}
 	
 	public function getOeuvresParPhotos() 
 	{
-			try
-			{
-				$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto
-												   FROM Oeuvres
-												   LEFT JOIN Photos ON Oeuvres.idOeuvre = Photos.idOeuvre
-												   ORDER BY noOeuvre");
-				$stmt->execute();
-				return $stmt->fetchAll();
-			}	
-			catch(Exception $exc)
-			{
-				return 0;
-			}
-		$aDonnees = array('');
-		
-		return $aDonnees;
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto
+											   FROM Oeuvres
+											   LEFT JOIN Photos ON Oeuvres.idOeuvre = Photos.idOeuvre
+											   ORDER BY noOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return 0;
+		}
 	}
 }
 

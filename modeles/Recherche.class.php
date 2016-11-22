@@ -14,13 +14,14 @@
 class Recherche extends TemplateBase {
 	
     
-	protected function getPrimaryKey()
-	{
-		return "Je ne sert à rien dans cette classe";
-	}  
 	protected function getTable()
 	{
 		return "Oeuvres";
+	}
+	
+	protected function getPrimaryKey()
+	{
+		return "";
 	}
 	
 	public function rechercheOeuvres($valeur, $cle = null)
