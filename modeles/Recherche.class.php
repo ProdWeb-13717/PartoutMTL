@@ -3,9 +3,14 @@ class Recherche extends TemplateBase {
 	
     
 	 
-	public function getTable()
+	protected function getTable()
 	{
 		return "Oeuvres";
+	}
+	
+	protected function getPrimaryKey()
+	{
+		return "";
 	}
 	
 	public function rechercheOeuvres($valeur, $cle = null)
