@@ -1,6 +1,7 @@
 <body>
     <header>
-        <div id="logo">P<span id="noir">ART</span>OUT<br/></div>
+        <div id="logo">P<span class="noir">ART</span>OUT</div>
+		<!--
         <div id="menuAdmin">
             <ul>
                 <li><a href="#">GESTION</a></li>
@@ -10,8 +11,7 @@
             </ul>     
         </div>
 		
-		<!--
 		-->
-        
-        <h1 id="administration">ADMINISTRATION</h1>
+        <div class="ligneLogo LigneCouleurMenu"></div>
+        <h1 id="administrationLogo" class='blanc'>ADMINISTRATION</h1>
     </header>

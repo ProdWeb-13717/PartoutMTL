@@ -16,58 +16,11 @@
 
 a{
     text-decoration: none;
-	margin:0;
 }
 
-li{
-	padding:0;
-	
-}
-
-.LigneCouleurMenu{
-	background-color: #016737; 
-	height: 50px;
-}
-
-
-/* largeur / hauteur
+/* Entête
 -------------------------------------------------------------*/
-.largeur100{
-	position: relative;
-	width: 100%;
-	margin-left: 0;
-	margin-right: 0;
-}
 
-
-/* couleur texte
--------------------------------------------------------------*/
-.noir{
-    color : black;
-}
-
-.blanc{
-	color : white;
-}
-
-.vert{
-	color: #016737;
-}
-
-
-/* couleur background
--------------------------------------------------------------*/
-.fondVert{
-	background-color: #016737;
-}
-
-.fondBlanc{
-	background-color: white;
-}
-
-
-/* logo
--------------------------------------------------------------*/
 #logo{
     font-size : 3.5em;
     color : #016737;
@@ -83,15 +36,32 @@ li{
     letter-spacing: 4px;   
 }
 
-.ligneLogo{
+.LigneCouleurMenu{
 	margin-top : -25px;
-	background-color: #016737;  
-	height: 150px;
+	background-color: #016737; 
+	height: 50px;
 }
 
+#deconnectionAdmin{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	
+	
+	//justify-content: flex-end;
+	align-content: flex-end;
+	color : #016737; 
+	text-align: right;
+
+}
+
+.noir{
+    color : black;
+}
 
 /* menu
 -------------------------------------------------------------*/
+/*
 .menu{
     margin-top : -20px;
 }
@@ -111,78 +81,26 @@ li{
     border-left : solid white 2px;
     border-right : solid white 2px;
     border-top : solid white 2px;
+	padding : 10px 22px;
 	
 }
 
 .menu a{
-	display:block;
     text-decoration: none;
     color : white; 
-	padding : 10px 20px 5px 20px;
 }
 
-.menu li:hover a{
-	padding-top: 20px;
-	
-}
-
-.menu li.actif { 
-	background-color : white;
-    display : inline-block;
-    color: black;
-    pointer-events:none;
-    
-	border-left : solid white 2px;
-    border-right : solid white 2px;
-    border-top : solid white 2px;
-	padding-top: 10px;
-}
-
-.menu li.actif a{
-	color : #016737;
-}
+*/
 
 
-/* connection Admin
+
+/* classe générale
 -------------------------------------------------------------*/
-.autentificationForm{
-	width: 570px;
-    color : #016737;
-	display: flex;
-	flex-direction: column;
-	flex-wrap:nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	margin: 10%;
-	padding:50px 5px;
-}
 
-#nomUsager{
-	margin:0;
-	padding:0;
-}
-
-#deconnectionAdmin{
-	position: absolute;
-	top: 10px;
-	right: 20px;
-	
-	
-	//justify-content: flex-end;
-	align-content: flex-end;
-	color : #016737; 
-	text-align: right;
-
-}
-
-
-/* bouton
--------------------------------------------------------------*/
 .bouton{
+    position: relative;
     left: 75.5%;
-    padding: 10px 30px;
-	margin: 0;
+    padding: 15px 35px;
     margin-top : 20px;
     margin-bottom : 30px;
     color : white;
@@ -207,9 +125,17 @@ li{
 	border : solid #016737 2px;
 }
 
+.largeur100{
+	position: relative;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
 
-/* flexbox
--------------------------------------------------------------*/
+.largeur80{
+	
+}
+
 .flex-row{
 	display: flex;
 	flex-direction: 	row;
@@ -239,9 +165,58 @@ li{
 }
 
 
-/* formulaire
+.fondVert{
+	background-color: #016737;
+}
+
+.textVert{
+	color: #016737;
+}
+
+
+/* Autentification Admin
 -------------------------------------------------------------*/
-.form{
+
+.autentificationForm{
+	width: 570px;
+    color : #016737;
+	display: flex;
+	flex-direction: column;
+	flex-wrap:nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	margin: 10%;
+	padding:50px 5px;
+}
+
+#deconnectionAdmin{
+	
+}
+
+#nomUsager{
+	margin:0;
+	padding:0;
+}
+
+
+/* Soumission
+-------------------------------------------------------------*/
+
+.soumissionAdmin{
+    width: 602px;
+    color : #016737;
+    margin: auto;
+    margin-top : 50px;
+}
+
+.soumissionAdmin h1{
+    position: relative;
+    left: 29%;
+    margin-bottom: -1px;
+}
+
+.soumissionAdminFormulaire{
     width: 570px;
     color : #016737;
     padding-left: 5%;
@@ -281,18 +256,4 @@ li{
     color : brown;
     margin-left : 37%;
 
-}
-
-
-.soumissionAdmin{
-    width: 602px;
-    color : #016737;
-    margin: auto;
-    margin-top : 50px;
-}
-
-.soumissionAdmin h1{
-    position: relative;
-    left: 29%;
-    margin-bottom: -1px;
 }

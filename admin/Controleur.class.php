@@ -20,7 +20,7 @@ class Controleur
 	 */
 	public function gerer()
 	{
-        $this->afficheVue("head");
+        //$this->afficheVue("head");
         
         switch ($_GET['requete']) 
         {
@@ -29,8 +29,9 @@ class Controleur
 				break;
 				
 			case 'formAutentificationAdmin':
-				$vue = 'FormAutentificationAdmin';
-				$this->afficheVue($vue);
+				$this->afficheVue("head");
+				$this->afficheVue("enteteAdmin");
+				$this->afficheVue('FormAutentificationAdmin');
 				break;
 				
 			case 'AutentificationAdmin':
@@ -46,6 +47,8 @@ class Controleur
 				
 				if($resulta == false)
 				{
+					$this->afficheVue("head");
+					$this->afficheVue("enteteAdmin");
 					$vue = 'FormAutentificationAdmin';
 					$this->afficheVue($vue);
 				}
@@ -61,15 +64,15 @@ class Controleur
 				break;
 				
 			case 'importation':
-				$vue = "enteteAdmin";
-				$this->afficheVue($vue);
+				$this->afficheVue("head");
+				$this->afficheVue("enteteAdmin");
 				$this->importation();                                                      
 				break;
 				
 			case 'importationok':
 			
-				$vue = "enteteAdmin";
-				$this->afficheVue($vue);
+				$this->afficheVue("head");
+				$this->afficheVue("enteteAdmin");
 				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
 				$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
 				$this->importationok();                                                    
@@ -224,6 +227,7 @@ class Controleur
 		
 	public function afficherFormAutentificationAdmin()
 	{
+		$this->afficheVue("enteteAdmin");
 		$vue = "boutonSoumission";
         $this->afficheVue($vue);
 		
@@ -232,7 +236,9 @@ class Controleur
 	
 	protected function afficherEnteteAdmin()
 	{
-        $this->afficheVue("enteteAdmin");
+        $this->afficheVue("head");
+		$this->afficheVue("enteteAdmin");
+        $this->afficheVue("menuAdmin");
         $this->afficheVue("boutonDeconnectionAdmin");
 		
 	}
@@ -244,6 +250,8 @@ class Controleur
 
 		if(!isset($_SESSION['authentifie']))
 		{
+			$this->afficheVue("head");
+			$this->afficheVue("enteteAdmin");
 			$vue = 'FormAutentificationAdmin';
 			$this->afficheVue($vue);
 		}

@@ -39,7 +39,7 @@
 		{
 			window.addEventListener('load', function()
 			{
-				document.getElementById('encrypte').addEventListener('click', encrypte);
+				document.getElementById('BoutonEncrypte').addEventListener('click', encrypte);
 			});
 	
 		})();
@@ -62,12 +62,16 @@
 		
 		
 	</script>
-	<form name="autentificationForm" method="POST">
-		NOM USAGER : <input type="text" name="usager"/>		
-		MOT DE PASSE :  <input type="password" name="pass"/>	
-		<input type="hidden" name="grainSel" value="<?php echo $_SESSION["grainDeSel"];?>"/>
-		<input type="button" value="soumettre" id="encrypte"/>
-	</form>
+	<div class="largeur100 flex-column margin-hauteur100">
+		<form name="autentificationForm" method="POST">
+			NOM USAGER : <input type="text" name="usager"/>	
+			<br><br>
+			MOT DE PASSE :  <input type="password" name="pass"/>	
+			<input type="hidden" name="grainSel" value="<?php echo $_SESSION["grainDeSel"];?>"/>
+			<br><br><br>
+			<input type="button" value="soumettre" id="BoutonEncrypte" class="bouton"/>
+		</form>
+	</div>
 	<form name="formEncrypte" method="POST" action="index.php?requete=AutentificationAdmin">
 		<input type="hidden" name="usager"/>		
 		<input type="hidden" name="pass"/>		

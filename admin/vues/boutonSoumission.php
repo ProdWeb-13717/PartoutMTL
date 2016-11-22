@@ -1,4 +1,4 @@
     </section>
-    <input type="button" id="boutonSoumission" value="SOUMETTRE" name="boutonSoumission"/>
+    <input type="button" class="bouton" id="boutonSoumission" value="SOUMETTRE" name="boutonSoumission"/>
     
 </div>
