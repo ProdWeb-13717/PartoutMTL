@@ -12,6 +12,8 @@
 *{
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
+	margin: 0;
+	padding:0;
 }
 
 a{
@@ -38,11 +40,6 @@ li{
 	margin-left: 0;
 	margin-right: 0;
 }
-
-.largeur80{
-	
-}
-
 
 /* couleur texte
 -------------------------------------------------------------*/
@@ -146,20 +143,19 @@ li{
 	color : #016737;
 }
 
-
 /* connection Admin
 -------------------------------------------------------------*/
 .autentificationForm{
 	width: 570px;
     color : #016737;
-	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	flex-wrap:nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	margin: 10%;
 	padding:50px 5px;
-	text-align: right;
-}
-
-.autentificationForm label{
-	text-align: right;
-	width: 100px;
 }
 
 #nomUsager{
@@ -209,8 +205,62 @@ li{
     color : #016737; 
     background-color: white; 
 	border : solid #016737 2px;
+	margin: 0 auto;
+	padding:50px 5px;
+	text-align: right;
 }
 
+.autentificationForm label{
+	text-align: right;
+	width: 100px;
+}
+
+#nomUsager{
+	margin:0;
+	padding:0;
+}
+
+#deconnectionAdmin{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	
+	
+	//justify-content: flex-end;
+	align-content: flex-end;
+	color : #016737; 
+	text-align: right;
+
+}
+
+
+/* bouton
+-------------------------------------------------------------*/
+.bouton{
+    left: 75.5%;
+    padding: 10px 30px;
+	margin: 0;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+	border : solid transparent 2px;
+}
+
+.bouton2{
+	margin: 0;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+	border : solid transparent 2px;
+}
+
+.bouton:hover, .bouton2:hover{
+    color : #016737; 
+    background-color: white; 
+	border : solid #016737 2px;
+}
 
 /* flexbox
 -------------------------------------------------------------*/
@@ -226,7 +276,7 @@ li{
 .flex-column{
 	display: flex;
 	flex-direction: 	column;
-	//flex-wrap:			nowrap;
+	flex-wrap:			nowrap;
 	justify-content: 	center;
 	align-items: 		center;
 	align-content: 		center;
@@ -245,7 +295,6 @@ li{
 
 /* formulaire
 -------------------------------------------------------------*/
-
 .form{
     width: 570px;
     color : #016737;

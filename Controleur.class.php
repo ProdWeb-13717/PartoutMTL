@@ -43,13 +43,14 @@ class Controleur
 					*/
                     
                 case 'listeArtistes':
-					$this->entete();
-					$vue = "listeArtistes";
+  					$this->entete();
+  					$vue = "listeOeuvres";
 					$modeleListe = new ModeleListe();
-					$data = $modeleListe->getArtisteTout();
+					$data = $modeleListe->getOeuvresTout();
+					$data = [];
+					array_push($data,$modeleListe->getOeuvresParPhotos());
+					array_push($data,$modeleListe->getOeuvresParAuteur());
 					$this->afficheVue($vue,$data);
-					
-					break;
 					
 				case 'listeOeuvres':
 					$this->entete();
