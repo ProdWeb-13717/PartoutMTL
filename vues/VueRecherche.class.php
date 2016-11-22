@@ -18,7 +18,7 @@ class VueRecherche {
 	
 	public function afficheRechercheOeuvreTitre() ///********************** function pour afficher la resultat de rechercher les oeuvres par titre
 	{
-		//En construction
+		//En construction ...
 		echo "<p> En construction ... </p>";
 	}
 	
