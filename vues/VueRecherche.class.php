@@ -18,24 +18,59 @@ class VueRecherche {
 	
 	public function afficheRechercheOeuvreTitre() ///********************** function pour afficher la resultat de rechercher les oeuvres par titre
 	{
-		?>
-		<!--img id="imgload" src="images/ajax-loader.gif"-->
-		<form>
-			<h4>La recherche d'oeuvre par son titre:
-			<input id='rechercheOeuvre' placeholder="Titre d'oeuvre" name="rechercheOeuvre" type='text'/></h4>
-			<div id="boiteRecherche"></div>
-		</form>
-		<div>
-			<a href="index.php?requete=txtRecherche&valRecherche=p">test la resultat l</a>
-		</div>
-	<?php
+		//En construction
+		echo "<p> En construction ... </p>";
 	}
 	
 	
-	public function resltatDataRecherche($data) ///********************** function pour afficher la resultat de rechercher les oeuvres par titre
+	public function resltatDataRecherche($data) ///********************** function pour afficher la resultat de rechercher 
 	{
 		
-		echo json_encode($data);
+		//echo json_encode($data);
+		//print_r($data);
+		
+		//print_r(array_values($data));
+		//echo "<br><br><br><br>";
+		//echo count($data[0]);
+		if(!$data){
+			
+			echo "<p> Aucun résultat pour le mot/lettre recherché </p>";
+		}
+		else{
+		?>
+		<section class="liste">
+			<section class="liste">
+			<h1>Liste des oeuvres</h1>
+		<?php
+					foreach($data as $oeuvre)
+					{
+						
+						
+						
+		?>
+						<div class="elemListe">
+							<ul>
+								<li><span class="catElemListe">ID : </span><?php echo $oeuvre["idOeuvre"]?></li>
+								<li><span class="catElemListe">Titre : </span><?php echo $oeuvre["titre"]?></li>
+								<li><span class="catElemListe">Année : </span><?php echo $oeuvre["dateFinProduction"]?></li>
+
+							</ul>
+						</div>
+		<?php
+						
+					}
+		?>
+		</section>
+		<?php
+		}
+		
+	}
+	
+	
+	public function rechercheResultat($data) ///********************** function pour afficher la resultat de rechercher les oeuvres par titre
+	{
+		
+		print_r($data);
 		
 	}
 	

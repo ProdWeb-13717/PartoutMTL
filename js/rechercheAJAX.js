@@ -1,7 +1,7 @@
 window.addEventListener("load", function()
 {
 	
-	//window.onload= Recherche();
+	
 	Recherche();
 		
 	
@@ -9,33 +9,71 @@ window.addEventListener("load", function()
 
 function Recherche(){
 	
-	var elmRecherche = document.getElementById("rechercheOeuvre");
+	
+	var btnRecherche = document.getElementById("btnRecherche");
+	var motRecherche = document.getElementById("motRecherche"); //rechercheOeuvre 
+	var categorieRecherche = document.getElementById("categorieRecherche"); 
+	var souscategorieRecherche = document.getElementById("souscategorieRecherche"); 
 	
 	
-	elmRecherche.onkeyup = function(){
-		
-		
-		document.getElementById("boiteRecherche").innerHTML = '';
-	
-		if(elmRecherche.value!=""){
-			document.getElementById("boiteRecherche").innerHTML = '';
-			rechercheOeuvre();
+	motRecherche.onclick = function(){
+		if(categorieRecherche.value=="" || souscategorieRecherche.value==""){
+			alert("Séléctionner un catégorie et sous-catégorie avant");
 		}
-		else{
-			rechercheOeuvre();
+		
+	}
+	
+	categorieRecherche.onchange = function(){
+		
+		if(categorieRecherche.value=="Oeuvres"){
+			souscategorieRecherche.disabled = false;
+		}else if(categorieRecherche.value=="Artistes"){
+			//---------------------- pour sprint 2
+			souscategorieRecherche.value=""
+			souscategorieRecherche.disabled = true;
+		}else{
+			souscategorieRecherche.value=""
+			souscategorieRecherche.disabled = true;
+			
+		}
+		
+	}
+	
+	btnRecherche.onclick = function(){
+		
+		if(motRecherche.value==""){
+			alert("Séléctionner un catégorie et sous-catégorie et puis entrez un lettre ou le mot complét");
+		}else{
+			
+			if(document.getElementById("boiteRecherche")){
+				document.getElementById("boiteRecherche").innerHTML = '';
+				
+			}
+			if(motRecherche.value!=""){
+				if(document.getElementById("boiteRecherche")){
+					document.getElementById("boiteRecherche").innerHTML = '';
+					
+				}
+				
+				motRechercheF();
+			}
+			else{
+				
+				motRechercheF();
+			}
 		}
 	};
 
 }
 
 
-function rechercheOeuvre(){
+function motRechercheF(){
 	
 	//déclaration de l'objet XMLHttpRequest
 	var xhr;
 	xhr = new XMLHttpRequest();
 	
-	var valueRecherche=document.getElementById("rechercheOeuvre");
+	var valueRecherche=document.getElementById("motRecherche");
 	
 	if(xhr)
 	{	
@@ -47,7 +85,7 @@ function rechercheOeuvre(){
 			//obtenir le nom du fichier à aller chercher.
 			var txtRecherche = encodeURIComponent(valueRecherche.value);
 			
-			xhr.open("GET", "http://localhost:8080/PartoutMTL/index.php?requete=txtRecherche&valRecherche=" + txtRecherche);
+			xhr.open("GET", "http://localhost/PartoutMTL/index.php?requete=txtRecherche&valRecherche=" + txtRecherche);
 			
 			//2ème étape - spécifier la fonction de callback
 			xhr.addEventListener("readystatechange", function()
@@ -62,48 +100,15 @@ function rechercheOeuvre(){
 					if(xhr.status === 200)
 					{
 						//les données ont été reçues
-						var tabDonnees = JSON.parse(xhr.responseText);
 						
+						if(document.getElementById("pageAcceuil")){
+							
+							document.getElementById("pageAcceuil").removeAttribute("id");
+							
+						}
 						
-						for(var i = 0; i < tabDonnees.length; i++)
-						{
-							var liste = document.createElement("ul");
-							liste.classList.add("elemListe");
-							
-							//--------------ID d'oeuvre
-							var liID = document.createElement("li");
-							var spanId =  document.createElement("span");
-							spanId.innerHTML = 'ID :';
-							spanId.classList.add("catElemListe");
-							liID.appendChild(spanId);
-							
-							var spanIdN =  document.createElement("span");
-							spanIdN.classList.add("catElemListeRecherche");
-							spanIdN.innerHTML = tabDonnees[i].idOeuvre;
-							liID.appendChild(spanIdN);
-							
-							liste.appendChild(liID);
-							
-							
-							//--------------titre d'oeuvre
-							var liTitre = document.createElement("li");
-							var spanTitre =  document.createElement("span");
-							spanTitre.innerHTML = 'Titre :';
-							spanTitre.classList.add("catElemListe");
-							liTitre.appendChild(spanTitre);
-							
-							var spanTitreN =  document.createElement("span");
-							spanTitreN.classList.add("catElemListeRecherche");
-							spanTitreN.innerHTML = tabDonnees[i].titre;
-							liTitre.appendChild(spanTitreN);
-							liTitre.classList.add("liRecherche");
-							liste.appendChild(liTitre);
-							
-							
-							document.getElementById("boiteRecherche").appendChild(liste);
-						}						
-						
-						
+						document.querySelector("body").innerHTML = xhr.responseText;
+						Recherche();
 						
 					}
 					else if(xhr.status === 404)

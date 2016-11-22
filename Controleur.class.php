@@ -21,20 +21,16 @@ class Controleur
 		 */
 		public function gerer()
 		{
-			// j'ai suprimé cette partie parce que ca cause des problems pour afficher la resultat de recherche (case 'txtRecherche') et j'ai mit dans une function-SARA
-			//$vue = "head";
-			//$this->afficheVue($vue);
-            //
-			//$vue = "enteteUser";
-			//$this->afficheVue($vue);
+			
+			
+			$this->afficheVue("head");
 			
 			
 			switch ($_GET['requete']) {
 				case 'accueil':
-					$this->entete();
 					$this->accueil(); // option quand get requete est accueil
 					break;
-					
+				/*	
 				case 'importation':
 					$this->entete();
 					$this->importation(); // option quand get requete n'existe pas
@@ -44,6 +40,7 @@ class Controleur
 					$this->entete();
 					$this->importationok(); // option quand get requete n'existe pas
 					break;
+					*/
                     
                 case 'listeArtistes':
 					$this->entete();
@@ -58,7 +55,9 @@ class Controleur
 					$this->entete();
 					$vue = "listeOeuvres";
 					$modeleListe = new ModeleListe();
-					$data = $modeleListe->getOeuvresTout();
+					$data = [];
+					array_push($data,$modeleListe->getOeuvresParPhotos());
+					array_push($data,$modeleListe->getOeuvresParAuteur());
 					$this->afficheVue($vue,$data);
 					
 					break;
@@ -66,6 +65,7 @@ class Controleur
 					$this->entete();
 					$this->rechercheOeuvreTitre(); // option quand get requete n'existe pas
 					break;
+				
 				case 'txtRecherche': // la value de recherche d'oeuvre par titre envoye par AJAX
 					
 					if(isset($_GET['valRecherche'])){
@@ -74,7 +74,7 @@ class Controleur
 						$oRecherche = new Recherche();
 						$data = $oRecherche->rechercheOeuvres($valeur,"titre"); // cle = titre 
 						$oVueRecherche = new VueRecherche();
-			
+						$this->entete();
 						$oVueRecherche->resltatDataRecherche($data);
 						
 					}
@@ -82,7 +82,7 @@ class Controleur
 				break;
 					
                 default:
-					$this->entete();
+					
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;  
 			}
@@ -104,6 +104,7 @@ class Controleur
 			{
 				die("Erreur 404! La vue n'existe pas.");				
 			}
+
 		}
 		
 		
@@ -111,9 +112,11 @@ class Controleur
 		{
 			$oVue = new Vue();
 			
-			$oVue->afficheEntete();
+			$vue = "head";
+			$this->afficheVue($vue);
+			
 			$oVue->afficheAccueil();
-			$oVue->affichePied();
+			
 		}
 		// Placer les méthodes du controleur.
 		function entete() // pour afficher le head et entete d'usager
@@ -124,7 +127,7 @@ class Controleur
 			$vue = "enteteUser";
 			$this->afficheVue($vue);
 		}
-		
+		/*
 		function importation()
 		{
 			$oVue = new Vue();
@@ -142,6 +145,8 @@ class Controleur
 			$oVue->afficheImportationok();
 			$oVue->affichePied();
 		}
+		*/
+		
 		function rechercheOeuvreTitre() // la fonction pour la recherche d'oeuvre par son titre
 		{
 			$oVue = new Vue();

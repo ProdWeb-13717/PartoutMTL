@@ -18,8 +18,9 @@
         
         <!-- Javascript -------------> 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+		<script type="text/javascript" src="./js/md5.js"></script>
         <script src="./js/plugins.js"></script>
-        <script src="./js/soumissionAdmin.js"></script>
+        <script src="./js/AutentificationAdmin.js"></script>
         
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->

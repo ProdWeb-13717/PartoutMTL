@@ -20,26 +20,66 @@ class Controleur
 	 */
 	public function gerer()
 	{
-		
-        $vue = "head";
-        $this->afficheVue($vue);
-        
-        $vue = "enteteAdmin";
-        $this->afficheVue($vue);
+        $this->afficheVue("head");
         
         switch ($_GET['requete']) 
         {
 			case 'accueil':
 				$this->accueil();                                                          // option quand get requete est accueil
 				break;
+				
+			case 'formAutentificationAdmin':
+				$this->afficheVue("enteteAdmin");
+				$this->afficheVue('FormAutentificationAdmin');
+				break;
+				
+			case 'AutentificationAdmin':
+				$admin = new Admin();
+				$resulta = $admin->verificationAutentificationAdmin();
+				if($resulta)
+				{
+					unset($_POST['usager']);
+					unset($_POST['pass']);
+				}
+				
+				$_GET['requete'] = "accueil";
+				
+				if($resulta == false)
+				{
+					$this->afficheVue("enteteAdmin");
+					$this->afficheVue('FormAutentificationAdmin');
+				}
+				else
+				{
+					$this->accueil();
+				}
+				break;
+				
+			case 'deconnectionAdmin':
+				session_unset();
+				$this->accueil();  	
+				break;
+				
 			case 'importation':
-				$this->importation();                                                      // option quand get requete n'existe pas
+				$vue = "enteteAdmin";
+				$this->afficheVue($vue);
+				$this->importation();                                                      
 				break;
+				
 			case 'importationok':
-				$this->importationok();                                                    // option quand get requete n'existe pas
+			
+				$vue = "enteteAdmin";
+				$this->afficheVue($vue);
+				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
+				$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
+				$this->importationok();                                                    
 				break;
-            case 'soumission':                                                             // page formulaire de soumission administrateur
+				
+				
+            case 'soumission':// page formulaire de soumission administrateur
                 //$this->soumissionAdmin();
+				
+				$this->afficherEnteteAdmin();
 
                 $vue = "soumissionOeuvre1";
 				$this->afficheVue($vue);
@@ -67,10 +107,9 @@ class Controleur
 				$this->afficheVue($vue);
             
                 $vue = "boutonSoumission";
-                $this->afficheVue($vue);
-                
-
+                $this->afficheVue($vue);                
                 break;
+				
             case "insereSoumission":                                                       // à l'envoi du formulaire
                 /*-- paramètres dirigés vers la table Oeuvres -----------------------------*/
             
@@ -133,6 +172,7 @@ class Controleur
                     echo "ERROR";
                 }
                 break;
+				
             default:
 				$this->accueil();
 				break;
@@ -157,66 +197,278 @@ class Controleur
             die("Erreur 404! La vue n'existe pas.");				
         }
     }
-    
-    private function autentificationAdmin()
-    {
-        $oVue = new VueAdmin();
-        $admin = new Admin();
-        $resulta = $admin->verifFormAutentifiAdmin();
-        
-        
-        $oVue->afficheEntete();
-        
-        if($resulta)
-        {
-            $oVue->afficherAcceuilAdmin();
-        }
-        else
-        {
-            $oVue->afficheFormAutentificationAdmin();
-        }
-        
-        $oVue->affichePied();
-    }
-    
-    private function admin()
-    {
-        $oVue = new VueAdmin();
-        
-        $oVue->afficheEntete();
-        $oVue->verifFormAutentifiAdmin();
-        $oVue->affichePied();
-    }
+	
 
+		/**
+		 * Traite la requête
+		 * @return void
+		 */
+		
+		/*private function accueil()
+		{
+			$oVue = new Vueimportation();
+			
+			$oVue->afficheEntete();
+			$oVue->afficheAccueil();
+			$oVue->affichePied();
+		}*/
+		// Placer les méthodes du controleur.
+		private function importation()
+		{
+			
+			$oVue = new Vueimportation();
+			
+			$oVue->afficheEntete();
+			$oVue->afficheformImportation();
+			$oVue->affichePied();
+		
+		}
+		/*
+	public function afficherFormAutentificationAdmin()
+	{
+		$this->afficheVue("enteteAdmin");
+		$vue = "boutonSoumission";
+        $this->afficheVue($vue);
+		
+		
+	}
+	*/
+	
+	protected function afficherEnteteAdmin()
+	{
+        $this->afficheVue("enteteAdmin");
+        $this->afficheVue("menuAdmin");
+        $this->afficheVue("boutonDeconnectionAdmin");
+		
+	}
+    
+	
+	
     private function accueil()
     {
-        $oVue = new Vue();
-        
-        //$oVue->afficheEntete();
-        $oVue->afficheAccueil();
-        $oVue->affichePied();
+
+		if(!isset($_SESSION['authentifie']))
+		{
+			$this->afficheVue("enteteAdmin");
+			$vue = 'FormAutentificationAdmin';
+			$this->afficheVue($vue);
+		}
+		else
+		{
+			$this->afficherEnteteAdmin();
+		}
+
     }
 
-    function importation()
-    {
-        $oVue = new Vue();
-        
-        //$oVue->afficheEntete();
-        $oVue->afficheformImportation();
-        $oVue->affichePied();
-    }
+	
+	
+   
 		
 
-    function importationok()
-    {
-        $oVue = new Vue();
-        
-        //$oVue->afficheEntete();
-        $oVue->afficheImportationok();
-        $oVue->affichePied();
-    }
-    
-
+		private function importationok()
+		{
+			
+			$oVue = new Vueimportation();
+			$oVue->afficheEntete();
+			$oVue->afficheImportationok();
+			$oVue->affichePied();
+		}
+		
+		// fucntions/modeles pour traitement sans affichage
+		
+		private function obtenirJSON()
+		{
+			$oRemote = new Donnesremote();
+			return $oRemote->getpublicJSON();
+			
+		}
+		
+		private function traiterDonnees($jsonSite){
+			
+			$nomOeuvres = count($jsonSite);
+			
+			for($i=0;$i<=14;$i++)// for pour parcourir tout les oeuvres
+			{
+				
+				//***traitement des artistes***
+				
+				foreach($jsonSite[$i]->Artistes as $artiste){
+					
+					// verification des donnees null
+					if($artiste->Nom == null){
+						
+						$artiste->Nom = "";
+					}
+					if($artiste->Prenom == null){
+						
+						$artiste->Prenom = "";
+					}
+					if($artiste->NomCollectif == null){
+						
+						$artiste->NomCollectif = "";
+					}
+					
+					
+					//confirmation qu'un artiste n'est pas dans la BD et ajout si necessaire
+					
+					$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+					if(!$ilExiste){
+						
+						$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+						
+					}
+				}
+				//fin traitement des artistes
+				
+				
+				
+				
+				//*** traitement des arrondissements
+				
+				
+				//confirmation qu'un arrondissement n'est pas dans la BD et ajout si necessaire
+					
+				$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement);
+				if(!$ilExiste){
+					
+					$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
+				}
+				//fin traitement des arrondissements
+				
+				
+				//*** traitement des categories
+				
+				//echo $jsonSite[$i]->SousCategorieObjet;
+				//echo "<br>";
+				
+				
+				//confirmation qu'une categorie n'est pas dans la BD et ajout si necessaire
+					
+				$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet);
+				if(!$ilExiste){
+					
+					$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
+				}
+				
+				
+				//fin traitement des categories
+				
+				
+				
+				//*** traitement des oeuvres
+				
+				$ilExiste = $this->verifierOeuvre($jsonSite[$i]->NoInterne);
+				if(!$ilExiste){
+					//echo $i+1 ." ";
+					$this->inclureOeuvre($jsonSite[$i]);
+					//echo "paila no esta";
+					//echo "<br>";
+				}
+				
+				
+				//echo $jsonSite[$i]->SousCategorieObjet;
+				//echo "<br>";
+				
+				
+				//confirmation qu'une categorie n'est pas dans la BD et ajout si necessaire
+					
+				/*echo $jsonSite[$i]->Titre;
+				echo " - ";
+				echo $jsonSite[$i]->TitreVariante;
+				echo " - ";*/
+				//echo $jsonSite[$i]->NumeroAccession;
+				//echo "<br>";
+				
+				
+				//fin traitement des oeuvres
+				
+				
+				
+				
+				
+				
+			}
+			
+		}
+		//***** functions par rapport à des traitement des artistes
+		
+		private function verifierArtiste($nom,$prenom,$collectif)
+		{
+			
+			$oArtistes = new Artistes();
+			$data = $oArtistes->obtenirArtiste($nom,$prenom,$collectif);
+			return $data;
+			
+		}
+		
+		private function inclureArtiste($nom,$prenom,$collectif)
+		{
+			
+			$oArtistes = new Artistes();
+			$data = $oArtistes->insererArtiste($nom,$prenom,$collectif);
+			
+		}
+		
+		
+		//***** functions par rapport à des traitement des arrondissements
+		
+		
+		private function verifierArrondissement($arrondissement)
+		{
+			
+			$oArrondissements = new Arrondissements();
+			$data = $oArrondissements->obtenirArrondissement($arrondissement);
+			return $data;
+			
+		}
+		
+		private function inclureArrondissement($arrondissement)
+		{
+			
+			$oArrondissements = new Arrondissements();
+			$data = $oArrondissements->insererArrondissement($arrondissement);
+			
+		}
+		
+		//***** functions par rapport à des traitement des categories
+		
+		
+		private function verifierCategorie($categorie)
+		{
+			
+			$oCategorie = new Categories();
+			$data = $oCategorie->obtenirCategorie($categorie);
+			return $data;
+			
+		}
+		
+		private function inclureCategorie($categorie)
+		{
+			
+			$oCategorie = new Categories();
+			$data = $oCategorie->insererCategorie($categorie);
+			
+		}
+		
+		//***** functions par rapport à des traitement des oeuvres
+		
+		private function verifierOeuvre($noInterne)
+		{
+			
+			$oOeuvre = new Oeuvres();
+			$data = $oOeuvre->obtenirOeuvre($noInterne);
+			return $data;
+			
+		}
+		
+		private function inclureOeuvre($oeuvre)
+		{
+			
+			$oOeuvres = new Oeuvres();
+			$data = $oOeuvres->traiterOeuvre($oeuvre);
+			
+		}
+		
 
 }
 ?>

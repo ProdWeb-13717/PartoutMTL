@@ -3,14 +3,15 @@
 
 
 CREATE TABLE IF NOT EXISTS Administrateurs(
-    idAdmin int AUTO_INCREMENT NOT NULL,
-    prenomAdmin VARCHAR(50), 
-    nomAdmin VARCHAR(50),
+
     nomUsagerAdmin VARCHAR(50) NOT NULL,
     motPasseAdmin VARCHAR(50) NOT NULL,
     courrielAdmin VARCHAR(200) NOT NULL,
     niveauAdmin int NOT NULL,
-    PRIMARY KEY (idAdmin)
+    prenomAdmin VARCHAR(50), 
+    nomAdmin VARCHAR(50),
+    PRIMARY KEY (nomUsagerAdmin)
+
 );
 
 
@@ -126,7 +127,6 @@ INSERT into Arrondissements (nomArrondissement) VALUES
 			("Le Sud-Ouest")
 			;
 
-
-
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 
 
