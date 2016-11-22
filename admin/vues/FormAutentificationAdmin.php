@@ -17,7 +17,6 @@
 		})();
 	</script>
 		
-		
 	<div class="largeur100 margin-hauteur100">
 		<form class="autentificationForm" name="autentificationForm" method="POST">
 			<label for="usager">NOM USAGER : </label><input type="text" name="usager"/>	

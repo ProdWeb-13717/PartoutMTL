@@ -21,70 +21,51 @@ class Controleur
 		 */
 		public function gerer()
 		{
-			// j'ai suprimé cette partie parce que ca cause des problems pour afficher la resultat de recherche (case 'txtRecherche') et j'ai mit dans une function-SARA
-			//$this->afficheVue($vue);
-            //
-			//$vue = "enteteUser";
-			//$this->afficheVue($vue);
-			
-			$this->afficheVue("head");
 			
 			
 			switch ($_GET['requete']) {
 				case 'accueil':
 					$this->accueil(); // option quand get requete est accueil
 					break;
-				/*	
-				case 'importation':
-					$this->entete();
-					$this->importation(); // option quand get requete n'existe pas
-					break;
-					
-				case 'importationok':
-					$this->entete();
-					$this->importationok(); // option quand get requete n'existe pas
-					break;
-					*/
-                    
                 case 'listeArtistes':
-					$this->entete();
-					$vue = "listeArtistes";
+					$data = [];
+  					$this->entete();
+  					$vue = "listeArtistes";
 					$modeleListe = new ModeleListe();
 					$data = $modeleListe->getArtisteTout();
-					$this->afficheVue($vue,$data);
-					
-					break;
-					
-				case 'listeOeuvres':
-					$this->entete();
-					$vue = "listeOeuvres";
-					$modeleListe = new ModeleListe();
-					$data = [];
 					array_push($data,$modeleListe->getOeuvresParPhotos());
 					array_push($data,$modeleListe->getOeuvresParAuteur());
 					$this->afficheVue($vue,$data);
-					
 					break;
+					
+				case 'listeOeuvres':
+					$data = [];
+					$this->entete();
+					$vue = "listeOeuvres";
+					$modeleListe = new ModeleListe();
+					array_push($data,$modeleListe->getOeuvresParPhotos());
+					array_push($data,$modeleListe->getOeuvresParAuteur());
+					$this->afficheVue($vue,$data);
+					break;
+					
 				case 'rechercheOeuvreTitre': // la page de recherche d'oeuvre par titre
 					$this->entete();
 					$this->rechercheOeuvreTitre(); // option quand get requete n'existe pas
 					break;
+				
 				case 'txtRecherche': // la value de recherche d'oeuvre par titre envoye par AJAX
-					
-					if(isset($_GET['valRecherche'])){
-						
+					if(isset($_GET['valRecherche']))
+					{
 						$valeur = $_GET['valRecherche'];
 						$oRecherche = new Recherche();
 						$data = $oRecherche->rechercheOeuvres($valeur,"titre"); // cle = titre 
 						$oVueRecherche = new VueRecherche();
-						$oVueRecherche->resltatDataRecherche($data);
-						
+						$this->entete();
+						$oVueRecherche->resultatDataRecherche($data);
 					}
-					
-				break;
+					break;
 					
                 default:
-					$this->entete();
 					$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 					break;  
 			}
@@ -113,38 +94,24 @@ class Controleur
 		private function accueil()
 		{
 			
+			$this->afficheVue("head");
+			
+			$oVue = new Vue();
+			$oVue->afficheAccueil();
+			
 		}
 		// Placer les méthodes du controleur.
 		function entete() // pour afficher le head et entete d'usager
 		{
+			$this->afficheVue("head");
 			$this->afficheVue("enteteUser");
 		}
-		/*
-		function importation()
-		{
-			$oVue = new Vue();
-			
-			$oVue->afficheEntete();
-			$oVue->afficheformImportation();
-			$oVue->affichePied();
-		}
-		
-		function importationok()
-		{
-			$oVue = new Vue();
-			
-			$oVue->afficheEntete();
-			$oVue->afficheImportationok();
-			$oVue->affichePied();
-		}
-		*/
 		
 		function rechercheOeuvreTitre() // la fonction pour la recherche d'oeuvre par son titre
 		{
 			$oVue = new Vue();
 			$oVueRecherche = new VueRecherche();
-			
-			//$oVue->afficheEntete();
+			$oVue->afficheEntete();
 			$oVueRecherche->afficheRechercheOeuvreTitre();
 			$oVue->affichePied();
 		}
