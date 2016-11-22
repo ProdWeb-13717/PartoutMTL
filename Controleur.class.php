@@ -59,7 +59,9 @@ class Controleur
 					$this->entete();
 					$vue = "listeOeuvres";
 					$modeleListe = new ModeleListe();
-					$data = $modeleListe->getOeuvresTout();
+					$data = [];
+					array_push($data,$modeleListe->getOeuvresParPhotos());
+					array_push($data,$modeleListe->getOeuvresParAuteur());
 					$this->afficheVue($vue,$data);
 					
 					break;

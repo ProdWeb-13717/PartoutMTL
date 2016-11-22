@@ -12,6 +12,8 @@
 *{
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
+	margin: 0;
+	padding:0;
 }
 
 a{
@@ -38,7 +40,6 @@ li{
 	margin-left: 0;
 	margin-right: 0;
 }
-
 
 /* couleur texte
 -------------------------------------------------------------*/
@@ -85,8 +86,8 @@ li{
 
 .ligneLogo{
 	margin-top : -25px;
-	background-color: #016737;  
-	height: 150px;
+	background-color: #016737; 
+	height: 50px;
 }
 
 
@@ -141,7 +142,6 @@ li{
 .menu li.actif a{
 	color : #016737;
 }
-
 
 /* connection Admin
 -------------------------------------------------------------*/
@@ -205,8 +205,62 @@ li{
     color : #016737; 
     background-color: white; 
 	border : solid #016737 2px;
+	margin: 0 auto;
+	padding:50px 5px;
+	text-align: right;
 }
 
+.autentificationForm label{
+	text-align: right;
+	width: 100px;
+}
+
+#nomUsager{
+	margin:0;
+	padding:0;
+}
+
+#deconnectionAdmin{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	
+	
+	//justify-content: flex-end;
+	align-content: flex-end;
+	color : #016737; 
+	text-align: right;
+
+}
+
+
+/* bouton
+-------------------------------------------------------------*/
+.bouton{
+    left: 75.5%;
+    padding: 10px 30px;
+	margin: 0;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+	border : solid transparent 2px;
+}
+
+.bouton2{
+	margin: 0;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+	border : solid transparent 2px;
+}
+
+.bouton:hover, .bouton2:hover{
+    color : #016737; 
+    background-color: white; 
+	border : solid #016737 2px;
+}
 
 /* flexbox
 -------------------------------------------------------------*/
@@ -244,10 +298,10 @@ li{
 .form{
     width: 570px;
     color : #016737;
-    padding-left: 5%;
+    padding-left: 100px;
     padding-top : 20px;
     padding-bottom: 20px;
-    border : solid #016737 2px;
+
 }
 
 .soumissionAdminFormulaire label{
@@ -260,6 +314,7 @@ li{
 .soumissionAdminFormulaire input{
     width: 300px;
 }
+
 
 #boutonSoumission{
     position: relative;
