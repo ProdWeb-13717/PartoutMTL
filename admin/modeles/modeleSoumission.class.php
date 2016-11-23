@@ -12,16 +12,17 @@
  * 
  */
 
-class modeleSoumission extends TemplateBase {    
-    
+class modeleSoumission extends TemplateBase 
+{    
+
     protected function getPrimaryKey()
 	{
-		return "Je suis dummy";
+		return "";
 	} 
 	
 	public function getTable()
 	{
-		return "Je suis dummy";
+		return "";
 	}
     
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -55,10 +56,10 @@ class modeleSoumission extends TemplateBase {
                                                FROM Artistes
                                                ORDER BY idArtiste 
                                                DESC LIMIT 1");   
+											   
             $stmt->execute();
             $data = $stmt->fetch();
             return $data['idArtiste'];                                          // retourne l'id de cet artiste
-
         }	
         catch(Exception $exc)
         {
@@ -73,11 +74,11 @@ class modeleSoumission extends TemplateBase {
             $stmt = $this->connexion->prepare("SELECT idOeuvre
                                                FROM Oeuvres
                                                ORDER BY idOeuvre 
-                                               DESC LIMIT 1");   
+                                               DESC LIMIT 1");  
+											   
             $stmt->execute();
             $data = $stmt->fetch();
             return $data['idOeuvre'];                                           // retourne l'id de cet oeuvre
-
         }	
         catch(Exception $exc)
         {
@@ -90,6 +91,7 @@ class modeleSoumission extends TemplateBase {
         $stmt = $this->connexion->prepare("SELECT idArrondissement 
                                            FROM Oeuvres
                                            WHERE idOeuvre = $idOeuvre");
+										   
         $stmt->execute();
         $data = $stmt->fetch();
         return $data['idArrondissement'];                                       // retourne l'id de l'arrondissement de cet oeuvre
@@ -100,6 +102,7 @@ class modeleSoumission extends TemplateBase {
         $stmt = $this->connexion->prepare("SELECT nomArrondissement 
                                            FROM Arrondissements
                                            WHERE idArrondissement = $idArrondissement");
+										   
         $stmt->execute();
         $data = $stmt->fetch();
         return $data['nomArrondissement'];                                           // retourne le nom de cette catégorie
@@ -110,6 +113,7 @@ class modeleSoumission extends TemplateBase {
         $stmt = $this->connexion->prepare("SELECT idCategorie 
                                            FROM Oeuvres
                                            WHERE idOeuvre = $idOeuvre");
+										   
         $stmt->execute();
         $data = $stmt->fetch();
         return $data['idCategorie'];                                            // retourne l'id de la catégorie de cet oeuvre
@@ -120,6 +124,7 @@ class modeleSoumission extends TemplateBase {
         $stmt = $this->connexion->prepare("SELECT nomCategorie 
                                            FROM Categories
                                            WHERE idCategorie = $idCategorie");
+										   
         $stmt->execute();
         $data = $stmt->fetch();
         return $data['nomCategorie'];                                           // retourne le nom de cette catégorie
@@ -134,11 +139,15 @@ class modeleSoumission extends TemplateBase {
                                                WHERE prenomArtiste = :prenomArtiste 
                                                  AND nomArtiste    = :nomArtiste 
                                                  AND collectif     = :collectif"); // est-ce qu'il y a concordance ?
+												 
             //référence : http://php.net/manual/en/function.extract.php
             extract($param);                                                    // extrait le tableau de variables en paramètre
-            $stmt->execute(array(":prenomArtiste" => $prenomArtiste,
-                                 ":nomArtiste"    => $nomArtiste,
-                                 ":collectif"     => $collectif));
+            $stmt->execute(
+			array(
+				":prenomArtiste" => $prenomArtiste,
+                ":nomArtiste"    => $nomArtiste,
+                ":collectif"     => $collectif)
+			);
 			
             $data = $stmt->fetch();
             return $data['idArtiste'];                                          // retourne l'id de l'artiste s'il existe, sinon null
@@ -153,6 +162,7 @@ class modeleSoumission extends TemplateBase {
     
     public function obtenirDerniereSoumission()                                 // récupère toutes les entrées de la dernière soumission???
     {
+		// function pas fini (test)
         try
 		{
             $idDernierOeuvre = $this->obtenirDernierIdOeuvre();
@@ -165,9 +175,8 @@ class modeleSoumission extends TemplateBase {
                                                JOIN Categories ON Oeuvres.idCategorie
                                                WHERE idOeuvre = $idDernierOeuvre
                                                AND Arrondissements.idArrondissement = $idArrondissement
-                                               AND Categories.idCategorie = $idCategorie
-                                               "
-                                               );
+                                               AND Categories.idCategorie = $idCategorie");
+											   
             $stmt->execute();
             return $stmt->fetchAll();
         }
@@ -185,62 +194,69 @@ class modeleSoumission extends TemplateBase {
     {
         try
         {   
-            $stmt = $this->connexion->prepare("INSERT INTO Oeuvres (titre, 
-                                                                    titreVariante,
-                                                                    dateFinProduction,
-                                                                    dateAccession,
-                                                                    nomCollection,
-                                                                    modeAcquisition,
-                                                                    materiaux,
-                                                                    technique,
-                                                                    dimensions,
-                                                                    parc,
-                                                                    batiment,
-                                                                    adresseCivique,
-                                                                    latitude,
-                                                                    longitude,
-                                                                    description,
-                                                                    idCategorie,
-                                                                    idArrondissement
-                                                                    ) 
-                                                            VALUES (:titre, 
-                                                                    :titreVariante,
-                                                                    :dateFinProduction,
-                                                                    :dateAccession,
-                                                                    :nomCollection,
-                                                                    :modeAcquisition,
-                                                                    :materiaux,
-                                                                    :technique,
-                                                                    :dimensions,
-                                                                    :parc,
-                                                                    :batiment,
-                                                                    :adresseCivique,
-                                                                    :latitude,
-                                                                    :longitude,
-                                                                    :description,
-                                                                    :idCategorie,
-                                                                    :idArrondissement
-                                                                    )");
+            $stmt = $this->connexion->prepare("INSERT INTO Oeuvres 
+			(
+				titre, 
+                titreVariante,
+                dateFinProduction,
+                dateAccession,
+                nomCollection,
+                modeAcquisition,
+                materiaux,
+                technique,
+                dimensions,
+                parc,
+                batiment,
+                adresseCivique,
+                latitude,
+                longitude,
+                description,
+                idCategorie,
+                idArrondissement
+            ) 
+            VALUES 
+			(
+				:titre, 
+                :titreVariante,
+                :dateFinProduction,
+                :dateAccession,
+                :nomCollection,
+                :modeAcquisition,
+                :materiaux,
+                :technique,
+                :dimensions,
+                :parc,
+                :batiment,
+                :adresseCivique,
+                :latitude,
+                :longitude,
+                :description,
+                :idCategorie,
+                :idArrondissement
+            )");
             
             extract($param);                                                    // extrait le tableau de variables en paramètre
-            $stmt->execute(array(":titre"             => $titre, 
-                                 ":titreVariante"     => $titreVariante,
-                                 ":dateFinProduction" => $dateFinProduction,
-                                 ":dateAccession"     => $dateAccession,
-                                 ":nomCollection"     => $nomCollection,
-                                 ":modeAcquisition"   => $modeAcquisition,
-                                 ":materiaux"         => $materiaux,
-                                 ":technique"         => $technique,
-                                 ":dimensions"        => $dimensions,
-                                 ":parc"              => $parc,
-                                 ":batiment"          => $batiment,
-                                 ":adresseCivique"    => $adresseCivique,
-                                 ":latitude"          => $latitude,
-                                 ":longitude"         => $longitude,
-                                 ":description"       => $description,
-                                 ":idCategorie"       => $idCategorie,
-                                 ":idArrondissement"  => $idArrondissement
-                                 ));
+            $stmt->execute(
+			array(
+				":titre"             => $titre, 
+				":titreVariante"     => $titreVariante,
+				":dateFinProduction" => $dateFinProduction,
+				":dateAccession"     => $dateAccession,
+				":nomCollection"     => $nomCollection,
+				":modeAcquisition"   => $modeAcquisition,
+				":materiaux"         => $materiaux,
+				":technique"         => $technique,
+				":dimensions"        => $dimensions,
+				":parc"              => $parc,
+				":batiment"          => $batiment,
+				":adresseCivique"    => $adresseCivique,
+				":latitude"          => $latitude,
+				":longitude"         => $longitude,
+				":description"       => $description,
+				":idCategorie"       => $idCategorie,
+				":idArrondissement"  => $idArrondissement
+            ));
+			
             return 1;		     
         }	
         catch(Exception $exc)
@@ -254,16 +270,19 @@ class modeleSoumission extends TemplateBase {
         try
         {
             if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
-				{
-					$idOeuvre = $this->obtenirDernierIdOeuvre();                // récupère l'id de l'oeuvre en soumission
-				}
+			{
+				$idOeuvre = $this->obtenirDernierIdOeuvre();                	// récupère l'id de l'oeuvre en soumission
+			}
             
             $stmt = $this->connexion->prepare("INSERT INTO Photos (urlPhoto, idOeuvre) 
                                                            VALUES (:urlPhoto, :idOeuvre)");
             
             extract($param);                                                    // extrait le tableau de variables en paramètre
-            $stmt->execute(array(":urlPhoto" => $urlPhoto,
-                                 ":idOeuvre" => $idOeuvre));
+            $stmt->execute(
+			array(
+				":urlPhoto" => $urlPhoto,
+                ":idOeuvre" => $idOeuvre
+			));
             
             return 1;		     
         }	
@@ -277,16 +296,27 @@ class modeleSoumission extends TemplateBase {
     {
         try
         {
-            $stmt = $this->connexion->prepare("INSERT INTO Artistes (prenomArtiste,
-                                                                     nomArtiste,
-                                                                     collectif)
-                                                              VALUE (:prenomArtiste,
-                                                                     :nomArtiste, 
-                                                                     :collectif)");
+            $stmt = $this->connexion->prepare("INSERT INTO Artistes 
+			(
+				prenomArtiste,
+                nomArtiste,
+                collectif
+			)
+            VALUE 
+			(
+				:prenomArtiste,
+                :nomArtiste, 
+                :collectif
+			)");
+			
             extract($param);                                                    // extrait le tableau de variables en paramètre
-            $stmt->execute(array(":prenomArtiste" => $prenomArtiste,
-                                 ":nomArtiste"    => $nomArtiste,
-                                 ":collectif"     => $collectif));
+            $stmt->execute(
+			array(
+				":prenomArtiste" => $prenomArtiste,
+				":nomArtiste"    => $nomArtiste,
+				":collectif"     => $collectif
+			));
+			
             return 1;		     
         }	
         catch(Exception $exc)
@@ -300,20 +330,31 @@ class modeleSoumission extends TemplateBase {
         try
         {
             if($idArtiste == null)                                              // si l'artiste n'existe pas dans la table
-				{
-					$idArtiste = $this->obtenirDernierIdArtiste();              // récupère l'id du dernier artiste soumis
-				}
+			{
+				$idArtiste = $this->obtenirDernierIdArtiste();              	// récupère l'id du dernier artiste soumis
+			}
             
             if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
-				{
-					$idOeuvre = $this->obtenirDernierIdOeuvre();                // récupère l'id de l'oeuvre en soumission
-				}
+			{
+				$idOeuvre = $this->obtenirDernierIdOeuvre();               		// récupère l'id de l'oeuvre en soumission
+			}
             
-            $stmt = $this->connexion->prepare("INSERT INTO ArtistesOeuvres  (idArtiste, idOeuvre) 
-                                                                     VALUES (:idArtiste, :idOeuvre)");
+            $stmt = $this->connexion->prepare("INSERT INTO ArtistesOeuvres  
+			(
+				idArtiste, 
+				idOeuvre
+			) 
+            VALUES 
+			(
+				:idArtiste, 
+				:idOeuvre
+			)");
             
-            $stmt->execute(array(":idArtiste" => $idArtiste,
-                                 ":idOeuvre"  => $idOeuvre));
+            $stmt->execute(
+			array(
+				":idArtiste" => $idArtiste,
+				":idOeuvre"  => $idOeuvre
+			));
             
             return 1;		     
         }	

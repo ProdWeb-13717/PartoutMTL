@@ -11,28 +11,11 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Arrondissements extends TemplateBase {
-	
-    
-	/*function __construct ()
-	{
-		
-	}
-	
-	function __destruct ()
-	{
-		
-	}*/
-	
-		
-	/**
-	 * @access public
-	 * @return Array
-	 */
-	 
+class Arrondissements extends TemplateBase 
+{
 	protected function getPrimaryKey()
 	{
-		return "Je ne sert à rien dans cette classe";
+		return "idArrondissement";
 	}  
 	 
 	public function getTable()
@@ -44,7 +27,7 @@ class Arrondissements extends TemplateBase {
 	{		
 		try
 		{	
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where nomArrondissement = :arrondissement");
+			$stmt = $this->connexion->prepare("SELECT * FROM " . $this->getTable() . " WHERE nomArrondissement = :arrondissement");
 			$stmt->bindParam(":arrondissement", $arrondissement);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -59,10 +42,10 @@ class Arrondissements extends TemplateBase {
 	{		
 		try
 		{	
-			//$connexion = $this->connexionBD();
-			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomArrondissement) values(:arrondissement)");
+			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomArrondissement) VALUES(:arrondissement)");
 			$stmt->bindParam(":arrondissement", $arrondissement);
 			$stmt->execute();
+			
 			return 1;
 		}
 		catch(Exception $exc)
@@ -72,3 +55,5 @@ class Arrondissements extends TemplateBase {
 	}
 	
 }
+
+?>

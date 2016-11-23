@@ -10,20 +10,8 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Admin extends TemplateBase{
-	
-	
-	/**
-	 * @access public
-	 * @return Array
-	 */
-	public function getDonnees() 
-	{
-		$aDonnees = array('');
-		
-		return $aDonnees;
-	}
-	
+class Admin extends TemplateBase
+{
 	protected function getPrimaryKey()
 	{
 		return "nomUsagerAdmin";
@@ -38,10 +26,6 @@ class Admin extends TemplateBase{
 	{
 		unset($_SESSION['authentifie']);
 	}
-	public function test()
-	{
-
-	}
 	
 	public function verifFormAutentifiAdmin()
 	{
@@ -54,9 +38,6 @@ class Admin extends TemplateBase{
 			return false;
 		}
 	}
-
-
-///// APPEL A LA BASE DE DONNEES ///////////////////////////////////
 
 	public function verificationAutentificationAdmin()
 	{
@@ -74,13 +55,10 @@ class Admin extends TemplateBase{
 			else
 			{
 				return false;
-				//$message = "Mauvaise combinaison usager/pass";
 			}
 		}
 	}
-	
-	
-	
+
 	public function ObtenirMotDePasseAdmin($usager)
 	{
 		try
@@ -95,9 +73,7 @@ class Admin extends TemplateBase{
 		{
 			return false;
 		}
-		
 	}
-
 }
 
 ?>

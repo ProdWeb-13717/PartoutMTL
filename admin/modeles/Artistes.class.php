@@ -11,29 +11,12 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Artistes extends TemplateBase {
-	
-    
-	/*function __construct ()
-	{
-		
-	}
-	
-	function __destruct ()
-	{
-		
-	}*/
-	
+class Artistes extends TemplateBase 
+{
 	protected function getPrimaryKey()
 	{
-		return "Je ne sert à rien dans cette classe";
+		return "idArtiste";
 	} 
-	
-		
-	/**
-	 * @access public
-	 * @return Array
-	 */
 	 
 	public function getTable()
 	{
@@ -44,8 +27,7 @@ class Artistes extends TemplateBase {
 	{		
 		try
 		{	
-			
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where nomArtiste = :nom and prenomArtiste = :prenom and collectif = :collectif");
+			$stmt = $this->connexion->prepare("SELECT * FROM " . $this->getTable() . " WHERE nomArtiste = :nom AND prenomArtiste = :prenom AND collectif = :collectif");
 			$stmt->bindParam(":nom", $nom);
 			$stmt->bindParam(":prenom", $prenom);
 			$stmt->bindParam(":collectif", $collectif);
@@ -62,11 +44,12 @@ class Artistes extends TemplateBase {
 	{		
 		try
 		{	
-			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomArtiste,prenomArtiste,collectif) values(:nom, :prenom, :collectif)");
+			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomArtiste,prenomArtiste,collectif) VALUES(:nom, :prenom, :collectif)");
 			$stmt->bindParam(":nom", $nom);
 			$stmt->bindParam(":prenom", $prenom);
 			$stmt->bindParam(":collectif", $collectif);
 			$stmt->execute();
+			
 			return 1;
 		}
 		catch(Exception $exc)
@@ -74,10 +57,6 @@ class Artistes extends TemplateBase {
 			return 0;
 		}
 	}
-	
 }
-
-
-
 
 ?>

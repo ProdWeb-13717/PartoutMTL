@@ -47,11 +47,11 @@ class ModeleListe extends TemplateBase
 	{
 		try
 		{
-			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre,Artistes.prenomArtiste AS prenom, Artistes.nomArtiste AS nom, Artistes.collectif AS collectif
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre, prenomArtiste, nomArtiste, collectif
 											   FROM Oeuvres
 											   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
 											   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
-											   ORDER BY noOeuvre");
+											   ORDER BY Oeuvres.idOeuvre");
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}	
@@ -65,10 +65,10 @@ class ModeleListe extends TemplateBase
 	{
 		try
 		{
-			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre AS noOeuvre, titre, dateFinProduction, urlPhoto
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre, titre, dateFinProduction, urlPhoto
 											   FROM Oeuvres
 											   LEFT JOIN Photos ON Oeuvres.idOeuvre = Photos.idOeuvre
-											   ORDER BY noOeuvre");
+											   ORDER BY Oeuvres.idOeuvre");
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}	
