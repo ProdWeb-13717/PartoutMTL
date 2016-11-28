@@ -95,7 +95,7 @@
     letter-spacing: 4px;   
 }
 
-/* Entête
+/* Listes
 -------------------------------------------------------------*/
 /* Acceuil */
 
@@ -214,6 +214,7 @@ span.inconnu{
 }
 
 .elemListe{
+
 	/*border: 2px solid #016737;*/
 	/*//border-radius:10px 0 10px 0;*/
 	min-width: 50%;
@@ -247,6 +248,10 @@ span.inconnu{
 	background-color:#016737;
 	border-radius:100%;
 	margin-right :45px;
+}
+
+.pageCache{
+	display:none;
 }
 
 ul.listeAuteur{
