@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang="fr">
+<html lang="fr">
 	<head>
         <title>Partout</title>
         <meta charset="utf-8">
@@ -17,8 +17,6 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         
         <!-- Javascript -------------> 
-		<!--
-		-->
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="./js/plugins.js"></script>
         <script src="./js/rechercheAJAX.js"></script>

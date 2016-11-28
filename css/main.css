@@ -14,6 +14,7 @@
     letter-spacing: 1px;
 }
 
+
 /* Entête
 -------------------------------------------------------------*/
 
@@ -26,6 +27,17 @@
 
 #noir{
     color : black;
+}
+
+#blanch{
+    color : white;
+}
+#barRecherche{
+	position:absolute;
+	color:white;
+	top:150px;
+	right:30px;
+	
 }
 
 #menuUser{
@@ -42,13 +54,19 @@
     list-style-type : none;
     margin-top : 30px;
     margin-right : 10px;
-    width : 130px;
+    width : 120px;
     padding-top : 15px;
     text-align:center;
     background-color : white;
     //background-color : #547968;
     //border : solid black 2px;
 }
+#menuUser #liRecherche{
+   
+    width : 150px;
+    
+}
+
 
 #menuUser a{
     text-decoration: none;
@@ -79,6 +97,97 @@
 
 /* Listes
 -------------------------------------------------------------*/
+/* Acceuil */
+
+#pageAcceuil{ 
+
+	/* l'image d'arrier plan */
+	background: url(../images/Acceuil_4.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	min-width: 100%;
+	min-height: 100%;
+	/* flex*/
+	/*display: flex;
+	flex-flow:  column nowrap;
+	justify-content: flex-start;
+	align-content: center;
+	align-items: center;
+	 -----------------*/
+	color: white;
+	text-align: center;
+}
+#acceuil {
+	position:absolute;
+	color:white;
+	top:50%;
+	left:50%;
+	padding:15px;
+	-ms-transform: translateX(-50%) translateY(-50%);
+	-webkit-transform: translate(-50%,-50%);
+	transform: translate(-50%,-50%);
+	/*min-width: 800px;
+	min-height: 600px;*/
+}
+#headerAcceuil, #contentAcceuil{
+	min-width: 800px;
+}
+
+
+
+
+#menuAcceuil li{
+    display : inline-block;
+    list-style-type : none;
+   
+    margin-right : 10px;
+    width : 150px;
+    padding-top : 15px;
+    text-align:center;
+    color: white;
+    
+}
+
+#menuAcceuil a{
+    text-decoration: none;
+    color: white;
+}
+
+#menuAcceuil a:hover{
+    color : #016737;
+	border-bottom: 1px solid #016737;
+}
+
+#menuAcceuil .actif { 
+    display : inline-block;
+    padding-top : 40px;
+    color: black;   
+}
+#contentAcceuil {
+	margin-top: 40px;
+	
+}
+#contentAcceuil a{
+	text-decoration: none;
+    color: white;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	border-bottom: 1px solid white;
+}
+#btnRecherche{
+	background-color : #016737;
+	text-align: center;
+	color: white;
+}
+
+/* Fin d'Acceuil
+-------------------------------------------------------------*/
+
+/* Listes
+-------------------------------------------------------------*/
 section.liste{
 	padding-left:2em;
 	
@@ -105,6 +214,9 @@ span.inconnu{
 }
 
 .elemListe{
+
+	/*border: 2px solid #016737;*/
+	/*//border-radius:10px 0 10px 0;*/
 	min-width: 50%;
 	display: flex;
 	flex-direction: row;
@@ -112,6 +224,7 @@ span.inconnu{
 	align-items:center;
 	padding:15px 30px;
 	margin: 0 0 15px 30px;
+	/*box-shadow: 5px 5px 5px #888888;*/	
 }
 
 .elemListe ul{
@@ -135,6 +248,10 @@ span.inconnu{
 	background-color:#016737;
 	border-radius:100%;
 	margin-right :45px;
+}
+
+.pageCache{
+	display:none;
 }
 
 ul.listeAuteur{

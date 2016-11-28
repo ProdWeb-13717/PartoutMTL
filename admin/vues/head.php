@@ -10,7 +10,8 @@
         <!-- CSS --------------------> 
         <link rel="stylesheet" href="./css/normalize.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/base_h5bp.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/main2.css" type="text/css" media="screen"> 
         
         <!-- Google font ------------> 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
@@ -21,6 +22,7 @@
 		<script type="text/javascript" src="./js/md5.js"></script>
         <script src="./js/plugins.js"></script>
         <script src="./js/AutentificationAdmin.js"></script>
+        <script src="./js/soumissionAdmin.js"></script>
         
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->

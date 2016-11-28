@@ -11,28 +11,11 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Categories extends TemplateBase {
-	
-    
-	/*function __construct ()
-	{
-		
-	}
-	
-	function __destruct ()
-	{
-		
-	}*/
-	
-		
-	/**
-	 * @access public
-	 * @return Array
-	 */
-	
+class Categories extends TemplateBase 
+{
 	protected function getPrimaryKey()
 	{
-		return "Je ne sert à rien dans cette classe";
+		return "idCategorie";
 	} 
 	
 	public function getTable()
@@ -44,8 +27,7 @@ class Categories extends TemplateBase {
 	{		
 		try
 		{	
-		
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where nomCategorie = :categorie");
+			$stmt = $this->connexion->prepare("SELECT * FROM " . $this->getTable() . " WHERE nomCategorie = :categorie");
 			$stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -60,10 +42,10 @@ class Categories extends TemplateBase {
 	{		
 		try
 		{	
-			//$connexion = $this->connexionBD();
-			$stmt = $this->connexion->prepare("insert into ". $this->getTable() ." (nomCategorie) values(:categorie)");
+			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomCategorie) VALUES(:categorie)");
 			$stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
+			
 			return 1;
 		}
 		catch(Exception $exc)
@@ -73,8 +55,5 @@ class Categories extends TemplateBase {
 	}
 	
 }
-
-
-
 
 ?>

@@ -39,7 +39,6 @@
 		}
 	}
 	spl_autoload_register('chargeurDeClasse');
-	
 	/*
 	// Retrait de l'autoloader natif, non fonctionnel sur webdev
 	set_include_path(get_include_path().PATH_SEPARATOR.MODELE_DIR.PATH_SEPARATOR.VUES_DIR.PATH_SEPARATOR.LIB_DIR);	// Ajoute le chemin dans les "path"

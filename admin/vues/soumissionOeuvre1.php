@@ -1,3 +1,5 @@
+<!-- DÉBUT DE LA PAGE SOUMISSION D'UNE OEUVRE, TABLE Oeuvres ---------------------------------------->
+
 <div class="soumissionAdmin">
     <h1>AJOUTER UNE OEUVRE</h1>
     <section class="soumissionAdminFormulaire">

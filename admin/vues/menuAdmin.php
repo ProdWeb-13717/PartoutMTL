@@ -1,10 +1,8 @@
-
-
         <div id="menuAdmin" class="menu">
             <ul>
-                <li><a href="#">GESTION</a></li>
-                <li class="actif" ><a href="#">SOUMISSION</a></li>
-                <li><a href="#">UPDATE BD</a></li> 
-                <li><a href="#">CARROUSSEL</a></li> 
+                <li class="" ><a href="index.php?requete=gestion">GESTION</a></li>
+                <li class="" ><a href="index.php?requete=soumission">SOUMISSION</a></li>
+                <li><a href="index.php?requete=updateBD">UPDATE BD</a></li> 
+                <li><a href="index.php?requete=carroussel">CARROUSSEL</a></li> 
             </ul>     
         </div>
