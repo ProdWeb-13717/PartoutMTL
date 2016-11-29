@@ -1,10 +1,10 @@
 <!--Variables pour se retrouver dans le dénombrement des résultats de la variable $data-->
 <?php
-$precendent = 0; // permettra de savoir l'ID de l'oeuvre traité précédemment
-$nbrePage = 1; // compte le nombre total de pages
-$nbreMaxElement = 20; //nombre maximum de résultats par pages
-$elemCourant = 1; //Rang d'un élément dans un pages
-$elemTotal = 0;
+$precendent = 0;        // permettra de savoir l'ID de l'oeuvre traité précédemment
+$nbrePage = 1;          // compte le nombre total de pages
+$nbreMaxElement = 20;   //nombre maximum de résultats par pages
+$elemCourant = 1;       //Rang d'un élément dans un pages
+$elemTotal = 0;         //Nombre total de résultats dans la liste
 ?>
 
 <!--Script pour afficher une page quand on clique son onglet correspondant-->
@@ -32,17 +32,18 @@ $elemTotal = 0;
 
 </script>
 
+<!--Construire la liste en divisant les résultats en page de 20 résultats-->
 <section id="liste">
 	<h1>Liste des oeuvres</h1>
 	<span class="pageBalise" id="1">
 	<?php
 		if(count($data[0]) <= 20)
 		{
-			echo "*** Oeuvre 1 à ".count($data[0])." ***";
+			echo "*** Résultat 1 à ".count($data[0])." ***";
 		}
 		else
 		{
-			echo "Oeuvre 1 à 20";
+			echo "*** Résultat 1 à 20 ***";
 		}
 	?>
 	</span>
@@ -118,7 +119,7 @@ $elemTotal = 0;
 					</div>
 					<span class="pageBalise" id="<?php echo $nbrePage;?>">
 					<?php
-						echo"*** Oeuvre ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement)." ***";
+						echo"*** Résultat ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement)." ***";
 					?>
 					</span>
 					<br>
