@@ -59,6 +59,37 @@ class Controleur
 					$oVueRecherche->resultatDataRecherche($data);
 				}
 				break;
+            
+            
+            case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
+				$this->entete();                    
+                $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
+                $data = $modeleSoumisionUsager->obtenirArrondissements();                     // récupère la table Arrondissements
+                $vue = "soumissionOeuvreUsager";
+                $this->afficheVue($vue, $data);    
+                break;
+            
+            
+            case "insereSoumissionUsager":                                                    // à l'envoi du formulaire
+            
+                /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
+                $tableauContenu = json_decode (file_get_contents('php://input'), true);       // decode la string JSON
+                extract($tableauContenu);                                                     // convertit le JSON en variables
+                
+                var_dump($tableauContenu);
+            
+                /*-- INSERT TABLE Soumission ----------------------------------------------*/
+                $modeleSoumisionUsager = new modeleSoumissionUsager();
+                $valide = $modeleSoumisionUsager->insererSoumission($tableauContenu);                                       
+                if(!$valide)
+				{                                                           // si non réussi
+                    $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                    break;
+                }
+                
+                //$vue = "afficheSoumission";
+                //$this->afficheVue($vue, $tableauContenu);    
+                break;
 				
 				
             default:

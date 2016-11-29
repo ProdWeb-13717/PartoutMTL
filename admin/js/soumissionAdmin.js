@@ -21,47 +21,47 @@
                 if(validationSoumission()){                                                 // valide certaines entrées, si valide
                     
                     /*-- RÉCUPÈRE LES ENTRÉES DE LA TABLE OEUVRES ----------------------------------*/
-                    var valeurTitre = document.querySelector("[name=titreOeuvreAjout]").value;
-                    var valeurTitreVariante = document.querySelector("[name=titreVarianteOeuvreAjout]").value;
+                    var valeurTitre             = document.querySelector("[name=titreOeuvreAjout]").value;
+                    var valeurTitreVariante     = document.querySelector("[name=titreVarianteOeuvreAjout]").value;
                     var valeurDateFinProduction = document.querySelector("[name=dateFinProductionOeuvreAjout]").value;
                     if(valeurDateFinProduction == ""){                                      // si l'entrée date fin de production est vide
                         valeurDateFinProduction = null;                                     // sa valeur est null
                     }
-                    var valeurDateAccession = document.querySelector("[name=dateAccessionOeuvreAjout]").value;
+                    var valeurDateAccession         = document.querySelector("[name=dateAccessionOeuvreAjout]").value;
                     if(valeurDateAccession == ""){                                          // si l'entrée date d'accession est vide
                         valeurDateAccession = null;                                         // sa valeur est null
                     }
-                    var valeurCollection = document.querySelector("[name=collectionOeuvreAjout]").value;
-                    var valeurModeAcquisition = document.querySelector("[name=modeAcquisitionOeuvreAjout]").value;
-                    var valeurMateriaux = document.querySelector("[name=materiauxOeuvreAjout]").value;
-                    var valeurTechnique = document.querySelector("[name=techniqueOeuvreAjout]").value;
-                    var valeurDimensions = document.querySelector("[name=dimensionsOeuvreAjout]").value;
-                    var valeurParc = document.querySelector("[name=parcOeuvreAjout]").value;
-                    var valeurBatiment = document.querySelector("[name=batimentOeuvreAjout]").value;
-                    var valeurAdresseCivique = document.querySelector("[name=adresseCiviqueOeuvreAjout]").value;
-                    var valeurLatitude = document.querySelector("[name=latitudeOeuvreAjout]").value;
+                    var valeurCollection        = document.querySelector("[name=collectionOeuvreAjout]").value;
+                    var valeurModeAcquisition   = document.querySelector("[name=modeAcquisitionOeuvreAjout]").value;
+                    var valeurMateriaux         = document.querySelector("[name=materiauxOeuvreAjout]").value;
+                    var valeurTechnique         = document.querySelector("[name=techniqueOeuvreAjout]").value;
+                    var valeurDimensions        = document.querySelector("[name=dimensionsOeuvreAjout]").value;
+                    var valeurParc              = document.querySelector("[name=parcOeuvreAjout]").value;
+                    var valeurBatiment          = document.querySelector("[name=batimentOeuvreAjout]").value;
+                    var valeurAdresseCivique    = document.querySelector("[name=adresseCiviqueOeuvreAjout]").value;
+                    var valeurLatitude          = document.querySelector("[name=latitudeOeuvreAjout]").value;
                     if(valeurLatitude == ""){                                               // si l'entrée latitude est vide
                         valeurLatitude = null;                                              // sa valeur est null
                     }
-                    var valeurLongitude = document.querySelector("[name=longitudeOeuvreAjout]").value;
+                    var valeurLongitude         = document.querySelector("[name=longitudeOeuvreAjout]").value;
                     if(valeurLongitude == ""){                                              // si l'entrée longitude est vide
                         valeurLongitude = null;                                             // sa valeur est null
                     }
-                    var valeurDescription = document.querySelector("[name=descriptionOeuvreAjout]").value;
+                    var valeurDescription       = document.querySelector("[name=descriptionOeuvreAjout]").value;
                     
                     /*-- RÉCUPÈRE LES ENTRÉES DE LA TABLE ARTISTES --------------------------------*/
-                    var valeurPrenomArtiste = document.querySelector("[name=prenomArtisteOeuvreAjout]").value;
-                    var valeurNomArtiste = document.querySelector("[name=nomArtisteOeuvreAjout]").value;
-                    var valeurCollectif = document.querySelector("[name=collectifOeuvreAjout]").value;
+                    var valeurPrenomArtiste     = document.querySelector("[name=prenomArtisteOeuvreAjout]").value;
+                    var valeurNomArtiste        = document.querySelector("[name=nomArtisteOeuvreAjout]").value;
+                    var valeurCollectif         = document.querySelector("[name=collectifOeuvreAjout]").value;
                     
                     /*-- RÉCUPÈRE L'ENTRÉE DE LA TABLE CATÉGORIES ---------------------------------*/
-                    var valeurCategorie = document.querySelector("[name=categorieOeuvreAjout]").value;
+                    var valeurCategorie         = document.querySelector("[name=categorieOeuvreAjout]").value;
                     
                     /*-- RÉCUPÈRE L'ENTRÉE DE LA TABLE ARRONDISSEMENTS ----------------------------*/
-                    var valeurArrondissement = document.querySelector("[name=arrondissementOeuvreAjout]").value;
+                    var valeurArrondissement    = document.querySelector("[name=arrondissementOeuvreAjout]").value;
                     
                     /*-- RÉCUPÈRE L'ENTRÉE DE LA TABLE PHOTOS -------------------------------------*/
-                    var valeurUrlPhoto = document.querySelector("[name=urlPhotoOeuvreAjout]").value;
+                    var valeurUrlPhoto          = document.querySelector("[name=urlPhotoOeuvreAjout]").value;
                 
                     /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/
                     var data = JSON.stringify({titre             : valeurTitre, 
@@ -102,7 +102,8 @@
                     xhr.send(data);                                                         // envoie la requête et les datas en POST
                     
                 }
-                else{                                                                       // sinon, message de champs invalides
+                else                                                                         // sinon, message de champs invalides
+                {
                     document.querySelector("#msgErreurSoumision").innerHTML = "Veuillez remplir correctement les champs";
                 }  
             });
@@ -117,21 +118,21 @@
         var valide= true;
         
         /*-- RÉCUPÈRE LES ENTRÉES À VALIDER -------------------------------------------*/
-        var valeurTitre = document.querySelector("[name=titreOeuvreAjout]").value;
+        var valeurTitre         = document.querySelector("[name=titreOeuvreAjout]").value;
         var valeurPrenomArtiste = document.querySelector("[name=prenomArtisteOeuvreAjout]").value;
-        var valeurNomArtiste = document.querySelector("[name=nomArtisteOeuvreAjout]").value;
-        var valeurCollectif = document.querySelector("[name=collectifOeuvreAjout]").value;
-        var valeurDimensions = document.querySelector("[name=dimensionsOeuvreAjout]").value;
-        var valeurLatitude = document.querySelector("[name=latitudeOeuvreAjout]").value;
-        var valeurLongitude = document.querySelector("[name=longitudeOeuvreAjout]").value;
+        var valeurNomArtiste    = document.querySelector("[name=nomArtisteOeuvreAjout]").value;
+        var valeurCollectif     = document.querySelector("[name=collectifOeuvreAjout]").value;
+        var valeurDimensions    = document.querySelector("[name=dimensionsOeuvreAjout]").value;
+        var valeurLatitude      = document.querySelector("[name=latitudeOeuvreAjout]").value;
+        var valeurLongitude     = document.querySelector("[name=longitudeOeuvreAjout]").value;
         
         /*-- REGEX --------------------------------------------------------------------*/
-        var dimensionsRegex = /^[0-9]+ ?x ?[0-9]+ ?x? ?[0-9]+? ?(cm)?$/;
-        var latitudeRegex = /^45\.[0-9]{4}$/;
-        var longitudeRegex = /^\-73\.[0-9]{4}$/;
+        var dimensionsRegex     = /^[0-9]+ ?x ?[0-9]+ ?x? ?[0-9]+? ?(cm)?$/;
+        var latitudeRegex       = /^45\.[0-9]{4}$/;
+        var longitudeRegex      = /^\-73\.[0-9]{4}$/;
         
         /*-- REINITIALISE LA COULEUR DES TITRES DES INPUTS ----------------------------*/
-        var couleurErreur = document.querySelectorAll(".couleurErreurSoumission");
+        var couleurErreur       = document.querySelectorAll(".couleurErreurSoumission");
         for (i = 0; i < couleurErreur.length; i++) {    
             couleurErreur[i].style.color= "#016737";
         }
