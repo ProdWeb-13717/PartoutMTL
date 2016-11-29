@@ -1,4 +1,4 @@
-﻿
+
 <?php
 ?>
 
@@ -15,7 +15,7 @@
 				<li><a href="index.php?requete=rechercheOeuvreTitre">RECHERCHE AVANCÉ</a></li>
 				<li><a href="index.php?requete=listeArtistes">ARTISTES</a></li>
 				<li><a href="index.php?requete=listeOeuvres">OEUVRES</a></li>
-				<li><a href="#">SOUMISSION</a></li>
+				<li><a href="index.php?requete=soumissionOeuvre">SOUMISSION</a></li>
 			</ul>     
 		</div>
 	 

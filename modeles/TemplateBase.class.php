@@ -1,8 +1,8 @@
-<?php
+ï»¿<?php
 set_time_limit(300);
 /**
  * Class Controleur
- * Gère les requêtes a la Base de donnees
+ * GÃ¨re les requÃªtes a la Base de donnees
  * 
  * @author Guillaume Harvey
  * @version 1.0
@@ -31,7 +31,7 @@ abstract class TemplateBase
 		}
 		catch(Exception $exc)
 		{
-			die("Connexion à la base de données impossible.");
+			die("Connexion Ã  la base de donnÃ©es impossible.");
 		}
 	}
 	

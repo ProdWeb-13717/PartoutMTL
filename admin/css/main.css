@@ -297,7 +297,7 @@ li{
 -------------------------------------------------------------*/
 .form{
     width: 570px;
-    color : #016737;
+    color : black;
     padding-left: 100px;
     padding-top : 20px;
     padding-bottom: 20px;
@@ -335,9 +335,7 @@ li{
 #msgErreurSoumision{
     color : brown;
     margin-left : 37%;
-
 }
-
 
 .soumissionAdmin{
     width: 602px;

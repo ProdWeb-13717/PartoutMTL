@@ -205,7 +205,7 @@ a{
 
 .soumissionAdmin{
     width: 602px;
-    color : #016737;
+    color : black;
     margin: auto;
     margin-top : 50px;
 }
@@ -217,12 +217,12 @@ a{
 }
 
 .soumissionAdminFormulaire{
-    width: 570px;
-    color : #016737;
+    width: 600px;
+    color : black;
     padding-left: 5%;
     padding-top : 20px;
     padding-bottom: 20px;
-    border : solid #016737 2px;
+    border : solid black 2px;
 }
 
 .soumissionAdminFormulaire label{
@@ -233,7 +233,7 @@ a{
 }
 
 .soumissionAdminFormulaire input{
-    width: 300px;
+    width: 337px;
 }
 
 #boutonSoumission{

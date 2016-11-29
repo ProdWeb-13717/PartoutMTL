@@ -26,12 +26,16 @@ CREATE TABLE IF NOT EXISTS MiseAJours(
 
 CREATE TABLE IF NOT EXISTS Soumissions(
     idSoumission int AUTO_INCREMENT NOT NULL,
-	titre VARCHAR(100),
-    parc VARCHAR(200), 
-    adresseCivique VARCHAR(200),
-    descritpion TEXT,
-    urlPhoto TEXT,
-    courriel VARCHAR(200) NOT NULL,
+	titreSoumission VARCHAR(100),
+    prenomArtisteSoumission VARCHAR(50),
+    nomArtisteSoumission VARCHAR(50),
+    collectifSoumission VARCHAR(100),
+    idArrondissementSoumission int,
+    parcSoumission VARCHAR(200), 
+    adresseCiviqueSoumission VARCHAR(200),
+    descriptionSoumission TEXT,
+    photoSoumission TEXT,
+    courrielSoumission VARCHAR(200) NOT NULL,
     PRIMARY KEY (idSoumission)
 );
 
