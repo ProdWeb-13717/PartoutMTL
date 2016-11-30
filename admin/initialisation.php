@@ -23,7 +23,6 @@
 	}
 
 
-
 	if(empty($_GET['usagerAdmin']))
 	{
 		$_GET['usagerAdmin'] = '';
@@ -37,6 +36,11 @@
 	if(empty($_SESSION['idAdmin']))
 	{
 		$_SESSION['idAdmin'] = '';
+	}
+	
+	if(empty($_SESSION['ongletActif']))
+	{
+		$_SESSION['ongletActif'] = 'gestion';
 	}
 
 

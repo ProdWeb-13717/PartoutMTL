@@ -1,0 +1,59 @@
+/*  CSS SOUMISSION  */
+
+/* Soumission
+-------------------------------------------------------------*/
+.soumissionAdmin{
+    width: 602px;
+    color : black;
+    margin: auto;
+    margin-top : 50px;
+}
+
+.soumissionAdmin h1{
+    position: relative;
+    left: 29%;
+    margin-bottom: -1px;
+}
+
+.soumissionAdminFormulaire{
+    width: 600px;
+    color : black;
+    padding-left: 5%;
+    padding-top : 20px;
+    padding-bottom: 20px;
+    border : solid black 2px;
+}
+
+.soumissionAdminFormulaire label{
+    display:inline-block;
+    width: 200px;
+    text-align:right;
+    margin-bottom: 10px;
+}
+
+.soumissionAdminFormulaire input{
+    width: 337px;
+}
+
+#boutonSoumission{
+    position: relative;
+    left: 75.5%;
+    padding: 15px 35px;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+    border: none;
+}
+
+#boutonSoumission:hover{
+    color : #016737; 
+    background-color: white; 
+}
+
+#msgErreurSoumision{
+    color : brown;
+    margin-left : 37%;
+
+}
+
