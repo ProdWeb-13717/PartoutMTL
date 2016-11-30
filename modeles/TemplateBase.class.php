@@ -53,17 +53,15 @@ abstract class TemplateBase
 		}
 	}
 	
+    
 	public function obtenirTous($table = null, $cle = null)
 	{
-		if($table == null)
-		{
-			$table = getTable();
-		}
+        if($table == null){
+            $table = $this->getTable();
+        }
 		try
 		{	
-			$stmt = $this->connexion->prepare("select * from :table ORDER BY :cle");
-			$stmt->bindParam(":table", $table);
-			$stmt->bindParam("cle", $cle);
+			$stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle);
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}
@@ -72,7 +70,28 @@ abstract class TemplateBase
 			return false;
 		}
 	}
-	
+    
+    
+    public function obtenirDernier($id, $table)                                     // récupère l'id de la dernière entrée, table Artistes
+    {  
+        try
+        {
+            // source : http://www.w3schools.com/sql/sql_func_last.asp
+            $stmt = $this->connexion->prepare("SELECT " . $id . " 
+                                               FROM " . $table . "
+                                               ORDER BY ". $id . "
+                                               DESC LIMIT 1");   
+											   
+            $stmt->execute();
+            $data = $stmt->fetch();
+            return $data[$id];                                                      // retourne l'id de la table en paramêtre
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }   
+    }
+    
 	
 	public function supprimer($valeur, $cle = null)
 	{
