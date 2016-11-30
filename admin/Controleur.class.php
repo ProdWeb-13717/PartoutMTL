@@ -61,15 +61,14 @@ class Controleur
 				
 				
 			case 'importation':
-				$this->afficheVue("head");
-				$this->afficheVue("enteteAdmin");
+				$_SESSION['ongletActif'] = 'importation';
+				$this->afficherEnteteAdmin();
 				$this->importation();                                                      
 				break;
 				
 				
 			case 'importationok':
-				$this->afficheVue("head");
-				$this->afficheVue("enteteAdmin");
+				$this->afficherEnteteAdmin();
 				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
 				$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
 				$this->importationok();                                                    
@@ -77,12 +76,13 @@ class Controleur
             
             
             case 'gestion':
+				$_SESSION['ongletActif'] = 'gestion';
                 $this->afficherEnteteAdmin();
                 $this->afficherPageGestion();
 				break;
 				
             case 'soumission':                                                          // page formulaire d'ajout administrateur
-				
+				$_SESSION['ongletActif'] = 'ajoutOeuvre';
 				$this->afficherEnteteAdmin();
 				$this->afficherFormSoumissionAdmin();             
                 break;
@@ -140,6 +140,7 @@ class Controleur
             
             
             case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
+				$_SESSION['ongletActif'] = 'soumission';
                 $this->afficherEnteteAdmin();
 				$this->afficherSoumissionsDesUsagers();             
                 break;
@@ -242,17 +243,13 @@ class Controleur
 	private function importation()
 	{
 		$oVue = new Vueimportation();
-		$oVue->afficheEntete();
 		$oVue->afficheformImportation();
-		$oVue->affichePied();
 	}	
 
 	private function importationok()
 	{
 		$oVue = new Vueimportation();
-		$oVue->afficheEntete();
 		$oVue->afficheImportationok();
-		$oVue->affichePied();
 	}
 	
 	private function obtenirJSON()
