@@ -130,6 +130,50 @@ INSERT into Arrondissements (nomArrondissement) VALUES
 			("Le Sud-Ouest")
 			;
 
+INSERT into Soumissions (titreSoumission,
+                         prenomArtisteSoumission,
+                         nomArtisteSoumission,
+                         collectifSoumission,
+                         idArrondissementSoumission,
+                         parcSoumission, 
+                         adresseCiviqueSoumission,
+                         descriptionSoumission,
+                         photoSoumission,
+                         courrielSoumission
+                        ) VALUES ("titre #1",
+                                  "prénom #1",
+			                      "nom #1",
+			                      "collectif #1",
+			                      19,
+                                  "parc #1",
+                                  "adresse #1",
+                                  "description #1",
+                                  "photo #1",
+                                  "courriel1@gmail.com"
+                                  ),
+                                 ("titre #2",
+                                  "prénom #2",
+                                  "nom #2",
+                                  "collectif #2",
+                                  20,
+                                  "parc #2",
+                                  "adresse #2",
+                                  "description #2",
+                                  "photo #2",
+                                  "courriel2@gmail.com"
+                                 ),
+                                 ("titre #3",
+                                  "prénom #3",
+                                  "nom #3",
+                                  "collectif #3",
+                                  21,
+                                  "parc #3",
+                                  "adresse #3",
+                                  "description #3",
+                                  "photo #3",
+                                  "courriel3@gmail.com")
+			                     ;
+
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 
 INSERT INTO Categories(nomCategorie) VALUE("dsafsegf");

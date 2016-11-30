@@ -17,7 +17,8 @@
         
         <label for="arrondissementOeuvreSoumissionUsager">ARRONDISSEMENT : </label>
         <select name="arrondissementOeuvreSoumission" id="arrondissmentOeuvreSoumissionUsager">
-			<?php
+			<option value="#">Options</option>
+            <?php
 			/*-- pour toutes les datas récupérées de la table Arrondissements ------------------------------*/
 			foreach($data as $arrondissement)                                       
 			{
@@ -35,7 +36,7 @@
         <input type="text" name="adresseCiviqueOeuvreSoumission" id="adresseCiviqueOeuvreSoumissionUsager"/><br/>
         
         <label for="descriptionOeuvreSoumissionUsager">DESCRIPTION : </label>
-        <textarea rows="4" cols="40" name="descriptionOeuvreSoumission" id="descriptionOeuvreSoumissionUsager"></textarea><br/>
+        <textarea rows="4" style="margin-bottom: 10px; width: 337px;" name="descriptionOeuvreSoumission" id="descriptionOeuvreSoumissionUsager"></textarea><br/>
         
         <label for="photoOeuvreSoumissionUsager">URL PHOTO : </label>
         <input type="text" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager"/><br/>

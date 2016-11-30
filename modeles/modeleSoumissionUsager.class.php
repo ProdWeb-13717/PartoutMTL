@@ -33,7 +33,7 @@ class modeleSoumissionUsager extends TemplateBase
     
     public function obtenirArrondissements()                                    // récupère toute la table Arrondissements
     {
-        $stmt = $this->connexion->prepare("SELECT * FROM Arrondissements");
+        $stmt = $this->connexion->prepare("SELECT * FROM Arrondissements ORDER BY nomArrondissement ASC");
         $stmt->execute();
         return $stmt->fetchAll();                                               // retourne tous les arrondissements
     }

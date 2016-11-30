@@ -2,7 +2,8 @@
     
         <label for="arrondissementOeuvreAjoutAdmin">ARRONDISSEMENT : </label>
         <select name="arrondissementOeuvreAjout" id="arrondissmentOeuvreAjoutAdmin">
-			<?php
+			<option value="#">Options</option>
+            <?php
 			/*-- pour toutes les datas récupérées de la table Arrondissements ------------------------------*/
 			foreach($data as $arrondissement)                                       
 			{

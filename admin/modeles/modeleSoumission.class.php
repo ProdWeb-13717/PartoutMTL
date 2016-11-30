@@ -33,16 +33,23 @@ class modeleSoumission extends TemplateBase
     
     public function obtenirCategories()                                         // récupère toute la table Catégories
     {
-        $stmt = $this->connexion->prepare("SELECT * FROM Categories");
+        $stmt = $this->connexion->prepare("SELECT * FROM Categories ORDER BY nomCategorie ASC");
         $stmt->execute();
         return $stmt->fetchAll();                                               // retourne toutes les catégories
     }
     
     public function obtenirArrondissements()                                    // récupère toute la table Arrondissements
     {
-        $stmt = $this->connexion->prepare("SELECT * FROM Arrondissements");
+        $stmt = $this->connexion->prepare("SELECT * FROM Arrondissements ORDER BY nomArrondissement ASC");
         $stmt->execute();
         return $stmt->fetchAll();                                               // retourne tous les arrondissements
+    }
+    
+    public function afficherSoumissionsDesUsagers()                             // récupère toute la table Arrondissements
+    {
+        $stmt = $this->connexion->prepare("SELECT * FROM Soumissions ORDER BY idSoumission");
+        $stmt->execute();
+        return $stmt->fetchAll();                                               // retourne toutes les entrées de Soumissions
     }
     
     /////////////////////////////////       ID       ////////////////////////////////////////////

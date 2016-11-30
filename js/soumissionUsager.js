@@ -26,6 +26,9 @@
                     var valeurNomArtiste        = document.querySelector("[name=nomArtisteOeuvreSoumission]").value;
                     var valeurCollectif         = document.querySelector("[name=collectifOeuvreSoumission]").value;
                     var valeurArrondissement    = document.querySelector("[name=arrondissementOeuvreSoumission]").value;
+                    if(valeurArrondissement == "#"){                                        // si l'usager n'a rien sélectionné
+                        valeurArrondissement = null;                                        // sa valeur est null
+                    }
                     var valeurParc              = document.querySelector("[name=parcOeuvreSoumission]").value;
                     var valeurAdresseCivique    = document.querySelector("[name=adresseCiviqueOeuvreSoumission]").value;
                     var valeurDescription       = document.querySelector("[name=descriptionOeuvreSoumission]").value;
