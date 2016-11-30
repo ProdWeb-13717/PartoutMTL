@@ -21,8 +21,6 @@ abstract class TemplateBase
 	
 	public function __construct()
 	{
-		
-		
 		try
 		{
 
@@ -61,11 +59,11 @@ abstract class TemplateBase
 		{
 			$table = getTable();
 		}
-	
 		try
 		{	
 			$stmt = $this->connexion->prepare("select * from :table ORDER BY :cle");
-			$stmt->bindParam(array(":table" => $table, "cle" => $cle));
+			$stmt->bindParam(":table", $table);
+			$stmt->bindParam("cle", $cle);
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}

@@ -212,7 +212,7 @@ class Controleur
 		$this->afficheVue($vue);
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirCategories();                             // récupère la table Categories
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");           // récupère la table Categories
         $vue = "soumissionCategorie";                                                   // select : catégories
         $this->afficheVue($vue, $data);
         
