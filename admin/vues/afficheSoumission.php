@@ -10,9 +10,11 @@
     PRÉNOM DE L'ARTISTE :       <?php if(isset($data['prenomArtiste'])) {echo $data['prenomArtiste'];}?><br/>
     NOM DE L'ARTISTE :          <?php if(isset($data['nomArtiste'])) {echo $data['nomArtiste'];}?><br/>
     COLLECTIF :                 <?php if(isset($data['collectif'])) {echo $data['collectif'];}?><br/>
-    CATÉGORIE :                 <?php $modeleSoumisionAdmin = new modeleSoumission();
-                                      $nomCategorieOeuvreEnSoumission = $modeleSoumisionAdmin->obtenirNomCategorie($data['idCategorie']);
-                                      echo $nomCategorieOeuvreEnSoumission;?><br/>
+    CATÉGORIE :                 <?php 
+                                    $modeleSoumisionAdmin = new modeleSoumission();
+                                    $nomCategorieOeuvreEnSoumission = $modeleSoumisionAdmin->obtenir($data['idCategorie'],'idCategorie',"Categories");
+                                    echo $nomCategorieOeuvreEnSoumission['nomCategorie'];
+                                ?><br/>
     DATE FIN DE PRODUCTION :    <?php if(isset($data['dateFinProduction'])) {echo $data['dateFinProduction'];}?><br/>
     DATE D'ACCESSION :          <?php if(isset($data['dateAccession'])) {echo $data['dateAccession'];}?><br/>
     COLLECTION DE L'OEUVRE :    <?php if(isset($data['nomCollection'])) {echo $data['nomCollection'];}?><br/>
@@ -20,9 +22,11 @@
     MATÉRIAUX :                 <?php if(isset($data['materiaux'])) {echo $data['materiaux'];}?><br/>
     TECHNIQUE :                 <?php if(isset($data['technique'])) {echo $data['technique'];}?><br/>
     DIMENSIONS :                <?php if(isset($data['dimensions'])) {echo $data['dimensions'];}?><br/>
-    ARRONDISSEMENT :            <?php $modeleSoumisionAdmin = new modeleSoumission();
-                                      $nomArrondissementOeuvreEnSoumission = $modeleSoumisionAdmin->obtenirNomArrondissement($data['idArrondissement']);
-                                      echo $nomArrondissementOeuvreEnSoumission;?><br/>
+    ARRONDISSEMENT :            <?php 
+                                    $modeleSoumisionAdmin = new modeleSoumission();
+                                    $nomArrondissementOeuvreEnSoumission = $modeleSoumisionAdmin->obtenir($data['idArrondissement'],'idArrondissement',"Arrondissements");
+                                    echo $nomArrondissementOeuvreEnSoumission['nomArrondissement'];
+                                ?><br/>
     PARC :                      <?php if(isset($data['parc'])) {echo $data['parc'];}?><br/>
     BÂTIMENT :                  <?php if(isset($data['batiment'])) {echo $data['batiment'];}?><br/>
     ADRESSE CIVIQUE :           <?php if(isset($data['adresseCivique'])) {echo $data['adresseCivique'];}?><br/>
