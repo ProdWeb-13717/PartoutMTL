@@ -56,11 +56,17 @@ abstract class TemplateBase
 		}
 	}
 	
-	public function obtenirTous()
+	public function obtenirTous($table = null, $cle = null)
 	{
+		if($table == null)
+		{
+			$table = getTable();
+		}
+	
 		try
 		{	
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable());
+			$stmt = $this->connexion->prepare("select * from :table ORDER BY :cle");
+			$stmt->bindParam(array(":table" => $table, "cle" => $cle));
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}

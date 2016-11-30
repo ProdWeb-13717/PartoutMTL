@@ -1,208 +1,7 @@
-/*  TABLE DES MATIÈRES
-    - Global
-    - Entête 
-    - Soumission
-    -
-    -
--------------------------------------------------------------*/
-
-/* Global
--------------------------------------------------------------*/
-
-*{
-    font-family: 'Fjalla One', sans-serif;
-    letter-spacing: 1px;
-}
-
-a{
-    text-decoration: none;
-}
-
-/* Entête
--------------------------------------------------------------*/
-
-#logo{
-    font-size : 3.5em;
-    color : #016737;
-    margin-top : 40px;
-    margin-left : 40px;
-}
-
-#administrationLogo{
-    position: absolute;
-    color : white;
-    top: 64px;
-    margin-left : 150px;
-    letter-spacing: 4px;   
-}
-
-.LigneCouleurMenu{
-	margin-top : -25px;
-	background-color: #016737; 
-	height: 50px;
-}
-
-#deconnectionAdmin{
-	position: absolute;
-	top: 10px;
-	right: 20px;
-	
-	
-	//justify-content: flex-end;
-	align-content: flex-end;
-	color : #016737; 
-	text-align: right;
-
-}
-
-.noir{
-    color : black;
-}
-
-/* menu
--------------------------------------------------------------*/
-/*
-.menu{
-    margin-top : -20px;
-}
-
-.menu ul{
-    background-color : #016737;
-    padding-top : 50px;
-}
-
-.menu li{
-    display : inline-block;
-    list-style-type : none;
-    margin-top : 30px;
-    margin-right : 10px;
-    width : 130px;
-    text-align:center;
-    border-left : solid white 2px;
-    border-right : solid white 2px;
-    border-top : solid white 2px;
-	padding : 10px 22px;
-	
-}
-
-.menu a{
-    text-decoration: none;
-    color : white; 
-}
-
-*/
-
-
-
-/* classe générale
--------------------------------------------------------------*/
-
-.bouton{
-    position: relative;
-    left: 75.5%;
-    padding: 15px 35px;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-	border : solid transparent 2px;
-}
-
-.bouton2{
-    left: 75.5%;
-    padding: 5px 20px;
-	margin: 0;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-	border : solid transparent 2px;
-}
-
-.bouton:hover, .bouton2:hover{
-    color : #016737; 
-    background-color: white; 
-	border : solid #016737 2px;
-}
-
-.largeur100{
-	position: relative;
-	width: 100%;
-	margin-left: 0;
-	margin-right: 0;
-}
-
-.largeur80{
-	
-}
-
-.flex-row{
-	display: flex;
-	flex-direction: 	row;
-	flex-wrap:			nowrap;
-	justify-content: 	center;
-	align-items: 		center;
-	align-content: 		center;
-}
-
-.flex-column{
-	display: flex;
-	flex-direction: 	column;
-	flex-wrap:			nowrap;
-	justify-content: 	center;
-	align-items: 		center;
-	align-content: 		center;
-}
-
-.reset-marges{
-	margin:0;
-	padding:0;
-}
-
-.margin-hauteur100{
-	margin-top: 100px;
-	margin-bottom: 100px;
-}
-
-
-.fondVert{
-	background-color: #016737;
-}
-
-.textVert{
-	color: #016737;
-}
-
-
-/* Autentification Admin
--------------------------------------------------------------*/
-
-.autentificationForm{
-	width: 570px;
-    color : #016737;
-	display: flex;
-	flex-direction: column;
-	flex-wrap:nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	margin: 10%;
-	padding:50px 5px;
-}
-
-#deconnectionAdmin{
-	
-}
-
-#nomUsager{
-	margin:0;
-	padding:0;
-}
-
+/*  CSS SOUMISSION  */
 
 /* Soumission
 -------------------------------------------------------------*/
-
 .soumissionAdmin{
     width: 602px;
     color : black;
@@ -257,3 +56,138 @@ a{
     margin-left : 37%;
 
 }
+
+
+
+
+
+/*
+.noir{
+    color : black;
+}
+*/
+
+/* menu
+-------------------------------------------------------------*/
+/*
+.menu{
+    margin-top : -20px;
+}
+
+.menu ul{
+    background-color : #016737;
+    padding-top : 50px;
+}
+
+.menu li{
+    display : inline-block;
+    list-style-type : none;
+    margin-top : 30px;
+    margin-right : 10px;
+    width : 130px;
+    text-align:center;
+    border-left : solid white 2px;
+    border-right : solid white 2px;
+    border-top : solid white 2px;
+	padding : 10px 22px;
+	
+}
+
+.menu a{
+    text-decoration: none;
+    color : white; 
+}
+
+*/
+
+
+
+/* classe générale
+-------------------------------------------------------------*/
+/*
+.bouton{
+    position: relative;
+    left: 75.5%;
+    padding: 15px 35px;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+	border : solid transparent 2px;
+}
+
+.bouton2{
+    left: 75.5%;
+    padding: 5px 20px;
+	margin: 0;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+	border : solid transparent 2px;
+}
+
+.bouton:hover, .bouton2:hover{
+    color : #016737; 
+    background-color: white; 
+	border : solid #016737 2px;
+}
+*/
+/*
+.largeur100{
+	position: relative;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+*/
+/*
+.largeur80{
+	
+}
+
+.flex-row{
+	display: flex;
+	flex-direction: 	row;
+	flex-wrap:			nowrap;
+	justify-content: 	center;
+	align-items: 		center;
+	align-content: 		center;
+}
+
+.flex-column{
+	display: flex;
+	flex-direction: 	column;
+	flex-wrap:			nowrap;
+	justify-content: 	center;
+	align-items: 		center;
+	align-content: 		center;
+}
+*/
+
+/* Autentification Admin
+-------------------------------------------------------------*/
+/*
+.autentificationForm{
+	min-width: 570px;
+    color : #016737;
+	display: flex;
+	flex-direction: column;
+	flex-wrap:nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	margin: 10%;
+	padding:50px 5px;
+}
+
+#deconnectionAdmin{
+	
+}
+
+#nomUsager{
+	margin:0;
+	padding:0;
+	
+}
+*/
