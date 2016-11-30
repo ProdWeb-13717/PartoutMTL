@@ -28,7 +28,8 @@ class ModeleListe extends TemplateBase
 	{
 		return "";  // Je ne sert à rien dans cette classe
 	}
-	 
+	
+	//Fonction qui va chercher les info des artistes pour construction d'une liste
 	public function getArtisteTout() 
 	{
 		try
@@ -43,6 +44,7 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
+	//Fonction qui va chercher les infos de toutes les oeuvres ainsi que les artistes rattachés à chaque oeuvre.
 	public function getOeuvresParAuteur() 
 	{
 		try
@@ -61,6 +63,7 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
+	//Fonction qui va chercher les photos de toutes les oeuvres
 	public function getOeuvresParPhotos() 
 	{
 		try
@@ -71,6 +74,26 @@ class ModeleListe extends TemplateBase
 											   ORDER BY Oeuvres.idOeuvre");
 			$stmt->execute();
 			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+	}
+	
+	//Fonction qui va chercher les information d'une oeuvre correspondant à un ID précis
+	public function getOeuvresParID($id) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT *
+											   FROM Oeuvres
+											   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+											   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											   WHERE Oeuvres.idOeuvre = :id");
+			$stmt->bindParam(":id", $id);
+			$stmt->execute();
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}	
 		catch(Exception $exc)
 		{

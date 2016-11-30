@@ -22,7 +22,7 @@ class Controleur
 				$this->accueil(); // option quand get requete est accueil
 				break;
 				
-				
+			//Affichage de la liste de tous les artistes	
             case 'listeArtistes':
 				$data = []; // initialisation de $data
   				$this->entete();
@@ -31,7 +31,7 @@ class Controleur
 				$this->afficheVue("listeArtistes",$data);
 				break;
 				
-			
+			//Affichage de la liste de toutes les oeuvres
 			case 'listeOeuvres':  
 				$data = []; // initialisation de $data
 				$this->entete();
@@ -39,6 +39,35 @@ class Controleur
 				array_push($data,$modeleListe->getOeuvresParPhotos());
 				array_push($data,$modeleListe->getOeuvresParAuteur());
 				$this->afficheVue("listeOeuvres",$data);
+				break;
+				
+			//Affichage d'une oeuvre individuelle
+			case 'afficheOeuvre':  
+				$this->entete();
+				$modeleListe = new ModeleListe();
+				if(isset($_GET['idOeuvre']))
+				{
+					$data = $modeleListe->getOeuvresParID($_GET['idOeuvre']);
+					if($data != 0)
+					{
+						if(count($data) != 0)
+						{
+							$this->afficheVue("affichageOeuvre",$data);
+						}
+						else
+						{
+							echo "<h1>Cette id n'existe pas !</h1>";
+						}
+					}
+					else
+					{
+						echo "<h1>Une erreure s'est produite dans votre requête</h1>";
+					}
+				}
+				else
+				{
+					echo "<h1>!!! ERREUR !!! : Un ID d'oeuvre est requis pour cette requête... </h1>";
+				}
 				break;
 				
 				
