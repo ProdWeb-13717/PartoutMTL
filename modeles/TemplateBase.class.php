@@ -36,15 +36,22 @@ abstract class TemplateBase
 	}
 	
 
-	public function obtenir($valeur, $cle = null)
+	public function obtenir($valeur, $cle = null, $table = null)
 	{
 		try
 		{	
+			if($table == null)
+			{
+				$table = $this->getTable();
+			}
+			
 			if($cle == null)
 			{
 				$cle = $this->getPrimaryKey();
 			}
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where " . $cle . " = :valeur");
+			
+			
+			$stmt = $this->connexion->prepare("select * from " . $table . " where " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -57,12 +64,12 @@ abstract class TemplateBase
 	
 	public function obtenirTous($table = null, $cle = null)
 	{
-		if($table = null)
-		{
-			$table = getTable();
-		}
 		try
-		{	
+		{
+			if($table == null)
+			{
+				$table = $this->getTable();
+			}
 			$stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle);
 			$stmt->execute();
 			return $stmt->fetchAll();
@@ -72,7 +79,6 @@ abstract class TemplateBase
 			return false;
 		}
 	}
-	
 	
 	public function supprimer($valeur, $cle = null)
 	{
