@@ -21,8 +21,6 @@ abstract class TemplateBase
 	
 	public function __construct()
 	{
-		
-		
 		try
 		{
 
@@ -62,6 +60,7 @@ abstract class TemplateBase
 		}
 	}
 	
+    
 	public function obtenirTous($table = null, $cle = null)
 	{
 		try
@@ -79,6 +78,29 @@ abstract class TemplateBase
 			return false;
 		}
 	}
+    
+    
+    public function obtenirDernier($id, $table)                                     // récupère l'id de la dernière entrée, table Artistes
+    {  
+        try
+        {
+            // source : http://www.w3schools.com/sql/sql_func_last.asp
+            $stmt = $this->connexion->prepare("SELECT " . $id . " 
+                                               FROM " . $table . "
+                                               ORDER BY ". $id . "
+                                               DESC LIMIT 1");   
+											   
+            $stmt->execute();
+            $data = $stmt->fetch();
+            return $data[$id];                                                      // retourne l'id de la table en paramêtre
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }   
+    }
+    
+
 	
 	public function supprimer($valeur, $cle = null)
 	{

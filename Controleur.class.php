@@ -64,7 +64,7 @@ class Controleur
             case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
 				$this->entete();                    
                 $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
-                $data = $modeleSoumisionUsager->obtenirArrondissements();                     // récupère la table Arrondissements
+                $data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
                 $vue = "soumissionOeuvreUsager";
                 $this->afficheVue($vue, $data);    
                 break;

@@ -213,7 +213,7 @@ class Controleur
 		$this->afficheVue($vue);
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");	 	// récupère la table Categories
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories
         $vue = "soumissionCategorie";                                                   // select : catégories
         $this->afficheVue($vue, $data);
         
@@ -221,7 +221,7 @@ class Controleur
 		$this->afficheVue($vue);                                                        //         technique, dimension
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirArrondissements();                        // récupère la table Arrondissements
+		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
         $vue = "soumissionArrondissement";                                              // select : arrondissements
         $this->afficheVue($vue, $data);
         
@@ -235,7 +235,7 @@ class Controleur
     private function afficherSoumissionsDesUsagers()
     {
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->afficherSoumissionsDesUsagers();                 // récupère la table Soumissions
+		$data = $modeleSoumisionAdmin->obtenirTous("Soumissions","idSoumission");       // récupère la table Soumissions
         $vue = "soumissionsDesUsagers";
         $this->afficheVue($vue, $data);
     }
