@@ -6,14 +6,14 @@
     -
 -------------------------------------------------------------*/
 
+
+
+
 /* Global
 -------------------------------------------------------------*/
-
 *{
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
-	margin: 0;
-	padding:0;
 }
 
 a{
@@ -21,25 +21,6 @@ a{
 	margin:0;
 }
 
-li{
-	padding:0;
-	
-}
-
-.LigneCouleurMenu{
-	background-color: #016737; 
-	height: 50px;
-}
-
-
-/* largeur / hauteur
--------------------------------------------------------------*/
-.largeur100{
-	position: relative;
-	width: 100%;
-	margin-left: 0;
-	margin-right: 0;
-}
 
 /* couleur texte
 -------------------------------------------------------------*/
@@ -67,6 +48,44 @@ li{
 }
 
 
+/* tableau 
+-------------------------------------------------------------*/
+ul {
+	
+}
+
+li{
+	padding:0;
+	
+}
+
+
+/* largeur / hauteur
+-------------------------------------------------------------*/
+.reset-marges{
+	margin:0;
+	padding:0;
+}
+
+.largeur100
+{
+	position: relative;
+	width: 100%;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.reset-marges{
+	margin:0;
+	padding:0;
+}
+
+.margin-hauteur100{
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+
 /* logo
 -------------------------------------------------------------*/
 #logo{
@@ -76,7 +95,8 @@ li{
     margin-left : 40px;
 }
 
-#administrationLogo{
+#administrationLogo
+{
     position: absolute;
     color : white;
     top: 64px;
@@ -91,8 +111,14 @@ li{
 }
 
 
-/* menu
+/* menu 
 -------------------------------------------------------------*/
+.LigneCouleurMenu
+{
+	background-color: #016737; 
+	height: 50px;
+}
+
 .menu{
     margin-top : -20px;
 }
@@ -131,8 +157,7 @@ li{
 	background-color : white;
     display : inline-block;
     color: black;
-    pointer-events:none;
-    
+    pointer-events: none;
 	border-left : solid white 2px;
     border-right : solid white 2px;
     border-top : solid white 2px;
@@ -144,62 +169,54 @@ li{
 }
 
 
-/*-- drop menu source : http://www.cssscript.com/create-a-multi-level-drop-down-menu-with-pure-css/  --*/
-
-
-/* connection Admin
+/* deconnection Admin
 -------------------------------------------------------------*/
-.autentificationForm{
-	width: 570px;
-    color : #016737;
-	display: flex;
-	flex-direction: column;
-	flex-wrap:nowrap;
-	justify-content: center;
-	align-items: center;
-	align-content: center;
-	margin: 10%;
-	padding:50px 5px;
-}
-
-#nomUsager{
-	margin:0;
-	padding:0;
-}
-
 #deconnectionAdmin{
 	position: absolute;
 	top: 10px;
 	right: 20px;
 	
-	
-	//justify-content: flex-end;
 	align-content: flex-end;
 	color : #016737; 
 	text-align: right;
 
 }
 
+#nomUsager{
+	
+	margin:0;
+	padding: 20px;
+	
+}
+
 
 /* bouton
 -------------------------------------------------------------*/
 .bouton{
+	
     left: 75.5%;
     padding: 10px 30px;
+	/*
 	margin: 0;
     margin-top : 20px;
     margin-bottom : 30px;
+	*/
+	margin: 20px;
     color : white;
     background-color: #016737;
 	border : solid transparent 2px;
+	
 }
 
 .bouton2{
     left: 75.5%;
     padding: 5px 20px;
+	/*
 	margin: 0;
     margin-top : 20px;
     margin-bottom : 30px;
+	*/
+	margin : 20px;
     color : white;
     background-color: #016737;
 	border : solid transparent 2px;
@@ -209,62 +226,12 @@ li{
     color : #016737; 
     background-color: white; 
 	border : solid #016737 2px;
-	margin: 0 auto;
-	padding:50px 5px;
-	text-align: right;
+	/*
+	//margin: 0 auto;
+	//padding:50px 5px;
+	*/
 }
 
-.autentificationForm label{
-	text-align: right;
-	width: 100px;
-}
-
-#nomUsager{
-	margin:0;
-	padding:0;
-}
-
-#deconnectionAdmin{
-	position: absolute;
-	top: 10px;
-	right: 20px;
-	
-	
-	//justify-content: flex-end;
-	align-content: flex-end;
-	color : #016737; 
-	text-align: right;
-
-}
-
-
-/* bouton
--------------------------------------------------------------*/
-.bouton{
-    left: 75.5%;
-    padding: 10px 30px;
-	margin: 0;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-	border : solid transparent 2px;
-}
-
-.bouton2{
-	margin: 0;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-	border : solid transparent 2px;
-}
-
-.bouton:hover, .bouton2:hover{
-    color : #016737; 
-    background-color: white; 
-	border : solid #016737 2px;
-}
 
 /* flexbox
 -------------------------------------------------------------*/
@@ -286,21 +253,12 @@ li{
 	align-content: 		center;
 }
 
-.reset-marges{
-	margin:0;
-	padding:0;
-}
-
-.margin-hauteur100{
-	margin-top: 100px;
-	margin-bottom: 100px;
-}
-
 
 /* formulaire
 -------------------------------------------------------------*/
 .form{
-    width: 570px;
+    //width: 570px;
+    width: 100%;
     color : black;
     padding-left: 100px;
     padding-top : 20px;
@@ -308,48 +266,37 @@ li{
 
 }
 
-.soumissionAdminFormulaire label{
-    display:inline-block;
-    width: 200px;
-    text-align:right;
-    margin-bottom: 10px;
+
+/* connection Admin
+-------------------------------------------------------------*/
+#deconnectionAdmin{
+	position: absolute;
+	top: 10px;
+	right: 20px;
+	
+	align-content: flex-end;
+	color : #016737; 
+	text-align: right;
+
 }
 
-.soumissionAdminFormulaire input{
-    width: 300px;
+#nomUsager{
+	
+	margin:0;
+	padding: 20px;
+	
 }
 
-
-#boutonSoumission{
-    position: relative;
-    left: 75.5%;
-    padding: 15px 35px;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-    border: none;
-}
-
-#boutonSoumission:hover{
-    color : #016737; 
-    background-color: white; 
-}
-
-#msgErreurSoumision{
-    color : brown;
-    margin-left : 37%;
-}
-
-.soumissionAdmin{
-    width: 602px;
+.autentificationForm{
+	//width: 570px;
+	//width: 60%;
     color : #016737;
-    margin: auto;
-    margin-top : 50px;
-}
-
-.soumissionAdmin h1{
-    position: relative;
-    left: 29%;
-    margin-bottom: -1px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap:nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+	margin: 0 100px;
+	padding:10px 5px;
 }

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 set_time_limit(300);
 /**
  * Class Controleur
@@ -44,7 +44,6 @@ abstract class TemplateBase
 			{
 				$cle = $this->getPrimaryKey();
 			}
-			
 			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
@@ -56,11 +55,17 @@ abstract class TemplateBase
 		}
 	}
 	
-	public function obtenirTous()
+	public function obtenirTous($table = null, $cle = null)
 	{
+		if($table == null)
+		{
+			$table = getTable();
+		}
+	
 		try
 		{	
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable());
+			$stmt = $this->connexion->prepare("select * from :table ORDER BY :cle");
+			$stmt->bindParam(array(":table" => $table, "cle" => $cle));
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}
