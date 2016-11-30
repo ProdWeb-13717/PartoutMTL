@@ -13,12 +13,16 @@
     
     window.addEventListener("load", function(){                                             // au chargement de la page
      
-        if(document.querySelector(".soumissionAdmin"))                                      // si la classe "soumissionAdmin" existe
+        if(document.querySelector(".gestionAdmin"))                                         // si la classe "gestionAdmin" existe
         { 
-            var btnSoumettre = document.querySelector("#boutonSoumission");                 // récupère le bouton SOUMETTRE
+            var btnSoumettre = document.querySelector("#boutonCategorie");                 // récupère le bouton SOUMETTRE
                 btnSoumettre.addEventListener("click", function(evt){                       // à l'événement CLIC
 
+                console.log ("fuck");    
+                    
                 if(validationSoumission()){                                                 // valide certaines entrées, si valide
+                    
+                    console.log ("fuck validé"); 
                     
                     /*-- RÉCUPÈRE LES ENTRÉES DE LA TABLE OEUVRES ----------------------------------*/
                     var valeurTitre             = document.querySelector("[name=titreOeuvreAjout]").value;
@@ -93,7 +97,7 @@
                                                description       : valeurDescription});
                     //console.log(data);
                     
-                    /*-- REQUÊTE AJAX -------------------------------------------------------------*/
+                    /*-- REQUÊTE AJAX -------------------------------------------------------------
                     var xhr = new XMLHttpRequest();                                         // nouvelle requête
                     
                     xhr.open("POST", "index.php?requete=insereSoumission")                  // controleur case "requete" = "insereSoumission"
@@ -106,7 +110,7 @@
                         document.querySelector(".soumissionAdmin").innerHTML = e.currentTarget.responseText;                 
                     });
                     xhr.send(data);                                                         // envoie la requête et les datas en POST
-                    
+                  */  
                 }
                 else                                                                        // sinon, message de champs invalides
                 {
@@ -123,7 +127,7 @@
         /*-- BOOLÉEN, VALIDE OU NON ---------------------------------------------------*/
         var valide= true;
         
-        /*-- RÉCUPÈRE LES ENTRÉES À VALIDER -------------------------------------------*/
+        /*-- RÉCUPÈRE LES ENTRÉES À VALIDER -------------------------------------------
         var valeurTitre         = document.querySelector("[name=titreOeuvreAjout]").value;
         var valeurPrenomArtiste = document.querySelector("[name=prenomArtisteOeuvreAjout]").value;
         var valeurNomArtiste    = document.querySelector("[name=nomArtisteOeuvreAjout]").value;
@@ -132,18 +136,18 @@
         var valeurLatitude      = document.querySelector("[name=latitudeOeuvreAjout]").value;
         var valeurLongitude     = document.querySelector("[name=longitudeOeuvreAjout]").value;
         
-        /*-- REGEX --------------------------------------------------------------------*/
+        /*-- REGEX --------------------------------------------------------------------
         var dimensionsRegex     = /^[0-9]+ ?x ?[0-9]+ ?x? ?[0-9]+? ?(cm)?$/;
         var latitudeRegex       = /^45\.[0-9]{4}$/;
         var longitudeRegex      = /^\-73\.[0-9]{4}$/;
         
-        /*-- REINITIALISE LA COULEUR DES TITRES DES INPUTS ----------------------------*/
+        /*-- REINITIALISE LA COULEUR DES TITRES DES INPUTS ----------------------------
         var couleurErreur       = document.querySelectorAll(".couleurErreurSoumission");
         for (i = 0; i < couleurErreur.length; i++) {    
             couleurErreur[i].style.color= "#016737";
         }
         
-        /*-- VÉRIFICATIONS ------------------------------------------------------------*/
+        /*-- VÉRIFICATIONS ------------------------------------------------------------
         if(valeurTitre == ""){                                                              // y'a t-il un titre ?
             valide= false;                                                                  // si non
             couleurErreur[0].style.color= "brown";                                          // le titre du input est rouge
@@ -186,6 +190,3 @@
         }
     }
 })();
-
-
-

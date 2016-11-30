@@ -2,7 +2,8 @@
 
         <label for="categorieOeuvreAjoutAdmin">CATÉGORIE : </label>
         <select name="categorieOeuvreAjout" id="categorieOeuvreAjoutAdmin">
-			<?php
+			<option value="#">Options</option>
+            <?php
 			/*-- pour toutes les datas récupérées de la table Catégories -----------------------------------*/
 			foreach($data as $categorie)
 			{

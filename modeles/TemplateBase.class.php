@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 set_time_limit(300);
 /**
  * Class Controleur
@@ -44,7 +44,6 @@ abstract class TemplateBase
 			{
 				$cle = $this->getPrimaryKey();
 			}
-			
 			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
