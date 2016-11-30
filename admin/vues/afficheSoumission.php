@@ -1,6 +1,6 @@
 <!-- AFFICHE LES DÉTAILS DE LA SOUMISSION POUR CONFIRMER SES ENTRÉES -------------------------------->
 
-<div class="soumissionOk">
+<div class="soumissionOk margin100">
 
     <h1>SOUMISSION COMPLÉTÉE</h1>
     <h2>DÉTAILS</h2>

@@ -50,13 +50,8 @@ a{
 
 /* tableau 
 -------------------------------------------------------------*/
-ul {
-	
-}
-
 li{
 	padding:0;
-	
 }
 
 
@@ -83,6 +78,14 @@ li{
 .margin-hauteur100{
 	margin-top: 100px;
 	margin-bottom: 100px;
+}
+
+.margin100{
+	margin:100px;
+}
+
+.margin10-100{
+	margin: 10px 100px;
 }
 
 
@@ -133,7 +136,6 @@ li{
     list-style-type : none;
     margin-top : 30px;
     margin-right : 10px;
-    width : 130px;
     text-align:center;
     border-left : solid white 2px;
     border-right : solid white 2px;
@@ -148,9 +150,12 @@ li{
 	padding : 10px 20px 5px 20px;
 }
 
+.menu li:hover{
+	margin-top: 20px;
+}
+
 .menu li:hover a{
 	padding-top: 20px;
-	
 }
 
 .menu li.actif { 
