@@ -26,12 +26,16 @@ CREATE TABLE IF NOT EXISTS MiseAJours(
 
 CREATE TABLE IF NOT EXISTS Soumissions(
     idSoumission int AUTO_INCREMENT NOT NULL,
-	titre VARCHAR(100),
-    parc VARCHAR(200), 
-    adresseCivique VARCHAR(200),
-    descritpion TEXT,
-    urlPhoto TEXT,
-    courriel VARCHAR(200) NOT NULL,
+	titreSoumission VARCHAR(100),
+    prenomArtisteSoumission VARCHAR(50),
+    nomArtisteSoumission VARCHAR(50),
+    collectifSoumission VARCHAR(100),
+    idArrondissementSoumission int,
+    parcSoumission VARCHAR(200), 
+    adresseCiviqueSoumission VARCHAR(200),
+    descriptionSoumission TEXT,
+    photoSoumission TEXT,
+    courrielSoumission VARCHAR(200) NOT NULL,
     PRIMARY KEY (idSoumission)
 );
 
@@ -57,22 +61,22 @@ CREATE TABLE IF NOT EXISTS Artistes(
 
 CREATE TABLE IF NOT EXISTS Oeuvres(
     idOeuvre int AUTO_INCREMENT NOT NULL,
-    titre VARCHAR(50) NOT NULL,
-    titreVariante VARCHAR(50),
+    titre VARCHAR(200) NOT NULL,
+    titreVariante VARCHAR(200),
     dateFinProduction DATE,
     dateAccession DATE,
-    nomCollection VARCHAR(50),
-    modeAcquisition VARCHAR(50),
+    nomCollection VARCHAR(200),
+    modeAcquisition VARCHAR(200),
     materiaux VARCHAR(200),
-    technique VARCHAR(100),
-    dimensions VARCHAR(50),
-    parc VARCHAR(100),
-    batiment VARCHAR(100),
+    technique VARCHAR(200),
+    dimensions VARCHAR(200),
+    parc VARCHAR(200),
+    batiment VARCHAR(200),
     adresseCivique VARCHAR(200),
     latitude float,
     longitude float,
     description TEXT,
-    numeroAccession VARCHAR(30),
+    numeroAccession VARCHAR(200),
     noInterne int,
     idCategorie int,
     idArrondissement int,
@@ -125,6 +129,50 @@ INSERT into Arrondissements (nomArrondissement) VALUES
 			("Le Plateau-Mont-Royal"),
 			("Le Sud-Ouest")
 			;
+
+INSERT into Soumissions (titreSoumission,
+                         prenomArtisteSoumission,
+                         nomArtisteSoumission,
+                         collectifSoumission,
+                         idArrondissementSoumission,
+                         parcSoumission, 
+                         adresseCiviqueSoumission,
+                         descriptionSoumission,
+                         photoSoumission,
+                         courrielSoumission
+                        ) VALUES ("titre #1",
+                                  "prénom #1",
+			                      "nom #1",
+			                      "collectif #1",
+			                      19,
+                                  "parc #1",
+                                  "adresse #1",
+                                  "description #1",
+                                  "photo #1",
+                                  "courriel1@gmail.com"
+                                  ),
+                                 ("titre #2",
+                                  "prénom #2",
+                                  "nom #2",
+                                  "collectif #2",
+                                  20,
+                                  "parc #2",
+                                  "adresse #2",
+                                  "description #2",
+                                  "photo #2",
+                                  "courriel2@gmail.com"
+                                 ),
+                                 ("titre #3",
+                                  "prénom #3",
+                                  "nom #3",
+                                  "collectif #3",
+                                  21,
+                                  "parc #3",
+                                  "adresse #3",
+                                  "description #3",
+                                  "photo #3",
+                                  "courriel3@gmail.com")
+			                     ;
 
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 

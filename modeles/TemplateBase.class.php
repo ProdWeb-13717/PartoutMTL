@@ -2,7 +2,7 @@
 set_time_limit(500);
 /**
  * Class Controleur
- * G�re les requ�tes a la Base de donnees
+ * Gère les requêtes a la Base de donnees
  * 
  * @author Guillaume Harvey
  * @version 1.0
@@ -21,29 +21,33 @@ abstract class TemplateBase
 	
 	public function __construct()
 	{
-		
-		
 		try
 		{
 			$this->connexion = new PDO("mysql:dbname=PartoutMTL;host=107.180.109.70:3306", "partout", "equipeDeCourse5", array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 		}
 		catch(Exception $exc)
 		{
-			die("Connexion � la base de donn�es impossible.");
+			die("Connexion à la base de données impossible.");
 		}
 	}
 	
 
-	public function obtenir($valeur, $cle = null)
+	public function obtenir($valeur, $cle = null, $table = null)
 	{
 		try
 		{	
+			if($table == null)
+			{
+				$table = $this->getTable();
+			}
+			
 			if($cle == null)
 			{
 				$cle = $this->getPrimaryKey();
 			}
 			
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable() . " where " . $cle . " = :valeur");
+			
+			$stmt = $this->connexion->prepare("select * from " . $table . " where " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -54,11 +58,16 @@ abstract class TemplateBase
 		}
 	}
 	
-	public function obtenirTous()
+    
+	public function obtenirTous($table = null, $cle = null)
 	{
 		try
-		{	
-			$stmt = $this->connexion->prepare("select * from " . $this->getTable());
+		{
+			if($table == null)
+			{
+				$table = $this->getTable();
+			}
+			$stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle);
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}
@@ -67,7 +76,29 @@ abstract class TemplateBase
 			return false;
 		}
 	}
-	
+    
+    
+    public function obtenirDernier($id, $table)                                     // récupère l'id de la dernière entrée, table Artistes
+    {  
+        try
+        {
+            // source : http://www.w3schools.com/sql/sql_func_last.asp
+            $stmt = $this->connexion->prepare("SELECT " . $id . " 
+                                               FROM " . $table . "
+                                               ORDER BY ". $id . "
+                                               DESC LIMIT 1");   
+											   
+            $stmt->execute();
+            $data = $stmt->fetch();
+            return $data[$id];                                                      // retourne l'id de la table en paramêtre
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }   
+    }
+    
+
 	
 	public function supprimer($valeur, $cle = null)
 	{

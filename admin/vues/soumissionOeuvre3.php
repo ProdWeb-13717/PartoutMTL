@@ -19,7 +19,7 @@
 		 <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"/><br/>
 		 
 		 <label for="descriptionOeuvreAjoutAdmin">DESCRIPTION : </label>
-		 <textarea rows="4" cols="40" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"></textarea><br/>
+		 <textarea rows="4" style="width: 337px;" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"></textarea><br/>
 		 <br/>
 		 <span id="msgErreurSoumision"></span>
 		 <br/>

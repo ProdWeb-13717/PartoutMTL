@@ -29,62 +29,8 @@ class modeleSoumission extends TemplateBase
     ////////////////////////////////      SELECT      /////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
     
-    ////////////////////////////////      TABLE       /////////////////////////////////////////
-    
-    public function obtenirCategories()                                         // récupère toute la table Catégories
-    {
-        $stmt = $this->connexion->prepare("SELECT * FROM Categories");
-        $stmt->execute();
-        return $stmt->fetchAll();                                               // retourne toutes les catégories
-    }
-    
-    public function obtenirArrondissements()                                    // récupère toute la table Arrondissements
-    {
-        $stmt = $this->connexion->prepare("SELECT * FROM Arrondissements");
-        $stmt->execute();
-        return $stmt->fetchAll();                                               // retourne tous les arrondissements
-    }
-    
     /////////////////////////////////       ID       ////////////////////////////////////////////
-    
-    public function obtenirDernierIdArtiste()                                   // récupère l'id de la dernière entrée, table Artistes
-    {  
-        try
-        {
-            // source : http://www.w3schools.com/sql/sql_func_last.asp
-            $stmt = $this->connexion->prepare("SELECT idArtiste
-                                               FROM Artistes
-                                               ORDER BY idArtiste 
-                                               DESC LIMIT 1");   
-											   
-            $stmt->execute();
-            $data = $stmt->fetch();
-            return $data['idArtiste'];                                          // retourne l'id de cet artiste
-        }	
-        catch(Exception $exc)
-        {
-            return 0;
-        }   
-    }
-    
-    public function obtenirDernierIdOeuvre()                                    // récupère l'id de la dernière entrée, table Oeuvres
-    {
-        try
-        {
-            $stmt = $this->connexion->prepare("SELECT idOeuvre
-                                               FROM Oeuvres
-                                               ORDER BY idOeuvre 
-                                               DESC LIMIT 1");  
-											   
-            $stmt->execute();
-            $data = $stmt->fetch();
-            return $data['idOeuvre'];                                           // retourne l'id de cet oeuvre
-        }	
-        catch(Exception $exc)
-        {
-            return 0;
-        }   
-    }
+
     
     public function obtenirArrondissementOeuvre($idOeuvre)                      // récupère l'id de l'arrondissement de l'oeuvre en paramètre
     {
@@ -97,7 +43,7 @@ class modeleSoumission extends TemplateBase
         return $data['idArrondissement'];                                       // retourne l'id de l'arrondissement de cet oeuvre
     }
     
-    public function obtenirNomArrondissement($idArrondissement)                           // récupère le nom de la catégorie demandée en paramètre
+    public function obtenirNomArrondissement($idArrondissement)                 // récupère le nom de la catégorie demandée en paramètre
     {
         $stmt = $this->connexion->prepare("SELECT nomArrondissement 
                                            FROM Arrondissements
@@ -105,7 +51,7 @@ class modeleSoumission extends TemplateBase
 										   
         $stmt->execute();
         $data = $stmt->fetch();
-        return $data['nomArrondissement'];                                           // retourne le nom de cette catégorie
+        return $data['nomArrondissement'];                                      // retourne le nom de cette catégorie
     }
 
     public function obtenirCategorieOeuvre($idOeuvre)                           // récupère l'id de la catégorie de l'oeuvre en paramètre
@@ -159,7 +105,7 @@ class modeleSoumission extends TemplateBase
 	}
     
     /////////////////////////////////   SOUMISSION   ////////////////////////////////////////////
-    
+    /*
     public function obtenirDerniereSoumission()                                 // récupère toutes les entrées de la dernière soumission???
     {
 		// function pas fini (test)
@@ -184,7 +130,7 @@ class modeleSoumission extends TemplateBase
 		{
 			return 0;
 		}
-    }
+    }*/
     
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      INSERT     //////////////////////////////////////////
@@ -271,8 +217,8 @@ class modeleSoumission extends TemplateBase
         {
             if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
 			{
-				$idOeuvre = $this->obtenirDernierIdOeuvre();                	// récupère l'id de l'oeuvre en soumission
-			}
+                $idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");       // récupère l'id de l'oeuvre en soumission
+			} 
             
             $stmt = $this->connexion->prepare("INSERT INTO Photos (urlPhoto, idOeuvre) 
                                                            VALUES (:urlPhoto, :idOeuvre)");
@@ -331,12 +277,13 @@ class modeleSoumission extends TemplateBase
         {
             if($idArtiste == null)                                              // si l'artiste n'existe pas dans la table
 			{
-				$idArtiste = $this->obtenirDernierIdArtiste();              	// récupère l'id du dernier artiste soumis
+				$idArtiste = $this->obtenirDernier("idArtiste", "Artistes");    // récupère l'id du dernier artiste soumis
+                
 			}
             
             if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
 			{
-				$idOeuvre = $this->obtenirDernierIdOeuvre();               		// récupère l'id de l'oeuvre en soumission
+				$idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");       // récupère l'id de l'oeuvre en soumission
 			}
             
             $stmt = $this->connexion->prepare("INSERT INTO ArtistesOeuvres  

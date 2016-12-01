@@ -61,27 +61,33 @@ class Controleur
 				
 				
 			case 'importation':
-				$this->afficheVue("head");
-				$this->afficheVue("enteteAdmin");
+				$_SESSION['ongletActif'] = 'importation';
+				$this->afficherEnteteAdmin();
 				$this->importation();                                                      
 				break;
 				
 				
 			case 'importationok':
-				$this->afficheVue("head");
-				$this->afficheVue("enteteAdmin");
+				$this->afficherEnteteAdmin();
 				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
 				$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
 				$this->importationok();                                                    
 				break;
+            
+            
+            case 'gestion':
+				$_SESSION['ongletActif'] = 'gestion';
+                $this->afficherEnteteAdmin();
+                $this->afficherPageGestion();
+				break;
 				
-				
-            case 'soumission':                                                          // page formulaire de soumission administrateur
-				
+            case 'soumission':                                                          // page formulaire d'ajout administrateur
+				$_SESSION['ongletActif'] = 'ajoutOeuvre';
 				$this->afficherEnteteAdmin();
-				$this->afficherFormSoumission();             
+				$this->afficherFormSoumissionAdmin();             
                 break;
-				
+			
+            
             case "insereSoumission":                                                    // à l'envoi du formulaire
                 
                 /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
@@ -131,7 +137,14 @@ class Controleur
                 $vue = "afficheSoumission";
                 $this->afficheVue($vue, $tableauContenu);    
                 break;
-				
+            
+            
+            case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
+				$_SESSION['ongletActif'] = 'soumission';
+                $this->afficherEnteteAdmin();
+				$this->afficherSoumissionsDesUsagers();             
+                break;
+            
             default:
 				$this->accueil();
 				break;   
@@ -143,7 +156,7 @@ class Controleur
     ////////////////////////////////////////////////////////////////////////////////////////////
 		
     
-    protected function afficheVue($nomVue, $data = null)                                    // affiche la vue 
+    protected function afficheVue($nomVue, $data = null)                                // affiche la vue 
     {
         $cheminVue = "vues/" . $nomVue . ".php";       
         if(file_exists($cheminVue))
@@ -184,49 +197,59 @@ class Controleur
         $this->afficheVue("menuAdmin");
         $this->afficheVue("boutonDeconnectionAdmin");
 	}
+    
+    private function afficherPageGestion()
+    {
+        $vue = "gestionCategorie";
+		$this->afficheVue($vue);
+    }
 	
-	private function afficherFormSoumission()
+	private function afficherFormSoumissionAdmin()
 	{
-		$vue = "soumissionOeuvre1";                                             // input : titre et titre variante
+		$vue = "soumissionOeuvre1";                                                     // input : titre et titre variante
 		$this->afficheVue($vue);
         
-        $vue = "soumissionArtiste";                                             // input : prénom, nom, collectif artiste
+        $vue = "soumissionArtiste";                                                     // input : prénom, nom, collectif artiste
 		$this->afficheVue($vue);
         
-        $modeleSoumisionAdmin = new modeleSoumission();                         // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirCategories();                     // récupère la table Categories
-        $vue = "soumissionCategorie";                                           // select : catégories
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories
+        $vue = "soumissionCategorie";                                                   // select : catégories
         $this->afficheVue($vue, $data);
         
-        $vue = "soumissionOeuvre2";                                             // input : fin production, accession, matériaux, 
-		$this->afficheVue($vue);                                                //         technique, dimension
+        $vue = "soumissionOeuvre2";                                                     // input : fin production, accession, matériaux, 
+		$this->afficheVue($vue);                                                        //         technique, dimension
         
-        $modeleSoumisionAdmin = new modeleSoumission();                         // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirArrondissements();                // récupère la table Arrondissements
-        $vue = "soumissionArrondissement";                                      // select : arrondissements
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
+        $vue = "soumissionArrondissement";                                              // select : arrondissements
         $this->afficheVue($vue, $data);
         
-        $vue = "soumissionOeuvre3";                                             // inputs : parc, batiment, adresse, latitude, 
-		$this->afficheVue($vue);                                                //          longitude
+        $vue = "soumissionOeuvre3";                                                     // inputs : parc, batiment, adresse, latitude, 
+		$this->afficheVue($vue);                                                        //          longitude
         
-        $vue = "boutonSoumission";                                              // bouton soumission
+        $vue = "boutonSoumission";                                                      // bouton soumission
         $this->afficheVue($vue);               
 	}
 	
+    private function afficherSoumissionsDesUsagers()
+    {
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Soumissions","idSoumission");       // récupère la table Soumissions
+        $vue = "soumissionsDesUsagers";
+        $this->afficheVue($vue, $data);
+    }
+    
 	private function importation()
 	{
 		$oVue = new Vueimportation();
-		$this->afficheVue("menuAdmin");
 		$oVue->afficheformImportation();
-		$oVue->affichePied();
 	}	
 
 	private function importationok()
 	{
 		$oVue = new Vueimportation();
-		$this->afficheVue("menuAdmin");
 		$oVue->afficheImportationok();
-		$oVue->affichePied();
 	}
 	
 	private function obtenirJSON()

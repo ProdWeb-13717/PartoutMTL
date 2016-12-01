@@ -95,7 +95,7 @@
     letter-spacing: 4px;   
 }
 
-/* Entête
+/* Listes
 -------------------------------------------------------------*/
 /* Acceuil */
 
@@ -188,13 +188,26 @@
 
 /* Listes
 -------------------------------------------------------------*/
-section.liste{
+#liste{
 	padding-left:2em;
-	
+    width: 100%;
 }
 
-section.liste hr{
+#liste hr{
 	border-top:3px solid #ccc;
+}
+
+#liste span.pageBalise{
+    margin: 0 auto;
+    display: block;
+    max-width: 25%;
+    text-align: center;
+    font-family: 'Fjalla One', sans-serif;
+    font-weight: bold;
+}
+
+#liste span.pageBalise:hover{
+    cursor: pointer;
 }
 
 span.catElemListe{
@@ -214,8 +227,6 @@ span.inconnu{
 }
 
 .elemListe{
-	/*border: 2px solid #016737;*/
-	/*//border-radius:10px 0 10px 0;*/
 	min-width: 50%;
 	display: flex;
 	flex-direction: row;
@@ -223,7 +234,6 @@ span.inconnu{
 	align-items:center;
 	padding:15px 30px;
 	margin: 0 0 15px 30px;
-	/*box-shadow: 5px 5px 5px #888888;*/	
 }
 
 .elemListe ul{
@@ -249,10 +259,72 @@ span.inconnu{
 	margin-right :45px;
 }
 
+.pageCache{
+	display:none;
+}
+
 ul.listeAuteur{
 	margin:0 0 0 20px;
 }
 
 li, ul{
 	width:100%;
+}
+
+
+/* Soumission
+-------------------------------------------------------------*/
+
+.soumissionUsager{
+    width: 602px;
+    color : black;
+    margin: auto;
+    margin-top : 50px;
+}
+
+.soumissionUsager h1{
+    position: relative;
+    left: 27%;
+    margin-bottom: -1px;
+}
+
+.soumissionUsagerFormulaire{
+    width: 600px;
+    color : black;
+    padding-left: 5%;
+    padding-top : 20px;
+    padding-bottom: 20px;
+    border : solid black 2px;
+}
+
+.soumissionUsagerFormulaire label{
+    display:inline-block;
+    width: 200px;
+    text-align:right;
+    margin-bottom: 10px;
+}
+
+.soumissionUsagerFormulaire input{
+    width: 337px;
+}
+
+#boutonSoumission{
+    position: relative;
+    left: 75.5%;
+    padding: 15px 35px;
+    margin-top : 20px;
+    margin-bottom : 30px;
+    color : white;
+    background-color: #016737;
+    border: none;
+}
+
+#boutonSoumission:hover{
+    color : #016737; 
+    background-color: white; 
+}
+
+#msgErreurSoumision{
+    color : brown;
+    margin-left : 37%;
 }

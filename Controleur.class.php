@@ -22,7 +22,7 @@ class Controleur
 				$this->accueil(); // option quand get requete est accueil
 				break;
 				
-				
+			//Affichage de la liste de tous les artistes	
             case 'listeArtistes':
 				$data = []; // initialisation de $data
   				$this->entete();
@@ -31,7 +31,7 @@ class Controleur
 				$this->afficheVue("listeArtistes",$data);
 				break;
 				
-			
+			//Affichage de la liste de toutes les oeuvres
 			case 'listeOeuvres':  
 				$data = []; // initialisation de $data
 				$this->entete();
@@ -39,6 +39,35 @@ class Controleur
 				array_push($data,$modeleListe->getOeuvresParPhotos());
 				array_push($data,$modeleListe->getOeuvresParAuteur());
 				$this->afficheVue("listeOeuvres",$data);
+				break;
+				
+			//Affichage d'une oeuvre individuelle
+			case 'afficheOeuvre':  
+				$this->entete();
+				$modeleListe = new ModeleListe();
+				if(isset($_GET['idOeuvre']))
+				{
+					$data = $modeleListe->getOeuvresParID($_GET['idOeuvre']);
+					if($data != 0)
+					{
+						if(count($data) != 0)
+						{
+							$this->afficheVue("affichageOeuvre",$data);
+						}
+						else
+						{
+							echo "<h1>Cette id n'existe pas !</h1>";
+						}
+					}
+					else
+					{
+						echo "<h1>Une erreure s'est produite dans votre requête</h1>";
+					}
+				}
+				else
+				{
+					echo "<h1>!!! ERREUR !!! : Un ID d'oeuvre est requis pour cette requête... </h1>";
+				}
 				break;
 				
 				
@@ -59,6 +88,37 @@ class Controleur
 					$oVueRecherche->resultatDataRecherche($data);
 				}
 				break;
+            
+            
+            case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
+				$this->entete();                    
+                $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
+                $data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
+                $vue = "soumissionOeuvreUsager";
+                $this->afficheVue($vue, $data);    
+                break;
+            
+            
+            case "insereSoumissionUsager":                                                    // à l'envoi du formulaire
+            
+                /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
+                $tableauContenu = json_decode (file_get_contents('php://input'), true);       // decode la string JSON
+                extract($tableauContenu);                                                     // convertit le JSON en variables
+                
+                var_dump($tableauContenu);
+            
+                /*-- INSERT TABLE Soumission ----------------------------------------------*/
+                $modeleSoumisionUsager = new modeleSoumissionUsager();
+                $valide = $modeleSoumisionUsager->insererSoumission($tableauContenu);                                       
+                if(!$valide)
+				{                                                           // si non réussi
+                    $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                    break;
+                }
+                
+                //$vue = "afficheSoumission";
+                //$this->afficheVue($vue, $tableauContenu);    
+                break;
 				
 				
             default:
