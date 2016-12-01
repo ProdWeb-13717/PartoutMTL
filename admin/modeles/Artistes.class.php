@@ -28,10 +28,14 @@ class Artistes extends TemplateBase
 		try
 		{	
 			$stmt = $this->connexion->prepare("SELECT * FROM " . $this->getTable() . " WHERE nomArtiste = :nom AND prenomArtiste = :prenom AND collectif = :collectif");
-			$stmt->bindParam(":nom", $nom);
-			$stmt->bindParam(":prenom", $prenom);
-			$stmt->bindParam(":collectif", $collectif);
-			$stmt->execute();
+			$stmt->execute(
+			array(
+			
+				":nom"          => $nom, 
+				":prenom"   	=> $prenom,
+				":collectif" 	=> $collectif
+
+			));
 			return $stmt->fetch();
 		}
 		catch(Exception $exc)
@@ -45,11 +49,12 @@ class Artistes extends TemplateBase
 		try
 		{	
 			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomArtiste,prenomArtiste,collectif) VALUES(:nom, :prenom, :collectif)");
-			$stmt->bindParam(":nom", $nom);
-			$stmt->bindParam(":prenom", $prenom);
-			$stmt->bindParam(":collectif", $collectif);
-			$stmt->execute();
-			
+			$stmt->execute(
+			array(
+				":nom"          => $nom, 
+				":prenom"   	=> $prenom,
+				":collectif" 	=> $collectif
+			));
 			return 1;
 		}
 		catch(Exception $exc)
