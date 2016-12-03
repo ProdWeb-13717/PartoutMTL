@@ -37,30 +37,6 @@ class Vueimportation
 		<?php
 	}
 	
-	public function afficheformImportation()
-	{
-		?>
-		<br><br>
-		<form id="formImport" method="GET">
-			Cliquez sur le bouton pour importer le donnés<br>
-			<input type="hidden" name="requete" value="importationok"/>
-			<input type="submit" name="Importer" value="Importer"/><br/><br/>
-		</form>
-		<br><br>
-		<?php
-	}
-	
-	public function afficheImportationok()
-	{
-		?>
-		<br><br>
-		<div>
-			Les donnés ont eté importé correctement<br>
-			<a href="index.php?requete=importation">Allez ver l'importation de donnés</a>
-		</div>
-		<br><br>
-		<?php
-	}
 }
 
 ?>

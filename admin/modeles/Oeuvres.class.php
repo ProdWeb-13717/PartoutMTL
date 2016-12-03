@@ -40,82 +40,15 @@ class Oeuvres extends TemplateBase
 		}
 	}
 	
-	public function traiterOeuvre($oeuvre,$artistes,$arrondissements,$categories)
+	public function traiterOeuvre($oeuvre,$arrondissements,$categories)
 	{		
-		//test d'assignation
-		
-		//$oeuvre->NumeroAccession = "perro";
-		/*$oeuvre->TitreVariante,
-		$oeuvre->DateFinProduction,
-		$oeuvre->DateAccession,
-		$oeuvre->NomCollection,
-		$oeuvre->ModeAcquisition,
-		$oeuvre->Materiaux,
-		$oeuvre->Technique,
-		$oeuvre->DimensionsGenerales,
-		$oeuvre->Parc,
-		$oeuvre->Batiment,
-		$oeuvre->AdresseCivique,
-		$oeuvre->CoordonneeLatitude,
-		$oeuvre->CoordonneeLongitude,
-		$oeuvre->NumeroAccession,
-		$oeuvre->NoInterne,
-		$idCat,
-		$idArron*/
-		
+		//Effacer les spaces de valeurs numeriques pour eviter des conflits
+		$oeuvre->CoordonneeLatitude = trim($oeuvre->CoordonneeLatitude);
+		$oeuvre->CoordonneeLongitude = trim($oeuvre->CoordonneeLongitude);
 		
 		// asignation temporel de date par default
 		$oeuvre->DateFinProduction = "2012-06-18";
 		$oeuvre->DateAccession = "2012-06-18";
-		
-		//verification pour savoir si le TitreVariante est rempli ou pas
-		/*if($oeuvre->TitreVariante == null)
-		{
-						
-			$oeuvre->TitreVariante = "";
-		}*/
-
-		//verification pour savoir si le ModeAcquisition est rempli ou pas
-		/*if($oeuvre->ModeAcquisition == null)
-		{			
-			$oeuvre->ModeAcquisition = "";
-		}*/
-		
-		//verification pour savoir si le Materiaux est rempli ou pas
-		/*if($oeuvre->Materiaux == null)
-		{			
-			$oeuvre->Materiaux = "";
-		}*/
-		
-		//verification pour savoir si le Materiaux est rempli ou pas
-		/*if($oeuvre->Technique == null)
-		{
-			$oeuvre->Technique = "";
-		}*/
-		
-		//verification pour savoir si le Dimensions est rempli ou pas
-		/*if($oeuvre->DimensionsGenerales == null)
-		{		
-			$oeuvre->DimensionsGenerales = "";
-		}*/
-		
-		//verification pour savoir si le Parc est rempli ou pas
-		/*if($oeuvre->Parc == null)
-		{	
-			$oeuvre->Parc = "";
-		}*/
-		
-		//verification pour savoir si le Batiment est rempli ou pas
-		/*if($oeuvre->Batiment == null)
-		{			
-			$oeuvre->Batiment = "";
-		}*/
-		
-		//verification pour savoir si le AdresseCivique est rempli ou pas
-		/*if($oeuvre->AdresseCivique == null)
-		{		
-			$oeuvre->AdresseCivique = "";
-		}*/
 		
 		//Obtenir l'id de la categorie de l'oeuvre
 		
@@ -130,8 +63,6 @@ class Oeuvres extends TemplateBase
 			
 		}
 		
-		echo $idCat;
-		echo "<br>";
 		//Obtenir l'id d'arrondissement de l'oeuvre
 		
 		$noArrondissements = count($arrondissements);
@@ -145,13 +76,6 @@ class Oeuvres extends TemplateBase
 			
 		}
 		
-		//echo $idArron;
-		//echo "<br>";
-		
-		
-		print_r($oeuvre);
-		
-		//print_r($oeuvre);
 		$insertion = $this->insererOeuvre
 		(
 			$oeuvre->Titre,
@@ -173,26 +97,6 @@ class Oeuvres extends TemplateBase
 			$idCat,
 			$idArron
 		);
-		
-		//echo $insertion;
-		/*$oCategorie = new Categories();
-		$idCat = $oCategorie->obtenirCategorie($oeuvre->SousCategorieObjet);
-		
-		$oArrondissements = new Arrondissements();
-		$idArron = $oArrondissements->obtenirArrondissement($oeuvre->Arrondissement);*/
-		
-		// une fois que je viens d'obtenir les Id necessaires, on va finir l'insertion de donnés pour l'oeuvre respective
-		//$insertion = $this->completerOeuvre($oeuvre->NoInterne,$idCat["idCategorie"],$idArron["idArrondissement"]);
-		
-		
-		//insertion de donnes sur la table artistesoeuvres
-		/*foreach($oeuvre->Artistes as $artiste)
-		{
-			$oArtistes = new Artistes();
-			$idArt = $oArtistes->obtenirArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
-			$idOeuvre = $this->obtenirOeuvre($oeuvre->NoInterne);
-			$insertion = $this->insererArtistesOeuvres($idArt["idArtiste"],$idOeuvre["idOeuvre"]);
-		}*/
 	}
 	
 	public function insererOeuvre
@@ -313,6 +217,36 @@ class Oeuvres extends TemplateBase
 		}
 	}
 	
+	public function inclureArtistesOeuvres($oeuvreJson,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes)
+	{
+
+		for($i=0;$i<$qOeuvres;$i++)
+		{
+			if($listeOeuvres[$i]["noInterne"]==$oeuvreJson->NoInterne)
+			{
+				
+				$idOeuvre = $listeOeuvres[$i]["idOeuvre"];
+			}
+			
+		}
+		foreach($oeuvreJson->Artistes as $artiste)
+		{
+			for($i=0;$i<$qArtistes;$i++)
+			{
+				$artActuelle = $artiste->Nom ." ".$artiste->Prenom ." ".$artiste->NomCollectif;
+				$artActuelleBD = $listeArtistes[$i]["nomArtiste"] ." ".$listeArtistes[$i]["prenomArtiste"] ." ".$listeArtistes[$i]["collectif"];
+				if($artActuelle == $artActuelleBD)
+				{
+					$idArtiste = $listeArtistes[$i]["idArtiste"];
+					$this->insererArtistesOeuvres($idArtiste,$idOeuvre);
+					break;
+				}
+			
+			}
+		}
+		
+	}
+	
 	public function insererArtistesOeuvres($idArt,$idOeuvre)
 	{
 		try
@@ -331,6 +265,7 @@ class Oeuvres extends TemplateBase
 			return 0;
 		}
 	}
+	
 	
 }
 
