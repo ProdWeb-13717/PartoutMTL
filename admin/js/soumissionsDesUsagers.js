@@ -15,34 +15,8 @@
      
         if(document.querySelector(".afficheSoumissionsUsagers"))                            // 
         { 
-            var btnSoumissionAAjouter = document.querySelectorAll (".boutonAjouterSoumissionUsager"); // récupère les boutons SOUMETTRE   
-            console.log(btnSoumissionAAjouter);
-            console.log(btnSoumissionAAjouter.length);
-            for (i = 0; i <= btnSoumissionAAjouter.length; i++){
-                console.log(i);
-                btnSoumissionAAjouter[i].addEventListener("click", function(evt){                      // à l'événement CLIC
-                    console.log(document.querySelector("[name=soumissionDunUsager]").value);
-                    console.log(btnSoumissionAAjouter[i].value);
-                });   
-            }
-            //btnSoumissionAAjouter.addEventListener("click", function(evt){                      // à l'événement CLIC
-                
-            //var btnSoumissionAAjouter = document.getElementsByClassName("boutonAjouterSoumissionUsager");
-            //console.log(btnSoumissionAAjouter);
-            //btnSoumissionAAjouter.addEventListener("click", function(evt){
-                
-                
-            //});    
+           
                     
-            
-            
-            
-            
-            
-            
-            
-            
-            
                 //var valeurIdSoumissionUsager = document.querySelector("[name=soumissionDunUsager]").value;
                 //console.log(valeurIdSoumissionUsager);
                 

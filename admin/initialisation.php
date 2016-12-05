@@ -37,6 +37,11 @@
 	{
 		$_SESSION['idAdmin'] = '';
 	}
+
+    if(empty($_SESSION['id']))
+	{
+		$_SESSION['id'] = '';
+	}
 	
 	if(empty($_SESSION['ongletActif']))
 	{

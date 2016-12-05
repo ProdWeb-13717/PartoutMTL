@@ -9,7 +9,8 @@
             ?>
             <hr/>
             <li class='soumissionDesUsagers margin10-100' name='soumissionDunUsager' value="<?php echo $soumission['idSoumission']?>"> 
-                SOUMISSION #        <?php echo $soumission["idSoumission"]?> <br/>
+                <a href="./index.php?requete=soumission&id=<?php echo $soumission["idSoumission"]?>">
+                SOUMISSION #        <?php echo $soumission["idSoumission"]?> </a><br/>
                 TITRE :             <?php echo $soumission["titreSoumission"]?> <br/>
                 PRÉNOM ARTISTE :    <?php echo $soumission["prenomArtisteSoumission"]?> <br/>
                 NOM ARTISTE :       <?php echo $soumission["nomArtisteSoumission"]?> <br/>
