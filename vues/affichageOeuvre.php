@@ -1,12 +1,12 @@
 ﻿<section id="oeuvreIndi">
-	<ul>
+	<ul class="elementOeuvre">
 <?php
 	//Affichage du titre de l'oeuvre
 	foreach($data[0] as $cle => $valeur)
 	{	
 		if($cle == "titre")
 		{
-			echo "<li>Titre : ".$valeur;
+			echo "<li><span class='catElemListe'>Titre : </span>".$valeur;
 			foreach($data[0] as $cle => $valeur)
 			{
 				if($cle == "titreVariante" && $valeur != "")
@@ -19,7 +19,7 @@
 		}
 	}
 	?>
-	<li>Auteur(s):
+	<li><span class="catElemListe">Auteur(s): </span>
 		<ul>
 	<?php
 		//Affichage du ou des auteurs de l'oeuvre
@@ -68,119 +68,98 @@
 			case "dateFinProduction":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Date fin de production : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Date fin de production : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "dateAccession":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Date d'accession : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Date d'accession : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "nomCollection":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Nom de collection : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Nom de collection : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "nomCollection":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Nom de collection : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Nom de collection : </span>".$valeur."</li>";
 				}
 				break;
 			
 			case "modeAcquisition":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Mode d'acquisition : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Mode d'acquisition : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "materiaux":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Materiaux : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Materiaux : </span>".$valeur."</li>";
 				}
 				break;
 			
 			case "technique":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Technique : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Technique : </span>".$valeur."</li>";
 				}
 				break;
 
 			case "dimensions":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Dimensions : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Dimensions : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "parc":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Parc : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Parc : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "batiment":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Batiment : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Batiment : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "adresseCivique":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Adresse civique : ".$valeur."</li>";
-				}
-				break;
-				
-			case "latitude":
-				if($valeur != null && $valeur != "")
-				{
-					echo "<li>Latitude : ".$valeur."</li>";
-				}
-				break;
-				
-			case "longitude":
-				if($valeur != null && $valeur != "")
-				{
-					echo "<li>Longitude : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Adresse civique : </span>".$valeur."</li>";
 				}
 				break;
 			
 			case "description":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Description : ".$valeur."</li>";
-				}
-				break;
-				
-			case "numeroAccession":
-				if($valeur != null && $valeur != "")
-				{
-					echo "<li>Numero d'accession : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Description : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "nomArrondissement":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Arrondissement : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Arrondissement : </span>".$valeur."</li>";
 				}
 				break;
 				
 			case "nomCategorie":
 				if($valeur != null && $valeur != "")
 				{
-					echo "<li>Categorie : ".$valeur."</li>";
+					echo "<li><span class='catElemListe'>Categorie : </span>".$valeur."</li>";
 				}
 				break;
 				
