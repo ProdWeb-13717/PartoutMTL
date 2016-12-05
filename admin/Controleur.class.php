@@ -125,7 +125,7 @@ class Controleur
                     $modele = new modeleSoumission();
                     $valide = $modele->insererSoumissionArtiste($tableauContenu);
                     if(!$valide)
-					{                                                       // si non réussi
+					{                                                                   // si non réussi
                         $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                         break;
                     }
@@ -135,7 +135,7 @@ class Controleur
                 $modeleSoumisionAdmin = new modeleSoumission();
                 $valide = $modeleSoumisionAdmin->insererSoumissionArtisteOeuvres($existe);
                 if(!$valide)
-				{                                                             // si non réussi
+				{                                                                       // si non réussi
                     $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                     break;
                 }
@@ -144,6 +144,38 @@ class Controleur
                 $this->afficheVue($vue, $tableauContenu);    
                 break;
             
+            
+            case 'ajoutCategorie':
+                $tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
+                extract($tableauContenu);                                               // convertit le JSON en variables
+                
+                /*-- INSERT TABLE Categories -----------------------------------------------*/
+                $modeleCategorieAdmin = new Categories();
+                $valide = $modeleCategorieAdmin->insererCategorie($tableauContenu);                                       
+                if(!$valide)
+				{                                                                       // si non réussi
+                    $this->phpAlert("Désolé, il y a eu un problème lors de la demande d'ajout d'une catégorie.");
+                    break;
+                }
+                break;
+            
+            case 'supprimerCategorie':
+                $tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
+                extract($tableauContenu);                                               // convertit le JSON en variables
+                
+                print_r($tableauContenu);
+                print_r($tableauContenu['categorie']);
+                $categorieASupprimer = $tableauContenu['categorie'];
+                
+                /*-- DELETE TABLE Categories ----------------------------------------------*/
+                $modeleCategorieAdmin = new Categories();
+                $valide = $modeleCategorieAdmin->supprimer($categorieASupprimer);                                       
+                if(!$valide)
+				{                                                                       // si non réussi
+                    $this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
+                    break;
+                }
+                break;
             
             case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
 				$_SESSION['ongletActif'] = 'soumission';
@@ -206,8 +238,10 @@ class Controleur
     
     private function afficherPageGestion()
     {
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories        
         $vue = "gestionCategorie";
-		$this->afficheVue($vue);
+		$this->afficheVue($vue, $data);
     }
 	
 	private function afficherFormSoumissionAdmin()

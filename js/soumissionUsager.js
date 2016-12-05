@@ -58,7 +58,7 @@
                         console.log(e.currentTarget);
                         console.log(e.currentTarget.responseText);
                         //window.location.href = "./index.php?requete=afficheSoumission";
-                        //document.querySelector(".soumissionAdmin").innerHTML = e.currentTarget.responseText;                 
+                        document.querySelector(".soumissionUsager").innerHTML = e.currentTarget.responseText;                 
                     });
                     xhr.send(data);                                                         // envoie la requête et les datas en POST    
                 }
