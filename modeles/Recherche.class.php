@@ -42,5 +42,57 @@ class Recherche extends TemplateBase {
 			return false;
 		}
 	}
+	public function rechercheOeuvresParAuteur($valeur) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre, prenomArtiste, nomArtiste, collectif
+											   FROM Oeuvres
+											   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+											   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											   WHERE Oeuvres.titre LIKE '".$valeur."%'
+											   ORDER BY Oeuvres.idOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	public function rechercheOeuvresParPhotos($valeur) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre, Oeuvres.titre, Oeuvres.dateFinProduction, Photos.urlPhoto
+											   FROM Oeuvres
+											   LEFT JOIN Photos ON Oeuvres.idOeuvre = Photos.idOeuvre
+											   WHERE Oeuvres.titre LIKE '".$valeur."%'
+											   ORDER BY Oeuvres.idOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	public function rechercheArtisteTout($valeur) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes
+												where nomArtiste LIKE '".$valeur."%' OR prenomArtiste LIKE '".$valeur."%'
+												");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
 	
 }

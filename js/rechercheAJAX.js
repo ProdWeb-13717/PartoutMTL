@@ -14,8 +14,14 @@ function Recherche(){
 	var motRecherche = document.getElementById("motRecherche"); //rechercheOeuvre 
 	var categorieRecherche = document.getElementById("categorieRecherche"); 
 	var souscategorieRecherche = document.getElementById("souscategorieRecherche"); 
+	var oeuvres = document.getElementById("oeuvres"); 
+	var artistes = document.getElementById("artistes"); 
+	var acceuil = document.getElementById("menuAcceuil"); 
+	var msgResultat = document.getElementById("msgResultat"); 
+	var msg="";
 	
-	
+
+	/*
 	motRecherche.onclick = function(){
 		if(categorieRecherche.value=="" || souscategorieRecherche.value==""){
 			alert("Séléctionner un catégorie et sous-catégorie avant");
@@ -38,36 +44,34 @@ function Recherche(){
 		}
 		
 	}
-	
+	*/
 	btnRecherche.onclick = function(){
 		
-		if(motRecherche.value==""){
-			alert("Séléctionner un catégorie et sous-catégorie et puis entrez un lettre ou le mot complét");
-		}else{
-			
-			if(document.getElementById("boiteRecherche")){
-				document.getElementById("boiteRecherche").innerHTML = '';
-				
-			}
+		if(oeuvres){
 			if(motRecherche.value!=""){
-				if(document.getElementById("boiteRecherche")){
-					document.getElementById("boiteRecherche").innerHTML = '';
-					
-				}
-				
-				motRechercheF();
-			}
-			else{
-				
-				motRechercheF();
+				motRechercheF("oeuvres");
+				console.log("oeuvres");
 			}
 		}
+		else if(artistes){
+			if(motRecherche.value!=""){
+				console.log("artistes");
+				motRechercheF("artistes");
+			}
+		}
+		else if(acceuil){
+			if(motRecherche.value!=""){
+				console.log("acceuil");
+				motRechercheF("acceuil");
+			}
+		}
+		
 	};
 
 }
 
 
-function motRechercheF(){
+function motRechercheF(categorieDeRecherche){
 	
 	//déclaration de l'objet XMLHttpRequest
 	var xhr;
@@ -85,7 +89,22 @@ function motRechercheF(){
 			//obtenir le nom du fichier à aller chercher.
 			var txtRecherche = encodeURIComponent(valueRecherche.value);
 			
-			xhr.open("GET", "http://localhost/PartoutMTL/index.php?requete=txtRecherche&valRecherche=" + txtRecherche);
+			if(categorieDeRecherche=="oeuvres"){
+				console.log("categorieDeRecherche : "+categorieDeRecherche)
+				xhr.open("GET", "http://localhost:8080/PartoutMTL/index.php?requete=rechercheOeuvre&valRecherche=" + txtRecherche);
+				msg ='dans la liste des oeuvres';
+			}
+			else if(categorieDeRecherche=="artistes"){
+				console.log("categorieDeRecherche : "+categorieDeRecherche)
+				xhr.open("GET", "http://localhost:8080/PartoutMTL/index.php?requete=rechercheArtistes&valRecherche=" + txtRecherche);
+				msg ='dans la liste des aristes';
+			}
+			else if(categorieDeRecherche=="acceuil"){
+				console.log("categorieDeRecherche : "+categorieDeRecherche)
+				xhr.open("GET", "http://localhost:8080/PartoutMTL/index.php?requete=rechercheAcceuil&valRecherche=" + txtRecherche);
+				msg ='dans les listes des artistes et des oeuvres';
+			}
+			
 			
 			//2ème étape - spécifier la fonction de callback
 			xhr.addEventListener("readystatechange", function()
@@ -101,13 +120,11 @@ function motRechercheF(){
 					{
 						//les données ont été reçues
 						
-						if(document.getElementById("pageAcceuil")){
-							
-							document.getElementById("pageAcceuil").removeAttribute("id");
-							
-						}
-						
 						document.querySelector("body").innerHTML = xhr.responseText;
+						if(msgResultat.value!=""){
+							msgResultat.innerHTML ="";
+						}
+						msgResultat.innerHTML ='La la résultat de recherche '+msg+' pour "'+txtRecherche+' ":';
 						Recherche();
 						
 					}

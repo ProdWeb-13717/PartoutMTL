@@ -32,7 +32,7 @@
 </script>
 
 <section id="liste">
-	<h1>Liste des artistes</h1>
+	<h1 id="artistes">Liste des artistes</h1> <!-- id pour recherche -->
     <span class="pageBalise" id="1">
     <?php
 		if(count($data) <= 20)
