@@ -28,54 +28,7 @@ class modeleSoumission extends TemplateBase
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      SELECT      /////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
-    
-    /////////////////////////////////       ID       ////////////////////////////////////////////
 
-    
-    public function obtenirArrondissementOeuvre($idOeuvre)                      // récupère l'id de l'arrondissement de l'oeuvre en paramètre
-    {
-        $stmt = $this->connexion->prepare("SELECT idArrondissement 
-                                           FROM Oeuvres
-                                           WHERE idOeuvre = $idOeuvre");
-										   
-        $stmt->execute();
-        $data = $stmt->fetch();
-        return $data['idArrondissement'];                                       // retourne l'id de l'arrondissement de cet oeuvre
-    }
-    
-    public function obtenirNomArrondissement($idArrondissement)                 // récupère le nom de la catégorie demandée en paramètre
-    {
-        $stmt = $this->connexion->prepare("SELECT nomArrondissement 
-                                           FROM Arrondissements
-                                           WHERE idArrondissement = $idArrondissement");
-										   
-        $stmt->execute();
-        $data = $stmt->fetch();
-        return $data['nomArrondissement'];                                      // retourne le nom de cette catégorie
-    }
-
-    public function obtenirCategorieOeuvre($idOeuvre)                           // récupère l'id de la catégorie de l'oeuvre en paramètre
-    {
-        $stmt = $this->connexion->prepare("SELECT idCategorie 
-                                           FROM Oeuvres
-                                           WHERE idOeuvre = $idOeuvre");
-										   
-        $stmt->execute();
-        $data = $stmt->fetch();
-        return $data['idCategorie'];                                            // retourne l'id de la catégorie de cet oeuvre
-    }
-    
-    public function obtenirNomCategorie($idCategorie)                           // récupère le nom de la catégorie demandée en paramètre
-    {
-        $stmt = $this->connexion->prepare("SELECT nomCategorie 
-                                           FROM Categories
-                                           WHERE idCategorie = $idCategorie");
-										   
-        $stmt->execute();
-        $data = $stmt->fetch();
-        return $data['nomCategorie'];                                           // retourne le nom de cette catégorie
-    }
-    
     public function verifierArtiste($param)                                     // récupère l'id d'un artiste s'il est présent dans la table
 	{		
 		try
