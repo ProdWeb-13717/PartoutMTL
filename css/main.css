@@ -195,6 +195,8 @@
 
 #liste hr{
 	border-top:3px solid #ccc;
+	padding:0;
+	margin:0;
 }
 
 #liste span.pageBalise{
@@ -204,6 +206,10 @@
     text-align: center;
     font-family: 'Fjalla One', sans-serif;
     font-weight: bold;
+}
+
+div.elemListe:hover{
+	background-color:#dfefdf;
 }
 
 #liste span.pageBalise:hover{
@@ -226,20 +232,28 @@ span.inconnu{
 	font-size:0.8em;
 }
 
-.elemListe{
-	min-width: 50%;
+.elemListe a{
+	min-width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 	align-items:center;
 	padding:15px 30px;
-	margin: 0 0 15px 30px;
+	margin: 0;
+}
+
+/*Permet de gérer les différents affichages d'un lien our qu'ils soient tous le même*/
+.elemListe a:link, .elemListe a:visited, .elemListe a:hover , .elemListe a:active{
+  text-decoration:  none;
+  background-color: none;
+  color: black;
 }
 
 .elemListe ul{
 	max-width: 50%;
 	margin: 0;
 	padding:0;
+	font-style:normal;
 }
 
 .elemListe img{
@@ -271,6 +285,18 @@ li, ul{
 	width:100%;
 }
 
+/* Affichage individuel d'oeuvre
+-------------------------------------------------------------*/
+#oeuvreIndi ul.elementOeuvre{
+	list-style-type: none;
+}
+#oeuvreIndi ul.elementOeuvre li{
+	margin-bottom:0.5em;
+}
+
+#oeuvreIndi ul.elementOeuvre li span{
+	font-size:1.5em;
+}
 
 /* Soumission
 -------------------------------------------------------------*/

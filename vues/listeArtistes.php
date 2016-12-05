@@ -12,6 +12,7 @@
 		var secListe = document.getElementById("liste");
 		secListe.addEventListener("click",function(){
 			var eTarget = event.target;
+			//Si le target du event est un span de la classe pageBalise on change de page
 			if(eTarget.nodeName == "SPAN" && eTarget.classList.contains("pageBalise"))
 			{
 				var idVisible = eTarget.id;
@@ -25,6 +26,7 @@
 				
 				$pageVisible = document.getElementById("page"+idVisible);
 				$pageVisible.classList.remove("pageCache");
+				window.scrollTo(0,0); //scroll vers le haut de la page
 			}
 		});
 	};
