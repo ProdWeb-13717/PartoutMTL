@@ -28,6 +28,7 @@ class Controleur
   				$this->entete();
 				$modeleListe = new ModeleListe();
 				$data = $modeleListe->getArtisteTout();
+				$this->afficheVue("barRecherche");
 				$this->afficheVue("listeArtistes",$data);
 				break;
 				
@@ -38,6 +39,7 @@ class Controleur
 				$modeleListe = new ModeleListe();
 				array_push($data,$modeleListe->getOeuvresParPhotos());
 				array_push($data,$modeleListe->getOeuvresParAuteur());
+				$this->afficheVue("barRecherche");
 				$this->afficheVue("listeOeuvres",$data);
 				break;
 				
@@ -70,26 +72,58 @@ class Controleur
 				}
 				break;
 				
-				
-			case 'rechercheOeuvreTitre': // la page de recherche d'oeuvre par titre
+			case 'rechercheAvance': // la recherche Avance
 				$this->entete();
-				$this->rechercheOeuvreTitre(); // option quand get requete n'existe pas
-				break;
+				$this->afficheVue("rechercheAvance");
+				break;	
 				
-			
-			case 'txtRecherche': // la value de recherche d'oeuvre par titre envoye par AJAX
+			case 'rechercheOeuvre': // la value de recherche d'oeuvre par titre envoye par AJAX
 				if(isset($_GET['valRecherche']))
 				{
-					$valeur = $_GET['valRecherche'];
-					$oRecherche = new Recherche();
-					$data = $oRecherche->rechercheOeuvres($valeur,"titre"); // cle = titre 
-					$oVueRecherche = new VueRecherche();
+					$data = []; // initialisation de $data
 					$this->entete();
-					$oVueRecherche->resultatDataRecherche($data);
+					$modeleListe = new Recherche();
+					array_push($data,$modeleListe->rechercheOeuvresParPhotos($_GET['valRecherche']));
+					array_push($data,$modeleListe->rechercheOeuvresParAuteur($_GET['valRecherche']));
+					$this->afficheVue("barRecherche");
+					$this->afficheVue("listeOeuvres",$data);
+				
 				}
 				break;
             
+            case 'rechercheArtistes': // la value de recherche d'oeuvre par titre envoye par AJAX
+				if(isset($_GET['valRecherche']))
+				{
+					$data = []; // initialisation de $data
+					$this->entete();
+					$modeleListe = new Recherche();
+					$data = $modeleListe->rechercheArtisteTout($_GET['valRecherche']);
+					$this->afficheVue("barRecherche");
+					$this->afficheVue("listeArtistes",$data);
+				
+				}
+				break;
             
+            case 'rechercheAcceuil': // la value de recherche d'oeuvre par titre envoye par AJAX
+				if(isset($_GET['valRecherche']))
+				{
+					//********* recherche pour artistes
+					$dataArtistes = []; // initialisation de $dataArtistes
+					$this->entete();
+					$modeleListe = new Recherche();
+					$dataArtistes = $modeleListe->rechercheArtisteTout($_GET['valRecherche']);
+					//************** recherche pour oeuvre
+					$data = []; // initialisation de $data
+					$modeleListe = new Recherche();
+					array_push($data,$modeleListe->rechercheOeuvresParPhotos($_GET['valRecherche']));
+					array_push($data,$modeleListe->rechercheOeuvresParAuteur($_GET['valRecherche']));
+					$this->afficheVue("barRecherche");
+					$this->afficheVue("listeOeuvres",$data);
+					$this->afficheVue("listeArtistes",$dataArtistes);
+				
+				}
+				break;
+             
             case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
 				$this->entete();                    
                 $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission

@@ -20,7 +20,7 @@
 
 #logo{
     font-size : 3.5em;
-    color : #016737;
+    color : #009999;
     margin-top : 40px;
     margin-left : 40px;
 }
@@ -33,11 +33,10 @@
     color : white;
 }
 #barRecherche{
-	position:absolute;
-	color:white;
-	top:150px;
-	right:30px;
-	
+	color: #4d4d4d;
+	text-align: center;
+	margin: auto;
+	margin-top: 50px;
 }
 
 #menuUser{
@@ -45,7 +44,7 @@
 }
 
 #menuUser ul{
-    background-color : #016737;
+    background-color : #4d4d4d;
     padding-top : 50px;
 }
 
@@ -74,7 +73,7 @@
 }
 
 #menuUser a:hover{
-    color : #016737;
+    color : #009999;
 }
 
 #menuUser .actif { 
@@ -95,93 +94,98 @@
     letter-spacing: 4px;   
 }
 
+#btnRecherche{
+	background-color: #4d4d4d;
+	text-align: center;
+	color: white;
+	width: 150px;
+}
+
+#motRecherche{
+	width: 350px;
+}
+
+#msgResultat{
+	color : #009999;
+	text-align: center;
+	
+}
+
+.selectRechercheAvance{
+	margin-right: 10px;
+}
+
 /* Listes
 -------------------------------------------------------------*/
 /* Acceuil */
 
-#pageAcceuil{ 
+#carousel{ 
 
-	/* l'image d'arrier plan */
-	background: url(../images/Acceuil_4.jpg) no-repeat center center fixed; 
+	background: url(../images/Acceuil_1.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
 	background-size: cover;
-	
-	min-width: 100%;
-	min-height: 100%;
-	/* flex*/
-	/*display: flex;
-	flex-flow:  column nowrap;
-	justify-content: flex-start;
-	align-content: center;
-	align-items: center;
-	 -----------------*/
-	color: white;
+	width: 100%;
+	//min-height: 500px;
+	margin: 0;
 	text-align: center;
 }
-#acceuil {
-	position:absolute;
-	color:white;
-	top:50%;
-	left:50%;
-	padding:15px;
-	-ms-transform: translateX(-50%) translateY(-50%);
-	-webkit-transform: translate(-50%,-50%);
-	transform: translate(-50%,-50%);
-	/*min-width: 800px;
-	min-height: 600px;*/
-}
-#headerAcceuil, #contentAcceuil{
-	min-width: 800px;
+
+#menuAcceuil{
+    margin-top: -39px;
 }
 
-
-
+#menuAcceuil ul{
+    background-color: #4d4d4d;
+    padding-top: 50px;
+	margin-bottom: 5px;
+}
 
 #menuAcceuil li{
-    display : inline-block;
-    list-style-type : none;
-   
+    display: inline-block;
+    list-style-type: none;
+    margin-top: 30px;
     margin-right : 10px;
-    width : 150px;
-    padding-top : 15px;
-    text-align:center;
-    color: white;
-    
+    width: 120px;
+    padding-top: 15px;
+    text-align: center;
+    background-color: white;
 }
+
+#menuAcceuil #liRecherche{
+   width: 150px;
+}
+
 
 #menuAcceuil a{
     text-decoration: none;
-    color: white;
+    color: #4d4d4d; 
 }
 
 #menuAcceuil a:hover{
-    color : #016737;
-	border-bottom: 1px solid #016737;
+    color: #009999;
 }
 
 #menuAcceuil .actif { 
-    display : inline-block;
-    padding-top : 40px;
-    color: black;   
+    display: inline-block;
+    padding-top: 40px;
+    color: black;
+    pointer-events: none;
 }
-#contentAcceuil {
-	margin-top: 40px;
+
+#barRechercheAcceuil{
+	color: #4d4d4d;
+	min-width: 550px;
+	margin: 0 auto;
+	padding:17% 0 17% 0;
 	
 }
-#contentAcceuil a{
-	text-decoration: none;
-    color: white;
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: 14px;
-	border-bottom: 1px solid white;
-}
-#btnRecherche{
-	background-color : #016737;
-	text-align: center;
-	color: white;
-}
+
+#apropos{
+	padding: 20px;
+	width: 100%
+}	
 
 /* Fin d'Acceuil
 -------------------------------------------------------------*/

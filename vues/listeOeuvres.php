@@ -34,7 +34,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 
 <!--Construire la liste en divisant les résultats en page de 20 résultats-->
 <section id="liste">
-	<h1>Liste des oeuvres</h1>
+	<h1 id="oeuvres" >Liste des oeuvres</h1> <!-- id pour recherche -->
 	<span class="pageBalise" id="1">
 	<?php
 		if(count($data[0]) <= 20)
