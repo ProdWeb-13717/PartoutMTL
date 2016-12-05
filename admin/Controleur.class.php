@@ -63,17 +63,23 @@ class Controleur
 			case 'importation':
 				$_SESSION['ongletActif'] = 'importation';
 				$this->afficherEnteteAdmin();
-				$this->importation();                                                      
+				$this->afficheImportation();                                                      
 				break;
 				
 				
 			case 'importationok':
 				$this->afficherEnteteAdmin();
 				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-				$this->traiterDonnees($publicJson);//parce qu'on envoi des donnees il n'est pas neccessaire de retourner quelque chose
-				$this->importationok();                                                    
+				$novData = $this->traiterDonnees($publicJson,"importationBD");//traiter donnes avec l'action importation
+				$this->afficheImportationOK();                                                    
 				break;
             
+			case 'verification':
+				$this->afficherEnteteAdmin();
+				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
+				$novData = $this->traiterDonnees($publicJson,"verification");//traiter donnes avec l'action verification
+				$this->afficheVerification($novData);
+				break;
             
             case 'gestion':
 				$_SESSION['ongletActif'] = 'gestion';
@@ -274,16 +280,22 @@ class Controleur
         $this->afficheVue($vue, $data);
     }
     
-	private function importation()
+	private function afficheImportation()
 	{
-		$oVue = new Vueimportation();
-		$oVue->afficheformImportation();
+		$vue = "afficheImportation";
+		$this->afficheVue($vue);
 	}	
 
-	private function importationok()
+	private function afficheImportationOK()
 	{
-		$oVue = new Vueimportation();
-		$oVue->afficheImportationok();
+		$vue = "afficheImportationOK";
+		$this->afficheVue($vue);
+	}
+	
+	private function afficheVerification($data)
+	{
+		$vue = "afficheVerification";
+		$this->afficheVue($vue,$data);
 	}
 	
 	private function obtenirJSON()
@@ -292,69 +304,223 @@ class Controleur
 		return $oRemote->getpublicJSON();
 	}
 	
-	private function traiterDonnees($jsonSite)
+	private function traiterDonnees($jsonSite,$action)
 	{
-		$nomOeuvres = count($jsonSite);
-		for($i=0;$i<=14;$i++)// for pour parcourir tout les oeuvres
+		
+		$nomOeuvres = count($jsonSite);//numero des oeuvres dans le Json
+		//$dataUpdate = array();// contienne l'information des nouveaux information (index 0 = artistes, 1 = arrondissements, 2 = categories 3 = Oeuvres)
+		
+		/////////////////////////////////////////////////////
+		///////////////traitement des artistes///////////////
+		/////////////////////////////////////////////////////
+		
+		$tabArtistes = $this->obtenirTabArtistes(); // Obtenir la derniere liste des artistes de la BD
+		$novArtistes = 0;
+		
+		for($i=0;$i<$nomOeuvres;$i++)// for pour parcourir tout les oeuvres
 		{
-			//***traitement des artistes***
 			foreach($jsonSite[$i]->Artistes as $artiste)
 			{
-				if($artiste->Nom == null)// verification des donnees null
-				{
-					$artiste->Nom = "";
-				}
-				if($artiste->Prenom == null)
-				{
-					$artiste->Prenom = "";
-				}
-				if($artiste->NomCollectif == null)
-				{
-					$artiste->NomCollectif = "";
-				}
-
-				$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+				$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif,$tabArtistes);//je dois faire ça me contre mon array, pa contre la BD
 				if(!$ilExiste)
 				{
-					$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+					switch ($action)
+					{
+						
+						case "importationBD":
+						
+							$artActuelle = $artiste->Nom ." ".$artiste->Prenom ." ".$artiste->NomCollectif;
+							array_push($tabArtistes,$artActuelle);
+							$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
+							$novArtistes++;
+							break;
+						
+						case "verification":
+							$novArtistes++;
+							break;
+					}
 				}
 			}
-			//fin traitement des artistes
 			
-			//*** traitement des arrondissements
-			$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement);
+		}
+		//array_push($dataUpdate,$novArtistes);
+		
+		/////////////////////////////////////////////////////
+		///////////////traitement des arrondissements////////
+		/////////////////////////////////////////////////////
+		
+		$tabArrondissements = $this->obtenirTabArrondissements();//Obtenir la derniere liste des arrondissements de la BD
+		$novArrondissements = 0;
+		
+		for($i=0;$i<$nomOeuvres;$i++)// for pour parcourir tout les arrondissement
+		{
+			$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement,$tabArrondissements);
+			if(!$ilExiste)
+			{
+				switch($action)
+				{
+					case "importationBD":
+						
+						$novArrondissements++;
+						array_push($tabArrondissements,$jsonSite[$i]->Arrondissement);
+						$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
+						break;
+					
+					case "verification":
+						
+						$novArrondissement++;
+						break;
+				}
+			}
+		}
+		//array_push($dataUpdate,$novArrondissements);
+		
+		/////////////////////////////////////////////////////
+		///////////////traitement des categories/////////////
+		/////////////////////////////////////////////////////
+		
+		$tabCategories = $this->obtenirTabCategories();//Obtenir la derniere liste des categories de la BD
+		$novCategories = 0;
+		
+		for($i=0;$i<$nomOeuvres;$i++)// for pour parcourir tout les categories
+		{
+			$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet,$tabCategories);
+			if(!$ilExiste)
+			{
+				switch($action)
+				{
+					case "importationBD":
+					
+						$novCategories++;
+						array_push($tabCategories,$jsonSite[$i]->SousCategorieObjet);
+						$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
+						break;
+					
+					case "verification":
+						
+						$novCategories++;
+						break;
+				}
+				
+			}
+		}
+		//array_push($dataUpdate,$novCategories);
+		
+		/////////////////////////////////////////////////////
+		///////////////traitement des oeuvres////////////////
+		/////////////////////////////////////////////////////
+		
+		//Obtenir la derniere liste des oeuvres de la BD
+		$tabOeuvres = $this->obtenirTabOeuvres();
+		$novOeuvres = 0;
+		
+		//Obtenir la derniere liste des arrondissements dans la BD
+		$oArrondissementsListe = new Arrondissements();
+		$listeArrondissements = $oArrondissementsListe->obtenirTous("Arrondissements","idArrondissement");//contienne le resultat du tableau avec les arrondissement
+		
+		//Obtenir la derniere liste des categories dans la BD
+		$oCategoriesListe = new Categories();
+		$listeCategories = $oCategoriesListe->obtenirTous("Categories","idCategorie");//contienne le resultat du tableau avec les categories
+		
+		//L'insertion des oeuvres (il faut le faire avec un while parce que avec des for il avait problèmes de deconnexion)
+		
+		$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
+		while($curOeuvre<$nomOeuvres)
+		{
+			$ilExiste = $this->verifierOeuvre($jsonSite[$curOeuvre]->NoInterne,$tabOeuvres);//verification par NoInterne d'oeuvre
 			if(!$ilExiste)
 			{
 				
-				$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
+				switch($action)
+				{
+					case "importationBD":
+					
+						$novOeuvres++;
+						array_push($tabOeuvres,$jsonSite[$curOeuvre]->NoInterne);
+						$this->inclureOeuvre($jsonSite[$curOeuvre],$listeArrondissements,$listeCategories);
+						break;
+					
+					case "verification":
+						
+						$novOeuvres++;
+						break;
+				}
 			}
-			//fin traitement des arrondissements
-			
-			
-			//*** traitement des categories
-			$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet);
-			if(!$ilExiste)
-			{
-				$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
-			}
-			//fin traitement des categories
-			
-			//*** traitement des oeuvres
-			$ilExiste = $this->verifierOeuvre($jsonSite[$i]->NoInterne);
-			if(!$ilExiste)
-			{
-				$this->inclureOeuvre($jsonSite[$i]);
-			}
-			//fin traitement des oeuvres
+			$curOeuvre++;
 		}
+		//array_push($dataUpdate,$novOeuvres);
+		
+		
+		if($action == "importationBD"){
+			
+			/////////////////////////////////////////////////////
+			///////////////traitement des Oeuvres-Artistes///////
+			/////////////////////////////////////////////////////
+			
+			/******** Obtenir la derniere liste des Oeuvres dans la BD*************/
+			$oOeuvresListe = new Oeuvres();
+			$listeOeuvres = $oOeuvresListe->obtenirTous("Oeuvres","idOeuvre");//contienne le resultat du tableau avec les categories
+			$nomOeuvres = count($listeOeuvres);
+			/******** Obtenir la derniere liste des artistes dans la BD*************/
+			$oArtistesListe = new Artistes();
+			$listeArtistes = $oArtistesListe->obtenirTous("Artistes","idArtiste");
+			$nomOArtistes = count($listeArtistes);
+			
+			$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
+			while($curOeuvre<$nomOeuvres)
+			{
+				$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
+				$curOeuvre++;
+			}
+			
+		}
+		
+		$dataUpdate = 
+			[
+				'Artistes' => $novArtistes,
+				'Arrondissements'  => $novArrondissements, 
+				'Categories'  => $novCategories, 
+				'Oeuvres'  => $novOeuvres
+			];
+		return $dataUpdate;
+		
 	}
-	//***** functions par rapport à des traitement des artistes
 	
-	private function verifierArtiste($nom,$prenom,$collectif)
+	//***** functions par rapport à des traitement des artistes
+	private function obtenirTabArtistes()
+	{	
+		$oArtistesListe = new Artistes();
+		$listeArtistes = $oArtistesListe->obtenirTous("Artistes","idArtiste");//contienne le resultat du tableau avec les artistes
+		$nomArtistes = count($listeArtistes);
+		$tableau = array();
+		for($i=0;$i<$nomArtistes;$i++)
+		{
+			$artiste = $listeArtistes[$i]["nomArtiste"]." ".$listeArtistes[$i]["prenomArtiste"]." ".$listeArtistes[$i]["collectif"];
+			array_push($tableau,$artiste);
+		}
+		return $tableau;
+	}
+	
+	private function verifierArtiste($nom,$prenom,$collectif,$mesArtistes)
 	{
-		$oArtistes = new Artistes();
-		$data = $oArtistes->obtenirArtiste($nom,$prenom,$collectif);
-		return $data;
+		$nomArtistes = count($mesArtistes);
+		
+		if($nomArtistes == 0)
+		{
+			return false;
+		}
+		else
+		{
+			for($i=0;$i<$nomArtistes;$i++)
+			{
+				$artActuelle = $nom." ".$prenom." ".$collectif;
+				if($artActuelle == $mesArtistes[$i])
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 	
 	private function inclureArtiste($nom,$prenom,$collectif)
@@ -363,13 +529,41 @@ class Controleur
 		$data = $oArtistes->insererArtiste($nom,$prenom,$collectif);
 	}
 	
-	
 	//***** functions par rapport à des traitement des arrondissements
-	private function verifierArrondissement($arrondissement)
+	
+	private function obtenirTabArrondissements()
 	{
-		$oArrondissements = new Arrondissements();
-		$data = $oArrondissements->obtenirArrondissement($arrondissement);
-		return $data;
+		$oArrondissementsListe = new Arrondissements();
+		$listeArrondissements = $oArrondissementsListe->obtenirTous("Arrondissements","idArrondissement");//contienne le resultat du tableau avec les artistes
+		$nomArrondissements = count($listeArrondissements);
+		$tableau = array();
+		for($i=0;$i<$nomArrondissements;$i++)
+		{
+			$arrondissement = $listeArrondissements[$i]["nomArrondissement"];
+			array_push($tableau,$arrondissement);
+		}
+		return $tableau;
+	}
+	
+	private function verifierArrondissement($arrondissement,$mesArrondissements)
+	{
+		$nomArrondissements = count($mesArrondissements);
+		
+		if($nomArrondissements == 0)
+		{
+			return false;
+		}
+		else
+		{
+			for($i=0;$i<$nomArrondissements;$i++)
+			{
+				if($arrondissement == $mesArrondissements[$i])
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 	
 	private function inclureArrondissement($arrondissement)
@@ -379,11 +573,41 @@ class Controleur
 	}
 	
 	//***** functions par rapport à des traitement des categories
-	private function verifierCategorie($categorie)
+	
+	private function obtenirTabCategories()
 	{
-		$oCategorie = new Categories();
-		$data = $oCategorie->obtenirCategorie($categorie);
-		return $data;
+		$oCategoriesListe = new Categories();
+		$listeCategories = $oCategoriesListe->obtenirTous("Categories","idCategorie");//contienne le resultat du tableau avec les categories
+		$nomCategories = count($listeCategories);
+		$tableau = array();
+		for($i=0;$i<$nomCategories;$i++)
+		{
+			$categorie = $listeCategories[$i]["nomCategorie"];
+			array_push($tableau,$categorie);
+		}
+		return $tableau;
+	}	
+	
+	
+	private function verifierCategorie($categorie,$mesCategories)
+	{
+		$nomCategories = count($mesCategories);
+		
+		if($nomCategories == 0)
+		{
+			return false;
+		}
+		else
+		{
+			for($i=0;$i<$nomCategories;$i++)
+			{
+				if($categorie == $mesCategories[$i])
+				{
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 	
 	private function inclureCategorie($categorie)
@@ -393,19 +617,59 @@ class Controleur
 	}
 	
 	//***** functions par rapport à des traitement des oeuvres
-	private function verifierOeuvre($noInterne)
+	
+	private function obtenirTabOeuvres()
 	{
-		$oOeuvre = new Oeuvres();
-		$data = $oOeuvre->obtenirOeuvre($noInterne);
-		return $data;
+		$oOeuvresListe = new Oeuvres();
+		$listeOeuvres = $oOeuvresListe->obtenirTous("Oeuvres","idOeuvre");//contienne le resultat du tableau avec les categories
+		$nomOeuvres = count($listeOeuvres);
+		$tableau = array();
+		for($i=0;$i<$nomOeuvres;$i++)
+		{
+			$Oeuvre = $listeOeuvres[$i]["noInterne"];
+			array_push($tableau,$Oeuvre);
+		}
+		return $tableau;
 	}
 	
-	private function inclureOeuvre($oeuvre)
+	
+	private function verifierOeuvre($noInterne,$mesOeuvres)
+	{
+		
+		$nomOeuvres = count($mesOeuvres);
+		
+		if($nomOeuvres == 0)
+		{
+			return false;
+		}
+		else
+		{
+			for($i=0;$i<$nomOeuvres;$i++)
+			{
+				if($noInterne == $mesOeuvres[$i])
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	
+	private function inclureOeuvre($oeuvre,$arrondissements,$categories)
 	{
 		$oOeuvres = new Oeuvres();
-		$data = $oOeuvres->traiterOeuvre($oeuvre);
+		$data = $oOeuvres->traiterOeuvre($oeuvre,$arrondissements,$categories);
 	}
-
+	
+	//***** functions par rapport à des traitement des oeuvresArtistes
+	
+	private function insererArtisteOeuvre($oeuvre,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes)
+	{
+		$oOeuvres = new Oeuvres();
+		$data = $oOeuvres->inclureArtistesOeuvres($oeuvre,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes);
+	}
+	
+	
 }
 ?>
 
