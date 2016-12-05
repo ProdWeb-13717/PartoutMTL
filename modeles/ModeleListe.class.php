@@ -90,6 +90,8 @@ class ModeleListe extends TemplateBase
 											   FROM Oeuvres
 											   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
 											   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											   JOIN Arrondissements ON Arrondissements.idArrondissement = Oeuvres.idArrondissement
+											   JOIN Categories ON Categories.idCategorie = Oeuvres.idCategorie
 											   WHERE Oeuvres.idOeuvre = :id");
 			$stmt->bindParam(":id", $id);
 			$stmt->execute();
