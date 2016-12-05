@@ -23,6 +23,7 @@
         <script src="./js/plugins.js"></script>
         <script src="./js/AutentificationAdmin.js"></script>
         <script src="./js/soumissionAdmin.js"></script>
+        <script src="./js/soumissionsDesUsagers.js"></script>
         <script src="./js/gestionAdmin.js"></script>
         
         <!-- JQUERY -----------------> 

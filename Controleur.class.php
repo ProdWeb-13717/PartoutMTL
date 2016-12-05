@@ -105,7 +105,7 @@ class Controleur
                 $tableauContenu = json_decode (file_get_contents('php://input'), true);       // decode la string JSON
                 extract($tableauContenu);                                                     // convertit le JSON en variables
                 
-                var_dump($tableauContenu);
+                //var_dump($tableauContenu);
             
                 /*-- INSERT TABLE Soumission ----------------------------------------------*/
                 $modeleSoumisionUsager = new modeleSoumissionUsager();
@@ -116,9 +116,9 @@ class Controleur
                     break;
                 }
                 
-                //$vue = "afficheSoumission";
-                //$this->afficheVue($vue, $tableauContenu);    
-                break;
+                $vue = "remerciements";
+                $this->afficheVue($vue);    
+                break;    
 				
 				
             default:

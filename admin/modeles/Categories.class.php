@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Class Modele
  * Modèle de classe modèle. Dupliquer et modifier pour votre usage.
@@ -42,8 +42,9 @@ class Categories extends TemplateBase
 	{		
 		try
 		{	
-			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomCategorie) VALUES(:categorie)");
-			$stmt->bindParam(":categorie", $categorie);
+            $stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomCategorie) VALUES(:categorie)");
+            extract($categorie);                                                   // extrait le tableau de variables en paramètre
+            $stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			
 			return 1;
