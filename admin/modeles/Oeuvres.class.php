@@ -42,13 +42,24 @@ class Oeuvres extends TemplateBase
 	
 	public function traiterOeuvre($oeuvre,$arrondissements,$categories)
 	{		
-		//Effacer les spaces de valeurs numeriques pour eviter des conflits
+		//Effacer les spaces des valeurs numeriques pour eviter des conflits
 		$oeuvre->CoordonneeLatitude = trim($oeuvre->CoordonneeLatitude);
 		$oeuvre->CoordonneeLongitude = trim($oeuvre->CoordonneeLongitude);
 		
-		// asignation temporel de date par default
-		$oeuvre->DateFinProduction = "2012-06-18";
-		$oeuvre->DateAccession = "2012-06-18";
+		
+		//Conversion de les donnes en date time
+		
+		$expDate = "/-?([0-9]{10,13})/";//Expression reguliere pour obtenir le timestamp
+		if($oeuvre->DateFinProduction != null)
+		{
+			preg_match($expDate, $oeuvre->DateFinProduction, $resultat);
+			$oeuvre->DateFinProduction = date("Y-m-d", $resultat[0]/1000);
+		}
+		if($oeuvre->DateAccession != null)
+		{
+			preg_match($expDate, $oeuvre->DateAccession, $resultat);
+			$oeuvre->DateAccession = date("Y-m-d", $resultat[0]/1000);	
+		}
 		
 		//Obtenir l'id de la categorie de l'oeuvre
 		
