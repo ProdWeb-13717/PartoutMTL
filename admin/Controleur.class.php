@@ -308,7 +308,7 @@ class Controleur
 	{
 		
 		$nomOeuvres = count($jsonSite);//numero des oeuvres dans le Json
-		//$dataUpdate = array();// contienne l'information des nouveaux information (index 0 = artistes, 1 = arrondissements, 2 = categories 3 = Oeuvres)
+		
 		
 		/////////////////////////////////////////////////////
 		///////////////traitement des artistes///////////////
@@ -404,7 +404,6 @@ class Controleur
 				
 			}
 		}
-		//array_push($dataUpdate,$novCategories);
 		
 		/////////////////////////////////////////////////////
 		///////////////traitement des oeuvres////////////////
@@ -448,8 +447,6 @@ class Controleur
 			}
 			$curOeuvre++;
 		}
-		//array_push($dataUpdate,$novOeuvres);
-		
 		
 		if($action == "importationBD"){
 			
@@ -469,7 +466,7 @@ class Controleur
 			$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
 			while($curOeuvre<$nomOeuvres)
 			{
-				$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
+				//$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
 				$curOeuvre++;
 			}
 			
