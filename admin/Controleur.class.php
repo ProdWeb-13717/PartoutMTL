@@ -343,7 +343,6 @@ class Controleur
 			}
 			
 		}
-		//array_push($dataUpdate,$novArtistes);
 		
 		/////////////////////////////////////////////////////
 		///////////////traitement des arrondissements////////
@@ -373,7 +372,6 @@ class Controleur
 				}
 			}
 		}
-		//array_push($dataUpdate,$novArrondissements);
 		
 		/////////////////////////////////////////////////////
 		///////////////traitement des categories/////////////
@@ -466,7 +464,7 @@ class Controleur
 			$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
 			while($curOeuvre<$nomOeuvres)
 			{
-				//$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
+				$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
 				$curOeuvre++;
 			}
 			
