@@ -102,6 +102,24 @@ class ModeleListe extends TemplateBase
 			return 0;
 		}
 	}
+	
+	//Fonction qui va chercher les information d'une oeuvre correspondant à un ID précis
+	public function getPhotoParIDOeuvre($id) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT *
+											   FROM Photos
+											   WHERE Photos.idOeuvre = :id");
+			$stmt->bindParam(":id", $id);
+			$stmt->execute();
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		}	
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+	}
 }
 
 

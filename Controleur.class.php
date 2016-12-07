@@ -46,11 +46,14 @@ class Controleur
 			//Affichage d'une oeuvre individuelle
 			case 'afficheOeuvre':  
 				$this->entete();
+				$data = [];
 				$modeleListe = new ModeleListe();
 				if(isset($_GET['idOeuvre']))
 				{
-					$data = $modeleListe->getOeuvresParID($_GET['idOeuvre']);
-					if($data != 0)
+					//On va chercher les informations reliées à l'oeuvres ainsi que ses auteurs et les photo qui y son relié et on les tock dans  $data
+					array_push($data, $modeleListe->getOeuvresParID($_GET['idOeuvre']));
+					array_push($data, $modeleListe->getPhotoParIDOeuvre($_GET['idOeuvre']));
+					if($data[0] != 0 && $data[1] != 0)
 					{
 						if(count($data) != 0)
 						{

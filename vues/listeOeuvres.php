@@ -13,6 +13,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 		var secListe = document.getElementById("liste");
 		secListe.addEventListener("click",function(){
 			var eTarget = event.target;
+			//Si le target du event est un span de la classe pageBalise on change de page
 			if(eTarget.nodeName == "SPAN" && eTarget.classList.contains("pageBalise"))
 			{
 				var idVisible = eTarget.id;
@@ -26,6 +27,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 				
 				$pageVisible = document.getElementById("page"+idVisible);
 				$pageVisible.classList.remove("pageCache");
+				window.scrollTo(0,0); //scroll vers le haut de la page
 			}
 		});
 	};
@@ -58,54 +60,55 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 			?>		
 			<hr>
 			<div class="elemListe">
-				<input type="hidden" class="idOeuvre" value="<?php echo $oeuvre["idOeuvre"]?>"/>
-				<img src="
-					<?php 
-					if($oeuvre["urlPhoto"] != null)
-					{
-						echo $oeuvre["urlPhoto"];
-					}
-					else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
-					{
-						echo "http://galaxy.mobity.net/uploads/148/logo/1399898656.png";
-					}
-					?>
-				">
-				<ul>
-					<li><span class="catElemListe">Titre : </span><?php echo $oeuvre["titre"]?></li>
-					<li><span class="catElemListe">Année : </span><?php echo $oeuvre["dateFinProduction"]?></li>
-					<li><span class="catElemListe">Auteur(s):</span>
-						<ul class="listeAuteur">
-							<?php
-							foreach($data[1] as $artiste)
-							{	
-								if($artiste["idOeuvre"] == $precendent)
-								{
-								?>
-									<li>
-									<?php
-										if($artiste["prenomArtiste"] != "")
-										{
-											echo $artiste["prenomArtiste"];
-											
-											if($artiste["nomArtiste"] != "")
-											{
-												echo " ".$artiste["nomArtiste"];
-											}
-										}
-										if($artiste["collectif"] != "" && ($artiste["prenomArtiste"] == "" && $artiste["nomArtiste"] == ""))
-										{
-											echo $artiste["collectif"]." (collectif)";
-										}
-									?>
-									</li>
+				<a href="./index.php?requete=afficheOeuvre&idOeuvre=<?php echo $oeuvre["idOeuvre"]?>">
+					<img src="
+						<?php 
+						if($oeuvre["urlPhoto"] != null)
+						{
+							echo $oeuvre["urlPhoto"];
+						}
+						else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
+						{
+							echo "http://galaxy.mobity.net/uploads/148/logo/1399898656.png";
+						}
+						?>
+					">
+					<ul>
+						<li><span class="catElemListe">Titre : </span><?php echo $oeuvre["titre"]?></li>
+						<li><span class="catElemListe">Année : </span><?php echo $oeuvre["dateFinProduction"]?></li>
+						<li><span class="catElemListe">Auteur(s):</span>
+							<ul class="listeAuteur">
 								<?php
+								foreach($data[1] as $artiste)
+								{	
+									if($artiste["idOeuvre"] == $precendent)
+									{
+									?>
+										<li>
+										<?php
+											if($artiste["prenomArtiste"] != "")
+											{
+												echo $artiste["prenomArtiste"];
+												
+												if($artiste["nomArtiste"] != "")
+												{
+													echo " ".$artiste["nomArtiste"];
+												}
+											}
+											if($artiste["collectif"] != "" && ($artiste["prenomArtiste"] == "" && $artiste["nomArtiste"] == ""))
+											{
+												echo $artiste["collectif"]." (collectif)";
+											}
+										?>
+										</li>
+									<?php
+									}
 								}
-							}
-							?>
-						</ul>
-					</li>
-				</ul>
+								?>
+							</ul>
+						</li>
+					</ul>
+				</a>
 			</div>
 			<?php
 			
