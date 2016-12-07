@@ -16,9 +16,10 @@
         if(document.querySelector(".soumissionAdmin"))                                      // si la classe "soumissionAdmin" existe
         { 
             var btnSoumettre = document.querySelector("#boutonSoumission");                 // récupère le bouton SOUMETTRE
-                btnSoumettre.addEventListener("click", function(evt){                       // à l'événement CLIC
-
-                if(validationSoumission()){                                                 // valide certaines entrées, si valide
+            btnSoumettre.addEventListener("click", function(evt)                            // à l'événement CLIC
+            {                               
+                if(validationSoumission())                                                  // valide certaines entrées, si valide
+                {
                     
                     /*-- RÉCUPÈRE LES ENTRÉES DE LA TABLE OEUVRES ----------------------------------*/
                     var valeurTitre             = document.querySelector("[name=titreOeuvreAjout]").value;

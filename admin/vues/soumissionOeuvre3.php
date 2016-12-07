@@ -1,13 +1,31 @@
 <!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres --------------------------------------------->   
 
 		 <label for="parcOeuvreAjoutAdmin">PARC : </label>
-		 <input type="text" name="parcOeuvreAjout" id="parcOeuvreAjoutAdmin"/><br/>
+		 <input type="text" name="parcOeuvreAjout" id="parcOeuvreAjoutAdmin"
+            <?php 
+                if(isset($_GET["idSoumissionUsager"]))
+                {
+                    ?>
+                    value="<?php echo $data['parcSoumission']; ?>"
+				    <?php
+                }
+            ?> 
+         /><br/>
 		 
 		 <label for="batimentOeuvreAjoutAdmin">BÂTIMENT : </label>
 		 <input type="text" name="batimentOeuvreAjout" id="batimentOeuvreAjoutAdmin"/><br/>
 		 
 		 <label for="adresseCiviqueOeuvreAjoutAdmin">ADRESSE CIVIQUE : </label>
-		 <input type="text" name="adresseCiviqueOeuvreAjout" id="adresseCiviqueOeuvreAjoutAdmin"/><br/>
+		 <input type="text" name="adresseCiviqueOeuvreAjout" id="adresseCiviqueOeuvreAjoutAdmin"
+            <?php 
+                if(isset($_GET["idSoumissionUsager"]))
+                {
+                    ?>
+                    value="<?php echo $data['adresseCiviqueSoumission']; ?>"
+                    <?php
+			    }
+            ?> 
+         /><br/>
 		 
 		 <label for="latitudeOeuvreAjoutAdmin"><span class="couleurErreurSoumission">LATITUDE : </span></label>
 		 <input type="text" name="latitudeOeuvreAjout" id="latitudeOeuvreAjoutAdmin" placeholder= "45.0000"/><br/>
@@ -19,7 +37,14 @@
 		 <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"/><br/>
 		 
 		 <label for="descriptionOeuvreAjoutAdmin">DESCRIPTION : </label>
-		 <textarea rows="4" style="width: 337px;" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"></textarea><br/>
+		 <textarea rows="4" style="width: 337px;" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"
+            ><?php 
+                 if(isset($_GET["idSoumissionUsager"]))
+                 {
+				    echo $data['descriptionSoumission'];
+			     }
+             ?>
+         </textarea><br/>
 		 <br/>
 		 <span id="msgErreurSoumision"></span>
 		 <br/>

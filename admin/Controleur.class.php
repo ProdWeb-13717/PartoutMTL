@@ -74,6 +74,7 @@ class Controleur
 				$this->afficheImportationOK();                                                    
 				break;
             
+                
 			case 'verification':
 				$this->afficherEnteteAdmin();
 				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
@@ -81,12 +82,14 @@ class Controleur
 				$this->afficheVerification($novData);
 				break;
             
+                
             case 'gestion':
 				$_SESSION['ongletActif'] = 'gestion';
                 $this->afficherEnteteAdmin();
                 $this->afficherPageGestion();
 				break;
 				
+                
             case 'soumission':                                                          // page formulaire d'ajout administrateur
 				$_SESSION['ongletActif'] = 'ajoutOeuvre';
 				$this->afficherEnteteAdmin();
@@ -159,12 +162,10 @@ class Controleur
                 }
                 break;
             
+                
             case 'supprimerCategorie':
                 $tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
                 extract($tableauContenu);                                               // convertit le JSON en variables
-                
-                print_r($tableauContenu);
-                print_r($tableauContenu['categorie']);
                 $categorieASupprimer = $tableauContenu['categorie'];
                 
                 /*-- DELETE TABLE Categories ----------------------------------------------*/
@@ -177,11 +178,30 @@ class Controleur
                 }
                 break;
             
+                
             case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
-				$_SESSION['ongletActif'] = 'soumission';
+                $_SESSION['ongletActif'] = 'soumission';
                 $this->afficherEnteteAdmin();
 				$this->afficherSoumissionsDesUsagers();             
                 break;
+                
+                
+            case 'supprimeSoumissionUsager':
+                $soumissionASupprimer = ($_GET['idSoumissionUsager']);
+                
+                /*-- DELETE TABLE Soumissions ---------------------------------------------*/
+                $modeleCategorieAdmin = new modeleSoumission();
+                $valide = $modeleCategorieAdmin->supprimer($soumissionASupprimer, "idSoumission", "Soumissions");
+                if(!$valide)
+				{                                                                       // si non réussi
+                    $this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
+                    break;
+                }
+                $_SESSION['ongletActif'] = 'soumission';
+                $this->afficherEnteteAdmin();
+                $this->afficherSoumissionsDesUsagers();
+                break;
+                
             
             default:
 				$this->accueil();
@@ -247,10 +267,18 @@ class Controleur
 	private function afficherFormSoumissionAdmin()
 	{
 		$vue = "soumissionOeuvre1";                                                     // input : titre et titre variante
-		$this->afficheVue($vue);
+        $dataSoumissions = null;
+        if(isset($_GET["idSoumissionUsager"]))
+        {
+            $idSoumissionUsager = ($_GET["idSoumissionUsager"]);
+            $modeleSoumisionAdmin = new modeleSoumission();                             // appelle modeleSoumission
+            $dataSoumissions = $modeleSoumisionAdmin->obtenir($idSoumissionUsager, "idSoumission", "Soumissions");     // récupère la table Soumissions
+            $choixArrondissement = $dataSoumissions['idArrondissementSoumission'];
+        }
+        $this->afficheVue($vue, $dataSoumissions);
         
-        $vue = "soumissionArtiste";                                                     // input : prénom, nom, collectif artiste
-		$this->afficheVue($vue);
+        $vue = "soumissionArtiste"; 
+        $this->afficheVue($vue, $dataSoumissions);
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
 		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories
@@ -261,12 +289,16 @@ class Controleur
 		$this->afficheVue($vue);                                                        //         technique, dimension
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
-        $vue = "soumissionArrondissement";                                              // select : arrondissements
-        $this->afficheVue($vue, $data);
-        
+		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements                                   
+        if(isset($_GET["idSoumissionUsager"]))
+        {
+            $data['choix'] = $choixArrondissement;
+        }
+        $vue = "soumissionArrondissement"; 
+        $this->afficheVue($vue, $data);                                                 // select : arrondissements
+
         $vue = "soumissionOeuvre3";                                                     // inputs : parc, batiment, adresse, latitude, 
-		$this->afficheVue($vue);                                                        //          longitude
+		$this->afficheVue($vue, $dataSoumissions);                                      //          longitude
         
         $vue = "boutonSoumission";                                                      // bouton soumission
         $this->afficheVue($vue);               

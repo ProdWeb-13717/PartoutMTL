@@ -47,7 +47,7 @@ abstract class TemplateBase
 			}
 			
 			
-			$stmt = $this->connexion->prepare("select * from " . $table . " where " . $cle . " = :valeur");
+			$stmt = $this->connexion->prepare("select * from " . $table . " WHERE " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
 			return $stmt->fetch();
@@ -100,15 +100,20 @@ abstract class TemplateBase
     
 
 	
-	public function supprimer($valeur, $cle = null)
+	public function supprimer($valeur, $cle = null, $table = null)
 	{
 		try
 		{
-			if($cle == null)
+			if($table == null)
+			{
+				$table = $this->getTable();
+			}
+            
+            if($cle == null)
 			{
 				$cle = $this->getPrimaryKey();
 			}
-			$stmt = $this->connexion->prepare("delete from " . $this->getTable() . " where " . $cle . " = :valeur");
+			$stmt = $this->connexion->prepare("delete from " . $table . " where " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
 			return true;
@@ -117,6 +122,6 @@ abstract class TemplateBase
 		{
 			return false;
 		}
-	}
+	}   
 }
 ?>

@@ -8,8 +8,8 @@
         {
             ?>
             <hr/>
-            <li class='soumissionDesUsagers margin10-100' name='soumissionDunUsager' value="<?php echo $soumission['idSoumission']?>"> 
-                <a href="./index.php?requete=soumission&id=<?php echo $soumission["idSoumission"]?>">
+            <li class='soumissionDesUsagers margin10-100' name='soumissionDunUsager' id="<?php echo $soumission['idSoumission']?>"> 
+                <a href="./index.php?requete=soumission&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">
                 SOUMISSION #        <?php echo $soumission["idSoumission"]?> </a><br/>
                 TITRE :             <?php echo $soumission["titreSoumission"]?> <br/>
                 PRÉNOM ARTISTE :    <?php echo $soumission["prenomArtisteSoumission"]?> <br/>
@@ -25,7 +25,8 @@
                 DESCRIPTION :       <?php echo $soumission["descriptionSoumission"]?> <br/>
                 PHOTO :             <?php echo $soumission["photoSoumission"]?> <br/>
                 COURRIEL :          <?php echo $soumission["courrielSoumission"]?> <br/>
-                <input type="button" class="bouton boutonAjouterSoumissionUsager" value="SOUMETTRE" name="boutonSoumission"/>
+                <!--input type="button" class="bouton" value="SUPPRIMER" id="<?php echo $soumission['idSoumission']?>"/-->
+                <a href="./index.php?requete=supprimeSoumissionUsager&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">SUPPRIMER</a>
             </li>
 			<br/>
             <?php

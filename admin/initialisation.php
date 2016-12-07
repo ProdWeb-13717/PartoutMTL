@@ -38,9 +38,9 @@
 		$_SESSION['idAdmin'] = '';
 	}
 
-    if(empty($_SESSION['id']))
+    if(empty($_SESSION['idSoumissionUsager']))
 	{
-		$_SESSION['id'] = '';
+		$_SESSION['idSoumissionUsager'] = '';
 	}
 	
 	if(empty($_SESSION['ongletActif']))
