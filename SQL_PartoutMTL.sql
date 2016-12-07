@@ -176,8 +176,14 @@ INSERT into Soumissions (titreSoumission,
 
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 
-INSERT INTO Categories(nomCategorie) VALUE("dsafsegf");
 
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) 
 VALUE 
 ("1", MD5("1"), "un@hotmail.com", 2),
+
+INSERT INTO Carroussel(urlPhoto) 
+VALUE("./images/image_default_oeuvre_1.jpg");
+VALUE("./images/image_default_oeuvre_2.jpg");
+VALUE("./images/image_default_oeuvre_3.jpg");
+VALUE("./images/image_default_oeuvre_4.jpg");
+
