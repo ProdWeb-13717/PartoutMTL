@@ -1,13 +1,32 @@
 ﻿<section id="oeuvreIndi">
+	<div id="sectionImage">
+<?php
+	if(count($data[1]) != 0)
+	{
+		foreach($data[1] as $valeur)
+		{	
+			?>
+				<img src="<?php echo $valeur["urlPhoto"];?>">
+			<?php
+		}
+	}
+	else
+	{
+		?>
+		<span>Aucune image disponible</span>
+		<?php
+	}
+?>
+	</div>
 	<ul class="elementOeuvre">
 <?php
 	//Affichage du titre de l'oeuvre
-	foreach($data[0] as $cle => $valeur)
+	foreach($data[0][0] as $cle => $valeur)
 	{	
 		if($cle == "titre")
 		{
 			echo "<li><span class='catElemListe'>Titre : </span>".$valeur;
-			foreach($data[0] as $cle => $valeur)
+			foreach($data[0][0] as $cle => $valeur)
 			{
 				if($cle == "titreVariante" && $valeur != "")
 				{
@@ -23,7 +42,7 @@
 		<ul>
 	<?php
 		//Affichage du ou des auteurs de l'oeuvre
-		foreach($data as $auteur)
+		foreach($data[0] as $auteur)
 		{
 			?>
 			<li>
@@ -61,7 +80,7 @@
 	</li>
 	<?php
 	//Affichage des éléments restants du de l'oeuvre (ils sont présents)
-	foreach($data[0] as $cle => $valeur)
+	foreach($data[0][0] as $cle => $valeur)
 	{	
 		switch($cle)
 		{

@@ -29,17 +29,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 				$pageVisible.classList.remove("pageCache");
 				window.scrollTo(0,0); //scroll vers le haut de la page
 			}
-			
-			/*if(eTarget.nodeName == "DIV" && eTarget.classList.contains("elemListe"))
-			{
-				var idOeuvre = eTarget.firstChild.value;
-				var urlCourrant = window.location.host + window.location.pathname;
-				
-				console.log(urlCourrant);
-				
-				//window.location = urlCourrant+"?requete=listeOeuvres=afficheOeuvre&idOeuvre="+idOeuvre;
-			}*/
-		},false);
+		});
 	};
 
 </script>
