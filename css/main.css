@@ -115,9 +115,8 @@
 	margin-right: 10px;
 }
 
-/* Listes
+/* Acceuil
 -------------------------------------------------------------*/
-/* Acceuil */
 
 #carousel{ 
 
@@ -300,6 +299,28 @@ li, ul{
 
 #oeuvreIndi ul.elementOeuvre li span{
 	font-size:1.5em;
+}
+
+#sectionImage{
+	border:solid 5px #009999;
+	border-radius: 25px;
+	max-width:50%;
+	min-height:10em;
+	margin:0 auto;
+	padding:1em;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items:center;
+}
+
+#sectionImage img{
+	max-height: 10em;
+}
+
+#sectionImage span{
+	color:#b5b5b5;
+	font-style:italic;
 }
 
 /* Soumission
