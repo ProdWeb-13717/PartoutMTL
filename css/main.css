@@ -94,14 +94,14 @@
     letter-spacing: 4px;   
 }
 
-#btnRecherche{
+#btnRecherche , #btnRechercheAvance{
 	background-color: #4d4d4d;
 	text-align: center;
 	color: white;
 	width: 150px;
 }
 
-#motRecherche{
+#motRecherche, #motRechercheAvance{
 	width: 350px;
 }
 
@@ -131,17 +131,17 @@
 	text-align: center;
 }
 
-#menuAcceuil{
+#menuAccueil{
     margin-top: -39px;
 }
 
-#menuAcceuil ul{
+#menuAccueil ul{
     background-color: #4d4d4d;
     padding-top: 50px;
 	margin-bottom: 5px;
 }
 
-#menuAcceuil li{
+#menuAccueil li{
     display: inline-block;
     list-style-type: none;
     margin-top: 30px;
@@ -152,28 +152,28 @@
     background-color: white;
 }
 
-#menuAcceuil #liRecherche{
+#menuAccueil #liRecherche{
    width: 150px;
 }
 
 
-#menuAcceuil a{
+#menuAccueil a{
     text-decoration: none;
     color: #4d4d4d; 
 }
 
-#menuAcceuil a:hover{
+#menuAccueil a:hover{
     color: #009999;
 }
 
-#menuAcceuil .actif { 
+#menuAccueil .actif { 
     display: inline-block;
     padding-top: 40px;
     color: black;
     pointer-events: none;
 }
 
-#barRechercheAcceuil{
+#barRechercheAccueil{
 	color: #4d4d4d;
 	min-width: 550px;
 	margin: 0 auto;
