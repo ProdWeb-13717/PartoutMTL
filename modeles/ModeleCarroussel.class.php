@@ -11,8 +11,18 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class ModeleListe extends TemplateBase
+class ModeleCarroussel extends TemplateBase
 {
+	protected function getPrimaryKey()
+	{
+		return "idCaroussel";
+	} 
+		
+	protected  function getTable()
+	{
+		return "Carroussel";
+	}
+	
 	//Fonction qui va chercher les info des artistes pour construction d'une liste
 	public function getPhotoCarroussel() 
 	{
@@ -20,7 +30,7 @@ class ModeleListe extends TemplateBase
 		{
 			$stmt = $this->connexion->prepare("SELECT urlPhoto FROM Carroussel");
 			$stmt->execute();
-			return $stmt->fetchAll();
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}	
 		catch(Exception $exc)
 		{
