@@ -186,12 +186,21 @@ class Controleur
 	{
 		$this->afficheVue("head");
 		$this->afficheVue("enteteUser");
+		$this->carroussel();
 	}
 	
 	private function accueil()
 	{
 		$this->afficheVue("head");
 		$this->afficheVue("acceuilUsager");
+		$this->carroussel();
+	}
+	
+	function carroussel() // la fonction pour afficher le carroussel
+	{
+		$modCar = new ModeleCarroussel();
+		$data = $modCar -> getPhotoCarroussel();
+		$this->afficheVue("carroussel",$data);
 	}
 	
 	function rechercheOeuvreTitre() // la fonction pour la recherche d'oeuvre par son titre
@@ -204,6 +213,7 @@ class Controleur
 
 		$oVue->affichePied();
 	}
+	
 	
 	
 }
