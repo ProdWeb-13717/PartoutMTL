@@ -1,7 +1,7 @@
 <body>
     <header>
         <div id="logo">P<span id="noir">ART</span>OUT<br/></div>
-		<div id="menuAcceuil"> <!-- id est aussi utilise pour recherche -->
+		<div id="menuAccueil"> <!-- id est aussi utilise pour recherche -->
             <ul>
 				<!--Chaque li est un lien dans la barre menu-->
                 <li><a href="index.php?requete=acceuil">ACCEUIL</a></li>
@@ -16,7 +16,7 @@
     </header>
 	
 	<div id="carousel"> 
-		<div id="barRechercheAcceuil">
+		<div id="barRechercheAccueil">
 			<form class="rechercheAcceuil">
 				<input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
 				<input type="button" id="btnRecherche" value="Rechercher"/>
