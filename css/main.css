@@ -126,9 +126,18 @@
 	-o-background-size: cover;
 	background-size: cover;
 	width: 100%;
-	//min-height: 500px;
+	max-height: 500px;
 	margin: 0;
 	text-align: center;
+	position:relative;
+}
+
+#carousel span{
+	color :white;
+	font-size:1.2em;
+	position:absolute;
+	bottom: 1em;
+	left:1em;
 }
 
 #menuAccueil{

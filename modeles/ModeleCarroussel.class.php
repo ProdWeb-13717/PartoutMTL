@@ -28,7 +28,7 @@ class ModeleCarroussel extends TemplateBase
 	{
 		try
 		{
-			$stmt = $this->connexion->prepare("SELECT urlPhoto FROM Carroussel");
+			$stmt = $this->connexion->prepare("SELECT * FROM Carroussel");
 			$stmt->execute();
 			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}	

@@ -1,15 +1,9 @@
 ﻿<?php
 	$imagesURL = "";
+	$titreCar = "";
+	$descrCar = "";
 	$longueur = count($data);
-	
-	//var_dump($data);
-	
-	/*foreach($data as $url)
-	{
-		//echo $url["urlPhoto"];
-		$imagesURL = $imagesURL.$url["urlPhoto"]."~";
-	}*/
-	
+
 	for ($i = 0 ; $i < $longueur ; $i++)
 	{
 		$imagesURL = $imagesURL.$data[$i]["urlPhoto"];
@@ -17,44 +11,33 @@
 		{
 			$imagesURL = $imagesURL."~";
 		}
+		
+		$titreCar = $titreCar.$data[$i]["titre"];
+		if($i != ($longueur-1))
+		{
+			$titreCar = $titreCar."~";
+		}
+		
+		$descrCar = $descrCar.$data[$i]["description"];
+		if($i != ($longueur-1))
+		{
+			$descrCar = $descrCar."~";
+		}
+		
 	}
 
 ?>
 
-<script>
-	window.onload = function()
-	{
-		var toutURL = document.getElementById("toutURL").value;
-		console.log(toutURL);
-		var toutURL = toutURL.split('~');
-		console.log(toutURL);
-		var taille = toutURL.length;
-		console.log(taille);
-		var compteur = 0;
-		var imgSlider = document.getElementById("imgSlider");
-		
-		setInterval(function()
-		{
-			console.log("toto");
-			if(((compteur + 1)%taille) != 0)
-			{
-				console.log(compteur+" on monte");
-				imgSlider.src = toutURL[compteur];
-				compteur++;
-			}
-			else if(((compteur + 1)%taille) == 0)
-			{
-				console.log(compteur+" on recommence");
-				imgSlider.src = toutURL[compteur];
-				compteur = 0;
-			}
-		}, 3000);
-	}
-</script>
-
-<section id="carroussel">
-	<input type = "hidden" id="toutURL" value = "<?php echo $imagesURL?>"/>
-	<div id="slider">
-		<img id="imgSlider" src = "<?php echo $data[0]["urlPhoto"]?>">
-	</div>
-</section>
+<div id="carousel"> 
+		<div id="barRechercheAccueil" style="background=url('+toutURL[compteurCar ]+') no-repeat center center fixed">
+			<input type = "hidden" id="toutURL" value = "<?php echo $imagesURL?>"/>
+			<input type = "hidden" id="toutTitre" value = "<?php echo $titreCar?>"/>
+			<input type = "hidden" id="toutDescr" value = "<?php echo $descrCar?>"/>
+			<form class="rechercheAcceuil">
+				<input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
+				<input type="button" id="btnRecherche" value="Rechercher"/>
+			</form>
+			
+			<span id="descrCar"></span>
+		</div>
+</div>

@@ -255,13 +255,13 @@ class Controleur
 	{
 		$this->afficheVue("head");
 		$this->afficheVue("enteteUser");
-		$this->carroussel();
 	}
 	
 	private function accueil()
 	{
+		$modCar = new ModeleCarroussel();
+		$data = $modCar -> getPhotoCarroussel();
 		$this->afficheVue("head");
-		$this->afficheVue("acceuilUsager");
 		$this->carroussel();
 	}
 	
@@ -282,9 +282,6 @@ class Controleur
 
 		$oVue->affichePied();
 	}
-	
-	
-	
 }
 ?>
 
