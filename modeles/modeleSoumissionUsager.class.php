@@ -20,27 +20,12 @@ class modeleSoumissionUsager extends TemplateBase
 		return "";
 	} 
 	
+    
 	public function getTable()
 	{
 		return "Arrondissements";
 	}
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////      SELECT      /////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    
-    ////////////////////////////////      TABLE       /////////////////////////////////////////
-    
-    public function obtenirArrondissements()                                    // récupère toute la table Arrondissements
-    {
-        $stmt = $this->connexion->prepare("SELECT * FROM Arrondissements ORDER BY nomArrondissement ASC");
-        $stmt->execute();
-        return $stmt->fetchAll();                                               // retourne tous les arrondissements
-    }
-    
-    ///////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////////////      INSERT     //////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////////////////
+
 
     public function insererSoumission($param)                                   // insère les entrées d'une soumission dans la table Soumissions
     {   
@@ -97,5 +82,4 @@ class modeleSoumissionUsager extends TemplateBase
         }   
     }
 }
-
 ?>

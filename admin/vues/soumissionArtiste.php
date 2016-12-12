@@ -10,7 +10,7 @@
 				    <?php
                 }
              ?>
-        /><br/>
+        />
 
         <label for="nomArtisteOeuvreAjoutAdmin"><span class="couleurErreurSoumission">NOM DE L'ARTISTE : </span></label>
         <input type="text" name="nomArtisteOeuvreAjout" id="nomArtisteOeuvreAjoutAdmin"
@@ -22,7 +22,7 @@
 				    <?php
                 }
             ?>     
-        /><br/>
+        />
         
         <label for="collectifOeuvreAjoutAdmin"><span class="couleurErreurSoumission">COLLECTIF : </span></label>
         <input type="text" name="collectifOeuvreAjout" id="collectifOeuvreAjoutAdmin"
@@ -34,4 +34,4 @@
 				    <?php
                 }
             ?>
-        /><br/>
+        />

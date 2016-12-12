@@ -202,6 +202,29 @@ class Controleur
                 $this->afficherSoumissionsDesUsagers();
                 break;
                 
+                
+            case 'supprimeOeuvre':
+                $oeuvreASupprimer = ($_GET['idOeuvre']);
+                
+                /*-- DELETE TABLE Oeuvre --------------------------------------------------*/
+                $modeleCategorieAdmin = new modeleSoumission();
+                $valide = $modeleCategorieAdmin->supprimer($oeuvreASupprimer, "idOeuvre", "Oeuvres");
+                if(!$valide)
+				{                                                                       // si non réussi
+                    $this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
+                    break;
+                }
+                $_SESSION['ongletActif'] = 'listeOeuvresAdmin';
+                $this->afficherEnteteAdmin();
+                $this->afficherListeDesOeuvres();
+                break;
+                
+            
+            case 'listeOeuvresAdmin':  
+                $this->afficherEnteteAdmin();
+                $this->afficherListeDesOeuvres();
+				break;
+                
             
             default:
 				$this->accueil();
@@ -311,6 +334,16 @@ class Controleur
         $vue = "soumissionsDesUsagers";
         $this->afficheVue($vue, $data);
     }
+    
+     private function afficherListeDesOeuvres()
+     {
+         // récupération du code de Nicolas d'affichage de la liste des oeuvres du côté usager
+         $data = [];                                                             // initialisation de $data
+         $modeleListe = new ModeleListe();
+         array_push($data,$modeleListe->getOeuvresParPhotos());
+         array_push($data,$modeleListe->getOeuvresParAuteur());
+         $this->afficheVue("listeOeuvresAdmin",$data); 
+     }
     
 	private function afficheImportation()
 	{

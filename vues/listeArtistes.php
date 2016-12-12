@@ -30,7 +30,6 @@
 			}
 		});
 	};
-
 </script>
 
 <section id="liste">
@@ -47,15 +46,15 @@
 		}
 	?>
 	</span>
-    <br>
-    <div class="pageListe" id="page1">
+
+    <section class="pageListe" id="page1">
 	<?php
 	$inconnu="<span class='inconnu'>(non-applicable)</span>";
 	foreach($data as $artiste)
 	{
 		?>
-		<hr>
-		<div class="elemListe">
+		<!--hr-->
+		<article class="elemListe">
 			<input type="hidden" class="idArtiste" value="<?php echo $artiste["idArtiste"]?>">
 			<div class="rondListe"></div>
 			<ul>
@@ -96,7 +95,7 @@
 				}
 				?>
 			</ul>
-		</div>
+		</article>
 		<?php
             $elemTotal++;
 			$elemCourant++;
@@ -115,7 +114,7 @@
 					<div class="pageListe pageCache" id="<?php echo "page".$nbrePage;?>">
 				<?php	
 			}
-	}
+        }
 	?>
-    </div>
+    </section>
 </section>

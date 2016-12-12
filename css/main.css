@@ -14,6 +14,10 @@
     letter-spacing: 1px;
 }
 
+.texteCentre{
+    text-align: center;
+}
+
 
 /* Entête
 -------------------------------------------------------------*/
@@ -21,7 +25,7 @@
 #logo{
     font-size : 3.5em;
     color : #009999;
-    margin-top : 40px;
+    margin-top : 30px;
     margin-left : 40px;
 }
 
@@ -136,8 +140,15 @@
 }
 
 #menuAcceuil ul{
-    background-color: #4d4d4d;
-    padding-top: 50px;
+    /* source du dégradé : http://www.w3schools.com/css/tryit.asp?filename=trycss3_gradient-linear_diagonal */
+    background-color: #050515;
+    background: #050515; /* Par défaut si le navigateur ne prend pas le dégradé */    
+    background: -webkit-linear-gradient(left top, #050515, #000033); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom right, #050515, #000033); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom right, #050515, #000033); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to bottom right, #050515, #000033); /* Syntaxe standard */
+
+    padding-top: 40px;
 	margin-bottom: 5px;
 }
 
@@ -146,10 +157,10 @@
     list-style-type: none;
     margin-top: 30px;
     margin-right : 10px;
-    width: 120px;
+    width: 100px;
     padding-top: 15px;
-    text-align: center;
-    background-color: white;
+    text-align: left;
+    /*background-color: white;*/
 }
 
 #menuAcceuil #liRecherche{
@@ -159,7 +170,8 @@
 
 #menuAcceuil a{
     text-decoration: none;
-    color: #4d4d4d; 
+    /*color: #4d4d4d; */
+    color: white; 
 }
 
 #menuAcceuil a:hover{
@@ -172,6 +184,48 @@
     color: black;
     pointer-events: none;
 }
+
+/* Burger
+-------------------------------------------------------------
+section.entete {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  height: 70px;
+}
+section #burger {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+section.entete ul {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 20px;
+  margin-top: -50px;
+}
+label {
+  display: block;
+}
+#burger div {
+  width: 40px;
+  height: 5px;
+  border-radius: 0px;
+  background-color: FloralWhite;
+  margin-bottom: 10px;
+  transform: rotateZ(0deg);
+  transform-origin: 0 2.4px;
+  transition: transform 0.5s ease-in-out;
+  transform: translate(0px, 0px);
+}
+
+idée : http://www.details.co.jp/
+
+*/
 
 #barRechercheAcceuil{
 	color: #4d4d4d;
@@ -323,59 +377,3 @@ li, ul{
 	font-style:italic;
 }
 
-/* Soumission
--------------------------------------------------------------*/
-
-.soumissionUsager{
-    width: 602px;
-    color : black;
-    margin: auto;
-    margin-top : 50px;
-}
-
-.soumissionUsager h1{
-    position: relative;
-    left: 27%;
-    margin-bottom: -1px;
-}
-
-.soumissionUsagerFormulaire{
-    width: 600px;
-    color : black;
-    padding-left: 5%;
-    padding-top : 20px;
-    padding-bottom: 20px;
-    border : solid black 2px;
-}
-
-.soumissionUsagerFormulaire label{
-    display:inline-block;
-    width: 200px;
-    text-align:right;
-    margin-bottom: 10px;
-}
-
-.soumissionUsagerFormulaire input{
-    width: 337px;
-}
-
-#boutonSoumission{
-    position: relative;
-    left: 75.5%;
-    padding: 15px 35px;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-    border: none;
-}
-
-#boutonSoumission:hover{
-    color : #016737; 
-    background-color: white; 
-}
-
-#msgErreurSoumision{
-    color : brown;
-    margin-left : 37%;
-}

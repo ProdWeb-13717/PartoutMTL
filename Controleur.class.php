@@ -132,7 +132,8 @@ class Controleur
                 $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
                 $data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
                 $vue = "soumissionOeuvreUsager";
-                $this->afficheVue($vue, $data);    
+                $this->afficheVue($vue, $data); 
+                $this->afficheVue("footer");
                 break;
             
             
@@ -192,6 +193,7 @@ class Controleur
 	{
 		$this->afficheVue("head");
 		$this->afficheVue("acceuilUsager");
+        $this->afficheVue("footer");
 	}
 	
 	function rechercheOeuvreTitre() // la fonction pour la recherche d'oeuvre par son titre

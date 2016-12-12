@@ -11,19 +11,23 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Recherche extends TemplateBase {
+
+
+class Recherche extends TemplateBase 
+{
 	
-    
-	protected function getTable()
+    protected function getTable()
 	{
 		return "Oeuvres";
 	}
 	
+    
 	protected function getPrimaryKey()
 	{
 		return "";
 	}
 	
+    
 	public function rechercheOeuvres($valeur, $cle = null)
 	{
 		try
@@ -42,6 +46,8 @@ class Recherche extends TemplateBase {
 			return false;
 		}
 	}
+    
+    
 	public function rechercheOeuvresParAuteur($valeur) 
 	{
 		try
@@ -61,6 +67,7 @@ class Recherche extends TemplateBase {
 		}
 	}
 	
+    
 	public function rechercheOeuvresParPhotos($valeur) 
 	{
 		try
@@ -79,6 +86,7 @@ class Recherche extends TemplateBase {
 		}
 	}
 	
+    
 	public function rechercheArtisteTout($valeur) 
 	{
 		try
@@ -94,5 +102,5 @@ class Recherche extends TemplateBase {
 			return false;
 		}
 	}
-	
 }
+?>

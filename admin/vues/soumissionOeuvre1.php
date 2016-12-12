@@ -1,6 +1,6 @@
 <!-- DÉBUT DE LA PAGE SOUMISSION D'UNE OEUVRE, TABLE Oeuvres ---------------------------------------->
 
-<div class="soumissionAdmin">
+<section class="soumissionAdmin">
     <h1>AJOUTER UNE OEUVRE</h1>
     <section class="soumissionAdminFormulaire">
         <label for="titreOeuvreAjoutAdmin"><span class="couleurErreurSoumission">TITRE : </span></label>
@@ -13,6 +13,6 @@
 				    <?php
 			     }
             ?>
-        /><br/>
+        />
         <label for="titreVarianteOeuvreAjoutAdmin">TITRE VARIANTE : </label>
-        <input type="text" name="titreVarianteOeuvreAjout" id="titreVarianteOeuvreAjoutAdmin"/><br/>
+        <input type="text" name="titreVarianteOeuvreAjout" id="titreVarianteOeuvreAjoutAdmin"/>

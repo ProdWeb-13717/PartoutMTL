@@ -42,6 +42,11 @@
 	{
 		$_SESSION['idSoumissionUsager'] = '';
 	}
+
+    if(empty($_SESSION['idOeuvre']))
+	{
+		$_SESSION['idOeuvre'] = '';
+	}
 	
 	if(empty($_SESSION['ongletActif']))
 	{

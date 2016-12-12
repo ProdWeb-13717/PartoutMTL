@@ -10,10 +10,10 @@ set_time_limit(500);
  */
 
 
-
 abstract class TemplateBase
 {
-	protected $connexion;
+	
+    protected $connexion;
 	
 	abstract protected function getPrimaryKey(); //exemple pour Oeuvres = getPrimaryKey(){ return "idOeuvre"}
 	
@@ -45,8 +45,6 @@ abstract class TemplateBase
 			{
 				$cle = $this->getPrimaryKey();
 			}
-			
-			
 			$stmt = $this->connexion->prepare("select * from " . $table . " WHERE " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
@@ -67,7 +65,7 @@ abstract class TemplateBase
 			{
 				$table = $this->getTable();
 			}
-			$stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle);
+            $stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle);
 			$stmt->execute();
 			return $stmt->fetchAll();
 		}
@@ -99,7 +97,6 @@ abstract class TemplateBase
     }
     
 
-	
 	public function supprimer($valeur, $cle = null, $table = null)
 	{
 		try

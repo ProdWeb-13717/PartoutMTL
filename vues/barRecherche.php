@@ -1,7 +1,7 @@
-<div id="barRecherche">
+<aside id="barRecherche">
 	<form class="rechercheAcceuil">
 		<input id='motRecherche' placeholder="" name="rechercheOeuvre" type='text'  />
 		<input type="button" id="btnRecherche" value="Rechercher"/>
 	</form>
-</div>
+</aside>
 <p id="msgResultat"><p>

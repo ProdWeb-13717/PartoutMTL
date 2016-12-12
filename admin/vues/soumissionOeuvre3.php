@@ -10,10 +10,10 @@
 				    <?php
                 }
             ?> 
-         /><br/>
+         />
 		 
 		 <label for="batimentOeuvreAjoutAdmin">BÂTIMENT : </label>
-		 <input type="text" name="batimentOeuvreAjout" id="batimentOeuvreAjoutAdmin"/><br/>
+		 <input type="text" name="batimentOeuvreAjout" id="batimentOeuvreAjoutAdmin"/>
 		 
 		 <label for="adresseCiviqueOeuvreAjoutAdmin">ADRESSE CIVIQUE : </label>
 		 <input type="text" name="adresseCiviqueOeuvreAjout" id="adresseCiviqueOeuvreAjoutAdmin"
@@ -25,16 +25,16 @@
                     <?php
 			    }
             ?> 
-         /><br/>
+         />
 		 
 		 <label for="latitudeOeuvreAjoutAdmin"><span class="couleurErreurSoumission">LATITUDE : </span></label>
-		 <input type="text" name="latitudeOeuvreAjout" id="latitudeOeuvreAjoutAdmin" placeholder= "45.0000"/><br/>
+		 <input type="text" name="latitudeOeuvreAjout" id="latitudeOeuvreAjoutAdmin" placeholder= "45.0000"/>
 		 
 		 <label for="longitudeOeuvreAjoutAdmin"><span class="couleurErreurSoumission">LONGITUDE : </span></label>
-		 <input type="text" name="longitudeOeuvreAjout" id="longitudeOeuvreAjoutAdmin" placeholder= "-73.0000"/><br/>
+		 <input type="text" name="longitudeOeuvreAjout" id="longitudeOeuvreAjoutAdmin" placeholder= "-73.0000"/>
 		 
 		 <label for="urlPhotoOeuvreAjoutAdmin">URL PHOTO : </label>
-		 <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"/><br/>
+		 <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"/>
 		 
 		 <label for="descriptionOeuvreAjoutAdmin">DESCRIPTION : </label>
 		 <textarea rows="4" style="width: 337px;" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"
@@ -44,9 +44,8 @@
 				    echo $data['descriptionSoumission'];
 			     }
              ?>
-         </textarea><br/>
-		 <br/>
+         </textarea>
+
 		 <span id="msgErreurSoumision"></span>
-		 <br/>
 
 	 </section>
