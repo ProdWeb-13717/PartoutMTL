@@ -1,3 +1,16 @@
+<?php
+	$imagesURL = "";
+	$longueur = count($data);
+
+	for ($i = 0 ; $i < $longueur ; $i++)
+	{
+		$imagesURL = $imagesURL.$data[$i]["urlPhoto"];
+		if($i != ($longueur-1))
+		{
+			$imagesURL = $imagesURL."~";
+		}
+	}
+?>
 <body>
     <header>
         <div id="logo">P<span id="noir">ART</span>OUT<br/></div>
@@ -9,26 +22,7 @@
                 <li><a href="index.php?requete=listeArtistes">ARTISTES</a></li>
                 <li><a href="index.php?requete=listeOeuvres">OEUVRES</a></li>
                 <li><a href="index.php?requete=soumissionOeuvre">SOUMISSION</a></li>  
-            </ul>
-			
-        </div>
-		
+            </ul>	
+        </div>	
     </header>
-	
-	<div id="carousel"> 
-		<div id="barRechercheAccueil">
-			<form class="rechercheAcceuil">
-				<input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
-				<input type="button" id="btnRecherche" value="Rechercher"/>
-			</form>
-		</div>
-	</div>
-	<div id="apropos">
-		<p id="titreApropos">
-			What is Lorem Ipsum?
-		</p>
-		<p id="text">
-		Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.	
-		</p>
-	</div>
 </body>

@@ -182,8 +182,10 @@ VALUE
 ("1", MD5("1"), "un@hotmail.com", 2),
 
 INSERT INTO Carroussel(urlPhoto) 
-VALUE("./images/image_default_oeuvre_1.jpg");
-VALUE("./images/image_default_oeuvre_2.jpg");
-VALUE("./images/image_default_oeuvre_3.jpg");
-VALUE("./images/image_default_oeuvre_4.jpg");
+VALUE("./images/Acceuil_1"),
+("./images/Acceuil_4"),
+("./images/image_default_oeuvre_1.jpg"),
+("./images/image_default_oeuvre_2.jpg"),
+("./images/image_default_oeuvre_3.jpg"),
+("./images/image_default_oeuvre_4.jpg");
 

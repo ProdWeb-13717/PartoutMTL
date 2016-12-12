@@ -9,7 +9,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 
 <!--Script pour afficher une page quand on clique son onglet correspondant-->
 <script>
-	window.onload = function() {
+	window.addEventListener ("load", function(){
 		var secListe = document.getElementById("liste");
 		secListe.addEventListener("click",function(){
 			var eTarget = event.target;
@@ -30,7 +30,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 				window.scrollTo(0,0); //scroll vers le haut de la page
 			}
 		});
-	};
+	});
 
 </script>
 
