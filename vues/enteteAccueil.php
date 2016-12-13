@@ -2,11 +2,11 @@
     <header>
         <section>
             <article class="logo">
-                P<span id="art">ART</span>OUT
+            <span class="logoFadeIn logoFadeInAnimation">P</span><span id="art">ART</span><span class="logoFadeIn logoFadeInAnimation">OUT</span>
             </article>    
             <article class="sousTitre">PORTAIL D'ART PUBLIC DE MONTRÉAL</article>
         </section>
-		<div class="ligne"></div>
+        <div class="ligne ligne_glisse"></div>
         <nav id="menuAcceuil" class='entete'> 
             <ul class="row menu">   
                 <li><a href="index.php?requete=acceuil">ACCUEIL</a></li>
@@ -16,5 +16,6 @@
                 <li><a href="index.php?requete=soumissionOeuvre">SOUMISSION</a></li>  
             </ul>	
         </nav>
+        
     </header>
-	
+    

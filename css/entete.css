@@ -1,0 +1,293 @@
+/*  TABLE DES MATIÈRES
+    - Logo
+    - Fade in logo
+    - Menu
+    - Media queries
+-------------------------------------------------------------*/
+
+/* Logo
+-------------------------------------------------------------*/
+
+.logo{
+    font-size : 3.5em;
+    color : #050515;
+    margin-top : 30px;
+    margin-left : 40px;
+}
+
+#art{
+    color : #009999;
+}
+
+.sousTitre{
+    position: absolute;
+    font-family: 'Muli', sans-serif;
+    font-size: 1em;
+    letter-spacing: 3px;
+    color: white;
+    margin-left: 40px;
+    margin-top: -10px;
+}
+
+.ligne{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 445px;
+    background: white;
+    height: 2px;
+    width: 100%;
+}
+
+.ligne_glisse {
+  animation-name: glisse;
+  animation-delay: 0s;
+  animation-duration: 2s;
+  animation-direction: normal;
+  animation-iteration-count: 1;
+}
+@keyframes glisse {
+  0% {
+    transform: scale(0,0);
+  }
+  100% {
+    transform: scale(1,1);
+  }
+}
+
+/* Fade in logo
+-------------------------------------------------------------*/
+
+.logoFadeIn{
+    opacity: 1;
+    -webkit-transition: opacity 1s ease-in;
+        -moz-transition: opacity 1s ease-in;
+        -ms-transition: opacity 1s ease-in;
+        -o-transition: opacity 1s ease-in;
+        transition: opacity 1s ease-in;
+}
+
+/*
+src fade in : http://stackoverflow.com/questions/11679567/using-css-for-fade-in-effect-on-page-load
+*/
+.logoFadeInAnimation {
+    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 4s; /* Firefox < 16 */
+        -ms-animation: fadein 4s; /* Internet Explorer */
+         -o-animation: fadein 4s; /* Opera < 12.1 */
+            animation: fadein 4s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Menu
+-------------------------------------------------------------*/
+
+.entete{
+    height: 120px;
+    margin-top: -40px;
+    /* source du dégradé : http://www.w3schools.com/css/tryit.asp?filename=trycss3_gradient-linear_diagonal */
+    background-color: #050515;
+    background: #050515;                                                /* Par défaut si le navigateur ne prend pas le dégradé */    
+    background: -webkit-linear-gradient(left top, #050515, #000033);    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom right, #050515, #000033);     /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom right, #050515, #000033);   /* Firefox 3.6 - 15 */
+    background: linear-gradient(to bottom right, #050515, #000033);     /* Syntaxe standard */
+
+	margin-bottom: 5px;
+}
+
+.menu{
+    position: relative;
+    top: 95px;
+    margin-right: 40px;
+}
+
+.menu li{
+    list-style-type: none;
+}
+
+.menu a{
+    font-family: 'Muli', sans-serif;
+    font-size: 0.7em;
+    letter-spacing: 5px;
+    color: white;
+    opacity: 0.7;
+    text-decoration: none; 
+    
+    -webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+    
+}
+
+.menu a:hover {
+    color: white;
+    opacity: 1;
+    letter-spacing: 7px;
+}
+
+
+/* Media queries
+-------------------------------------------------------------*/
+
+/* iPad ---------------------------------- */
+@media (max-width: 800px) {
+    
+    .entete{
+        height: 180px;
+    }
+    
+    .menu{
+        top: 65px;
+    }
+        
+    .menu.row{
+        flex-flow: column;
+    }
+}
+
+
+/* Téléphone ----------------------------- */
+@media (max-width: 480px) {
+
+   
+}
+
+
+//////////////////////////////////////////////////////////////
+
+/*
+#blanch{
+    color : white;
+}
+*/
+
+/*
+#menuUser{
+    margin-top : -39px;
+}
+
+#menuUser ul{
+    background-color : #4d4d4d;
+    padding-top : 50px;
+}
+
+#menuUser li{
+    display : inline-block;
+    list-style-type : none;
+    margin-top : 30px;
+    margin-right : 10px;
+    width : 120px;
+    padding-top : 15px;
+    text-align:center;
+    background-color : white;
+    //background-color : #547968;
+    //border : solid black 2px;
+}
+#menuUser #liRecherche{
+    width : 150px;
+}
+
+#menuUser a{
+    text-decoration: none;
+    color : black; 
+}
+
+#menuUser a:hover{
+    color : #009999;
+}
+
+#menuUser .actif { 
+    display : inline-block;
+    padding-top : 40px;
+    color: black;
+    pointer-events:none;
+    //border : solid black 1px;
+}
+
+#titreUser{
+    position: absolute;
+    color : white;
+    top: 97px;
+	font-style: italic;
+	font-weight:normal;
+    margin-left : 150px;
+    letter-spacing: 4px;   
+}
+
+#menuAccueil{
+    margin-top: -39px;
+}
+*/
+
+/*#menuAcceuil ul{*/
+
+
+
+
+/*
+#menuAccueil li{
+    display: inline-block;
+    list-style-type: none;
+    margin-top: 30px;
+    margin-right : 10px;
+    width: 100px;
+    padding-top: 15px;
+    text-align: left;
+    /*background-color: white;*/
+}
+
+/*
+#menuAccueil a{
+    text-decoration: none;
+    /*color: #4d4d4d; */
+    /*color: white; 
+}
+*/
+/*
+#menuAccueil a:hover{
+    color: #009999;
+}
+
+#menuAccueil .actif { 
+    display: inline-block;
+    padding-top: 40px;
+    color: black;
+    pointer-events: none;
+}
+*/
+
+
+
+
+
+

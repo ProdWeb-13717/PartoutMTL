@@ -46,9 +46,8 @@ class Recherche extends TemplateBase
 			return false;
 		}
 	}
-    
-    
-	public function rechercheOeuvresParAuteur($valeur) 
+
+	public function rechercheOeuvresParAuteur($valeur) //simple
 	{
 		try
 		{
@@ -67,8 +66,7 @@ class Recherche extends TemplateBase
 		}
 	}
 	
-    
-	public function rechercheOeuvresParPhotos($valeur) 
+	public function rechercheOeuvresParPhotos($valeur) //simple
 	{
 		try
 		{
@@ -86,7 +84,45 @@ class Recherche extends TemplateBase
 		}
 	}
 	
-    
+	
+	public function rechercheOeuvresAvanceParAuteur($valeur,$cleRecherche) //avance
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre, prenomArtiste, nomArtiste, collectif
+											   FROM Oeuvres
+											   LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+											   JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											   WHERE Oeuvres.".$cleRecherche." LIKE '".$valeur."%'
+											   ORDER BY Oeuvres.idOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	public function rechercheOeuvresAvanceParPhotos($valeur,$cleRecherche) //avance
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Oeuvres.idOeuvre, Oeuvres.titre, Oeuvres.dateFinProduction, Photos.urlPhoto
+											   FROM Oeuvres
+											   LEFT JOIN Photos ON Oeuvres.idOeuvre = Photos.idOeuvre
+											   WHERE Oeuvres.".$cleRecherche." LIKE '".$valeur."%'
+											   ORDER BY Oeuvres.idOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+
 	public function rechercheArtisteTout($valeur) 
 	{
 		try
@@ -102,5 +138,84 @@ class Recherche extends TemplateBase
 			return false;
 		}
 	}
+	
+	public function rechercheAvanceArtisteTout($valeur,$cleRecherche) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT idArtiste, prenomArtiste, nomArtiste, collectif FROM Artistes
+												where ".$cleRecherche." LIKE '".$valeur."%' 
+												");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	
+	public function rechercheAvanceArtistesOeuvres($valeur) //avanceeeeeeeeeeeeeeee Oeuvres par son artiste
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Artistes.nomArtiste,Artistes.collectif,Artistes.idArtiste,Artistes.prenomArtiste, Oeuvres.idOeuvre, Oeuvres.titre, Oeuvres.dateFinProduction, Photos.urlPhoto, Photos.idPhoto 
+												FROM Photos RIGHT JOIN Oeuvres ON Oeuvres.idOeuvre = Photos.idOeuvre 
+												LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+												JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+												WHERE Artistes.nomArtiste LIKE '".$valeur."%' OR Artistes.prenomArtiste  LIKE '".$valeur."%'
+ 
+												");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	
+	public function rechercheAvanceArtistesOeuvresArrondissements($valeur) //avance Oeuvres par Arrondissements
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Artistes.nomArtiste ,Artistes.prenomArtiste, Artistes.idArtiste, Artistes.collectif, Oeuvres.titre, Oeuvres.idOeuvre, Oeuvres.dateFinProduction, Arrondissements.nomArrondissement, Oeuvres.idArrondissement, Photos.urlPhoto, Photos.idPhoto 
+											FROM Photos RIGHT JOIN Oeuvres ON Oeuvres.idOeuvre = Photos.idOeuvre 
+											LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+											JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											JOIN Arrondissements on Arrondissements.idArrondissement= Oeuvres.idArrondissement 
+											WHERE Arrondissements.nomArrondissement LIKE '".$valeur."%' 
+												");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	public function rechercheAvanceArtistesOeuvresCategories($valeur) //avance Oeuvres par Categories
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT Artistes.nomArtiste ,Artistes.prenomArtiste, Artistes.idArtiste, Artistes.collectif, Oeuvres.titre, Oeuvres.idOeuvre, Oeuvres.dateFinProduction, Categories.nomCategorie, Oeuvres.idCategorie, Photos.urlPhoto, Photos.idPhoto 
+											FROM Photos RIGHT JOIN Oeuvres ON Oeuvres.idOeuvre = Photos.idOeuvre 
+											LEFT JOIN ArtistesOeuvres ON Oeuvres.idOeuvre = ArtistesOeuvres.idOeuvre
+											JOIN Artistes ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
+											JOIN Categories on Categories.idCategorie= Oeuvres.idCategorie 
+											WHERE Categories.nomCategorie LIKE '".$valeur."%'
+												");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}	
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
 }
 ?>

@@ -1,7 +1,7 @@
 /*  TABLE DES MATIÈRES
-    - 
-    - 
-    - 
+    - Global
+    - Recherche
+    - Carousel
     -
     -
 -------------------------------------------------------------*/
@@ -18,24 +18,9 @@
     text-align: center;
 }
 
-
-/* Entête
+/* Recherche
 -------------------------------------------------------------*/
 
-#logo{
-    font-size : 3.5em;
-    color : #009999;
-    margin-top : 30px;
-    margin-left : 40px;
-}
-
-#noir{
-    color : black;
-}
-
-#blanch{
-    color : white;
-}
 #barRecherche{
 	color: #4d4d4d;
 	text-align: center;
@@ -43,69 +28,14 @@
 	margin-top: 50px;
 }
 
-#menuUser{
-    margin-top : -39px;
-}
-
-#menuUser ul{
-    background-color : #4d4d4d;
-    padding-top : 50px;
-}
-
-#menuUser li{
-    display : inline-block;
-    list-style-type : none;
-    margin-top : 30px;
-    margin-right : 10px;
-    width : 120px;
-    padding-top : 15px;
-    text-align:center;
-    background-color : white;
-    //background-color : #547968;
-    //border : solid black 2px;
-}
-#menuUser #liRecherche{
-   
-    width : 150px;
-    
-}
-
-
-#menuUser a{
-    text-decoration: none;
-    color : black; 
-}
-
-#menuUser a:hover{
-    color : #009999;
-}
-
-#menuUser .actif { 
-    display : inline-block;
-    padding-top : 40px;
-    color: black;
-    pointer-events:none;
-    //border : solid black 1px;
-}
-
-#titreUser{
-    position: absolute;
-    color : white;
-    top: 97px;
-	font-style: italic;
-	font-weight:normal;
-    margin-left : 150px;
-    letter-spacing: 4px;   
-}
-
-#btnRecherche{
+#btnRecherche , #btnRechercheAvance{
 	background-color: #4d4d4d;
 	text-align: center;
 	color: white;
 	width: 150px;
 }
 
-#motRecherche{
+#motRecherche, #motRechercheAvance{
 	width: 350px;
 }
 
@@ -119,7 +49,19 @@
 	margin-right: 10px;
 }
 
-/* Acceuil
+#menuAccueil #liRecherche{
+   width: 150px;
+}
+
+#barRechercheAcceuil{
+	color: #4d4d4d;
+	min-width: 550px;
+	margin: 0 auto;
+	padding:17% 0 17% 0;
+}
+
+
+/* Carousel
 -------------------------------------------------------------*/
 
 #carousel{ 
@@ -135,110 +77,11 @@
 	text-align: center;
 }
 
-#menuAcceuil{
-    margin-top: -39px;
-}
-
-#menuAcceuil ul{
-    /* source du dégradé : http://www.w3schools.com/css/tryit.asp?filename=trycss3_gradient-linear_diagonal */
-    background-color: #050515;
-    background: #050515; /* Par défaut si le navigateur ne prend pas le dégradé */    
-    background: -webkit-linear-gradient(left top, #050515, #000033); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(bottom right, #050515, #000033); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(bottom right, #050515, #000033); /* Firefox 3.6 - 15 */
-    background: linear-gradient(to bottom right, #050515, #000033); /* Syntaxe standard */
-
-    padding-top: 40px;
-	margin-bottom: 5px;
-}
-
-#menuAcceuil li{
-    display: inline-block;
-    list-style-type: none;
-    margin-top: 30px;
-    margin-right : 10px;
-    width: 100px;
-    padding-top: 15px;
-    text-align: left;
-    /*background-color: white;*/
-}
-
-#menuAcceuil #liRecherche{
-   width: 150px;
-}
-
-
-#menuAcceuil a{
-    text-decoration: none;
-    /*color: #4d4d4d; */
-    color: white; 
-}
-
-#menuAcceuil a:hover{
-    color: #009999;
-}
-
-#menuAcceuil .actif { 
-    display: inline-block;
-    padding-top: 40px;
-    color: black;
-    pointer-events: none;
-}
-
-/* Burger
--------------------------------------------------------------
-section.entete {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: flex-end;
-  height: 70px;
-}
-section #burger {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-}
-section.entete ul {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  height: 20px;
-  margin-top: -50px;
-}
-label {
-  display: block;
-}
-#burger div {
-  width: 40px;
-  height: 5px;
-  border-radius: 0px;
-  background-color: FloralWhite;
-  margin-bottom: 10px;
-  transform: rotateZ(0deg);
-  transform-origin: 0 2.4px;
-  transition: transform 0.5s ease-in-out;
-  transform: translate(0px, 0px);
-}
-
-idée : http://www.details.co.jp/
-
-*/
-
-#barRechercheAcceuil{
-	color: #4d4d4d;
-	min-width: 550px;
-	margin: 0 auto;
-	padding:17% 0 17% 0;
-	
-}
-
+/*
 #apropos{
 	padding: 20px;
 	width: 100%
-}	
+}*/
 
 /* Fin d'Acceuil
 -------------------------------------------------------------*/

@@ -12,8 +12,7 @@
         <link rel="stylesheet" href="./css/base_h5bp.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/flexbox.css" type="text/css" media="screen">
-    
-        <link rel="stylesheet" href="./css/logo.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/entete.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/soumissionUsager.css" type="text/css" media="screen">
         
         
@@ -26,6 +25,7 @@
         <script src="./js/plugins.js"></script>
         <script src="./js/rechercheAJAX.js"></script>
         <script src="./js/main.js"></script>
+        <script src="./js/menu.js"></script>
         <script src="./js/soumissionUsager.js"></script>
         
         <!-- JQUERY -----------------> 

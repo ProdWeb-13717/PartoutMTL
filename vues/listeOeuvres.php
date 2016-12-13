@@ -128,7 +128,8 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 					<br>
 					<div class="pageListe pageCache" id="<?php echo "page".$nbrePage;?>">
 				<?php	
-			}
+                
+                }
 		}
 	}
 	?>

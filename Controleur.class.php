@@ -80,7 +80,7 @@ class Controleur
 				$this->afficheVue("rechercheAvance");
 				break;	
 				
-			case 'rechercheOeuvre': // la value de recherche d'oeuvre par titre envoye par AJAX
+			case 'rechercheOeuvre': 
 				if(isset($_GET['valRecherche']))
 				{
 					$data = []; // initialisation de $data
@@ -94,7 +94,63 @@ class Controleur
 				}
 				break;
             
-            case 'rechercheArtistes': // la value de recherche d'oeuvre par titre envoye par AJAX
+			case 'rechercheAvanceOeuvres': 
+				if(isset($_GET['valRecherche']) && isset($_GET['cleRecherche']))
+				{
+					$data = []; // initialisation de $data
+					$this->entete();
+					$modeleListe = new Recherche();
+					array_push($data,$modeleListe->rechercheOeuvresAvanceParPhotos($_GET['valRecherche'],$_GET['cleRecherche']));
+					array_push($data,$modeleListe->rechercheOeuvresAvanceParAuteur($_GET['valRecherche'],$_GET['cleRecherche']));
+					$this->afficheVue("rechercheAvance");
+					$this->afficheVue("listeOeuvres",$data);
+				
+				}
+				break;
+				
+			case 'rechercheAvanceArtistesOeuvres':  //avance par oeuvre par artistes
+				if(isset($_GET['valRecherche']))
+				{
+					$data = []; // initialisation de $data
+					$this->entete();
+					$modeleListe = new Recherche();
+					array_push($data,$modeleListe->rechercheAvanceArtistesOeuvres($_GET['valRecherche']));
+					array_push($data,$modeleListe->rechercheAvanceArtistesOeuvres($_GET['valRecherche']));
+					$this->afficheVue("rechercheAvance");
+					$this->afficheVue("listeOeuvres",$data);
+				
+				}
+				break;
+				
+			case 'rechercheAvanceArtistesOeuvresArrondissements':  //avance par oeuvre par Arrondissements
+				if(isset($_GET['valRecherche']))
+				{
+					$data = []; // initialisation de $data
+					$this->entete();
+					$modeleListe = new Recherche();
+					array_push($data,$modeleListe->rechercheAvanceArtistesOeuvresArrondissements($_GET['valRecherche']));
+					array_push($data,$modeleListe->rechercheAvanceArtistesOeuvresArrondissements($_GET['valRecherche']));
+					$this->afficheVue("rechercheAvance");
+					$this->afficheVue("listeOeuvres",$data);
+				
+				}
+				break;
+				
+				case 'rechercheAvanceArtistesOeuvresCategories':  //avance par oeuvre par Categories
+				if(isset($_GET['valRecherche']))
+				{
+					$data = []; // initialisation de $data
+					$this->entete();
+					$modeleListe = new Recherche();
+					array_push($data,$modeleListe->rechercheAvanceArtistesOeuvresCategories($_GET['valRecherche']));
+					array_push($data,$modeleListe->rechercheAvanceArtistesOeuvresCategories($_GET['valRecherche']));
+					$this->afficheVue("rechercheAvance");
+					$this->afficheVue("listeOeuvres",$data);
+				
+				}
+				break;
+            
+            case 'rechercheArtistes': 
 				if(isset($_GET['valRecherche']))
 				{
 					$data = []; // initialisation de $data
@@ -107,7 +163,20 @@ class Controleur
 				}
 				break;
             
-            case 'rechercheAcceuil': // la value de recherche d'oeuvre par titre envoye par AJAX
+			case 'rechercheAvanceArtistes': // la value de recherche d'oeuvre par titre envoye par AJAX
+				if(isset($_GET['valRecherche']) && isset($_GET['cleRecherche']))
+				{
+					$data = []; // initialisation de $data
+					$this->entete();
+					$modeleListe = new Recherche();
+					$data = $modeleListe->rechercheAvanceArtisteTout($_GET['valRecherche'],$_GET['cleRecherche']);
+					$this->afficheVue("rechercheAvance");
+					$this->afficheVue("listeArtistes",$data);
+					
+				}
+				break;
+            
+            case 'rechercheAccueil': // la value de recherche d'oeuvre par titre envoye par AJAX
 				if(isset($_GET['valRecherche']))
 				{
 					//********* recherche pour artistes
@@ -187,13 +256,23 @@ class Controleur
 	{
 		$this->afficheVue("head");
 		$this->afficheVue("enteteUser");
+		$this->carroussel();
 	}
 	
 	private function accueil()
 	{
 		$this->afficheVue("head");
-		$this->afficheVue("acceuilUsager");
+        $this->afficheVue("enteteAccueil");
+		$this->afficheVue("accueilUsager");
         $this->afficheVue("footer");
+		$this->carroussel();
+	}
+	
+	function carroussel() // la fonction pour afficher le carroussel
+	{
+		$modCar = new ModeleCarroussel();
+		$data = $modCar -> getPhotoCarroussel();
+		$this->afficheVue("carroussel",$data);
 	}
 	
 	function rechercheOeuvreTitre() // la fonction pour la recherche d'oeuvre par son titre
@@ -206,6 +285,7 @@ class Controleur
 
 		$oVue->affichePied();
 	}
+	
 	
 	
 }
