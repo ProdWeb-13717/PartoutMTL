@@ -13,7 +13,7 @@
 		
 		
 		<nav id="menuAdmin" class="menu">
-            <ul>
+            <ul class="row menu">
                 <li class="<?php echo $onglets['gestion']; ?>" ><a href="index.php?requete=gestion">GESTION</a></li>
                 <li class="<?php echo $onglets['ajoutOeuvre']; ?>" ><a href="index.php?requete=soumission">AJOUT D'OEUVRE</a></li>
                 <li class="<?php echo $onglets['soumission']; ?>" ><a href="index.php?requete=soumissionsDesUsagers">SOUMISSIONS USAGER</a></li>
@@ -22,3 +22,4 @@
                 <li class="<?php echo $onglets['listeOeuvresAdmin']; ?>" ><a href="index.php?requete=listeOeuvresAdmin">LISTE</a></li>
             </ul>     
         </nav>
+

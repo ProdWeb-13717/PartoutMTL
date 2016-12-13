@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="./css/normalize.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/base_h5bp.css" type="text/css" media="screen">
 		<link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="./css/gestion.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/soumission.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/importation.css" type="text/css" media="screen">
         

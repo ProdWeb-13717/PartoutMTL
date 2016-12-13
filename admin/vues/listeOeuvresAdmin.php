@@ -21,7 +21,6 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 		{
 			$precendent = $oeuvre["idOeuvre"];
 			?>		
-			<hr>
 			<div class="elemListe">
 					<img src="
 						<?php 

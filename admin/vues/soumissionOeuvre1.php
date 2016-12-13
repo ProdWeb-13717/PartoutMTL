@@ -1,7 +1,7 @@
 <!-- DÉBUT DE LA PAGE SOUMISSION D'UNE OEUVRE, TABLE Oeuvres ---------------------------------------->
 
-<section class="soumissionAdmin">
-    <h1>AJOUTER UNE OEUVRE</h1>
+<section class="column centre soumissionAdmin">
+    <h1 class=texteCentre>AJOUTER UNE OEUVRE</h1>
     <section class="soumissionAdminFormulaire">
         <label for="titreOeuvreAjoutAdmin"><span class="couleurErreurSoumission">TITRE : </span></label>
         <input type="text" name="titreOeuvreAjout" id="titreOeuvreAjoutAdmin" 

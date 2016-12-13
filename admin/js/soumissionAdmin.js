@@ -141,7 +141,7 @@
         /*-- REINITIALISE LA COULEUR DES TITRES DES INPUTS ----------------------------*/
         var couleurErreur       = document.querySelectorAll(".couleurErreurSoumission");
         for (i = 0; i < couleurErreur.length; i++) {    
-            couleurErreur[i].style.color= "#016737";
+            couleurErreur[i].style.color= "black";
         }
         
         /*-- VÉRIFICATIONS ------------------------------------------------------------*/
