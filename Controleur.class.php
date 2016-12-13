@@ -256,16 +256,17 @@ class Controleur
 	{
 		$this->afficheVue("head");
 		$this->afficheVue("enteteUser");
-		$this->carroussel();
 	}
 	
 	private function accueil()
 	{
 		$this->afficheVue("head");
         $this->afficheVue("enteteAccueil");
-		$this->afficheVue("accueilUsager");
+		//$this->afficheVue("accueilUsager");
+        $modCar = new ModeleCarroussel();
+		$data = $modCar -> getPhotoCarroussel();
+        $this->carroussel();
         $this->afficheVue("footer");
-		$this->carroussel();
 	}
 	
 	function carroussel() // la fonction pour afficher le carroussel
@@ -285,9 +286,6 @@ class Controleur
 
 		$oVue->affichePied();
 	}
-	
-	
-	
 }
 ?>
 

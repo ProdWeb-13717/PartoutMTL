@@ -25,8 +25,8 @@
         <script src="./js/plugins.js"></script>
         <script src="./js/rechercheAJAX.js"></script>
         <script src="./js/main.js"></script>
-        <script src="./js/menu.js"></script>
         <script src="./js/soumissionUsager.js"></script>
+        <script src="./js/carroussel.js"></script>
         
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->

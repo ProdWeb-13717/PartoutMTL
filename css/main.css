@@ -54,34 +54,39 @@
 }
 
 #barRechercheAcceuil{
-	color: #4d4d4d;
+	color: red;/*#4d4d4d;*/
 	min-width: 550px;
 	margin: 0 auto;
 	padding:17% 0 17% 0;
 }
 
 
+
+
 /* Carousel
 -------------------------------------------------------------*/
 
 #carousel{ 
-
 	background: url(../images/Acceuil_1.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
+       -moz-background-size: cover;
+	     -o-background-size: cover;
 	background-size: cover;
 	width: 100%;
-	//min-height: 500px;
+	min-height: 500px;
 	margin: 0;
 	text-align: center;
+	position:relative;
+    margin-bottom: 50px;
 }
 
-/*
-#apropos{
-	padding: 20px;
-	width: 100%
-}*/
+#carousel span{
+	color :white;
+	font-size:1.2em;
+	position:absolute;
+	bottom: 1em;
+	left:1em;
+}
 
 /* Fin d'Acceuil
 -------------------------------------------------------------*/

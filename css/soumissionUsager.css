@@ -59,7 +59,11 @@
 
 .remerciement{
     margin-bottom: 400px;
+    //border: solid red 2px;
 }
+
+
+
 
 /* Media queries
 -------------------------------------------------------------*/
@@ -94,8 +98,16 @@
     #msgErreurSoumision{
         margin-left : 0%;
     }
+    
+    .remerciement{
+        width: 440px;
+        margin-bottom: 300px;
+    }
+    
+    .remerciement h1{
+        text-align: center; 
+    }
 }
-
 
 /* Téléphone ----------------------------- */
 @media (max-width: 480px) {
@@ -113,5 +125,23 @@
     
     .boutonSoummissionUsager{
         align-self: center;
-    }   
+    } 
+    
+    .soumissionUsager h1{
+        width: 300px;
+    }
+    
+    .remerciement{
+        width: 300px;
+        margin-bottom: 200px;
+        margin-left: -80px; 
+    }
+    
+    .remerciement h1{
+        margin-left: 0px; 
+    }
+    
+    .remerciement p{
+        text-align:left; 
+    }
 }
