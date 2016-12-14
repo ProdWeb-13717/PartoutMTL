@@ -7,33 +7,6 @@ $elemCourant = 1;       //Rang d'un élément dans un pages
 $elemTotal = 0;         //Nombre total de résultats dans la liste
 ?>
 
-<!--Script pour afficher une page quand on clique son onglet correspondant-->
-<script>
-	window.addEventListener ("load", function(){
-		var secListe = document.getElementById("liste");
-		secListe.addEventListener("click",function(){
-			var eTarget = event.target;
-			//Si le target du event est un span de la classe pageBalise on change de page
-			if(eTarget.nodeName == "SPAN" && eTarget.classList.contains("pageBalise"))
-			{
-				var idVisible = eTarget.id;
-				
-				var toutePages= document.querySelectorAll("div.pageListe");
-				
-				for(var i = 0 ; i < toutePages.length ; i++)
-				{
-					toutePages[i].classList.add("pageCache");
-				}
-				
-				$pageVisible = document.getElementById("page"+idVisible);
-				$pageVisible.classList.remove("pageCache");
-				window.scrollTo(0,0); //scroll vers le haut de la page
-			}
-		});
-	});
-
-</script>
-
 <!--Construire la liste en divisant les résultats en page de 20 résultats-->
 <section id="liste">
 	<h1 id="oeuvres" >Liste des oeuvres</h1> <!-- id pour recherche -->
@@ -58,7 +31,7 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 		{
 			$precendent = $oeuvre["idOeuvre"];
 			?>		
-			<hr>
+			
 			<div class="elemListe">
 				<a href="./index.php?requete=afficheOeuvre&idOeuvre=<?php echo $oeuvre["idOeuvre"]?>">
 					<img src="
