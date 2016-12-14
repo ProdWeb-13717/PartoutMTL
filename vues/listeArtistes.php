@@ -6,33 +6,6 @@
 
 ?>
 
-<!--Script pour afficher une page quand on clique son onglet correspondant-->
-<script>
-	window.addEventListener("load", function() {
-		var secListe = document.getElementById("liste");
-		secListe.addEventListener("click",function(){
-			var eTarget = event.target;
-			//Si le target du event est un span de la classe pageBalise on change de page
-			if(eTarget.nodeName == "SPAN" && eTarget.classList.contains("pageBalise"))
-			{
-				var idVisible = eTarget.id;
-				
-				var toutePages= document.querySelectorAll("div.pageListe");
-				
-				for(var i = 0 ; i < toutePages.length ; i++)
-				{
-					toutePages[i].classList.add("pageCache");
-				}
-				
-				$pageVisible = document.getElementById("page"+idVisible);
-				$pageVisible.classList.remove("pageCache");
-				window.scrollTo(0,0); //scroll vers le haut de la page
-			}
-		});
-	});
-
-</script>
-
 <section id="liste">
 	<h1 id="artistes">Liste des artistes</h1> <!-- id pour recherche -->
     <span class="pageBalise" id="1">
@@ -54,11 +27,10 @@
 	foreach($data as $artiste)
 	{
 		?>
-		<hr>
+
 		<div class="elemListe">
 			<a>
 				<input type="hidden" class="idArtiste" value="<?php echo $artiste["idArtiste"]?>">
-				<div class="rondListe"></div>
 				<ul>
 					<li><span class="catElemListe">Prénom : </span>
 						<?php
