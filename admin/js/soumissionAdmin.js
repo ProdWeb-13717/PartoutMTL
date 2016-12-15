@@ -16,9 +16,10 @@
         if(document.querySelector(".soumissionAdmin"))                                      // si la classe "soumissionAdmin" existe
         { 
             var btnSoumettre = document.querySelector("#boutonSoumission");                 // récupère le bouton SOUMETTRE
-                btnSoumettre.addEventListener("click", function(evt){                       // à l'événement CLIC
-
-                if(validationSoumission()){                                                 // valide certaines entrées, si valide
+            btnSoumettre.addEventListener("click", function(evt)                            // à l'événement CLIC
+            {                               
+                if(validationSoumission())                                                  // valide certaines entrées, si valide
+                {
                     
                     /*-- RÉCUPÈRE LES ENTRÉES DE LA TABLE OEUVRES ----------------------------------*/
                     var valeurTitre             = document.querySelector("[name=titreOeuvreAjout]").value;
@@ -140,7 +141,7 @@
         /*-- REINITIALISE LA COULEUR DES TITRES DES INPUTS ----------------------------*/
         var couleurErreur       = document.querySelectorAll(".couleurErreurSoumission");
         for (i = 0; i < couleurErreur.length; i++) {    
-            couleurErreur[i].style.color= "#016737";
+            couleurErreur[i].style.color= "black";
         }
         
         /*-- VÉRIFICATIONS ------------------------------------------------------------*/

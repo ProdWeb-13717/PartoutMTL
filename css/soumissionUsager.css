@@ -16,6 +16,7 @@
 .soumissionUsager h1{
     width: 450px;
     margin: auto;
+    text-align: center;
     border-bottom: solid black 2px;
 }
 
@@ -27,7 +28,7 @@
 .soumissionUsagerFormulaire label{
     display:inline-block;
     width: 200px;
-    text-align:right;
+    text-align: right;
     margin-bottom: 10px;
 }
 
@@ -59,6 +60,7 @@
 
 .remerciement{
     margin-bottom: 400px;
+    text-align: center;
     //border: solid red 2px;
 }
 

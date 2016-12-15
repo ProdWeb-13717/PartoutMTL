@@ -3,7 +3,6 @@
     $nbreMaxElement = 20;   //nombre maximum de résultats par pages
     $elemCourant = 1;       //Rang d'un élément dans un pages
     $elemTotal = 0;         //Nombre total de résultats dans la liste
-
 ?>
 
 <section id="liste">
@@ -12,29 +11,28 @@
     <?php
 		if(count($data) <= 20)
 		{
-			//echo "*** Résultat 1 à ".count($data[0])." ***"; // J'ai modifié cette partie pour suprimer l'erreur qu'on a eu pour la résultat 0
+			//echo "Résultat 1 à ".count($data[0]); // J'ai modifié cette partie pour suprimer l'erreur qu'on a eu pour la résultat 0
 			
 			if($data)
 			{
-				echo "*** Résultat 1 à ". count($data[0]);
+				echo "Résultats 1 à ". count($data[0]);
 			}
 			else
 			{
-				echo "*** Résultat 0 à 0";
+				echo "Résultat 0 à 0";
 			}
-			echo " ***";;
 		}
 		else
 		{
-			echo "*** Résultat 1 à 20 ***";
+			echo "Résultats 1 à 20";
 		}
 	?>
 	</span>
-    <br>
     <div class="pageListe" id="page1">
 	<?php
 	$inconnu="<span class='inconnu'>(non-applicable)</span>";
-	foreach($data as $artiste)
+    
+    foreach($data as $artiste)
 	{
 		?>
 
@@ -92,10 +90,9 @@
 					</div>
 					<span class="pageBalise" id="<?php echo $nbrePage;?>">
 					<?php
-						echo"*** Résultat ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement)." ***";
+						echo"Résultats ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement);
 					?>
 					</span>
-					<br>
 					<div class="pageListe pageCache" id="<?php echo "page".$nbrePage;?>">
 				<?php	
 			}

@@ -16,6 +16,5 @@
                 <li><a href="index.php?requete=soumissionOeuvre">SOUMISSION</a></li>  
             </ul>	
         </nav>
-        
     </header>
     

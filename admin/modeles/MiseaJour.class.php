@@ -27,23 +27,15 @@ class MiseaJour extends TemplateBase
 	
 	public function enregistrement($donnes)
 	{	
-		$momentImportation =  date("Y-m-d H:i");// obtienne le moment de l'importation de donnés pour la gerder dans la table des historiques
-		
-		$this->insererMisAJour($momentImportation,$donnes["Oeuvres"],$_SESSION['authentifie']);
-		/*echo $_SESSION['authentifie'];
-		echo "<br>";
-		echo $donnes["Artistes"];
-		echo "<br>";
-		echo $donnes["Oeuvres"];
-		echo "<br>";*/
-		
+		$momentImportation = date("Y-m-d H:i:s");// obtienne le moment de l'importation de donnés pour le garder dans la table des historiques
+		$this->insererMiseAJour($momentImportation,$donnes["Oeuvres"],$_SESSION['authentifie']);
 	}
 	
-	public function insererMisAJour($date,$nOeuvres,$usager)
+	public function insererMiseAJour($date,$nOeuvres,$usager)
 	{
 		try
 		{	
-			$stmt = $this->connexion->prepare("INSERT INTO". $this->getTable() ." (dateMiseAJour,nbOeuvres,nomUsagerAdmin) VALUES (:date, :oeuvres, :usager)");
+			$stmt = $this->connexion->prepare("INSERT INTO ".$this->getTable()."(dateMiseAJour,nbOeuvres,nomUsagerAdmin) VALUES (:date, :oeuvres, :usager)");
 			$stmt->execute(array(
 			
 				"date"				=>$date,

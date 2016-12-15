@@ -1,17 +1,20 @@
 <body>
     <header>
-        <div id="logo">P<span id="noir">ART</span>OUT<br/></div>
-		<div id="menuUser">
-            <ul>
-				<!--Chaque li est un lien dans la barre menu-->
-                <li><a href="index.php?requete=acceuil">ACCEUIL</a></li>
-				<li id="liRecherche"><a href="index.php?requete=rechercheAvance">RECHERCHE AVANCÉ</a></li>
+        <section>
+            <article class="logo">
+                P<span id="art">ART</span>OUT
+            </article>    
+            <article class="sousTitre">PORTAIL D'ART PUBLIC DE MONTRÉAL</article>
+        </section>
+		<div class="ligne"></div>
+        <nav id="menuAcceuil" class='entete'> 
+            <ul class="row menu">   
+                <li><a href="index.php?requete=acceuil">ACCUEIL</a></li>
                 <li><a href="index.php?requete=listeArtistes">ARTISTES</a></li>
                 <li><a href="index.php?requete=listeOeuvres">OEUVRES</a></li>
+                <li id="liRecherche"><a href="index.php?requete=rechercheAvance">RECHERCHE</a></li>
                 <li><a href="index.php?requete=soumissionOeuvre">SOUMISSION</a></li>  
-            </ul>
-			
-        </div>
-		
+            </ul>	
+        </nav>
     </header>
 	

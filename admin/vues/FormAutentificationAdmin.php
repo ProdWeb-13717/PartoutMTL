@@ -1,6 +1,4 @@
-<?php
-
-		
+<?php	
 	if(!isset($_SESSION["grainDeSel"]))
 	{
 		$_SESSION["grainDeSel"] = rand(1, 10000);

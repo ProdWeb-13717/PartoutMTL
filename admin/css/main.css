@@ -113,6 +113,28 @@ li{
 	height: 50px;
 }
 
+@media (max-width: 600px) /*ajustement positionnement entête*/
+{
+	#administrationLogo{
+		font-size : 1.2em;
+		top: 120px;
+		margin-left : 120px;
+	}
+		
+	#logo{
+		font-size : 2.5em;
+		margin-top : 100px;
+	}
+	
+	#logo span{
+		font-size : 1em;
+	}
+	
+	.ligneLogo{
+		margin-top : -25px;
+	}
+}
+
 
 /* menu 
 -------------------------------------------------------------*/
@@ -171,6 +193,48 @@ li{
 
 .menu li.actif a{
 	color : #016737;
+}
+
+@media (max-width: 1000px)  /*ajustement menu*/
+{
+	.menu ul{
+		display: flex;
+		flex-direction: 	column;
+		flex-wrap:			nowrap;
+		justify-content: 	flex-start;
+		align-items: 		flex-start;
+		align-content: 		flex-start;
+	}
+	
+	.menu ul li{
+		flex: 1 0 auto;
+		margin : 10px 0;
+		margin-right : 30px;
+		border-bottom : solid white 2px;
+		border-left : solid transparent 0;
+	}
+	
+	.menu a{
+		color : white; 
+		padding : 10px 20px 10px 10px;
+	}
+
+	.menu li:hover{
+		margin-top: 10px;
+		margin-right: 50px;
+	}
+
+	.menu li:hover a{
+		padding-top: 10px;
+		padding-right: 50px;
+	}
+
+	.menu li.actif { 
+		padding-top: 0;
+		padding-right: 30px;
+	}
+	
+	
 }
 
 
