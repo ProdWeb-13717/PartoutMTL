@@ -14,15 +14,14 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 	<?php
 		if(count($data[0]) <= 20)
 		{
-			echo "*** Résultat 1 à ".count($data[0])." ***";
+			echo "Résultats 1 à ".count($data[0]);
 		}
 		else
 		{
-			echo "*** Résultat 1 à 20 ***";
+			echo "Résultats 1 à 20";
 		}
 	?>
 	</span>
-	<br>
 	<div class="pageListe" id="page1">
 	<?php
 	foreach($data[0] as $oeuvre)
@@ -95,10 +94,9 @@ $elemTotal = 0;         //Nombre total de résultats dans la liste
 					</div>
 					<span class="pageBalise" id="<?php echo $nbrePage;?>">
 					<?php
-						echo"*** Résultat ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement)." ***";
+						echo"Résultats ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement);
 					?>
 					</span>
-					<br>
 					<div class="pageListe pageCache" id="<?php echo "page".$nbrePage;?>">
 				<?php	
 			}

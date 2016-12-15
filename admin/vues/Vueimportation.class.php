@@ -1,4 +1,13 @@
 ﻿<?php
+	/// *** SECURITE DE LA PAGE *** ///////////////////////////
+	if(!isset($_SESSION['authentifie']))
+	{
+		header('Location: ../index.php');
+	}
+	///////////////////////////////////////////////////////////
+?>
+
+<?php
 /**
  * Class Vue
  * Modèle de classe Vue. Dupliquer et modifier pour votre usage.

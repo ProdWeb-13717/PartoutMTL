@@ -1,6 +1,10 @@
-/*  CSS SOUMISSION  */
+/*  TABLE DES MATIÈRES
+    - Soumission admin
+    - Affichage soumission usager
+-------------------------------------------------------------*/
 
-/* Soumission
+
+/* Soumission admin
 -------------------------------------------------------------*/
 .soumissionAdmin{
     width: 602px;
@@ -38,22 +42,40 @@
 #boutonSoumission{
     position: relative;
     left: 75.5%;
-    padding: 15px 35px;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-    border: none;
-}
-
-#boutonSoumission:hover{
-    color : #016737; 
-    background-color: white; 
 }
 
 #msgErreurSoumision{
     color : brown;
     margin-left : 37%;
-
 }
 
+.afficheSoumissionsUsagers h1{
+    border-bottom: solid black 2px;
+    margin-top : 50px;
+    margin-left: 40px; 
+}
+
+.afficheSoumissionsUsagers ul{
+    margin-bottom: 20px;
+}
+
+.soumissionDesUsagers li{
+    list-style-type: none;
+}
+
+.soumissionDesUsagers a{
+    text-decoration: none;
+    color: black;
+}
+
+.numeroSoumission{
+    font-size: 1.2em;
+    letter-spacing: 6px;
+}
+
+.liensSoumission a{
+    font-family: 'Muli', sans-serif;
+    font-size: 0.8em;
+    letter-spacing: 3px;
+    margin-right: 20px;
+}

@@ -1,9 +1,8 @@
 /*  TABLE DES MATIÈRES
-    - 
-    - 
-    - 
-    -
-    -
+    - Global
+    - Entête
+    - Carousel
+    - Accueil
 -------------------------------------------------------------*/
 
 /* Global
@@ -14,24 +13,9 @@
     letter-spacing: 1px;
 }
 
-
 /* Entête
 -------------------------------------------------------------*/
 
-#logo{
-    font-size : 3.5em;
-    color : #009999;
-    margin-top : 40px;
-    margin-left : 40px;
-}
-
-#noir{
-    color : black;
-}
-
-#blanch{
-    color : white;
-}
 #barRecherche{
 	color: #4d4d4d;
 	text-align: center;
@@ -61,11 +45,8 @@
     //border : solid black 2px;
 }
 #menuUser #liRecherche{
-   
-    width : 150px;
-    
+    width : 150px; 
 }
-
 
 #menuUser a{
     text-decoration: none;
@@ -115,11 +96,10 @@
 	margin-right: 10px;
 }
 
-/* Acceuil
+/* Carousel
 -------------------------------------------------------------*/
 
 #carousel{ 
-
 	background: url(../images/Acceuil_1.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -130,6 +110,7 @@
 	margin: 0;
 	text-align: center;
 	position:relative;
+    margin-bottom: 100px;
 }
 
 #carousel span{
@@ -139,6 +120,9 @@
 	bottom: 1em;
 	left:1em;
 }
+
+/* Acceuil
+-------------------------------------------------------------*/
 
 #menuAccueil{
     margin-top: -39px;
@@ -195,193 +179,3 @@
 	width: 100%
 }	
 
-/* Fin d'Acceuil
--------------------------------------------------------------*/
-
-/* Listes
--------------------------------------------------------------*/
-#liste{
-	padding-left:2em;
-    width: 100%;
-}
-
-#liste hr{
-	border-top:3px solid #ccc;
-	padding:0;
-	margin:0;
-}
-
-#liste span.pageBalise{
-    margin: 0 auto;
-    display: block;
-    max-width: 25%;
-    text-align: center;
-    font-family: 'Fjalla One', sans-serif;
-    font-weight: bold;
-}
-
-div.elemListe{
-	border-bottom: 2px double #ccc;
-}
-
-div.elemListe:hover{
-	background-color:#dfefdf;
-}
-
-#liste span.pageBalise:hover{
-    cursor: pointer;
-}
-
-span.catElemListe{
-	color: grey;
-	font-family:'Muli', sans-serif;
-	font-size:15px;
-}
-.liRecherche{
-	display:block;
-	margin-left: 20px;
-}
-
-span.inconnu{
-	font-family:arial;
-	font-style:italic;
-	color:red;
-	font-size:0.8em;
-}
-
-.elemListe a{
-	min-width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	align-items:center;
-	padding:15px 30px;
-	margin: 0;
-}
-
-/*Permet de gérer les différents affichages d'un lien our qu'ils soient tous le même*/
-.elemListe a:link, .elemListe a:visited, .elemListe a:hover , .elemListe a:active{
-  text-decoration:  none;
-  background-color: none;
-  color: black;
-}
-
-.elemListe ul{
-	max-width: 50%;
-	margin: 0;
-	padding:0;
-	font-style:normal;
-}
-
-.elemListe img{
-	height:auto;
-	max-width:10em;
-	border: 2px solid #016737;
-	border-radius:10px 0 10px 0;
-	margin-right :45px;
-	box-shadow: 5px 5px 5px #888888;
-}
-
-.pageCache{
-	display:none;
-}
-
-ul.listeAuteur{
-	margin:0 0 0 20px;
-}
-
-li, ul{
-	width:100%;
-}
-
-/* Affichage individuel d'oeuvre
--------------------------------------------------------------*/
-#oeuvreIndi ul.elementOeuvre{
-	list-style-type: none;
-}
-#oeuvreIndi ul.elementOeuvre li{
-	margin-bottom:0.5em;
-}
-
-#oeuvreIndi ul.elementOeuvre li span{
-	font-size:1.5em;
-}
-
-#sectionImage{
-	border:solid 5px #009999;
-	border-radius: 25px;
-	max-width:50%;
-	min-height:10em;
-	margin:0 auto;
-	padding:1em;
-	display:flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items:center;
-}
-
-#sectionImage img{
-	max-height: 10em;
-}
-
-#sectionImage span{
-	color:#b5b5b5;
-	font-style:italic;
-}
-
-/* Soumission
--------------------------------------------------------------*/
-
-.soumissionUsager{
-    width: 602px;
-    color : black;
-    margin: auto;
-    margin-top : 50px;
-}
-
-.soumissionUsager h1{
-    position: relative;
-    left: 27%;
-    margin-bottom: -1px;
-}
-
-.soumissionUsagerFormulaire{
-    width: 600px;
-    color : black;
-    padding-left: 5%;
-    padding-top : 20px;
-    padding-bottom: 20px;
-    border : solid black 2px;
-}
-
-.soumissionUsagerFormulaire label{
-    display:inline-block;
-    width: 200px;
-    text-align:right;
-    margin-bottom: 10px;
-}
-
-.soumissionUsagerFormulaire input{
-    width: 337px;
-}
-
-#boutonSoumission{
-    position: relative;
-    left: 75.5%;
-    padding: 15px 35px;
-    margin-top : 20px;
-    margin-bottom : 30px;
-    color : white;
-    background-color: #016737;
-    border: none;
-}
-
-#boutonSoumission:hover{
-    color : #016737; 
-    background-color: white; 
-}
-
-#msgErreurSoumision{
-    color : brown;
-    margin-left : 37%;
-}

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	$imagesURL = "";
 	$titreCar = "";
 	$descrCar = "";
@@ -23,12 +23,10 @@
 		{
 			$descrCar = $descrCar."~";
 		}
-		
 	}
-
 ?>
 
-<div id="carousel"> <!-- Cet id est utilié pour la recherche dans la page d'accueil -->
+<section id="carousel"> <!-- Cet id est utilié pour la recherche dans la page d'accueil -->
 		<div id="barRechercheAccueil" style="background=url('+toutURL[compteurCar ]+') no-repeat center center fixed">
 			<input type = "hidden" id="toutURL" value = "<?php echo $imagesURL?>"/>
 			<input type = "hidden" id="toutTitre" value = "<?php echo $titreCar?>"/>
@@ -40,4 +38,4 @@
 			
 			<span id="descrCar"></span>
 		</div>
-</div>
+</section>
