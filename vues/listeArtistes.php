@@ -12,7 +12,17 @@
     <?php
 		if(count($data) <= 20)
 		{
-			echo "*** Résultat 1 à ".count($data[0])." ***";
+			//echo "*** Résultat 1 à ".count($data[0])." ***"; // J'ai modifié cette partie pour suprimer l'erreur qu'on a eu pour la résultat 0
+			
+			if($data)
+			{
+				echo "*** Résultat 1 à ". count($data[0]);
+			}
+			else
+			{
+				echo "*** Résultat 0 à 0";
+			}
+			echo " ***";;
 		}
 		else
 		{

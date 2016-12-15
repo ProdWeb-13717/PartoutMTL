@@ -259,10 +259,12 @@ class Controleur
 	
 	private function accueil()
 	{
+		$this->afficheVue("head");
+        $this->afficheVue("enteteAccueil");
 		$modCar = new ModeleCarroussel();
 		$data = $modCar -> getPhotoCarroussel();
-		$this->afficheVue("head");
-		$this->carroussel();
+        $this->carroussel();
+        $this->afficheVue("footer");
 	}
 	
 	function carroussel() // la fonction pour afficher le carroussel
