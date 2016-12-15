@@ -1,0 +1,24 @@
+/*  TABLE DES MATIÈRES
+    - Global
+    - Catégorie
+    - 
+    -
+    -
+-------------------------------------------------------------*/
+
+/* Global
+-------------------------------------------------------------*/
+
+.gestionAdmin{
+    margin-top : 50px;
+    margin-left: 40px;  
+}
+
+/* Catégorie
+-------------------------------------------------------------*/
+
+.gestionAdminCategorie h1{
+    border-bottom: solid black 2px;
+    
+}
+

@@ -32,7 +32,8 @@
                     var valeurParc              = document.querySelector("[name=parcOeuvreSoumission]").value;
                     var valeurAdresseCivique    = document.querySelector("[name=adresseCiviqueOeuvreSoumission]").value;
                     var valeurDescription       = document.querySelector("[name=descriptionOeuvreSoumission]").value;
-                    var valeurPhoto             = document.querySelector("[name=photoOeuvreSoumission]").value;
+                    var valeurPhoto             = "#";
+                    //var valeurPhoto             = document.querySelector("[name=photoOeuvreSoumission]").value;
                     var valeurCourriel          = document.querySelector("[name=courrielOeuvreSoumission]").value;
                 
                     /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/

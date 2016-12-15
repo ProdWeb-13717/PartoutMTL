@@ -220,13 +220,13 @@
                 //obtenir le nom du fichier à aller chercher.
                 var txtRecherche = encodeURIComponent(valueRecherche.value);
                 
-                if(categorieDeRecherche=="oeuvres"){
+                if(categorieDeRecherche=="oeuvres"){ //******************************* Juste cette partie est utilisé pour Admin
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
                     
-                    url = "http://localhost:8080/PartoutMTL/index.php";
-                    //url = "http://localhost/PartoutMTL/index.php";
-                    params = "requete=rechercheOeuvre&valRecherche=" + txtRecherche;
+                    url = "http://localhost:8080/PartoutMTL/admin/index.php";
+                    //url = "http://localhost/PartoutMTL/admin/index.php";
+                    params = "requete=rechercheOeuvreAdmin&valRecherche=" + txtRecherche;
                     xhr.open("GET", url+"?"+params, true);
                     
                     msg ='dans la liste des oeuvres';
