@@ -28,6 +28,7 @@
 
 ?>
 
+<<<<<<< HEAD
 <section id="carousel"> 
     <section id="barRechercheAccueil" style="background=url('+toutURL[compteurCar ]+') no-repeat center center fixed">
         <input type = "hidden" id="toutURL" value = "<?php echo $imagesURL?>"/>
@@ -37,6 +38,17 @@
             <input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
             <input type="button" id="btnRecherche" value="Rechercher"/>
         </form>
+=======
+<div id="carousel"> <!-- Cet id est utilié pour la recherche dans la page d'accueil -->
+		<div id="barRechercheAccueil" style="background=url('+toutURL[compteurCar ]+') no-repeat center center fixed">
+			<input type = "hidden" id="toutURL" value = "<?php echo $imagesURL?>"/>
+			<input type = "hidden" id="toutTitre" value = "<?php echo $titreCar?>"/>
+			<input type = "hidden" id="toutDescr" value = "<?php echo $descrCar?>"/>
+			<form class="rechercheAcceuil">
+				<input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
+				<input type="button" id="btnRecherche" value="Rechercher"/>
+			</form>
+>>>>>>> upstream/master
 			
         <span id="descrCar"></span>
     </section>

@@ -71,6 +71,7 @@ class Controleur
 				$this->afficherEnteteAdmin();
 				$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
 				$novData = $this->traiterDonnees($publicJson,"importationBD");//traiter donnes avec l'action importation
+				$this-> enregistrerImportation($novData);
 				$this->afficheImportationOK();                                                    
 				break;
             
@@ -487,7 +488,7 @@ class Controleur
 		//L'insertion des oeuvres (il faut le faire avec un while parce que avec des for il avait problèmes de deconnexion)
 		
 		$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
-		while($curOeuvre<$nomOeuvres)
+		while($curOeuvre<$nomOeuvres-1)
 		{
 			$ilExiste = $this->verifierOeuvre($jsonSite[$curOeuvre]->NoInterne,$tabOeuvres);//verification par NoInterne d'oeuvre
 			if(!$ilExiste)
@@ -527,7 +528,7 @@ class Controleur
 			$nomOArtistes = count($listeArtistes);
 			
 			$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
-			while($curOeuvre<$nomOeuvres)
+			while($curOeuvre<$nomOeuvres-1)
 			{
 				$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
 				$curOeuvre++;
@@ -727,6 +728,12 @@ class Controleur
 	{
 		$oOeuvres = new Oeuvres();
 		$data = $oOeuvres->inclureArtistesOeuvres($oeuvre,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes);
+	}
+	
+	private function enregistrerImportation($donnes)
+	{
+		$oMisaJour = new MiseaJour();
+		$oMisaJour->enregistrement($donnes);
 	}
 	
 	

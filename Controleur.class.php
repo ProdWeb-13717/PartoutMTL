@@ -262,8 +262,12 @@ class Controleur
 	{
 		$this->afficheVue("head");
         $this->afficheVue("enteteAccueil");
+<<<<<<< HEAD
 		//$this->afficheVue("accueilUsager");
         $modCar = new ModeleCarroussel();
+=======
+		$modCar = new ModeleCarroussel();
+>>>>>>> upstream/master
 		$data = $modCar -> getPhotoCarroussel();
         $this->carroussel();
         $this->afficheVue("footer");

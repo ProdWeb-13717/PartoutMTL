@@ -113,6 +113,10 @@
     font-weight: bold;
 }
 
+div.elemListe{
+	border-bottom: 2px double #ccc;
+}
+
 div.elemListe:hover{
 	background-color:#dfefdf;
 }
@@ -122,8 +126,9 @@ div.elemListe:hover{
 }
 
 span.catElemListe{
-	color: #016737;
-	font-weight: bold;
+	color: grey;
+	font-family:'Muli', sans-serif;
+	font-size:15px;
 }
 .liRecherche{
 	display:block;
@@ -168,14 +173,6 @@ span.inconnu{
 	border-radius:10px 0 10px 0;
 	margin-right :45px;
 	box-shadow: 5px 5px 5px #888888;
-}
-
-.elemListe .rondListe{
-	height:15px;
-	width:15px;
-	background-color:#016737;
-	border-radius:100%;
-	margin-right :45px;
 }
 
 .pageCache{
