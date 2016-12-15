@@ -1,3 +1,12 @@
+<?php
+	/// *** SECURITE DE LA PAGE *** ///////////////////////////
+	if(!isset($_SESSION['authentifie']))
+	{
+		header('Location: ../index.php');
+	}
+	///////////////////////////////////////////////////////////
+?>
+
 <!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres --------------------------------------------->
 
         <label for="dateFinProductionOeuvreAjoutAdmin">DATE FIN DE PRODUCTION : </label>

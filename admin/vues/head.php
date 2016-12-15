@@ -14,6 +14,8 @@
 		<link rel="stylesheet" href="./css/gestion.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/soumission.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/importation.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/listeOeuvreAdmin.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/rechercheAdmin.css" type="text/css" media="screen">
         
         <!-- Google font ------------> 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
@@ -25,9 +27,10 @@
 		<script type="text/javascript" src="./js/md5.js"></script>
         <script src="./js/plugins.js"></script>
         <script src="./js/AutentificationAdmin.js"></script>
+        <script src="./js/importation.js"></script>
         <script src="./js/soumissionAdmin.js"></script>
-        <script src="./js/soumissionsDesUsagers.js"></script>
         <script src="./js/gestionAdmin.js"></script>
+        <script src="./js/rechercheAJAX.js"></script>
         
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->

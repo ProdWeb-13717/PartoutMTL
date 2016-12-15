@@ -1,3 +1,12 @@
+<?php
+	/// *** SECURITE DE LA PAGE *** ///////////////////////////
+	if(!isset($_SESSION['authentifie']))
+	{
+		header('Location: ../index.php');
+	}
+	///////////////////////////////////////////////////////////
+?>
+
 <!-- SECTION ARTISTE DE LA SOUMISSION D'UNE OEUVRE, TABLE Artistes ---------------------------------->
 
         <label for="prenomArtisteOeuvreAjoutAdmin"><span class="couleurErreurSoumission">PRÉNOM DE L'ARTISTE : </span></label>

@@ -14,11 +14,7 @@
         <link rel="stylesheet" href="./css/flexbox.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/entete.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/soumissionUsager.css" type="text/css" media="screen">
-<<<<<<< HEAD
-        
-=======
-		<link rel="stylesheet" href="./css/400px.css" media="(max-width: 400px)" type="text/css" media="screen">
->>>>>>> upstream/master
+		<link rel="stylesheet" href="./css/listes.css" type="text/css" media="screen">
         
         <!-- Google font ------------> 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
@@ -28,7 +24,6 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="./js/plugins.js"></script>
         <script src="./js/rechercheAJAX.js"></script>
-        <script src="./js/main.js"></script>
         <script src="./js/soumissionUsager.js"></script>
         <script src="./js/listeLien.js"></script>
         <script src="./js/carroussel.js"></script>

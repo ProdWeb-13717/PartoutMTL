@@ -40,8 +40,9 @@
         <label for="descriptionOeuvreSoumissionUsager">DESCRIPTION : </label>
         <textarea rows="4" style="margin-bottom: 10px; width: 337px;" name="descriptionOeuvreSoumission" id="descriptionOeuvreSoumissionUsager"></textarea>
         
-        <label for="photoOeuvreSoumissionUsager">URL PHOTO : </label>
-        <input type="text" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager"/>
+        <!-- à venir pour le sprint 3 -->
+        <!--label for="photoOeuvreSoumissionUsager">URL PHOTO : </label>
+        <input type="text" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager"/-->
     
         <label for="courrielOeuvreSoumissionUsager"><span class="couleurErreurSoumission">COURRIEL : </span></label>
         <input type="text" name="courrielOeuvreSoumission" id="courrielOeuvreSoumissionUsager"/>

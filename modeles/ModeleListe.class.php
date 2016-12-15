@@ -14,18 +14,21 @@
 class ModeleListe extends TemplateBase
 {
 		
+	/**
+	 * @access public
+	 * @return Array
+	 */
+	 
 	protected function getPrimaryKey()
 	{
 		return ""; //Je ne sert à rien dans cette classe
 	} 
 		
-    
 	protected  function getTable()
 	{
 		return "";  // Je ne sert à rien dans cette classe
 	}
 	
-    
 	//Fonction qui va chercher les info des artistes pour construction d'une liste
 	public function getArtisteTout() 
 	{
@@ -41,7 +44,6 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
-    
 	//Fonction qui va chercher les infos de toutes les oeuvres ainsi que les artistes rattachés à chaque oeuvre.
 	public function getOeuvresParAuteur() 
 	{
@@ -61,7 +63,6 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
-    
 	//Fonction qui va chercher les photos de toutes les oeuvres
 	public function getOeuvresParPhotos() 
 	{
@@ -80,7 +81,6 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
-    
 	//Fonction qui va chercher les information d'une oeuvre correspondant à un ID précis
 	public function getOeuvresParID($id) 
 	{
@@ -103,7 +103,6 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
-    
 	//Fonction qui va chercher les information d'une oeuvre correspondant à un ID précis
 	public function getPhotoParIDOeuvre($id) 
 	{
@@ -122,4 +121,8 @@ class ModeleListe extends TemplateBase
 		}
 	}
 }
+
+
+
+
 ?>

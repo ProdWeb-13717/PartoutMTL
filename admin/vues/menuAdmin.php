@@ -1,3 +1,12 @@
+<?php
+	/// *** SECURITE DE LA PAGE *** ///////////////////////////
+	if(!isset($_SESSION['authentifie']))
+	{
+		header('Location: ../index.php');
+	}
+	///////////////////////////////////////////////////////////
+?>
+
 		<?php
 			$onglets = 
 			[

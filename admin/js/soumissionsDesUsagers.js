@@ -15,7 +15,7 @@
      
         if(document.querySelector(".afficheSoumissionsUsagers"))                                // 
         { 
-            document.querySelector(".afficheSoumissionsUsagers").addEventListener("click", function(evt)
+           /* document.querySelector(".afficheSoumissionsUsagers").addEventListener("click", function(evt)
             {
                 //console.log(evt.target.firstChild.nextSibling.nodeValue);
                 
@@ -36,8 +36,9 @@
                     //console.log(e.currentTarget.responseText);
                     window.location.href = "./index.php?requete=soumissionsDesUsagers";               
                 });
-                xhr.send(data); */                                                                // envoie la requête et les datas en POST
+                xhr.send(data); */                                                 /*               // envoie la requête et les datas en POST
             });  
+        */
         }
     })
 })();

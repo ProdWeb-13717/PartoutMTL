@@ -1,3 +1,12 @@
+<?php
+	/// *** SECURITE DE LA PAGE *** ///////////////////////////
+	if(!isset($_SESSION['authentifie']))
+	{
+		header('Location: ../index.php');
+	}
+	///////////////////////////////////////////////////////////
+?>
+
 <!-- SECTION CATÉGORIES DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres -------------------------------->    
 
         <label for="categorieOeuvreAjoutAdmin">CATÉGORIE : </label>

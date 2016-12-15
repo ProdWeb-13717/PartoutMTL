@@ -1,12 +1,12 @@
 <?php
 /**
  * Class Modele
- * Modèle de classe modèle. Dupliquer et modifier pour votre usage.
+ * ModÃ¨le de classe modÃ¨le. Dupliquer et modifier pour votre usage.
  * 
  * @author Jonathan Martel
  * @version 1.0
  * @update 2013-12-11
- * @update 2016-01-22 : Adaptation du code aux standards de codage du département de TIM
+ * @update 2016-01-22 : Adaptation du code aux standards de codage du dÃ©partement de TIM
  * @license MIT
  * @license http://opensource.org/licenses/MIT
  * 

@@ -30,6 +30,7 @@ class Controleur
 				$data = $modeleListe->getArtisteTout();
 				$this->afficheVue("barRecherche");
 				$this->afficheVue("listeArtistes",$data);
+                $this->afficheVue("footer");
 				break;
 				
 			//Affichage de la liste de toutes les oeuvres
@@ -41,6 +42,7 @@ class Controleur
 				array_push($data,$modeleListe->getOeuvresParAuteur());
 				$this->afficheVue("barRecherche");
 				$this->afficheVue("listeOeuvres",$data);
+                $this->afficheVue("footer");
 				break;
 				
 			//Affichage d'une oeuvre individuelle
@@ -201,7 +203,7 @@ class Controleur
                 $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
                 $data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
                 $vue = "soumissionOeuvreUsager";
-                $this->afficheVue($vue, $data); 
+                $this->afficheVue($vue, $data);
                 $this->afficheVue("footer");
                 break;
             
@@ -262,12 +264,7 @@ class Controleur
 	{
 		$this->afficheVue("head");
         $this->afficheVue("enteteAccueil");
-<<<<<<< HEAD
-		//$this->afficheVue("accueilUsager");
-        $modCar = new ModeleCarroussel();
-=======
 		$modCar = new ModeleCarroussel();
->>>>>>> upstream/master
 		$data = $modCar -> getPhotoCarroussel();
         $this->carroussel();
         $this->afficheVue("footer");

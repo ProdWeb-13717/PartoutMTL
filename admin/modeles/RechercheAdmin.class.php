@@ -11,7 +11,7 @@
  * @license http://opensource.org/licenses/MIT
  * 
  */
-class Recherche extends TemplateBase {
+class RechercheAdmin extends TemplateBase {
 	
     
 	protected function getTable()
