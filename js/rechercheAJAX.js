@@ -19,7 +19,7 @@ function Recherche(){
 	var motRechercheAvance = document.getElementById("motRechercheAvance");         	// le mot recherché  dans la recherche avancé
 	var oeuvres = document.getElementById("oeuvres");                                   // prendre le titre de vue 'liste oeuvres' dans la recherche simple sur les oeuvres
 	var artistes = document.getElementById("artistes");                                 // prendre le titre de vue 'liste artistes' dans la recherche simple sur les artistes
-	var acceuil = document.getElementById("menuAccueil");                               // prendre le titre de vue 'accueil' dans la recherche simple sur les oeuvres
+	var acceuil = document.getElementById("carousel");                                  // prendre la vue 'carousel' dans la recherche simple pour afficher la resultat de recherche pour la page d'accueil
 	var msgResultat = document.getElementById("msgResultat");                           // la balise pour afficher un message pour la résultat de recherche
 	var msg="";
 	
@@ -232,18 +232,36 @@ function rechercheSimple(categorieDeRecherche){ // function de recherche simple 
 			var txtRecherche = encodeURIComponent(valueRecherche.value);
 			
 			if(categorieDeRecherche=="oeuvres"){
+				
 				console.log("categorieDeRecherche : "+categorieDeRecherche)
-				xhr.open("GET", "http://localhost/PartoutMTL/index.php?requete=rechercheOeuvre&valRecherche=" + txtRecherche);
+				
+				url = "http://localhost:8080/PartoutMTL/index.php";
+				//url = "http://localhost/PartoutMTL/index.php";
+				params = "requete=rechercheOeuvre&valRecherche=" + txtRecherche;
+				xhr.open("GET", url+"?"+params, true);
+				
 				msg ='dans la liste des oeuvres';
 			}
 			else if(categorieDeRecherche=="artistes"){
+				
 				console.log("categorieDeRecherche : "+categorieDeRecherche)
-				xhr.open("GET", "http://localhost/PartoutMTL/index.php?requete=rechercheArtistes&valRecherche=" + txtRecherche);
+				
+				url = "http://localhost:8080/PartoutMTL/index.php";
+				//url = "http://localhost/PartoutMTL/index.php";
+				params = "requete=rechercheArtistes&valRecherche=" + txtRecherche;
+				xhr.open("GET", url+"?"+params, true);
+				
 				msg ='dans la liste des aristes';
 			}
 			else if(categorieDeRecherche=="acceuil"){
+				
 				console.log("categorieDeRecherche : "+categorieDeRecherche)
-				xhr.open("GET", "http://localhost/PartoutMTL/index.php?requete=rechercheAccueil&valRecherche=" + txtRecherche);
+				
+				url = "http://localhost:8080/PartoutMTL/index.php";
+				//url = "http://localhost/PartoutMTL/index.php";			
+				params = "requete=rechercheAccueil&valRecherche=" + txtRecherche;
+				xhr.open("GET", url+"?"+params, true);
+				
 				msg ='dans les listes des artistes et des oeuvres';
 			}
 			
@@ -309,26 +327,30 @@ function rechercheAvance(categorieDeRecherche, souCategorieDerecherche, motDeRec
 				
 				if(souCategorieDerecherche=="artiste")
 				{
-					url = "http://localhost/PartoutMTL/index.php";
+					url = "http://localhost:8080/PartoutMTL/index.php";
+					//url = "http://localhost/PartoutMTL/index.php";				
 					params = "requete=rechercheAvanceArtistesOeuvres&valRecherche="+ txtRecherche;
 					xhr.open("GET", url+"?"+params, true);
 				}
 				else if(souCategorieDerecherche=="nomArrondissement")
 				{	
-					url = "http://localhost/PartoutMTL/index.php";
+					url = "http://localhost:8080/PartoutMTL/index.php";
+					//url = "http://localhost/PartoutMTL/index.php";			
 					params = "requete=rechercheAvanceArtistesOeuvresArrondissements&valRecherche="+ txtRecherche;
 					xhr.open("GET", url+"?"+params, true);
 					
 				}
 				else if(souCategorieDerecherche=="nomCategorie")
 				{
-					url = "http://localhost/PartoutMTL/index.php";
+					url = "http://localhost:8080/PartoutMTL/index.php";
+					//url = "http://localhost/PartoutMTL/index.php";
 					params = "requete=rechercheAvanceArtistesOeuvresCategories&valRecherche="+ txtRecherche;
 					xhr.open("GET", url+"?"+params, true);
 				}
 				else
 				{
-					url = "http://localhost/PartoutMTL/index.php";
+					url = "http://localhost:8080/PartoutMTL/index.php";
+					//url = "http://localhost/PartoutMTL/index.php";
 					params = "requete=rechercheAvanceOeuvres&valRecherche="+ txtRecherche+"&cleRecherche="+souCategorieDerecherche;
 					xhr.open("GET", url+"?"+params, true);
 				}
@@ -337,7 +359,8 @@ function rechercheAvance(categorieDeRecherche, souCategorieDerecherche, motDeRec
 			}
 			else if(categorieDeRecherche=="Artistes"){
 				
-				url = "http://localhost/PartoutMTL/index.php";
+				url = "http://localhost:8080/PartoutMTL/index.php";
+				//url = "http://localhost/PartoutMTL/index.php";
 				params = "requete=rechercheAvanceArtistes&valRecherche="+ txtRecherche+"&cleRecherche="+souCategorieDerecherche;
 				xhr.open("GET", url+"?"+params, true);
 				msg = 'de '+souCategorieDerecherche+' dans la liste des aristes';

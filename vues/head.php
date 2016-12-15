@@ -11,7 +11,10 @@
         <link rel="stylesheet" href="./css/normalize.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/base_h5bp.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/main.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="./css/400px.css" media="(max-width: 400px)" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/flexbox.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/entete.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="./css/soumissionUsager.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="./css/400px.css" media="(max-width: 400px)" type="text/css" media="screen">
         
         <!-- Google font ------------> 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
