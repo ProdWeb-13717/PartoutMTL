@@ -45,6 +45,41 @@ class Controleur
                 $this->afficheVue("footer");
 				break;
 				
+			//Affiche les oeuvre après avoir cliqué sur le nom d'un artiste
+			case 'listeOeuvreParAuteurId':  
+				$this->entete();
+				$data = [];
+				$modeleListe = new ModeleListe();
+				if(isset($_GET['idArtiste']))
+				{
+					//On va chercher les informations reliées à l'oeuvres ainsi que ses auteurs et les photo qui y son relié et on les tock dans  $data
+					array_push($data,$modeleListe->getOeuvresParPhotos());
+					array_push($data,$modeleListe->getOeuvresParAuteur());
+					array_push($data, $modeleListe->getOeuvresParAuteurId($_GET['idArtiste']));
+					if($data[0] != 0 && $data[1] != 0 && $data[2] != 0)
+					{
+						if(count($data) != 0)
+						{
+							$this->afficheVue("barRecherche");
+							$this->afficheVue("listeOeuvresParArtisteId",$data);
+							$this->afficheVue("footer");
+						}
+						else
+						{
+							echo "<h1>Cette id n'existe pas !</h1>";
+						}
+					}
+					else
+					{
+						echo "<h1>Une erreure s'est produite dans votre requête</h1>";
+					}
+				}
+				else
+				{
+					echo "<h1>!!! ERREUR !!! : Un ID d'Artiste est requis pour cette requête... </h1>";
+				}
+				break;
+				
 			//Affichage d'une oeuvre individuelle
 			case 'afficheOeuvre':  
 				$this->entete();
@@ -76,6 +111,7 @@ class Controleur
 					echo "<h1>!!! ERREUR !!! : Un ID d'oeuvre est requis pour cette requête... </h1>";
 				}
 				break;
+				
 				
 			case 'rechercheAvance': // la recherche Avance
 				$this->entete();

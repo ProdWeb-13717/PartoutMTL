@@ -101,7 +101,7 @@
 		?>
 
 		<div class="elemListe">
-			<a>
+			<a href="./index.php?requete=listeOeuvreParAuteurId&idArtiste=<?php echo $artiste["id"]?>">
 				<input type="hidden" class="idArtiste" value="<?php echo $artiste["id"]?>">
 				<ul>
 				<?php
