@@ -404,13 +404,20 @@ class Controleur
 		
 		$nomOeuvres = count($jsonSite);//numero des oeuvres dans le Json
 		
-		
 		/////////////////////////////////////////////////////
 		///////////////traitement des artistes///////////////
 		/////////////////////////////////////////////////////
 		
 		$tabArtistes = $this->obtenirTabArtistes(); // Obtenir la derniere liste des artistes de la BD
-		$novArtistes = 0;
+		
+		//arrays pour garder les nouveaux artistes a inclure dans la BD
+		$tableauNom = array();
+		$tableauPrenom = array();
+		$tableauCollectif = array();
+		/////////////////////////////////////
+		
+		
+		$novArtistes = 0;// compter la quantité des nouveaux artistes
 		
 		for($i=0;$i<$nomOeuvres;$i++)// for pour parcourir tout les oeuvres
 		{
@@ -419,24 +426,23 @@ class Controleur
 				$ilExiste = $this->verifierArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif,$tabArtistes);//je dois faire ça me contre mon array, pa contre la BD
 				if(!$ilExiste)
 				{
-					switch ($action)
-					{
-						
-						case "importationBD":
-						
-							$artActuelle = $artiste->Nom ." ".$artiste->Prenom ." ".$artiste->NomCollectif;
-							array_push($tabArtistes,$artActuelle);
-							$this->inclureArtiste($artiste->Nom,$artiste->Prenom,$artiste->NomCollectif);
-							$novArtistes++;
-							break;
-						
-						case "verification":
-							$novArtistes++;
-							break;
-					}
+					$artActuelle = $artiste->Nom ." ".$artiste->Prenom ." ".$artiste->NomCollectif;
+					array_push($tabArtistes,$artActuelle);//on insere dans tabArtistes pour eviter des doublons
+					array_push($tableauNom,$artiste->Nom);
+					array_push($tableauPrenom,$artiste->Prenom);
+					array_push($tableauCollectif,$artiste->NomCollectif);
+					$novArtistes++;
 				}
 			}
 			
+		}
+		if($action == "importationBD")
+		{
+			for($i=0;$i<$novArtistes;$i++)
+			{
+				$this->inclureArtiste($tableauNom[$i],$tableauPrenom[$i],$tableauCollectif[$i]);
+				
+			}
 		}
 		
 		/////////////////////////////////////////////////////
@@ -444,27 +450,28 @@ class Controleur
 		/////////////////////////////////////////////////////
 		
 		$tabArrondissements = $this->obtenirTabArrondissements();//Obtenir la derniere liste des arrondissements de la BD
-		$novArrondissements = 0;
+		
+		//array pour garder les nouveaux arrondissements à inclure dans la BD
+		$tableauNomarrondissement = array();
+		///////////////////////
+		
+		$novArrondissements = 0;// compter la quantité des nouveaux arrondissements
 		
 		for($i=0;$i<$nomOeuvres;$i++)// for pour parcourir tout les arrondissement
 		{
 			$ilExiste = $this->verifierArrondissement($jsonSite[$i]->Arrondissement,$tabArrondissements);
 			if(!$ilExiste)
 			{
-				switch($action)
-				{
-					case "importationBD":
-						
-						$novArrondissements++;
-						array_push($tabArrondissements,$jsonSite[$i]->Arrondissement);
-						$this->inclureArrondissement($jsonSite[$i]->Arrondissement);
-						break;
-					
-					case "verification":
-						
-						$novArrondissement++;
-						break;
-				}
+				array_push($tabArrondissements,$jsonSite[$i]->Arrondissement);
+				array_push($tableauNomarrondissement,$jsonSite[$i]->Arrondissement);
+				$novArrondissements++;	
+			}
+		}
+		if($action == "importationBD")
+		{
+			for($i=0;$i<$novArrondissements;$i++)
+			{
+				$this->inclureArrondissement($tableauNomarrondissement[$i]);
 			}
 		}
 		
@@ -473,6 +480,11 @@ class Controleur
 		/////////////////////////////////////////////////////
 		
 		$tabCategories = $this->obtenirTabCategories();//Obtenir la derniere liste des categories de la BD
+		
+		//array pour garder les nouveaux categories à inclure dans la BD
+		$tableauNomcategorie = array();
+		///////////////////////
+		
 		$novCategories = 0;
 		
 		for($i=0;$i<$nomOeuvres;$i++)// for pour parcourir tout les categories
@@ -480,31 +492,26 @@ class Controleur
 			$ilExiste = $this->verifierCategorie($jsonSite[$i]->SousCategorieObjet,$tabCategories);
 			if(!$ilExiste)
 			{
-				switch($action)
-				{
-					case "importationBD":
-					
-						$novCategories++;
-						array_push($tabCategories,$jsonSite[$i]->SousCategorieObjet);
-						$this->inclureCategorie($jsonSite[$i]->SousCategorieObjet);
-						break;
-					
-					case "verification":
-						
-						$novCategories++;
-						break;
-				}
-				
+				array_push($tabCategories,$jsonSite[$i]->SousCategorieObjet);
+				array_push($tableauNomcategorie,$jsonSite[$i]->SousCategorieObjet);
+				$novCategories++;	
 			}
 		}
+		if($action == "importationBD")
+		{
+			for($i=0;$i<$novCategories;$i++)
+			{
+				$this->inclureCategorie($tableauNomcategorie[$i]);
+			}
+		}
+		
 		
 		/////////////////////////////////////////////////////
 		///////////////traitement des oeuvres////////////////
 		/////////////////////////////////////////////////////
-		
+
 		//Obtenir la derniere liste des oeuvres de la BD
 		$tabOeuvres = $this->obtenirTabOeuvres();
-		$novOeuvres = 0;
 		
 		//Obtenir la derniere liste des arrondissements dans la BD
 		$oArrondissementsListe = new Arrondissements();
@@ -514,22 +521,19 @@ class Controleur
 		$oCategoriesListe = new Categories();
 		$listeCategories = $oCategoriesListe->obtenirTous("Categories","idCategorie");//contienne le resultat du tableau avec les categories
 		
-		//L'insertion des oeuvres (il faut le faire avec un while parce que avec des for il avait problèmes de deconnexion)
+		$novOeuvres = 0;
 		
-		$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
-		while($curOeuvre<$nomOeuvres)
+		for($i=0;$i<$nomOeuvres;$i++)
 		{
-			$ilExiste = $this->verifierOeuvre($jsonSite[$curOeuvre]->NoInterne,$tabOeuvres);//verification par NoInterne d'oeuvre
+			$ilExiste = $this->verifierOeuvre($jsonSite[$i]->Titre,$jsonSite[$i]->TitreVariante,$jsonSite[$i]->NoInterne,$tabOeuvres);//verification par NoInterne d'oeuvre
 			if(!$ilExiste)
 			{
-				
 				switch($action)
 				{
 					case "importationBD":
 					
 						$novOeuvres++;
-						array_push($tabOeuvres,$jsonSite[$curOeuvre]->NoInterne);
-						$this->inclureOeuvre($jsonSite[$curOeuvre],$listeArrondissements,$listeCategories);
+						$this->inclureOeuvre($jsonSite[$i],$listeArrondissements,$listeCategories);
 						break;
 					
 					case "verification":
@@ -538,31 +542,28 @@ class Controleur
 						break;
 				}
 			}
-			$curOeuvre++;
 		}
 		
-		if($action == "importationBD"){
-			
-			/////////////////////////////////////////////////////
-			///////////////traitement des Oeuvres-Artistes///////
-			/////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////
+		///////////////traitement des Oeuvres-Artistes///////
+		/////////////////////////////////////////////////////
+		
+		if($action == "importationBD")
+		{
 			
 			/******** Obtenir la derniere liste des Oeuvres dans la BD*************/
 			$oOeuvresListe = new Oeuvres();
-			$listeOeuvres = $oOeuvresListe->obtenirTous("Oeuvres","idOeuvre");//contienne le resultat du tableau avec les categories
-			//$nomOeuvres = count($listeOeuvres);
+			$listeOeuvres = $oOeuvresListe->obtenirTous("Oeuvres","idOeuvre");//contienne le resultat du tableau avec les oeuvres
+			$nomOeuvresBD = count($listeOeuvres);
 			/******** Obtenir la derniere liste des artistes dans la BD*************/
 			$oArtistesListe = new Artistes();
 			$listeArtistes = $oArtistesListe->obtenirTous("Artistes","idArtiste");
 			$nomOArtistes = count($listeArtistes);
 			
-			$curOeuvre = 0;//compteur pour savoir l'ouvre du JSON à traiter
-			while($curOeuvre<$nomOeuvres)
+			for($i=0;$i<$nomOeuvres;$i++)
 			{
-				$this->insererArtisteOeuvre($jsonSite[$curOeuvre],$listeOeuvres,$nomOeuvres,$listeArtistes,$nomOArtistes);
-				$curOeuvre++;
+				$this->insererArtisteOeuvre($jsonSite[$i],$listeOeuvres,$nomOeuvresBD,$listeArtistes,$nomOArtistes);
 			}
-			
 		}
 		
 		$dataUpdate = 
@@ -579,6 +580,7 @@ class Controleur
 	//***** functions par rapport à des traitement des artistes
 	private function obtenirTabArtistes()
 	{	
+		//obtienne tous les artistes dans la BD dans un tableau avec le format nom prenom collectif pour faciliter la comparaison
 		$oArtistesListe = new Artistes();
 		$listeArtistes = $oArtistesListe->obtenirTous("Artistes","idArtiste");//contienne le resultat du tableau avec les artistes
 		$nomArtistes = count($listeArtistes);
@@ -601,7 +603,7 @@ class Controleur
 		}
 		else
 		{
-			for($i=0;$i<$nomArtistes;$i++)
+			for($i=0;$i<$nomArtistes;$i++)// cherche si l'artiste est dans la liste des artistes deja existant dans la BD
 			{
 				$artActuelle = $nom." ".$prenom." ".$collectif;
 				if($artActuelle == $mesArtistes[$i])
@@ -716,14 +718,21 @@ class Controleur
 		$tableau = array();
 		for($i=0;$i<$nomOeuvres;$i++)
 		{
-			$Oeuvre = $listeOeuvres[$i]["noInterne"];
+			if($listeOeuvres[$i]["noInterne"]==null)
+			{
+				$Oeuvre = $listeOeuvres[$i]["titre"] ." ". $listeOeuvres[$i]["titreVariante"];
+			}
+			else
+			{
+				$Oeuvre = $listeOeuvres[$i]["noInterne"];
+			}	
 			array_push($tableau,$Oeuvre);
 		}
 		return $tableau;
 	}
 	
 	
-	private function verifierOeuvre($noInterne,$mesOeuvres)
+	private function verifierOeuvre($titre,$titreVariante,$noInterne,$mesOeuvres)
 	{
 		
 		$nomOeuvres = count($mesOeuvres);
@@ -737,6 +746,13 @@ class Controleur
 			for($i=0;$i<$nomOeuvres;$i++)
 			{
 				if($noInterne == $mesOeuvres[$i])
+				{
+					return true;
+				}
+			}
+			for($i=0;$i<$nomOeuvres;$i++)
+			{
+				if($titre." ".$titreVariante == $mesOeuvres[$i])
 				{
 					return true;
 				}
