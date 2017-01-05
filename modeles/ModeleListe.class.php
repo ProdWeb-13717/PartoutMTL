@@ -63,6 +63,24 @@ class ModeleListe extends TemplateBase
 		}
 	}
 	
+	//Fonction qui va chercher les infos de toutes les id des oeuvres selon l'id d'un artiste.
+	public function getOeuvresParAuteurId($idArtiste) 
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare("SELECT ArtistesOeuvres.idOeuvre
+											   FROM ArtistesOeuvres
+											   WHERE ArtistesOeuvres.idArtiste = ".$idArtiste."
+											   ORDER BY ArtistesOeuvres.idOeuvre");
+			$stmt->execute();
+			return $stmt->fetchAll(PDO::FETCH_COLUMN);
+		}	
+		catch(Exception $exc)
+		{
+			return 0;
+		}
+	}
+	
 	//Fonction qui va chercher les photos de toutes les oeuvres
 	public function getOeuvresParPhotos() 
 	{
