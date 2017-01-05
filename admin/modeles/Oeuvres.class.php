@@ -208,7 +208,7 @@ class Oeuvres extends TemplateBase
 		}
 	}
 	
-	public function completerOeuvre($numInt,$idCat,$idArron)
+	/*public function completerOeuvre($numInt,$idCat,$idArron)
 	{
 		try
 		{	
@@ -226,7 +226,7 @@ class Oeuvres extends TemplateBase
 		{
 			return 0;
 		}
-	}
+	}*/
 	
 	public function inclureArtistesOeuvres($oeuvreJson,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes)
 	{
