@@ -3,3 +3,12 @@
 3- 	login = partoutmtl (sans majuscules)
 	mot de passe = equipeDeCourse%
 4- aller sur l'icone de phpMyAdmin
+
+
+
+************************
+Fort Awesome:
+************************
+user name : partout
+email : legaultnoemi@gmail.com
+mot de passe = equipeDeCourse%
