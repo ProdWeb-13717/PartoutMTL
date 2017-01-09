@@ -233,6 +233,15 @@ class Controleur
 				
 				}
 				break;
+				
+			case 'carte': //**************************************************
+				$this->entete();                    
+                //$modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
+                //$data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
+                $vue = "carte";
+                $this->afficheVue($vue/*, $data*/);
+                $this->afficheVue("footer");
+                break;
              
             case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
 				$this->entete();                    
