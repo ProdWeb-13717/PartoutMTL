@@ -8,27 +8,164 @@
 ?>
 
 <!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres --------------------------------------------->
-
-        <label for="dateFinProductionOeuvreAjoutAdmin">DATE FIN DE PRODUCTION : </label>
-        <input type="date" name="dateFinProductionOeuvreAjout" id="dateFinProductionOeuvreAjoutAdmin"/>
-        
-        <label for="collectionOeuvreAjoutAdmin">COLLECTION DE L'OEUVRE : </label>
+    <article class="espaceHaut10">
+        <label for="dateFinProductionOeuvreAjoutAdmin">Fin de production : </label>
+        <input type="date" name="dateFinProductionOeuvreAjout" id="dateFinProductionOeuvreAjoutAdmin"
+            <?php  
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                {
+                    foreach($data as $oeuvre)
+                    {
+                        if ($oeuvre['dateFinProduction'] != NULL){
+                            ?>
+                            value="<?php echo $oeuvre['dateFinProduction']; ?>"
+                            <?php
+                        }
+                    }
+                }
+            ?>             
+        />
+    </article>
+</section>
+ 
+<section class="flex-row-left formulaireSoumissionAdmin">
+    <article>
+        <label for="collectionOeuvreAjoutAdmin">Collection : </label>
         <select name="collectionOeuvreAjout" id="collectionOeuvreAjoutAdmin">
-            <option value="Art public">Art public</option>
-            <option value="Intégration à l'architecture">Intégration à l'architecture</option>
+            <option value="Art public"
+                <?php  
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                    {
+                        foreach($data as $oeuvre)
+                        {
+                            if ($oeuvre['nomCollection'] == "Art public"){
+                                ?>
+                                selected
+                                <?php
+                            }
+                        }
+                    }
+                ?>     
+            >Art public</option>
+            <option value="Intégration à l'architecture"
+                <?php  
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                    {
+                        foreach($data as $oeuvre)
+                        {
+                            if ($oeuvre['nomCollection'] == "Intégration à l'architecture"){
+                                ?>
+                                selected
+                                <?php
+                            }
+                        }
+                    }
+                ?>        
+            >Intégration à l'architecture</option>
         </select>
-        
-        <label for="modeAcquisitionOeuvreAjoutAdmin">MODE D'ACQUISITION : </label>
-        <input type="text" name="modeAcquisitionOeuvreAjout" id="modeAcquisitionOeuvreAjoutAdmin"/>
-        
-        <label for="dateAccessionOeuvreAjoutAdmin">DATE D'ACCESSION : </label>
-        <input type="date" name="dateAccessionOeuvreAjout" id="dateAccessionOeuvreAjoutAdmin"/>
-        
-        <label for="materiauxOeuvreAjoutAdmin">MATÉRIAUX : </label>
-        <input type="text" name="materiauxOeuvreAjout" id="materiauxOeuvreAjoutAdmin"/>
-        
-        <label for="techniqueOeuvreAjoutAdmin">TECHNIQUE : </label>
-        <input type="text" name="techniqueOeuvreAjout" id="techniqueOeuvreAjoutAdmin"/>
-        
-        <label for="dimensionsOeuvreAjoutAdmin"><span class="couleurErreurSoumission">DIMENSIONS : </span></label>
-        <input type="text" name="dimensionsOeuvreAjout" id="dimensionsOeuvreAjoutAdmin" placeholder= "00 x 00 x 00 cm"/>
+    </article>
+</section>
+ 
+<section class="flex-row-left formulaireSoumissionAdmin">
+    <article class="formulaireSoumissionAdminGauche">
+        <label for="modeAcquisitionOeuvreAjoutAdmin">Mode d'acquisition : </label>
+        <input type="text" name="modeAcquisitionOeuvreAjout" id="modeAcquisitionOeuvreAjoutAdmin"
+            <?php                   
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                {
+                    foreach($data as $oeuvre)
+                    {
+                        if ($oeuvre['modeAcquisition'] != NULL){
+                            ?>
+                            value="<?php echo $oeuvre['modeAcquisition']; ?>"
+                            <?php
+                        }
+                    }
+                }
+            ?>       
+        />
+    </article>
+    
+    <article class="espaceHaut10">
+        <label for="dateAccessionOeuvreAjoutAdmin">Date d'accession : </label>
+        <input type="date" name="dateAccessionOeuvreAjout" id="dateAccessionOeuvreAjoutAdmin"
+            <?php                   
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                {
+                    foreach($data as $oeuvre)
+                    {
+                        if ($oeuvre['dateAccession'] != NULL){
+                            ?>
+                            value="<?php echo $oeuvre['dateAccession']; ?>"
+                            <?php
+                        }
+                    }
+                }
+            ?>
+        />
+    </article>
+</section>
+
+<section class="flex-row-left formulaireSoumissionAdmin">
+    <article class="formulaireSoumissionAdminGauche">
+        <label for="materiauxOeuvreAjoutAdmin">Matériaux : </label>
+        <input type="text" name="materiauxOeuvreAjout" id="materiauxOeuvreAjoutAdmin"
+            <?php                   
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                {
+                    foreach($data as $oeuvre)
+                    {
+                        if ($oeuvre['materiaux'] != NULL){
+                            ?>
+                            value="<?php echo $oeuvre['materiaux']; ?>"
+                            <?php
+                        }
+                    }
+                }
+            ?>      
+        />
+    </article>
+    
+    <article class="espaceHaut10">
+        <label for="techniqueOeuvreAjoutAdmin">Technique : </label>
+        <input type="text" name="techniqueOeuvreAjout" id="techniqueOeuvreAjoutAdmin"
+            <?php                   
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                {
+                    foreach($data as $oeuvre)
+                    {
+                        if ($oeuvre['technique'] != NULL){
+                            ?>
+                            value="<?php echo $oeuvre['technique']; ?>"
+                            <?php
+                        }
+                    }
+                }
+            ?>      
+        />
+    </article>
+</section>
+
+<section class="flex-row-left formulaireSoumissionAdmin">
+    <article>
+        <label for="dimensionsOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Dimensions : </span></label>
+        <input type="text" name="dimensionsOeuvreAjout" id="dimensionsOeuvreAjoutAdmin" placeholder= "00 x 00 x 00 cm"
+            <?php                   
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                {
+                    foreach($data as $oeuvre)
+                    {
+                        if ($oeuvre['dimensions'] != NULL){
+                            ?>
+                            value="<?php echo $oeuvre['dimensions']; ?>"
+                            <?php
+                        }
+                    }
+                }
+            ?> 
+        />
+    </article>
+</section>    
+
+    
+    

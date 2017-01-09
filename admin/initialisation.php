@@ -27,6 +27,11 @@
 	{
 		$_GET['usagerAdmin'] = '';
 	}
+	
+	if(empty($_SESSION["niveauAdmin"]))
+	{
+		$_SESSION["niveauAdmin"] = '';
+	}
 
 	if(empty($_GET['passAdmin']))
 	{

@@ -9,41 +9,55 @@
 
 <!-- AFFICHE LES DÉTAILS DE LA SOUMISSION POUR CONFIRMER SES ENTRÉES -------------------------------->
 
-<section class="soumissionOk margin100">
 
-    <h1>SOUMISSION COMPLÉTÉE</h1>
-    <h2>DÉTAILS</h2>
-    <ul>
-        <li>TITRE :                     <?php echo $data['titre']?>                                                     </li>
-        <li>TITRE VARIANTE :            <?php if(isset($data['titreVariante'])) {echo $data['titreVariante'];}?>        </li>
-        <li>PRÉNOM DE L'ARTISTE :       <?php if(isset($data['prenomArtiste'])) {echo $data['prenomArtiste'];}?>        </li>
-        <li>NOM DE L'ARTISTE :          <?php if(isset($data['nomArtiste'])) {echo $data['nomArtiste'];}?>              </li>
-        <li>COLLECTIF :                 <?php if(isset($data['collectif'])) {echo $data['collectif'];}?>                </li>
-        <li>CATÉGORIE :                 <?php 
+<div class="afficheSoumissionsAdmin adminTitre">    
+    <?php
+        if($_GET['requete'] == "updateModification")
+        {
+           echo "<h1>MODIFICATION COMPLÉTÉE</h1>";
+        }
+        else
+        {
+            echo "<h1>SOUMISSION COMPLÉTÉE</h1>";
+        }
+    ?>
+
+    <section class="flex-column-left">
+        <h3>DÉTAILS</h3>
+        <ul>
+            <li>Titre :                 <span  class="typoValeurAdmin"><?php echo $data['titre']?>                                                      </span></li>
+            <li>Titre variante :        <span  class="typoValeurAdmin"><?php if(isset($data['titreVariante'])) {echo $data['titreVariante'];}?>         </span></li>
+            <li>Prénom :                <span  class="typoValeurAdmin"><?php if(isset($data['prenomArtiste'])) {echo $data['prenomArtiste'];}?>         </span></li>
+            <li>Nom :                   <span  class="typoValeurAdmin"><?php if(isset($data['nomArtiste'])) {echo $data['nomArtiste'];}?>               </span></li>
+            <li>Collectif :             <span  class="typoValeurAdmin"><?php if(isset($data['collectif'])) {echo $data['collectif'];}?>                 </span></li>
+            <li>Catégorie :             <span  class="typoValeurAdmin"><?php 
                                             $modeleSoumisionAdmin = new modeleSoumission();
                                             $nomCategorieOeuvreEnSoumission = $modeleSoumisionAdmin->obtenir($data['idCategorie'],'idCategorie',"Categories");
                                             echo $nomCategorieOeuvreEnSoumission['nomCategorie'];
-                                        ?>                                                                              </li>
-        <li>DATE FIN DE PRODUCTION :    <?php if(isset($data['dateFinProduction'])) {echo $data['dateFinProduction'];}?></li>
-        <li>DATE D'ACCESSION :          <?php if(isset($data['dateAccession'])) {echo $data['dateAccession'];}?>        </li>
-        <li>COLLECTION DE L'OEUVRE :    <?php if(isset($data['nomCollection'])) {echo $data['nomCollection'];}?>        </li>
-        <li>MODE D'ACQUISTION :         <?php if(isset($data['modeAcquisition'])) {echo $data['modeAcquisition'];}?>    </li>
-        <li>MATÉRIAUX :                 <?php if(isset($data['materiaux'])) {echo $data['materiaux'];}?>                </li>
-        <li>TECHNIQUE :                 <?php if(isset($data['technique'])) {echo $data['technique'];}?>                </li>
-        <li>DIMENSIONS :                <?php if(isset($data['dimensions'])) {echo $data['dimensions'];}?>              </li>
-        <li>ARRONDISSEMENT :            <?php 
+                                        ?>                                                                                                              </span></li>
+            <li>Fin de production :     <span  class="typoValeurAdmin"><?php if(isset($data['dateFinProduction'])) {echo $data['dateFinProduction'];}?> </span></li>
+            <li>Date d'accession :      <span  class="typoValeurAdmin"><?php if(isset($data['dateAccession'])) {echo $data['dateAccession'];}?>         </span></li>
+            <li>Collection :            <span  class="typoValeurAdmin"><?php if(isset($data['nomCollection'])) {echo $data['nomCollection'];}?>         </span></li>
+            <li>Mode d'acquisition :    <span  class="typoValeurAdmin"><?php if(isset($data['modeAcquisition'])) {echo $data['modeAcquisition'];}?>     </span></li>
+            <li>Matériaux :             <span  class="typoValeurAdmin"><?php if(isset($data['materiaux'])) {echo $data['materiaux'];}?>                 </span></li>
+            <li>Technique :             <span  class="typoValeurAdmin"><?php if(isset($data['technique'])) {echo $data['technique'];}?>                 </span></li>
+            <li>Dimensions :            <span  class="typoValeurAdmin"><?php if(isset($data['dimensions'])) {echo $data['dimensions'];}?>               </span></li>
+            <li>Arrondissement :        <span  class="typoValeurAdmin"><?php 
                                             $modeleSoumisionAdmin = new modeleSoumission();
                                             $nomArrondissementOeuvreEnSoumission = $modeleSoumisionAdmin->obtenir($data['idArrondissement'],'idArrondissement',"Arrondissements");
                                             echo $nomArrondissementOeuvreEnSoumission['nomArrondissement'];
-                                        ?>                                                                              </li>
-        <li>PARC :                      <?php if(isset($data['parc'])) {echo $data['parc'];}?>                          </li>
-        <li>BÂTIMENT :                  <?php if(isset($data['batiment'])) {echo $data['batiment'];}?>                  </li>
-        <li>ADRESSE CIVIQUE :           <?php if(isset($data['adresseCivique'])) {echo $data['adresseCivique'];}?>      </li>
-        <li>LATITUDE :                  <?php if(isset($data['latitude'])) {echo $data['latitude'];}?>                  </li>
-        <li>LONGITUDE :                 <?php if(isset($data['longitude'])) {echo $data['longitude'];}?>                </li>
-        <li>URL PHOTO :                 <?php if(isset($data['urlPhoto'])) {echo $data['urlPhoto'];}?>                  </li>
-        <li>DESCRIPTION :               <?php if(isset($data['description'])) {echo $data['description'];}?>            </li>
-    </ul>
-    <!-- La modification d'une oeuvre sera une des tâches du sprint 2 -->
-    <input type="button" value="MODIFIER" disabled />  
-</section>
+                                        ?>                                                                                                              </span></li>
+            <li>Parc :                  <span  class="typoValeurAdmin"><?php if(isset($data['parc'])) {echo $data['parc'];}?>                           </span></li>
+            <li>Bâtiment :              <span  class="typoValeurAdmin"><?php if(isset($data['batiment'])) {echo $data['batiment'];}?>                   </span></li>
+            <li>Adresse civique :       <span  class="typoValeurAdmin"><?php if(isset($data['adresseCivique'])) {echo $data['adresseCivique'];}?>       </span></li>
+            <li>Latitude :              <span  class="typoValeurAdmin"><?php if(isset($data['latitude'])) {echo $data['latitude'];}?>                   </span></li>
+            <li>Longitude :             <span  class="typoValeurAdmin"><?php if(isset($data['longitude'])) {echo $data['longitude'];}?>                 </span></li>
+            <li>URL photo :             <span  class="typoValeurAdmin"><?php if(isset($data['urlPhoto'])) {echo $data['urlPhoto'];}?>                   </span></li>
+            <li>Description :           <span  class="typoValeurAdmin"><?php if(isset($data['description'])) {echo $data['description'];}?>             </span></li>
+        </ul> 
+    </section>
+        
+    <article  class="liens">
+        <a href="./index.php?requete=listeOeuvresAdmin">LISTE DES OEUVRES</a>
+    </article>
+</div>

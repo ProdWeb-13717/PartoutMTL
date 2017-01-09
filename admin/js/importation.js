@@ -14,7 +14,7 @@
    
    window.addEventListener("load", function(){                                          // au chargement de la page
      
-       if(document.querySelector(".optionBDContainer"))                                // 
+       if(document.querySelector(".optionBDContainer"))
        {    
     
            var boutones = document.getElementsByClassName("bouton");						// prendre les bouttons dans la page

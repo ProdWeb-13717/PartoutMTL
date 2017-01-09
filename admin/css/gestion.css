@@ -1,24 +1,24 @@
 /*  TABLE DES MATIÈRES
-    - Global
     - Catégorie
-    - 
-    -
-    -
+    - Carrousel
 -------------------------------------------------------------*/
-
-/* Global
--------------------------------------------------------------*/
-
-.gestionAdmin{
-    margin-top : 50px;
-    margin-left: 40px;  
-}
 
 /* Catégorie
 -------------------------------------------------------------*/
 
-.gestionAdminCategorie h1{
-    border-bottom: solid black 2px;
-    
+.gestionAdminTitre h3{
+    //border: solid blue 1px;
+    font-size: 1.3em;
+    letter-spacing: 0.15em;
+    margin-bottom : -10px;
 }
+
+.categorie{
+    margin-bottom: 70px;
+}
+
+
+/* Carrousel
+-------------------------------------------------------------*/
+
 

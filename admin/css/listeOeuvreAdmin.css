@@ -1,40 +1,39 @@
 /*  TABLE DES MATIÈRES
-    - Global
     - Liste
-    - 
-    -
-    -
 -------------------------------------------------------------*/
-
-/* Global
--------------------------------------------------------------*/
-
-.gestionAdmin{
-    margin-top : 50px;
-    margin-left: 40px;  
-}
 
 /* Liste
 -------------------------------------------------------------*/
-#liste{
-    margin: 50px;
-	
-}
-
-.gestionAdminCategorie h1{
-    border-bottom: solid black 2px;
-}
 
 .elemListe{
-	margin: 30px;
-	margin-bottom: 60px;
-	border-top: solid black 2px;
-	display: flex;
-	flex-direction: 	row;
-	flex-wrap:			nowrap;
-	/*
-	justify-content: 	flex-start;
-	align-items: 		flex-start;
-	align-content: 		flex-start;
-	*/
+    margin-bottom: 30px;
 }
+
+.listeOeuvresAdmin li{
+    list-style-type: none;
+    line-height: 1.5em;
+}
+
+.photoOeuvre{ 
+    margin-right: 30px;
+}
+
+.informationOeuvre{
+    width: 50%;
+}
+
+@media (max-width: 800px) /*ajustement menu*/
+{
+    .informationOeuvre{
+        width: 90%;
+    }
+    
+}
+
+.listeAuteur{
+    margin-top: -25px;
+    margin-left: 85px; 
+}
+
+
+

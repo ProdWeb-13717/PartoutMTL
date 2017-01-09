@@ -49,7 +49,7 @@ class Admin extends TemplateBase
 			if($motDePasseGrainSel == $_POST["pass"])
 			{
 				$_SESSION["authentifie"] = $_POST["usager"];
-				//header("Location: index.php?requete=accueil");
+				$_SESSION["niveauAdmin"] = $this->ObtenirNiveauAdmin($_POST["usager"]);
 				return true;
 			}
 			else
@@ -68,6 +68,22 @@ class Admin extends TemplateBase
 			$stmt->execute();
 			$resulta = $stmt->fetch();
 			return $resulta['motPasseAdmin'];
+		}
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
+	public function ObtenirNiveauAdmin($usager)
+	{
+		try
+		{
+			$stmt = $this->connexion->prepare('SELECT niveauAdmin FROM Administrateurs WHERE nomUsagerAdmin = :usager');
+			$stmt->bindParam(":usager", $usager);
+			$stmt->execute();
+			$resulta = $stmt->fetch();
+			return $resulta['niveauAdmin'];
 		}
 		catch(Exception $exc)
 		{

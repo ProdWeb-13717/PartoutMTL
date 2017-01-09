@@ -1,71 +1,79 @@
 /*  TABLE DES MATIÈRES
     - Soumission admin
+    - Affichage soumission admin
     - Affichage soumission usager
+    - Modification
 -------------------------------------------------------------*/
-
 
 /* Soumission admin
 -------------------------------------------------------------*/
-.soumissionAdmin{
-    width: 602px;
-    color : black;
-    margin: auto;
-    margin-top : 50px;
+
+.gestionAdminTitre h3{
+    margin-bottom: 7px;
 }
 
-.soumissionAdmin h1{
-    position: relative;
-    left: 29%;
-    margin-bottom: -1px;
+.formulaireSoumissionAdmin{
+    margin-bottom: 15px;
 }
 
-.soumissionAdminFormulaire{
-    width: 600px;
-    color : black;
-    padding-left: 5%;
-    padding-top : 20px;
-    padding-bottom: 20px;
-    border : solid black 2px;
+@media (max-width: 800px) /*ajustement menu*/
+{
+    .formulaireSoumissionAdmin{
+        margin-bottom: 10px;
+    }
 }
 
-.soumissionAdminFormulaire label{
-    display:inline-block;
+.formulaireSoumissionAdminGauche{
+    width: 400px;
+}
+
+.formulaireSoumissionAdmin input{
     width: 200px;
-    text-align:right;
-    margin-bottom: 10px;
 }
 
-.soumissionAdminFormulaire input{
-    width: 337px;
+.espaceH3{
+    margin-top: 15px;
 }
 
-#boutonSoumission{
-    position: relative;
-    left: 75.5%;
+.soumissionAdmin .bouton{
+    margin: 40px 0px 0px 0px;;
 }
 
 #msgErreurSoumision{
+    display: block;
+    margin-top: 20px;
     color : brown;
-    margin-left : 37%;
 }
 
-.afficheSoumissionsUsagers h1{
-    border-bottom: solid black 2px;
-    margin-top : 50px;
-    margin-left: 40px; 
+
+/* Affichage soumission admin
+-------------------------------------------------------------*/
+
+.afficheSoumissionsAdmin li{
+    list-style-type: none;
+    line-height: 1.5em;
 }
+
+.afficheSoumissionsAdmin article{
+    margin-top: 50px;
+    
+}
+
+
+/* Affichage soumission usager
+-------------------------------------------------------------*/
 
 .afficheSoumissionsUsagers ul{
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .soumissionDesUsagers li{
     list-style-type: none;
+    line-height: 1.5em;
 }
 
-.soumissionDesUsagers a{
-    text-decoration: none;
-    color: black;
+.soumissionDesUsagersListe{
+    width: 50%;
 }
 
 .numeroSoumission{
@@ -73,9 +81,21 @@
     letter-spacing: 6px;
 }
 
-.liensSoumission a{
-    font-family: 'Muli', sans-serif;
-    font-size: 0.8em;
-    letter-spacing: 3px;
-    margin-right: 20px;
+@media (max-width: 800px) /*ajustement menu*/
+{
+    .afficheSoumissionsUsagers ul{
+        margin-bottom: 40px;
+    }
+    
+    .soumissionDesUsagersListe{
+        margin-bottom: 5px;
+    }
 }
+
+/* Modification
+-------------------------------------------------------------*/
+
+#boutonModification{
+    margin-bottom: 20px;
+}
+

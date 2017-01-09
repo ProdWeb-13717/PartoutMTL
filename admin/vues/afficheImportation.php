@@ -7,26 +7,32 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-<br>
-<div class="optionBDContainer">
-	<form class ="form" id="forMisaJour" method="GET">
-		<fieldset>
-		<legend> Verification</legend>
-		<label>Verifier s'il existe des oeuvres non mise à jour</label>
-		<br>
-		<input type="hidden" name="requete" value="verification"/>
-		<input class ="bouton" type="submit" name="Verification" value="Verification"/><br/><br/>
-		</fieldset>
-	</form>
-	<br>
-	<form class ="form" id="formVerification" method="GET">
-		<fieldset>
-		<legend> Mise a Jour</legend>
-		<label>Importer la BD au complet du site des données publics de Montréal</label>
-		<br>
-		<input type="hidden" name="requete" value="importationok"/>
-		<input class ="bouton" type="submit" name="Importer" value="Mise à jour"/><br/><br/>
-		</fieldset>
-	</form>
+<div class="marginDivPrincipale">
+    <section class="optionBDContainer adminTitre">
+        <h1>BASE DE DONNÉES</h1>
+        <section class="flex-row-left">
+            <article class="espaceADroite10">
+                <form class ="form" id="forMisaJour" method="GET">
+                    <fieldset>
+                        <h3>VÉRIFICATION</h3>
+                        Des oeuvres non mise à jour
+                        <input type="hidden" name="requete" value="verification"/>
+                        <input class ="bouton2" type="submit" name="Verification" value="VÉRIFIER"/> 
+                    </fieldset>
+                </form>
+            </article>
+            
+            <article class="espaceHaut30">
+                <form class ="form" id="formVerification" method="GET">
+                    <fieldset>
+                        <h3>MISE À JOUR</h3>
+                        De la base de données
+                        <input type="hidden" name="requete" value="importationok"/>
+                        <input class ="bouton2" type="submit" name="Importer" value="MISE À JOUR"/>
+                    </fieldset>
+                </form>
+            </article>
+        </section>
+    </section>
 </div>
-<br>
+

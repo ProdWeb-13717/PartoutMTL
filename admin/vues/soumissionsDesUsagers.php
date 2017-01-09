@@ -5,51 +5,108 @@
 		header('Location: ../index.php');
 	}
 	///////////////////////////////////////////////////////////
-?>
+?>    
 
 <!-- AFFICHAGE DES SOUMISSIONS DES USAGERS, TABLE Soumissions --------------------------------------->
 
-<section class="afficheSoumissionsUsagers">
+<div class="soumissionsUsager marginDivPrincipale adminTitre">
     <h1>SOUMISSIONS DES USAGERS</h1>
-	<ul>
-		<?php
-		foreach($data as $soumission)
-        {
-			?>
-            <ul class='soumissionDesUsagers' name='soumissionDunUsager' id="<?php echo $soumission['idSoumission']?>">
-			
-                <li>
-					<span  class="numeroSoumission">
-						SOUMISSION #        <?php echo $soumission["idSoumission"]?>         
-					</span>
-				</li>
+	<section class="afficheSoumissionsUsagers">
+        <ul>
+            <?php
+            foreach($data as $soumission)
+            {
+                ?>
+                <ul class='soumissionDesUsagers' name='soumissionDunUsager' id="<?php echo $soumission['idSoumission']?>">
+                    <section class="flex-row-left">       
+                        <article class="soumissionDesUsagersListe"-->
+                    
+                            <li>
+				                <span  class="numeroSoumission">
+				                	SOUMISSION # <?php echo $soumission["idSoumission"]?>         
+				                </span>
+				            </li>
 				
-                <li>TITRE :             <?php echo $soumission["titreSoumission"]?>             </li>
-                <li>PRÉNOM ARTISTE :    <?php echo $soumission["prenomArtisteSoumission"]?>     </li>
-                <li>NOM ARTISTE :       <?php echo $soumission["nomArtisteSoumission"]?>        </li>
-                <li>COLLECTIF :         <?php echo $soumission["collectifSoumission"]?>         </li>
-				
-                <li>ARRONDISSEMENTS :   
-					<?php 
-                    $modeleSoumisionAdmin = new modeleSoumission();
-                    $nomArrondissementOeuvreEnSoumission = $modeleSoumisionAdmin->obtenir($soumission['idArrondissementSoumission'],'idArrondissement',"Arrondissements");
-                    echo $nomArrondissementOeuvreEnSoumission['nomArrondissement'];
-                    ?>                                                      
-				</li>
-				
-                <li>PARC :              <?php echo $soumission["parcSoumission"]?>              </li>
-                <li>ADRESSE CIVIQUE :   <?php echo $soumission["adresseCiviqueSoumission"]?>    </li>
-                <li>DESCRIPTION :       <?php echo $soumission["descriptionSoumission"]?>       </li>
-                <li>PHOTO :             <?php echo $soumission["photoSoumission"]?>             </li>
-                <li>COURRIEL :          <?php echo $soumission["courrielSoumission"]?>          </li>
-				
-                <li class="liensSoumission">
-                    <a href="./index.php?requete=soumission&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">AJOUTER</a>
-                    <a href="./index.php?requete=supprimeSoumissionUsager&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">SUPPRIMER</a>                    
-				</li>
-            </ul>
-			<?php
-		}
-		?>
-	</ul>		
-</section>
+                            <li>Titre : <span  class="typoValeurAdmin"><?php echo $soumission["titreSoumission"]?></span></li>
+                
+                            <?php
+                                if($soumission["prenomArtisteSoumission"])
+                                {
+                                    ?>
+                                    <li>Prénom artiste : <span  class="typoValeurAdmin"><?php echo $soumission["prenomArtisteSoumission"]?></span></li>
+                                    <?php   
+                                }
+  
+                                if($soumission["nomArtisteSoumission"])
+                                {
+                                    ?>
+                                    <li>Nom artiste : <span  class="typoValeurAdmin"><?php echo $soumission["nomArtisteSoumission"]?></span></li>
+                                    <?php   
+                                }
+
+                                if($soumission["collectifSoumission"])
+                                {
+                                    ?>
+                                    <li>Collectif : <span  class="typoValeurAdmin"><?php echo $soumission["collectifSoumission"]?></span></li>
+                                    <?php   
+                                }
+
+                                if($soumission["idArrondissementSoumission"])
+                                {
+                                    ?>
+                                    <li>Arrondissements :   
+				                    	<span  class="typoValeurAdmin">
+                                            <?php 
+                                                $modeleSoumisionAdmin = new modeleSoumission();
+                                                $nomArrondissementOeuvreEnSoumission = $modeleSoumisionAdmin->obtenir($soumission['idArrondissementSoumission'],'idArrondissement',"Arrondissements");
+                                                echo $nomArrondissementOeuvreEnSoumission['nomArrondissement'];
+                                            ?> 
+                                        </span>
+				                    </li>
+                                    <?php   
+                                }
+
+                                if($soumission["parcSoumission"])
+                                {
+                                    ?>
+                                    <li>Parc : <span  class="typoValeurAdmin"><?php echo $soumission["parcSoumission"]?></span></li>
+                                    <?php   
+                                }
+
+                                if($soumission["adresseCiviqueSoumission"])
+                                {
+                                    ?>
+                                    <li>Adresse civique : <span  class="typoValeurAdmin"><?php echo $soumission["adresseCiviqueSoumission"]?></span></li>
+                                    <?php   
+                                }
+
+                                if($soumission["descriptionSoumission"])
+                                {
+                                    ?>
+                                    <li>Description : <span  class="typoValeurAdmin"><?php echo $soumission["descriptionSoumission"]?></span></li>
+                                    <?php   
+                                }
+
+                                if($soumission["photoSoumission"])
+                                {
+                                    ?>
+                                    <li>Photo : <span  class="typoValeurAdmin"><?php echo $soumission["photoSoumission"]?></span></li>
+                                    <?php   
+                                }
+                            ?>
+                    
+                            <li>Courriel : <span  class="typoValeurAdmin"><?php echo $soumission["courrielSoumission"]?></span></li>
+            
+                        </article>
+                        <article  class="liens">
+                            <a href="./index.php?requete=soumission&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">AJOUTER</a>
+                            <a href="./index.php?requete=supprimeSoumissionUsager&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">SUPPRIMER</a>
+                        </article>
+                    </section>     
+                </ul>
+                <?php
+            }
+            ?>
+        </ul>			
+    </section>
+</div>

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Class Modele
  * Modèle de classe modèle. Dupliquer et modifier pour votre usage.
@@ -43,6 +43,9 @@ class Artistes extends TemplateBase
 			return false;
 		}
 	}
+    
+    //public function obtenirArtisteDuneOeuvre
+    
 	
 	public function insererArtiste($nom,$prenom,$collectif)
 	{		
