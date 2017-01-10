@@ -27,7 +27,9 @@
         <script src="./js/soumissionUsager.js"></script>
         <script src="./js/listeLien.js"></script>
         <script src="./js/carroussel.js"></script>
-        
+		
+		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+		
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->
 	</head>
