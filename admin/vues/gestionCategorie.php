@@ -1,3 +1,13 @@
+ <?php
+	/// *** SECURITE DE LA PAGE *** ///////////////////////////
+	if(!isset($_SESSION['authentifie']))
+	{
+		header('Location: ../index.php');
+	}
+	///////////////////////////////////////////////////////////
+?>
+
+
 <!-- PAGE GESTION AJOUTER UNE CATÉGORIE, TABLE Categories ------------------------------------------->
 
 <section class="categorie adminTitre">
