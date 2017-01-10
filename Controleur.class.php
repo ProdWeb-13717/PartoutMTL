@@ -21,6 +21,13 @@ class Controleur
 			case 'accueil':
 				$this->accueil(); // option quand get requete est accueil
 				break;
+                
+            case 'contact':
+				$this->afficheVue("contact");
+                $this->afficheVue("head");
+                $this->afficheVue("enteteAccueil");
+                $this->afficheVue("footer");
+				break;
 				
 			//Affichage de la liste de tous les artistes	
             case 'listeArtistes':

@@ -29,6 +29,7 @@
         <script src="./js/soumissionUsager.js"></script>
         <script src="./js/listeLien.js"></script>
         <script src="./js/carroussel.js"></script>
+        <script src="./js/mail.js"></script>
         
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->
