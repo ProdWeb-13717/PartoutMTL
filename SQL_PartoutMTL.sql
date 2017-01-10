@@ -177,8 +177,10 @@ INSERT into Soumissions (titreSoumission,
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NL", MD5("NL123"), "nl@hotmail.com", 1);
 
 
-INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("1", MD5("1"), "un@hotmail.com", 1),
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("1", MD5("1"), "un@hotmail.com", 1);
 INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("2", MD5("2"), "nl2@hotmail.com", 2);
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("NoemiLegault", MD5("NL"), "NoemiLegault@hotmail.com", 1);
+INSERT INTO Administrateurs(nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin) VALUE ("SCB", MD5("SCB"), "SCoteBouchard@hotmail.com", 2);
 
 INSERT INTO Carroussel(urlPhoto) 
 VALUE("./images/Acceuil_1"),
