@@ -7,8 +7,4 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-
-<div>
-	Les données ont eté importées correctement<br>
-	<a href="index.php?requete=importation">Retour vers l'importation de données</a>
-</div>
+<div class="gestionAdmin marginDivPrincipale">

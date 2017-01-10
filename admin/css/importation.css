@@ -1,9 +1,22 @@
-/*  CSS IMPORTATION  */
-
-/* IMPORTATION
+/*  TABLE DES MATIÈRES
+    - Vérification
 -------------------------------------------------------------*/
-.optionBDContainer
-{
-	display: flex;
-	/*background-color: red;*/
+
+/* Vérification
+-------------------------------------------------------------*/
+
+.verificationBD li{
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.droit{
+    margin-left: 20%;
+}
+
+@media (max-width: 800px) {
+    .droit{
+        margin-left: 0%;
+        margin-top: 20px;
+    }
 }

@@ -1,19 +1,29 @@
 /*  TABLE DES MATIÈRES
+    - Typo CSS
     - Global
-    - Entête 
-    - Soumission
-    -
-    -
+    - Flexbox
+    - Marges
+    - Couleur texte 
+    - Couleur background
+    - Logo
+    - Menu
+    - Deconnection Admin
+    - Liens
+    - Boutons
+    - Titre
+    - Liste
+    - Formulaire
+    - Accueil - Connection Admin
 -------------------------------------------------------------*/
-
-
-
+    
 
 /* Global
 -------------------------------------------------------------*/
 *{
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
+    margin:0;
+	padding:0;
 }
 
 a{
@@ -22,57 +32,97 @@ a{
 }
 
 
-/* couleur texte
+/* Typo CSS
 -------------------------------------------------------------*/
-.noir{
-    color : black;
+/*
+    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Muli', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Roboto', sans-serif;
+*/
+
+.typoValeurAdmin{
+    font-family: 'Muli', sans-serif;
+    font-size: 1.1em;
 }
 
-.blanc{
-	color : white;
-}
 
-.vert{
-	color: #016737;
-}
-
-
-/* couleur background
+/* Flexbox
 -------------------------------------------------------------*/
-.fondVert{
-	background-color: #016737;
+.flex-row{
+	display: flex;
+	flex-direction: 	row;
+	flex-wrap:			nowrap;
+	justify-content: 	center;
+	align-items: 		center;
+	align-content: 		center;
 }
 
-.fondBlanc{
-	background-color: white;
+.flex-row-left{
+	display: flex;
+	flex-direction: 	row;
+	flex-wrap:			nowrap;
+	justify-content: 	left;
+	align-items: 		center;
+	align-content: 		center;
 }
 
+@media (max-width: 800px) {
+    .flex-row-left{
+	   flex-direction:     column;
+	   justify-content:    left;
+	   align-items:        flex-start;
+	   align-content:      flex-start;
+    }
+}
 
-/* tableau 
+.flex-column{
+	display: flex;
+	flex-direction: 	column;
+	flex-wrap:			nowrap;
+	justify-content: 	center;
+	align-items: 		center;
+	align-content: 		center;
+}
+
+.flex-column-left{
+	display: flex;
+	flex-direction: 	column;
+	flex-wrap:			nowrap;
+	justify-content: 	left;
+	align-items: 		left;
+	align-content: 		left;
+}
+
+/* Marges
 -------------------------------------------------------------*/
-li{
-	padding:0;
-}
 
-
-/* largeur / hauteur
--------------------------------------------------------------*/
 .reset-marges{
 	margin:0;
 	padding:0;
 }
 
-.largeur100
-{
+.marginDivPrincipale{
+    margin-top : 50px;
+    margin-left: 40px;
+}
+
+@media (max-width: 480px) {
+    .marginDivPrincipale{
+        borde: solid red 1px;
+        margin-left: 20px; 
+    }
+}
+
+.marginFooter{
+	margin-top: 100px;
+}
+
+.largeur100{
 	position: relative;
 	width: 100%;
 	margin-left: 0;
 	margin-right: 0;
-}
-
-.reset-marges{
-	margin:0;
-	padding:0;
 }
 
 .margin-hauteur100{
@@ -88,28 +138,87 @@ li{
 	margin: 10px 100px;
 }
 
+.espaceADroite10{
+    margin-right: 10%;
+}
 
-/* logo
+@media (max-width: 850px) {
+    .espaceADroite10{
+         margin-right: 5%;
+    }
+}
+
+.espaceHaut10{
+    margin-top: 0px;
+}
+
+@media (max-width: 800px) {    
+    .espaceHaut10{
+        margin-top: 10px;
+    }
+}
+
+.espaceHaut30{
+    margin-top: 0px;
+}
+
+@media (max-width: 800px) {    
+    .espaceHaut30{
+        margin-top: 30px;
+    }
+}
+
+
+/* Couleur texte
+-------------------------------------------------------------*/
+
+.blanc{
+	color : white;
+}
+
+.vert{
+	color: #016737;
+}
+
+
+/* Couleur background
+-------------------------------------------------------------
+.fondVert{
+	//background-color: #016737;
+    //background-color: #313e54;
+}
+
+.fondBlanc{
+	background-color: white;
+}
+*/
+
+/* Logo
 -------------------------------------------------------------*/
 #logo{
     font-size : 3.5em;
-    color : #016737;
+    //color : #016737;
+    color: #1f2a33;
     margin-top : 40px;
     margin-left : 40px;
 }
 
-#administrationLogo
-{
+.art{
+    color : #b9cbce;
+}
+
+#administrationLogo{
     position: absolute;
     color : white;
-    top: 64px;
+    top: 67px;
     margin-left : 150px;
     letter-spacing: 4px;   
 }
 
 .ligneLogo{
-	margin-top : -25px;
-	background-color: #016737; 
+	margin-top : -23px;
+	//background-color: #016737;
+    background-color: #1f2a33; 
 	height: 50px;
 }
 
@@ -117,13 +226,13 @@ li{
 {
 	#administrationLogo{
 		font-size : 1.2em;
-		top: 120px;
+		top: 92px;
 		margin-left : 120px;
 	}
 		
 	#logo{
 		font-size : 2.5em;
-		margin-top : 100px;
+		margin-top : 70px;
 	}
 	
 	#logo span{
@@ -131,16 +240,27 @@ li{
 	}
 	
 	.ligneLogo{
-		margin-top : -25px;
+		margin-top : -17px;
+	}
+}
+
+@media (max-width: 480px) /*ajustement positionnement entête*/
+{
+	#logo{
+		margin-left : 20px;
+	}
+    #administrationLogo{
+		margin-left : 100px;
 	}
 }
 
 
-/* menu 
+/* Menu 
 -------------------------------------------------------------*/
 .LigneCouleurMenu
 {
-	background-color: #016737; 
+	//background-color: #016737;
+    background-color: #1f2a33;
 	height: 50px;
 }
 
@@ -149,7 +269,8 @@ li{
 }
 
 .menu ul{
-    background-color : #016737;
+    //background-color : #016737;
+    background-color: #1f2a33;
     padding-top : 50px;
 }
 
@@ -157,19 +278,24 @@ li{
     display : inline-block;
     list-style-type : none;
     margin-top : 30px;
-    margin-right : 10px;
+    margin-right : 1%;
     text-align:center;
     border-left : solid white 2px;
     border-right : solid white 2px;
     border-top : solid white 2px;
-	
+}
+
+.menu li:first-child{
+    margin-left: 40px;
 }
 
 .menu a{
 	display:block;
     text-decoration: none;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8em;
     color : white; 
-	padding : 10px 20px 5px 20px;
+	padding : 10px 15px 5px 15px;
 }
 
 .menu li:hover{
@@ -181,6 +307,7 @@ li{
 }
 
 .menu li.actif { 
+    font-weight: bold;
 	background-color : white;
     display : inline-block;
     color: black;
@@ -189,13 +316,15 @@ li{
     border-right : solid white 2px;
     border-top : solid white 2px;
 	padding-top: 10px;
+	//padding-top: 100px;
 }
 
 .menu li.actif a{
-	color : #016737;
+	//color : #016737;
+    color: #1f2a33;
 }
 
-@media (max-width: 1000px)  /*ajustement menu*/
+@media (max-width: 800px) /*ajustement menu*/
 {
 	.menu ul{
 		display: flex;
@@ -205,126 +334,175 @@ li{
 		align-items: 		flex-start;
 		align-content: 		flex-start;
 	}
-	
+      
 	.menu ul li{
 		flex: 1 0 auto;
-		margin : 10px 0;
-		margin-right : 30px;
+		margin : 5px 0;
+        width: 170px;
 		border-bottom : solid white 2px;
 		border-left : solid transparent 0;
 	}
 	
+    .menu li:first-child{
+        margin-left: 0px;
+        margin-top : -30px;
+    }
+    
+    .menu li:last-child{
+        margin-bottom: 10px;
+    }
+    
 	.menu a{
-		color : white; 
-		padding : 10px 20px 10px 10px;
+        font-size: 0.7em;
+		padding : 5px 0px 3px 0px;
 	}
-
+  
 	.menu li:hover{
-		margin-top: 10px;
-		margin-right: 50px;
+		margin-top: 5px;
+        width: 200px;
 	}
+    
+    .menu li:first-child:hover{
+        margin-top : -30px;
+    }
 
 	.menu li:hover a{
-		padding-top: 10px;
-		padding-right: 50px;
+		padding-top: 5px;
 	}
 
 	.menu li.actif { 
 		padding-top: 0;
-		padding-right: 30px;
+		//padding-right: 40px;
+        width: 100%;
 	}
-	
-	
 }
 
 
-/* deconnection Admin
+/* Deconnection Admin
 -------------------------------------------------------------*/
 #deconnectionAdmin{
 	position: absolute;
 	top: 10px;
 	right: 20px;
-	
 	align-content: flex-end;
-	color : #016737; 
+	//color : #016737; 
+	color : #1f2a33; 
 	text-align: right;
-
 }
 
 #nomUsager{
-	
 	margin:0;
 	padding: 20px;
-	
+}
+
+@media (max-width: 480px) /*ajustement menu*/
+{
+    #deconnectionAdmin{
+        margin-right: -20px;
+    }
+    
+    #nomUsager{
+        font-size: 0.8em;
+    }
+    
 }
 
 
-/* bouton
+/* Liens
+-------------------------------------------------------------*/
+
+.liens a{
+    font-family: 'Muli', sans-serif;
+    font-size: 0.7em;
+    color : white;
+    left: 75.5%;
+    padding: 5px 20px;
+    background-color: #1f2a33;
+	border : solid transparent 2px;
+}
+
+.liens a:hover{
+    color : #1f2a33; 
+    background-color: white; 
+	border : solid #1f2a33 2px;
+}
+
+.hautPage{
+    position: fixed;
+    font-size: 0.7em;
+    bottom: 0;
+    right: 0;
+    padding-right: 1%;
+    padding-bottom: 20px; 
+}
+
+.hautPage a{
+    color: black;
+    opacity: 0.4;
+}
+
+.hautPage a:hover{
+    opacity: 1;
+}
+
+/* Boutons
 -------------------------------------------------------------*/
 .bouton{
-	
+    font-family: 'Muli', sans-serif;
+    font-size: 0.7em;
+    color : white;
     left: 75.5%;
     padding: 10px 30px;
-	/*
-	margin: 0;
-    margin-top : 20px;
-    margin-bottom : 30px;
-	*/
 	margin: 20px;
-    color : white;
-    background-color: #016737;
+    //background-color: #016737;
+    background-color: #1f2a33;
 	border : solid transparent 2px;
-	
 }
 
 .bouton2{
+    font-family: 'Muli', sans-serif;
+    font-size: 0.7em;
+    color : white;
     left: 75.5%;
     padding: 5px 20px;
-	/*
-	margin: 0;
-    margin-top : 20px;
-    margin-bottom : 30px;
-	*/
 	margin : 20px;
-    color : white;
-    background-color: #016737;
+    //background-color: #016737;
+    background-color: #1f2a33;
 	border : solid transparent 2px;
 }
 
 .bouton:hover, .bouton2:hover{
-    color : #016737; 
+    //color : #016737; 
+    color : #1f2a33; 
     background-color: white; 
-	border : solid #016737 2px;
-	/*
-	//margin: 0 auto;
-	//padding:50px 5px;
-	*/
+	border : solid #1f2a33 2px;
+}
+
+@media (max-width: 480px) /*ajustement positionnement entête*/
+{
+	.bouton2{
+        font-size: 0.6em;
+    }
 }
 
 
-/* flexbox
+/* Titre 
 -------------------------------------------------------------*/
-.flex-row{
-	display: flex;
-	flex-direction: 	row;
-	flex-wrap:			nowrap;
-	justify-content: 	center;
-	align-items: 		center;
-	align-content: 		center;
-}
-
-.flex-column{
-	display: flex;
-	flex-direction: 	column;
-	flex-wrap:			nowrap;
-	justify-content: 	center;
-	align-items: 		center;
-	align-content: 		center;
+.adminTitre h1{
+    border-bottom: solid black 2px; 
 }
 
 
-/* formulaire
+/* Liste 
 -------------------------------------------------------------*/
+li{
+	padding:0;
+}
+
+
+/* Formulaire
+-------------------------------------------------------------*/
+/*
 .form{
     //width: 570px;
     width: 100%;
@@ -332,34 +510,31 @@ li{
     padding-left: 100px;
     padding-top : 20px;
     padding-bottom: 20px;
-
 }
+*/
 
-
-/* connection Admin
+/* Accueil - Connection Admin
 -------------------------------------------------------------*/
 #deconnectionAdmin{
 	position: absolute;
 	top: 10px;
 	right: 20px;
-	
 	align-content: flex-end;
 	color : #016737; 
 	text-align: right;
-
 }
 
-#nomUsager{
-	
+#nomUsager{	
 	margin:0;
 	padding: 20px;
-	
+    color : #1f2a33;
 }
 
 .autentificationForm{
 	//width: 570px;
 	//width: 60%;
-    color : #016737;
+    //color : #016737;
+    color : #1f2a33;
 	display: flex;
 	flex-direction: column;
 	flex-wrap:nowrap;

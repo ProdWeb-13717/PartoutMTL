@@ -40,6 +40,10 @@
                     });
                     xhr.send(data);                                                         // envoie la requête et les datas en POST
                 } 
+                else                                                                        // sinon, message de champs invalides
+                {
+                    document.querySelector("#msgErreurSoumision").innerHTML = "Veuillez remplir le champs";
+                }
             });
             
             /*-- SUPPRESSION D'UNE CATÉGORIE ------------------------------------------------------*/
@@ -66,6 +70,10 @@
                         window.location.href = "./index.php?requete=gestion";                
                     });
                     xhr.send(data);                                                         // envoie la requête et les datas en POST
+                }
+                else                                                                        // sinon, message de champs invalides
+                {
+                    document.querySelector("#msgErreurSoumision").innerHTML = "Veuillez choisir une catégorie";
                 }
             });
        

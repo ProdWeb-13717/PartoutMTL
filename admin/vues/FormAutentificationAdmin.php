@@ -22,7 +22,7 @@
 			<label for="pass">MOT DE PASSE : </label><input type="password" name="pass"/>	
 			<input type="hidden" name="grainSel" value="<?php echo $_SESSION["grainDeSel"];?>"/>
 			<br><br><br>
-			<input type="button" value="soumettre" id="BoutonEncrypte" class="bouton"/>
+			<input type="button" value="SOUMETTRE" id="BoutonEncrypte" class="bouton"/>
 		</form>
 	</div>
 	<form name="formEncrypte" method="POST" action="index.php?requete=AutentificationAdmin">

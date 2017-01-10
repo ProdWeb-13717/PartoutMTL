@@ -85,10 +85,12 @@ class modeleSoumission extends TemplateBase
 		}
     }*/
     
+    
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      INSERT     //////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
 
+    
     public function insererSoumissionOeuvre($param)                             // insère les entrées d'une soumission dans la table Oeuvres
     {
         try
@@ -263,6 +265,93 @@ class modeleSoumission extends TemplateBase
             return 0;
         }   
     }
+    
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      UPDATE     //////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    public function modifierOeuvre($param)
+    {
+        try
+        {  
+            $stmt = $this->connexion->prepare("UPDATE Oeuvres
+                                               SET titre =              :titre,
+                                                   titreVariante =      :titreVariante,
+                                                   dateFinProduction =  :dateFinProduction,
+                                                   dateAccession =      :dateAccession,
+                                                   nomCollection =      :nomCollection,
+                                                   modeAcquisition =    :modeAcquisition,
+                                                   materiaux =          :materiaux,
+                                                   technique =          :technique,
+                                                   dimensions =         :dimensions,
+                                                   parc =               :parc,
+                                                   batiment =           :batiment,
+                                                   adresseCivique =     :adresseCivique,
+                                                   latitude =           :latitude,
+                                                   longitude =          :longitude,
+                                                   description =        :description,
+                                                   idCategorie =        :idCategorie,
+                                                   idArrondissement =   :idArrondissement
+                                               WHERE idOeuvre = :idOeuvre");
+            extract($param);                                                    // extrait le tableau de variables en paramètre
+            $stmt->execute(
+			array(
+				":idOeuvre"          => $idOeuvre,
+                ":titre"             => $titre, 
+				":titreVariante"     => $titreVariante,
+				":dateFinProduction" => $dateFinProduction,
+				":dateAccession"     => $dateAccession,
+				":nomCollection"     => $nomCollection,
+				":modeAcquisition"   => $modeAcquisition,
+				":materiaux"         => $materiaux,
+				":technique"         => $technique,
+				":dimensions"        => $dimensions,
+				":parc"              => $parc,
+				":batiment"          => $batiment,
+				":adresseCivique"    => $adresseCivique,
+				":latitude"          => $latitude,
+				":longitude"         => $longitude,
+				":description"       => $description,
+				":idCategorie"       => $idCategorie,
+				":idArrondissement"  => $idArrondissement
+			));
+            
+            return 1;		     
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }   
+    
+    }
+    
+    
+    public function modifierArtiste($param, $idArtiste)
+    {
+        try
+        {  
+            $stmt = $this->connexion->prepare("UPDATE Artistes
+                                               SET prenomArtiste =  :prenomArtiste,
+                                                   nomArtiste =     :nomArtiste,
+                                                   collectif =      :collectif
+                                               WHERE idArtiste = $idArtiste");
+            extract($param);                                                    // extrait le tableau de variables en paramètre
+            $stmt->execute(
+			array(
+				":prenomArtiste" => $prenomArtiste,
+				":nomArtiste"    => $nomArtiste,
+				":collectif"     => $collectif
+			));
+            
+            return 1;		     
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }
+    }   
 }
 
 ?>

@@ -9,17 +9,37 @@
 
 <!-- SECTION CATÉGORIES DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres -------------------------------->    
 
-        <label for="categorieOeuvreAjoutAdmin">CATÉGORIE : </label>
+<h3 class="espaceH3">DÉTAILS</h3>
+
+<section class="flex-row-left formulaireSoumissionAdmin">
+    <article class="formulaireSoumissionAdminGauche">
+        <label for="categorieOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Catégorie : </span></label>
         <select name="categorieOeuvreAjout" id="categorieOeuvreAjoutAdmin">
-			<option value="#">Options</option>
+            <option value="#">Options</option>
             <?php
-			/*-- pour toutes les datas récupérées de la table Catégories -----------------------------------*/
-			foreach($data as $categorie)
-			{
-				?>
-				<option value="<?php echo $categorie['idCategorie']?>"> <?php echo $categorie["nomCategorie"]?> </option>
-				<?php
-			}
-			?>
+            /*-- pour toutes les datas récupérées de la table Catégories -----------------------------------*/
+            foreach($data as $categorie)
+            {
+                if (isset($categorie['idCategorie']))
+                {
+                ?>
+                    <option value="<?php echo $categorie['idCategorie']?>"
+                    <?php       
+                        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                        {
+                            if($categorie['idCategorie'] == $data['choix'])
+                            {
+                                ?>
+                                selected
+                                <?php     
+                            };
+                        }
+                    ?>> <?php echo $categorie["nomCategorie"]?> </option>
+                    <?php
+                }
+            }
+            ?>
         </select>
-        <br/>
+    </article>
+    
+

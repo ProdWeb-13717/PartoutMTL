@@ -1,0 +1,1 @@
+<p class="hautPage"><a href="#entete" >haut de page</a></p>

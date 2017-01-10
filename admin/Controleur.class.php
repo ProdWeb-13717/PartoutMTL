@@ -30,7 +30,7 @@ class Controleur
 				case 'importation':
 					$_SESSION['ongletActif'] = 'importation';
 					$this->afficherEnteteAdmin();
-					$this->afficheImportation();                                                      
+					$this->afficheImportation();
 					break;
 					
 					
@@ -66,7 +66,6 @@ class Controleur
 				
 				
 				case "insereSoumission":                                                    // à l'envoi du formulaire
-					
 					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
 					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
 					extract($tableauContenu);                                               // convertit le JSON en variables
@@ -75,7 +74,7 @@ class Controleur
 					$modeleSoumisionAdmin = new modeleSoumission();
 					$valide = $modeleSoumisionAdmin->insererSoumissionOeuvre($tableauContenu);                                       
 					if(!$valide)
-					{                                                           // si non réussi
+					{                                                                       // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 						break;
 					}
@@ -84,7 +83,7 @@ class Controleur
 					$modeleSoumisionAdmin = new modeleSoumission();
 					$valide = $modeleSoumisionAdmin->insererUrlPhoto($tableauContenu);
 					if(!$valide)
-					{                                                           // si non réussi
+					{                                                                       // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 						break;
 					}
@@ -111,9 +110,45 @@ class Controleur
 						break;
 					}
 					
-					$vue = "afficheSoumission";
-					$this->afficheVue($vue, $tableauContenu);    
+					$this->afficheVue("afficheSoumission", $tableauContenu);    
 					break;
+                
+                
+                case 'modifieOeuvre':
+                    // $_SESSION['ongletActif'] = 'gestion';   *******************
+                    $this->afficherEnteteAdmin();
+                    $this->afficherFormModificationAdmin();
+                    break;
+                
+                
+                case 'updateModification':                                                  // à l'envoi du formulaire
+					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
+					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
+					extract($tableauContenu);                                               // convertit le JSON en variables
+                
+                    /*-- UPDATE TABLE Oeuvres -------------------------------------------------*/
+                    $modeleSoumisionAdmin = new modeleSoumission();
+                    $valide = $modeleSoumisionAdmin->modifierOeuvre($tableauContenu);                                       
+					if(!$valide)
+					{                                                                       // si non réussi
+						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+						break;
+					}
+                    
+                    /*-- UPDATE TABLE Artistes ------------------------------------------------*/
+					$modeleSoumisionAdmin = new modeleSoumission();
+					$artisteDeLOeuvre = $modeleSoumisionAdmin->obtenir($idOeuvre, "idOeuvre", "ArtistesOeuvres"); // récupère l'id de l'artiste à modifier
+                    $artisteAModifier = $artisteDeLOeuvre['idArtiste'];
+                    $valide = $modeleSoumisionAdmin->modifierArtiste($tableauContenu, $artisteAModifier);                                       
+					if(!$valide)
+					{                                                                       // si non réussi
+						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+						break;
+					}
+                    
+                    $this->afficheVue("afficheSoumission", $tableauContenu); 
+                
+                    break;
 				
 				
 				case 'ajoutCategorie':
@@ -145,11 +180,12 @@ class Controleur
 						break;
 					}
 					break;
-				
-					
+
+                
 				case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
 					$_SESSION['ongletActif'] = 'soumission';
 					$this->afficherEnteteAdmin();
+                    $this->afficheVue("lienHautDePage");
 					$this->afficherSoumissionsDesUsagers();             
 					break;
 					
@@ -167,6 +203,7 @@ class Controleur
 					}
 					$_SESSION['ongletActif'] = 'soumission';
 					$this->afficherEnteteAdmin();
+                    $this->afficheVue("lienHautDePage");
 					$this->afficherSoumissionsDesUsagers();
 					break;
 					
@@ -184,6 +221,7 @@ class Controleur
 					}
 					$_SESSION['ongletActif'] = 'listeOeuvresAdmin';
 					$this->afficherEnteteAdmin();
+                    $this->afficheVue("lienHautDePage");
 					$this->afficherListeDesOeuvres();
 					break;
 					
@@ -192,29 +230,33 @@ class Controleur
 					$_SESSION['ongletActif'] = 'listeOeuvresAdmin';
 					$this->afficherEnteteAdmin();
 					$this->afficheVue("barRechercheAdmin");
-					$this->afficherListeDesOeuvres();
+					$this->afficheVue("lienHautDePage");
+                    $this->afficherListeDesOeuvres();
+                    $this->afficheVue("footer");
 					break;
 					
-					
-				case 'carroussel':
-					$_SESSION['ongletActif'] = 'carroussel';
-					$this->afficherEnteteAdmin();
-                    $this->afficheVue("carouselAdmin");
-					break;
-					
+                
 				case 'rechercheOeuvreAdmin': 
-				if(isset($_GET['valRecherche']))
-				{
-					$data = []; // initialisation de $data
-					$this->afficherEnteteAdmin();
-					$modeleListe = new RechercheAdmin();
-					array_push($data,$modeleListe->rechercheOeuvresParPhotos($_GET['valRecherche']));
-					array_push($data,$modeleListe->rechercheOeuvresParAuteur($_GET['valRecherche']));
-					$this->afficheVue("barRechercheAdmin");
-					$this->afficheVue("listeOeuvresAdmin",$data);
+					if(isset($_GET['valRecherche']))
+					{
+						$data = []; // initialisation de $data
+						$this->afficherEnteteAdmin();
+						$modeleListe = new RechercheAdmin();
+						array_push($data,$modeleListe->rechercheOeuvresParPhotos($_GET['valRecherche']));
+						array_push($data,$modeleListe->rechercheOeuvresParAuteur($_GET['valRecherche']));
+						$this->afficheVue("barRechercheAdmin");
+						$this->afficheVue("listeOeuvresAdmin",$data);
+					}
+					break;
+					
 				
-				}
-				break;
+				case 'permissionAdmin':
+					$_SESSION['ongletActif'] = 'permissionAdmin';
+					$this->afficherEnteteAdmin();
+                    $this->afficheVue("permissionAdmin");
+                    $this->afficheVue("footer");
+					break;
+					
             
 				default:
 					$this->accueil();
@@ -285,8 +327,7 @@ class Controleur
 		{
 			$this->afficheVue("head");
 			$this->afficheVue("enteteAdmin");
-			$vue = 'FormAutentificationAdmin';
-			$this->afficheVue($vue);
+			$this->afficheVue('FormAutentificationAdmin');
 		}
 		else
 		{
@@ -305,21 +346,24 @@ class Controleur
 	{
         $this->afficheVue("head");
 		$this->afficheVue("enteteAdmin");
-        $this->afficheVue("menuAdmin");
         $this->afficheVue("boutonDeconnectionAdmin");
+        $this->afficheVue("menuAdmin");
+        
 	}
     
     private function afficherPageGestion()
     {
+        $this->afficheVue("gestionDebutPage");
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
 		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories        
-        $vue = "gestionCategorie";
-		$this->afficheVue($vue, $data);
+		$this->afficheVue("gestionCategorie", $data);
+        $this->afficheVue("gestionCarrousel");
+        $this->afficheVue("gestionFinPage");
+        $this->afficheVue("footer");   
     }
 	
 	private function afficherFormSoumissionAdmin()
-	{
-		$vue = "soumissionOeuvre1";                                                     // input : titre et titre variante
+	{                                                 
         $dataSoumissions = null;
         if(isset($_GET["idSoumissionUsager"]))
         {
@@ -328,18 +372,17 @@ class Controleur
             $dataSoumissions = $modeleSoumisionAdmin->obtenir($idSoumissionUsager, "idSoumission", "Soumissions");     // récupère la table Soumissions
             $choixArrondissement = $dataSoumissions['idArrondissementSoumission'];
         }
-        $this->afficheVue($vue, $dataSoumissions);
         
-        $vue = "soumissionArtiste"; 
-        $this->afficheVue($vue, $dataSoumissions);
+        $this->afficheVue("soumissionOeuvre1", $dataSoumissions);                       // input : titre et titre variante
+        
+        $this->afficheVue("soumissionArtiste", $dataSoumissions);                       // input : prenom, nom, collectif
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories
-        $vue = "soumissionCategorie";                                                   // select : catégories
-        $this->afficheVue($vue, $data);
-        
-        $vue = "soumissionOeuvre2";                                                     // input : fin production, accession, matériaux, 
-		$this->afficheVue($vue);                                                        //         technique, dimension
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories                                                 
+        $this->afficheVue("soumissionCategorie", $data);                                // select : catégories
+                                                             
+		$this->afficheVue("soumissionOeuvre2");                                         // input : fin production, accession, matériaux,
+                                                                                        //         technique, dimension
         
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
 		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements                                   
@@ -347,22 +390,64 @@ class Controleur
         {
             $data['choix'] = $choixArrondissement;
         }
-        $vue = "soumissionArrondissement"; 
-        $this->afficheVue($vue, $data);                                                 // select : arrondissements
+        $this->afficheVue("soumissionArrondissement", $data);                           // select : arrondissements
 
-        $vue = "soumissionOeuvre3";                                                     // inputs : parc, batiment, adresse, latitude, 
-		$this->afficheVue($vue, $dataSoumissions);                                      //          longitude
+		$this->afficheVue("soumissionOeuvre3", $dataSoumissions);                       // inputs : parc, batiment, adresse, latitude,
+                                                                                        //          longitude
         
-        $vue = "boutonSoumission";                                                      // bouton soumission
-        $this->afficheVue($vue);               
+        $this->afficheVue("boutonSoumission");                                          // bouton soumission
+        
+        $this->afficheVue("footer");
 	}
-	
+
+    private function afficherFormModificationAdmin()
+	{                                                 
+        $dataOeuvreAModifie = null;
+        
+        $idOeuvre = ($_GET["idOeuvre"]);
+        $modeleModificationAdmin = new ModeleListe();                                   // appelle modeleSoumission
+        $dataOeuvreAModifie = $modeleModificationAdmin->getOeuvresParID($idOeuvre);     // récupère toutes les infos d'une oeuvre spécifiée par son ID
+        foreach($dataOeuvreAModifie as $oeuvre){
+            $choixCategorie = $oeuvre['idCategorie'];
+            $choixArrondissement = $oeuvre['idArrondissement'];
+        }
+        
+        $this->afficheVue("soumissionOeuvre1", $dataOeuvreAModifie);                    // input : titre et titre variante
+        
+        $this->afficheVue("soumissionArtiste", $dataOeuvreAModifie);                    // input : prenom, nom, collectif
+
+
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories                                                 
+        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+        {
+            $data['choix'] = $choixCategorie;
+        }
+        $this->afficheVue("soumissionCategorie", $data);                                // select : catégories
+        
+		$this->afficheVue("soumissionOeuvre2", $dataOeuvreAModifie);                    // input : fin production, accession, matériaux,
+                                                                                        //         technique, dimension
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements                                   
+        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+        {
+            $data['choix'] = $choixArrondissement;
+        }
+        $this->afficheVue("soumissionArrondissement", $data);                           // select : arrondissements
+
+		$this->afficheVue("soumissionOeuvre3", $dataOeuvreAModifie);                    // inputs : parc, batiment, adresse, latitude,
+                                                                                        //          longitude
+        $this->afficheVue("boutonModification");                                        // bouton modification
+
+        $this->afficheVue("footer");
+	}
+
     private function afficherSoumissionsDesUsagers()
     {
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
 		$data = $modeleSoumisionAdmin->obtenirTous("Soumissions","idSoumission");       // récupère la table Soumissions
-        $vue = "soumissionsDesUsagers";
-        $this->afficheVue($vue, $data);
+        $this->afficheVue("soumissionsDesUsagers", $data);
+        $this->afficheVue("footer"); 
     }
     
      private function afficherListeDesOeuvres()
@@ -377,20 +462,19 @@ class Controleur
     
 	private function afficheImportation()
 	{
-		$vue = "afficheImportation";
-		$this->afficheVue($vue);
+		$this->afficheVue("afficheImportation");
+        $this->afficheVue("footer"); 
 	}	
 
 	private function afficheImportationOK()
 	{
-		$vue = "afficheImportationOK";
-		$this->afficheVue($vue);
+		$this->afficheVue("afficheImportationOK");
 	}
 	
 	private function afficheVerification($data)
 	{
-		$vue = "afficheVerification";
-		$this->afficheVue($vue,$data);
+		$this->afficheVue("afficheVerification",$data);
+        $this->afficheVue("footer"); 
 	}
 	
 	private function obtenirJSON()
@@ -782,18 +866,5 @@ class Controleur
 	}
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

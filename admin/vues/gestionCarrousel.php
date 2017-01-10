@@ -1,4 +1,4 @@
-<?php
+ <?php
 	/// *** SECURITE DE LA PAGE *** ///////////////////////////
 	if(!isset($_SESSION['authentifie']))
 	{
@@ -7,8 +7,5 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-
-<div>
-	Les données ont eté importées correctement<br>
-	<a href="index.php?requete=importation">Retour vers l'importation de données</a>
-</div>
+<section class="adminTitre">
+    <h1>CARROUSEL</h1>

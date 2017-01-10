@@ -1,11 +1,35 @@
+/*  TABLE DES MATIÈRES
+    - Barre de recherche
+-------------------------------------------------------------*/
+
+/* Barre de recherche
+-------------------------------------------------------------*/
+
 #barRecherche{
+    position: absolute;
+    right: 0px;
+    margin-right: 22px;
 	color: #4d4d4d;
-	text-align: center;
-	margin: auto;
-	margin-top: 50px;
 }
+
+
+
+.inputRecherche{
+    width: 300px;
+}
+
+@media (max-width: 480px) {
+    .inputRecherche{
+        width: 200px;
+    }
+    
+    #barRecherche{
+        margin-right: 0px;
+    }
+    
+}
+
 #msgResultat{
-	color : #016737;
+	color : brown;
 	text-align: center;
-	
 }

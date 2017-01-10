@@ -1,9 +1,21 @@
 /*  TABLE DES MATIÈRES
+    - Typo CSS
     - Global
     - Entête
     - Carousel
     - Accueil
 -------------------------------------------------------------*/
+
+
+/* Typo CSS
+-------------------------------------------------------------*/
+/*
+    font-family: 'Fjalla One', sans-serif;
+    font-family: 'Muli', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Roboto', sans-serif;
+*/
+
 
 /* Global
 -------------------------------------------------------------*/
@@ -12,6 +24,7 @@
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
 }
+
 
 /* Entête
 -------------------------------------------------------------*/
@@ -96,6 +109,7 @@
 	margin-right: 10px;
 }
 
+
 /* Carousel
 -------------------------------------------------------------*/
 
@@ -120,6 +134,7 @@
 	bottom: 1em;
 	left:1em;
 }
+
 
 /* Acceuil
 -------------------------------------------------------------*/
@@ -149,7 +164,6 @@
    width: 150px;
 }
 
-
 #menuAccueil a{
     text-decoration: none;
     color: #4d4d4d; 
@@ -171,7 +185,6 @@
 	min-width: 550px;
 	margin: 0 auto;
 	padding:17% 0 17% 0;
-	
 }
 
 #apropos{
