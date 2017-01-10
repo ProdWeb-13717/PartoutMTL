@@ -1,8 +1,13 @@
-//IIFE
+var url = window.location.toString(); //prendre URL  
+	if (url.indexOf("?") > 0) {
+		var url = url.substring(0, url.indexOf("?"));
+		console.log(url);
+	}
+
 (function(){ 
     window.addEventListener("load", function()
-                            {
-        Recherche();
+    {
+		Recherche();
     });
     
     function Recherche(){ 
@@ -223,9 +228,6 @@
                 if(categorieDeRecherche=="oeuvres"){
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
-                    
-                    url = "http://localhost:8080/PartoutMTL/index.php";
-                    //url = "http://localhost/PartoutMTL/index.php";
                     params = "requete=rechercheOeuvre&valRecherche=" + txtRecherche;
                     xhr.open("GET", url+"?"+params, true);
                     
@@ -234,9 +236,6 @@
                 else if(categorieDeRecherche=="artistes"){
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
-                    
-                    url = "http://localhost:8080/PartoutMTL/index.php";
-                    //url = "http://localhost/PartoutMTL/index.php";
                     params = "requete=rechercheArtistes&valRecherche=" + txtRecherche;
                     xhr.open("GET", url+"?"+params, true);
                     
@@ -245,9 +244,6 @@
                 else if(categorieDeRecherche=="acceuil"){
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
-                    
-                    url = "http://localhost:8080/PartoutMTL/index.php";
-                    //url = "http://localhost/PartoutMTL/index.php";			
                     params = "requete=rechercheAccueil&valRecherche=" + txtRecherche;
                     xhr.open("GET", url+"?"+params, true);
                     
@@ -309,30 +305,22 @@
                     
                     if(souCategorieDerecherche=="artiste")
                     {
-                        url = "http://localhost:8080/PartoutMTL/index.php";
-                        //url = "http://localhost/PartoutMTL/index.php";				
                         params = "requete=rechercheAvanceArtistesOeuvres&valRecherche="+ txtRecherche;
                         xhr.open("GET", url+"?"+params, true);
                     }
                     else if(souCategorieDerecherche=="nomArrondissement")
                     {	
-                        url = "http://localhost:8080/PartoutMTL/index.php";
-                        //url = "http://localhost/PartoutMTL/index.php";			
                         params = "requete=rechercheAvanceArtistesOeuvresArrondissements&valRecherche="+ txtRecherche;
                         xhr.open("GET", url+"?"+params, true);
                         
                     }
                     else if(souCategorieDerecherche=="nomCategorie")
                     {
-                        url = "http://localhost:8080/PartoutMTL/index.php";
-                        //url = "http://localhost/PartoutMTL/index.php";
                         params = "requete=rechercheAvanceArtistesOeuvresCategories&valRecherche="+ txtRecherche;
                         xhr.open("GET", url+"?"+params, true);
                     }
                     else
                     {
-                        url = "http://localhost:8080/PartoutMTL/index.php";
-                        //url = "http://localhost/PartoutMTL/index.php";
                         params = "requete=rechercheAvanceOeuvres&valRecherche="+ txtRecherche+"&cleRecherche="+souCategorieDerecherche;
                         xhr.open("GET", url+"?"+params, true);
                     }
@@ -341,8 +329,6 @@
                 }
                 else if(categorieDeRecherche=="Artistes"){
                     
-                    url = "http://localhost:8080/PartoutMTL/index.php";
-                    //url = "http://localhost/PartoutMTL/index.php";
                     params = "requete=rechercheAvanceArtistes&valRecherche="+ txtRecherche+"&cleRecherche="+souCategorieDerecherche;
                     xhr.open("GET", url+"?"+params, true);
                     msg = 'de '+souCategorieDerecherche+' dans la liste des aristes';
