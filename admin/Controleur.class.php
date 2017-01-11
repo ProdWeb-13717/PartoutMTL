@@ -251,14 +251,39 @@ class Controleur
 					break;
 					
 				
-				case 'permissionAdmin':
-					$_SESSION['ongletActif'] = 'permissionAdmin';
-					$this->afficherEnteteAdmin();
-                    $this->afficheVue("permissionAdmin");
-                    $this->afficheVue("footer");
+				case 'permissionAdmin': 
+					$this->permissionAdmin();
 					break;
 					
-            
+				
+				case 'innitialisationPasse':
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->innitialisationPasse($_GET['nomUsagerAdmin']);
+					$this->permissionAdmin();
+					break;
+				
+					
+				case 'supprimeAdmin':
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->supprimer($_GET['nomUsagerAdmin']);
+					$this->permissionAdmin();
+					break;
+					
+					
+				case 'modifieNiveauAdmin':
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->modifieNiveauAdmin($_GET['nomUsagerAdmin'], $_GET['niveauAdmin']);
+					$this->permissionAdmin();
+					break;
+					
+					
+				case 'ajoutAdministrateur':
+					$donnee = json_decode (file_get_contents('php://input'), true);
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->ajoutAdministrateur($donnee);
+					break;
+				
+					
 				default:
 					$this->accueil();
 					break;   
@@ -874,6 +899,16 @@ class Controleur
 	{
 		$oMisaJour = new MiseaJour();
 		$oMisaJour->enregistrement($donnes);
+	}
+	
+	private function permissionAdmin()
+	{
+		$_SESSION['ongletActif'] = 'permissionAdmin';
+		$this->afficherEnteteAdmin();
+		$modelAdmin = new Admin();
+		$data = $modelAdmin->obtenirTous();
+        $this->afficheVue("permissionAdmin",$data);
+        $this->afficheVue("footer");
 	}
 }
 ?>

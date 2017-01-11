@@ -233,6 +233,14 @@ class Controleur
 				
 				}
 				break;
+				
+			case 'carte': //**************************************************
+				$this->entete();                    
+                $modeleCarte = new Recherche();
+				$data = $modeleCarte->obtenirOeuvres();
+                $this->afficheVue("carte", $data);
+                $this->afficheVue("footer");
+                break;
              
             case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
 				$this->entete();                    

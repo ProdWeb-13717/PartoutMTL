@@ -38,6 +38,32 @@ class Admin extends TemplateBase
 			return false;
 		}
 	}
+	
+	public function innitialisationPasse($nomUsagerAdmin)
+	{
+		$pass = md5('1234');
+		$stmt = $this->connexion->prepare('UPDATE Administrateurs SET motPasseAdmin = :pass WHERE nomUsagerAdmin = :usager');
+		$stmt->bindParam(":usager", $nomUsagerAdmin);
+		$stmt->bindParam(":pass", $pass);
+		$stmt->execute();
+		return true;
+
+	}
+	
+	public function modifieNiveauAdmin($nomUsagerAdmin, $niveau)
+	{
+		if($niveau == 1)
+		{
+			$stmt = $this->connexion->prepare('UPDATE Administrateurs SET niveauAdmin = "2" WHERE nomUsagerAdmin = :usager');
+		}
+		else
+		{
+			$stmt = $this->connexion->prepare('UPDATE Administrateurs SET niveauAdmin = "1" WHERE nomUsagerAdmin = :usager');
+		}
+		$stmt->bindParam(":usager", $nomUsagerAdmin);
+		$stmt->execute();
+		return true;
+	}
 
 	public function verificationAutentificationAdmin()
 	{
@@ -89,6 +115,33 @@ class Admin extends TemplateBase
 		{
 			return false;
 		}
+	}
+	
+	public function ajoutAdministrateur($data)
+	{
+			
+			$pass = MD5($data['motPasseAdmin']);
+			$usager = $data['nomUsagerAdmin'];
+			$courriel = $data['courrielAdmin'];
+			$niveau = $data['niveauAdmin'];
+			$nom =  $data['nomAdmin'];
+			$prenom =  $data['prenomAdmin'];
+			
+			$stmt = $this->connexion->prepare('
+			INSERT INTO Administrateurs (nomUsagerAdmin, motPasseAdmin, courrielAdmin, niveauAdmin, nomAdmin, prenomAdmin) 	
+								VALUES (:nomUsagerAdmin, :motPasseAdmin, :courrielAdmin, :niveauAdmin, :nomAdmin, :prenomAdmin)');
+			
+			$stmt->bindParam(":nomUsagerAdmin", $usager);
+			$stmt->bindParam(":motPasseAdmin", $pass);
+			$stmt->bindParam(":courrielAdmin", $courriel);
+			$stmt->bindParam(":niveauAdmin", $niveau);
+			$stmt->bindParam(":nomAdmin", $nom);
+			$stmt->bindParam(":prenomAdmin", $prenom);
+			
+			$stmt->execute();
+			$resulta = $stmt->fetch();
+			
+		
 	}
 }
 

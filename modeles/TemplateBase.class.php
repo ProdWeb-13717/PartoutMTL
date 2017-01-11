@@ -45,6 +45,7 @@ abstract class TemplateBase
 			{
 				$cle = $this->getPrimaryKey();
 			}
+			
 			$stmt = $this->connexion->prepare("select * from " . $table . " WHERE " . $cle . " = :valeur");
 			$stmt->bindParam(":valeur", $valeur);
 			$stmt->execute();
@@ -65,6 +66,12 @@ abstract class TemplateBase
 			{
 				$table = $this->getTable();
 			}
+			
+			if($cle == null)
+			{
+				$cle = $this->getPrimaryKey();
+			}
+			
             $stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle);
 			$stmt->execute();
 			return $stmt->fetchAll();
