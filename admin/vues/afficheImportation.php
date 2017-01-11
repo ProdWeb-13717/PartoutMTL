@@ -17,21 +17,26 @@
                         <h3>VÉRIFICATION</h3>
                         Des oeuvres non mise à jour
                         <input type="hidden" name="requete" value="verification"/>
-                        <input class ="bouton2" type="submit" name="Verification" value="VÉRIFIER"/> 
+                        <input class ="bouton2 btforms" type="submit" name="Verification" value="VÉRIFIER"/> 
                     </fieldset>
                 </form>
             </article>
             
-            <article class="espaceHaut30">
+            <article class="espaceHaut30 espaceADroite10">
                 <form class ="form" id="formVerification" method="GET">
                     <fieldset>
                         <h3>MISE À JOUR</h3>
                         De la base de données
                         <input type="hidden" name="requete" value="importationok"/>
-                        <input class ="bouton2" type="submit" name="Importer" value="MISE À JOUR"/>
+                        <input class ="bouton2 btforms" type="submit" name="Importer" value="MISE À JOUR"/>
                     </fieldset>
                 </form>
             </article>
+				
+			<article id="charImage">
+				<img id="gifCharge" src="./images/hourglass.gif"><div>CHARGEMENT</div>
+			</article>
+			
         </section>
     </section>
 </div>
