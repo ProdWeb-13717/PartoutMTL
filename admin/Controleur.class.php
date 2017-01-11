@@ -30,7 +30,8 @@ class Controleur
 				case 'importation':
 					$_SESSION['ongletActif'] = 'importation';
 					$this->afficherEnteteAdmin();
-					$this->afficheImportation();
+					$misJourData = $this->obtenirMiseAJour();
+					$this->afficheImportation($misJourData);
 					break;
 					
 					
@@ -39,7 +40,7 @@ class Controleur
 					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
 					$novData = $this->traiterDonnees($publicJson,"importationBD");//traiter donnes avec l'action importation
 					$this-> enregistrerImportation($novData);
-					$this->afficheImportationOK();                                                   
+					$this->afficheImportationOK($novData);                                                   
 					break;
 				
 					
@@ -460,15 +461,17 @@ class Controleur
          $this->afficheVue("listeOeuvresAdmin",$data); 
      }
     
-	private function afficheImportation()
+	private function afficheImportation($data)
 	{
 		$this->afficheVue("afficheImportation");
+		$this->afficheVue("historiqueBD",$data);
         $this->afficheVue("footer"); 
 	}	
 
-	private function afficheImportationOK()
+	private function afficheImportationOK($data)
 	{
-		$this->afficheVue("afficheImportationOK");
+		$this->afficheVue("afficheImportationOK",$data);
+		$this->afficheVue("footer");
 	}
 	
 	private function afficheVerification($data)
@@ -481,6 +484,13 @@ class Controleur
 	{
 		$oRemote = new Donnesremote();
 		return $oRemote->getpublicJSON();
+	}
+	
+	private function obtenirMiseAJour()
+	{
+		$oMisaJour = new MiseaJour();
+		return $oMisaJour->obtenirXenregistrement(10,"MiseAJours","idMiseAJour");
+		
 	}
 	
 	private function traiterDonnees($jsonSite,$action)
@@ -655,7 +665,8 @@ class Controleur
 				'Artistes' => $novArtistes,
 				'Arrondissements'  => $novArrondissements, 
 				'Categories'  => $novCategories, 
-				'Oeuvres'  => $novOeuvres
+				'Oeuvres'  => $novOeuvres,
+				'OeuvresTotal' => $nomOeuvresBD
 			];
 		return $dataUpdate;
 		
