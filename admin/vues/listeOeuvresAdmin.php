@@ -81,7 +81,7 @@
 									}
 									?>
 								</ul>
-                            </span></li>
+                            </li>
                         </ul>
 					</article>
                     

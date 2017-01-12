@@ -1,0 +1,104 @@
+/*  TABLE DES MATIÈRES
+    - Liste
+	- formulaire
+-------------------------------------------------------------*/
+
+/* Liste
+-------------------------------------------------------------*/
+.listeAdministateur .liens {
+	margin:1em;
+}
+
+.listeAdministateur .liens a{
+	margin:0.5em;
+}
+
+.listeAdministateur .elemListe{
+	
+}
+.listeAdministateur  li{
+	list-style-type: none;
+}
+
+.listeAdministateur .liens a span.police-demi{
+	font-family: 'Muli', sans-serif;
+	font-size: 0.8em;
+}
+
+/* formulaire
+-------------------------------------------------------------*/
+label.labelAjoutAdmin {
+	margin: 0.5em 2em;
+}
+
+label.labelAjoutAdmin input{
+	display:inline-block;
+	margin: 0.5em;
+}
+.formGestionAdministrateurs{
+	max-width: 800px;
+	margin: 2em;
+}
+
+.formAjoutAdminInfo{
+	
+	justify-content: 	space-around;
+	align-items: 		flex-start;
+	
+	align-content: 		flex-start;
+}
+
+.formAjoutAdminInfo div{
+	display: flex;
+	flex-direction: 	row;
+	flex-wrap:			wrap;
+	justify-content: 	flex-start;
+	align-items: 		center;
+	align-content: 		flex-start;
+}
+
+.formAjoutAdminInfo div label input{
+	display: block;
+	margin: 0 -0.5em;
+}
+
+.formAjoutAdminInfo div label.niveau {
+	display: flex;
+	flex-direction: 	row;
+	flex-wrap:			nowrap;
+	justify-content: 	flex-start;
+	align-items: 		center;
+	align-content: 		flex-start;
+	
+}
+
+.formAjoutAdminInfo div label.niveau  input{
+	margin:0.5em;
+}
+
+#boutonAjoutAdmin{
+	margin-left: 0;
+}
+
+#AjoutAdminUsager, #AjoutAdminPass, #AjoutAdminCourriel{
+	width: 360px;
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

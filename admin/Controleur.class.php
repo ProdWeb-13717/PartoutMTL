@@ -16,7 +16,6 @@ class Controleur
 {
 	public function gerer()
 	{
-		//$this->afficheVue("head");
 		if(isset($_SESSION['authentifie']))
 		{
 			switch ($_GET['requete']) 
@@ -31,7 +30,7 @@ class Controleur
 					session_unset();
 					$this->accueil();  	
 					break;	
-					
+
                 
                 /////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////    OEUVRES    ////////////////////////////////////
@@ -45,9 +44,7 @@ class Controleur
 					$this->afficheVue("lienHautDePage");
                     $this->afficherListeDesOeuvres();
                     $this->afficheVue("footer");
-					break;
-					
-                
+
 				case 'rechercheOeuvreAdmin': 
 					if(isset($_GET['valRecherche']))
 					{
@@ -270,12 +267,13 @@ class Controleur
                 /////////////////////////////////////////////////////////////////////////////////////
                 ////////////////////////////////    IMPORTATION    //////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////////
-                
-                
+                   
+                    
                 case 'importation':
 					$_SESSION['ongletActif'] = 'importation';
 					$this->afficherEnteteAdmin();
-					$this->afficheImportation();
+					$misJourData = $this->obtenirMiseAJour();
+					$this->afficheImportation($misJourData);
 					break;
 					
 					
@@ -284,10 +282,10 @@ class Controleur
 					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
 					$novData = $this->traiterDonnees($publicJson,"importationBD");//traiter donnes avec l'action importation
 					$this-> enregistrerImportation($novData);
-					$this->afficheImportationOK();                                                   
-					break;
-				
-					
+					$this->afficheImportationOK($novData);                                                   
+					break;    
+                    
+
 				case 'verification':
 					$this->afficherEnteteAdmin();
 					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
@@ -296,20 +294,44 @@ class Controleur
 					break;
 				
 					
-				
                 /////////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////    ADMIN    /////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////////
 					
-                
-				case 'permissionAdmin':
-					$_SESSION['ongletActif'] = 'permissionAdmin';
-					$this->afficherEnteteAdmin();
-                    $this->afficheVue("permissionAdmin");
-                    $this->afficheVue("footer");
+                    
+				case 'permissionAdmin': 
+					$this->permissionAdmin();
 					break;
 					
-            
+				
+				case 'innitialisationPasse':
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->innitialisationPasse($_GET['nomUsagerAdmin']);
+					$this->permissionAdmin();
+					break;
+				
+					
+				case 'supprimeAdmin':
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->supprimer($_GET['nomUsagerAdmin']);
+					$this->permissionAdmin();
+					break;
+					
+					
+				case 'modifieNiveauAdmin':
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->modifieNiveauAdmin($_GET['nomUsagerAdmin'], $_GET['niveauAdmin']);
+					$this->permissionAdmin();
+					break;
+					
+					
+				case 'ajoutAdministrateur':
+					$donnee = json_decode (file_get_contents('php://input'), true);
+					$modelAdmin = new Admin();
+					$data = $modelAdmin->ajoutAdministrateur($donnee);
+					break;
+				
+					
 				default:
 					$this->accueil();
 					break;   
@@ -527,17 +549,32 @@ class Controleur
     }
     
     
+    /*-- ADMIN ---------------------------------------------------------------------------*/
+    
+    private function permissionAdmin()
+	{
+		$_SESSION['ongletActif'] = 'permissionAdmin';
+		$this->afficherEnteteAdmin();
+		$modelAdmin = new Admin();
+		$data = $modelAdmin->obtenirTous();
+        $this->afficheVue("permissionAdmin",$data);
+        $this->afficheVue("footer");
+	}
+    
+    
     /*-- IMPORTATION ----------------------------------------------------------------------*/
     
-	private function afficheImportation()
+	private function afficheImportation($data)
 	{
 		$this->afficheVue("afficheImportation");
+		$this->afficheVue("historiqueBD",$data);
         $this->afficheVue("footer"); 
 	}	
 
-	private function afficheImportationOK()
+	private function afficheImportationOK($data)
 	{
-		$this->afficheVue("afficheImportationOK");
+		$this->afficheVue("afficheImportationOK",$data);
+		$this->afficheVue("footer");
 	}
 	
 	private function afficheVerification($data)
@@ -550,6 +587,13 @@ class Controleur
 	{
 		$oRemote = new Donnesremote();
 		return $oRemote->getpublicJSON();
+	}
+	
+	private function obtenirMiseAJour()
+	{
+		$oMisaJour = new MiseaJour();
+		return $oMisaJour->obtenirXenregistrement(10,"MiseAJours","idMiseAJour");
+		
 	}
 	
 	private function traiterDonnees($jsonSite,$action)
@@ -725,6 +769,7 @@ class Controleur
 				'Arrondissements'  => $novArrondissements, 
 				'Categories'  => $novCategories, 
 				'Oeuvres'  => $novOeuvres
+				//'OeuvresTotal' => $nomOeuvresBD
 			];
 		return $dataUpdate;
 		

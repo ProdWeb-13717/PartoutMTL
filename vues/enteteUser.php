@@ -13,6 +13,7 @@
                 <li><a href="index.php?requete=listeArtistes">ARTISTES</a></li>
                 <li><a href="index.php?requete=listeOeuvres">OEUVRES</a></li>
                 <li id="liRecherche"><a href="index.php?requete=rechercheAvance">RECHERCHE</a></li>
+                <li><a href="index.php?requete=carte">CARTE</a></li>  
                 <li><a href="index.php?requete=soumissionOeuvre">SOUMISSION</a></li>  
             </ul>	
         </nav>
