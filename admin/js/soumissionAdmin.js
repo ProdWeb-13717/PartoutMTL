@@ -20,9 +20,12 @@
             {
                 var btnSoumettre = document.querySelector("#boutonSoumission");                 // récupère le bouton SOUMETTRE
                 btnSoumettre.addEventListener("click", function(evt)                            // à l'événement CLIC
-                {                               
+                {                                         
                     if(validationSoumission())                                                  // valide certaines entrées, si valide
-                    {
+                    {    
+                       
+                        evt.target.disabled=true;                                               // il n'y a plus d'évènements au click
+                        
                         var data = recupereValeur();                                            // récupère les valeurs entrées lors de la soumission            
                                     
                         /*-- REQUÊTE AJAX -------------------------------------------------------------*/

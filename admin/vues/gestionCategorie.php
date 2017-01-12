@@ -10,8 +10,8 @@
 
 <!-- PAGE GESTION AJOUTER UNE CATÉGORIE, TABLE Categories ------------------------------------------->
 
-<section class="categorie adminTitre">
-    <h1>CATÉGORIE</h1>
+<div class="categorie marginDivPrincipale adminTitre"> 
+    <h1>CATÉGORIES</h1>
     <section class="flex-row-left">
         <article class="espaceADroite10">
             <h3>AJOUTER UNE CATÉGORIE</h3>
@@ -38,4 +38,4 @@
         </article> 
     </section>
     <span id="msgErreurSoumision"></span>
-</section>
+</div>

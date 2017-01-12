@@ -10,11 +10,10 @@
 <?php
 	$onglets = 
 	[
-		'gestion' => "",
-		'ajoutOeuvre'  => "", 
-		'soumission'  => "", 
+		'oeuvresAdmin' => "",
+        'artistesAdmin'=> "",
+        'affichage' => "",
 		'importation'  => "", 
-        'listeOeuvresAdmin' => "",
         'permissionAdmin' => ""
 	];
 	$onglets[$_SESSION['ongletActif']] = 'actif';
@@ -22,11 +21,10 @@
 
 <nav id="menuAdmin" class="menu">
     <ul class="row menu">
-        <li class="<?php echo $onglets['gestion']; ?>" ><a href="index.php?requete=gestion">GESTION</a></li>
-        <li class="<?php echo $onglets['ajoutOeuvre']; ?>" ><a href="index.php?requete=soumission">AJOUT D'OEUVRE</a></li>
-        <li class="<?php echo $onglets['soumission']; ?>" ><a href="index.php?requete=soumissionsDesUsagers">SOUMISSIONS</a></li>
+        <li class="<?php echo $onglets['oeuvresAdmin']; ?>" ><a href="index.php?requete=oeuvresAdmin">OEUVRES</a></li>
+        <li class="<?php echo $onglets['artistesAdmin']; ?>" ><a href="index.php?requete=artistesAdmin">ARTISTES</a></li>
+        <li class="<?php echo $onglets['affichage']; ?>" ><a href="index.php?requete=affichage">AFFICHAGE</a></li>
         <li class="<?php echo $onglets['importation']; ?>" ><a href="index.php?requete=importation">IMPORTATION</a></li> 
-        <li class="<?php echo $onglets['listeOeuvresAdmin']; ?>" ><a href="index.php?requete=listeOeuvresAdmin">OEUVRES</a></li>
 		<?php
             if($_SESSION["niveauAdmin"] == 1)
 			{

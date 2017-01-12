@@ -29,7 +29,8 @@ class modeleSoumissionUsager extends TemplateBase
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      INSERT     //////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
-
+    
+    
     public function insererSoumission($param)                                   // insère les entrées d'une soumission dans la table Soumissions
     {   
         try
@@ -44,7 +45,6 @@ class modeleSoumissionUsager extends TemplateBase
                 parcSoumission,
                 adresseCiviqueSoumission,
                 descriptionSoumission,
-                photoSoumission,
                 courrielSoumission
             ) 
             VALUES 
@@ -57,7 +57,6 @@ class modeleSoumissionUsager extends TemplateBase
                 :parcSoumission,
                 :adresseCiviqueSoumission,
                 :descriptionSoumission,
-                :photoSoumission,
                 :courrielSoumission         
             )");
             
@@ -73,7 +72,6 @@ class modeleSoumissionUsager extends TemplateBase
                 ":parcSoumission"               => $parcSoumission,
                 ":adresseCiviqueSoumission"     => $adresseCiviqueSoumission,
                 ":descriptionSoumission"        => $descriptionSoumission,
-                ":photoSoumission"              => $photoSoumission,
                 ":courrielSoumission"           => $courrielSoumission
             ));
         
@@ -84,6 +82,30 @@ class modeleSoumissionUsager extends TemplateBase
             return 0;
         }   
     }
+    
+    
+    public function insererPhotoSoumission($photo, $idSoumission = null)        // insère l'entrée photoSoumission dans la table Soumissions
+    {   
+        try
+        {   
+            if($idSoumission == null)                                           // toujours null, demande l'id de la soumission
+			{
+                $idSoumission = $this->obtenirDernier("idSoumission", "Soumissions");   // récupère l'id de la soumission
+			}
+            
+            $stmt = $this->connexion->prepare("UPDATE Soumissions 
+                                               SET photoSoumission = :photo
+                                               WHERE idSoumission = $idSoumission");
+            
+            $stmt->execute(array(":photo" => $photo));
+        
+            return 1;		     
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }   
+    }  
 }
 
 ?>
