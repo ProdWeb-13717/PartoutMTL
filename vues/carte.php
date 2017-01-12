@@ -28,9 +28,16 @@ function initMap() {
 		google.maps.event.addListener(marker, 'click', (function(marker, i) {
 			return function() {
 				
-				var infoContent = "<div class='infoCarteTitre'>"+dataCarte[i].titre+"</div>";
+				var url = window.location.toString(); //prendre URL  
+				if (url.indexOf("?") > 0) {
+					var url = url.substring(0, url.indexOf("?"));
+					console.log(url);
+				}
+	
+				var infoContent = "<a class='infoCarteA' href='"+url+"?requete=afficheOeuvre&idOeuvre="+dataCarte[i].idOeuvre+"'><div class='infoCarteTitre' >"+dataCarte[i].titre+"</div>";
 				if(dataCarte[i].dateFinProduction){infoContent+="<div class='infoCarte'>Année: "+dataCarte[i].dateFinProduction+"</div>";}
 				if(dataCarte[i].materiaux){infoContent+="<div class='infoCarte'>Materiaux: "+dataCarte[i].materiaux+"</div>";}
+				infoContent+="</a>";
 				
 				infowindow.setContent(infoContent);
 				infowindow.open(map, marker);
