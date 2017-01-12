@@ -15,14 +15,22 @@
 	<section class="categorie adminTitre">
 		<h1>HISTORIQUE D'IMPORTATION DE DONNÉS</h1>
 		<section class="flex-row-left">
-			<table id="tablehistorique">
-				<tr>
-					<th class="tetetableau">Date et temps</th>
-					<th class="tetetableau">Total Oeuvres</th>
-					<th class="tetetableau">Administrateur</th>
-				</tr>
+			<?php
+				$datalength = count($data);
+				if($datalength == 0)
+				{
+					echo "AUCUN IMPORTATION A ÊTÉ EFFECTUÉ JUSQU'À PRESENT";
+				}
+				else
+				{
+			?>	
+					<table id="tablehistorique">
+					<tr>
+						<th class="tetetableau">Date et temps</th>
+						<th class="tetetableau">Total Oeuvres</th>
+						<th class="tetetableau">Administrateur</th>
+					</tr>
 				<?php
-					$datalength = count($data);
 					for($i=0;$i<$datalength;$i++)
 					{
 				?>
@@ -33,8 +41,9 @@
 					</tr>
 				<?php
 					}
+				}
 				?>
-			</table>
+					</table>
 		</section>
 	</section>
 	
