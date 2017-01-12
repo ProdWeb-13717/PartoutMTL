@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="./css/entete.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/soumissionUsager.css" type="text/css" media="screen">
 		<link rel="stylesheet" href="./css/listes.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="./css/carte.css" type="text/css" media="screen">
         
         <!-- Google font ------------> 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
