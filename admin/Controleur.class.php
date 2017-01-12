@@ -21,45 +21,109 @@ class Controleur
 		{
 			switch ($_GET['requete']) 
 			{	
-				case 'deconnectionAdmin':
+				
+                /////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////    CONNECTION / DÉCONNECTION    ///////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
+                
+                
+                case 'deconnectionAdmin':
 					session_unset();
 					$this->accueil();  	
-					break;
+					break;	
 					
-					
-				case 'importation':
-					$_SESSION['ongletActif'] = 'importation';
+                
+                /////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////    OEUVRES    ////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
+                
+                
+                case 'oeuvresAdmin':                                                         // page principale de l'onglet OEUVRES
+					$_SESSION['ongletActif'] = 'oeuvresAdmin';
 					$this->afficherEnteteAdmin();
-					$this->afficheImportation();
+					$this->afficheVue("barRechercheAdmin");
+					$this->afficheVue("lienHautDePage");
+                    $this->afficherListeDesOeuvres();
+                    $this->afficheVue("footer");
 					break;
 					
+                
+				case 'rechercheOeuvreAdmin': 
+					if(isset($_GET['valRecherche']))
+					{
+						$data = []; // initialisation de $data
+						$this->afficherEnteteAdmin();
+						$modeleListe = new RechercheAdmin();
+						array_push($data,$modeleListe->rechercheOeuvresParPhotos($_GET['valRecherche']));
+						array_push($data,$modeleListe->rechercheOeuvresParAuteur($_GET['valRecherche']));
+						$this->afficheVue("barRechercheAdmin");
+						$this->afficheVue("listeOeuvresAdmin",$data);
+					}
+					break;
+                
+                
+                /*-- MODIFICATION D'UNE OEUVRE ------------------------------------------------*/ 
+                
+                case 'modifieOeuvre':
+                    $this->afficherEnteteAdmin();
+                    $this->afficherFormModificationAdmin();
+                    break;
+                
+                
+                case 'updateModification':                                                  // à l'envoi du formulaire
+					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
+					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
+					extract($tableauContenu);                                               // convertit le JSON en variables
+                
+                    /*-- UPDATE TABLE Oeuvres -------------------------------------------------*/
+                    $modeleSoumisionAdmin = new modeleSoumission();
+                    $valide = $modeleSoumisionAdmin->modifierOeuvre($tableauContenu);                                       
+					if(!$valide)
+					{                                                                       // si non réussi
+						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+						break;
+					}
+                    
+                    /*-- UPDATE TABLE Artistes ------------------------------------------------*/
+					$modeleSoumisionAdmin = new modeleSoumission();
+					$artisteDeLOeuvre = $modeleSoumisionAdmin->obtenir($idOeuvre, "idOeuvre", "ArtistesOeuvres"); // récupère l'id de l'artiste à modifier
+                    $artisteAModifier = $artisteDeLOeuvre['idArtiste'];
+                    $valide = $modeleSoumisionAdmin->modifierArtiste($tableauContenu, $artisteAModifier);                                       
+					if(!$valide)
+					{                                                                       // si non réussi
+						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+						break;
+					}
+                    
+                    $this->afficheVue("afficheSoumission", $tableauContenu); 
+                
+                    break;
+                
+                
+                /*-- SUPPRESSION D'UNE OEUVRE -------------------------------------------------*/
+                
+                case 'supprimeOeuvre':
+					$oeuvreASupprimer = ($_GET['idOeuvre']);
 					
-				case 'importationok':
+					/*-- DELETE TABLE Oeuvre --------------------------------------------------*/
+					$modeleCategorieAdmin = new modeleSoumission();
+					$valide = $modeleCategorieAdmin->supprimer($oeuvreASupprimer, "idOeuvre", "Oeuvres");
+					if(!$valide)
+					{                                                                       // si non réussi
+						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
+						break;
+					}
+					$_SESSION['ongletActif'] = 'oeuvresAdmin';
 					$this->afficherEnteteAdmin();
-					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-					$novData = $this->traiterDonnees($publicJson,"importationBD");//traiter donnes avec l'action importation
-					$this-> enregistrerImportation($novData);
-					$this->afficheImportationOK();                                                   
+                    $this->afficheVue("lienHautDePage");
+					$this->afficherListeDesOeuvres();
 					break;
-				
-					
-				case 'verification':
-					$this->afficherEnteteAdmin();
-					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-					$novData = $this->traiterDonnees($publicJson,"verification");//traiter donnes avec l'action verification
-					$this->afficheVerification($novData);
-					break;
-				
-					
-				case 'gestion':
-					$_SESSION['ongletActif'] = 'gestion';
-					$this->afficherEnteteAdmin();
-					$this->afficherPageGestion();
-					break;
-					
-					
-				case 'soumission':                                                          // page formulaire d'ajout administrateur
-					$_SESSION['ongletActif'] = 'ajoutOeuvre';
+                
+                
+                /*-- AJOUT D'UNE OEUVRE ------------------------------------------------------*/  
+                
+                case 'soumission':                                                          // page formulaire d'ajout administrateur
+					$_SESSION['ongletActif'] = 'oeuvresAdmin';
 					$this->afficherEnteteAdmin();
 					$this->afficherFormSoumissionAdmin();             
 					break;
@@ -114,43 +178,43 @@ class Controleur
 					break;
                 
                 
-                case 'modifieOeuvre':
-                    // $_SESSION['ongletActif'] = 'gestion';   *******************
+				/*-- OEUVRES SOUMISES PAR LES USAGERS -----------------------------------------*/
+                
+                case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
+					$_SESSION['ongletActif'] = 'oeuvresAdmin';
+					$this->afficherEnteteAdmin();
+                    $this->afficheVue("lienHautDePage");
+					$this->afficherSoumissionsDesUsagers();             
+					break;
+                
+                
+                case 'supprimeSoumissionUsager':
+					$soumissionASupprimer = ($_GET['idSoumissionUsager']);
+					
+					/*-- DELETE TABLE Soumissions ---------------------------------------------*/
+					$modeleCategorieAdmin = new modeleSoumission();
+					$valide = $modeleCategorieAdmin->supprimer($soumissionASupprimer, "idSoumission", "Soumissions");
+					if(!$valide)
+					{                                                                       // si non réussi
+						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
+						break;
+					}
+					$_SESSION['ongletActif'] = 'soumission';
+					$this->afficherEnteteAdmin();
+                    $this->afficheVue("lienHautDePage");
+					$this->afficherSoumissionsDesUsagers();
+					break;
+                
+                
+                /*-- CATÉGORIES D'OEUVRES ------------------------------------------------------*/
+                
+                case 'gestionCategorie':
+                    $_SESSION['ongletActif'] = 'oeuvresAdmin';
                     $this->afficherEnteteAdmin();
-                    $this->afficherFormModificationAdmin();
+                    $this->afficherPageGestionCategorie();
                     break;
                 
                 
-                case 'updateModification':                                                  // à l'envoi du formulaire
-					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-					extract($tableauContenu);                                               // convertit le JSON en variables
-                
-                    /*-- UPDATE TABLE Oeuvres -------------------------------------------------*/
-                    $modeleSoumisionAdmin = new modeleSoumission();
-                    $valide = $modeleSoumisionAdmin->modifierOeuvre($tableauContenu);                                       
-					if(!$valide)
-					{                                                                       // si non réussi
-						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-						break;
-					}
-                    
-                    /*-- UPDATE TABLE Artistes ------------------------------------------------*/
-					$modeleSoumisionAdmin = new modeleSoumission();
-					$artisteDeLOeuvre = $modeleSoumisionAdmin->obtenir($idOeuvre, "idOeuvre", "ArtistesOeuvres"); // récupère l'id de l'artiste à modifier
-                    $artisteAModifier = $artisteDeLOeuvre['idArtiste'];
-                    $valide = $modeleSoumisionAdmin->modifierArtiste($tableauContenu, $artisteAModifier);                                       
-					if(!$valide)
-					{                                                                       // si non réussi
-						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-						break;
-					}
-                    
-                    $this->afficheVue("afficheSoumission", $tableauContenu); 
-                
-                    break;
-				
-				
 				case 'ajoutCategorie':
 					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
 					extract($tableauContenu);                                               // convertit le JSON en variables
@@ -182,74 +246,62 @@ class Controleur
 					break;
 
                 
-				case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
-					$_SESSION['ongletActif'] = 'soumission';
+                /////////////////////////////////////////////////////////////////////////////////////
+                //////////////////////////////////    ARTISTES    ///////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
+                
+                
+                
+                
+                
+                
+                /////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////    AFFICHAGE    ///////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
+				
+                
+                case 'affichage':
+					$_SESSION['ongletActif'] = 'affichage';
 					$this->afficherEnteteAdmin();
-                    $this->afficheVue("lienHautDePage");
-					$this->afficherSoumissionsDesUsagers();             
+					$this->afficherPageAffichage();
+					break;
+                
+                
+                /////////////////////////////////////////////////////////////////////////////////////
+                ////////////////////////////////    IMPORTATION    //////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
+                
+                
+                case 'importation':
+					$_SESSION['ongletActif'] = 'importation';
+					$this->afficherEnteteAdmin();
+					$this->afficheImportation();
 					break;
 					
 					
-				case 'supprimeSoumissionUsager':
-					$soumissionASupprimer = ($_GET['idSoumissionUsager']);
-					
-					/*-- DELETE TABLE Soumissions ---------------------------------------------*/
-					$modeleCategorieAdmin = new modeleSoumission();
-					$valide = $modeleCategorieAdmin->supprimer($soumissionASupprimer, "idSoumission", "Soumissions");
-					if(!$valide)
-					{                                                                       // si non réussi
-						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
-						break;
-					}
-					$_SESSION['ongletActif'] = 'soumission';
+				case 'importationok':
 					$this->afficherEnteteAdmin();
-                    $this->afficheVue("lienHautDePage");
-					$this->afficherSoumissionsDesUsagers();
+					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
+					$novData = $this->traiterDonnees($publicJson,"importationBD");//traiter donnes avec l'action importation
+					$this-> enregistrerImportation($novData);
+					$this->afficheImportationOK();                                                   
 					break;
+				
 					
-					
-				case 'supprimeOeuvre':
-					$oeuvreASupprimer = ($_GET['idOeuvre']);
-					
-					/*-- DELETE TABLE Oeuvre --------------------------------------------------*/
-					$modeleCategorieAdmin = new modeleSoumission();
-					$valide = $modeleCategorieAdmin->supprimer($oeuvreASupprimer, "idOeuvre", "Oeuvres");
-					if(!$valide)
-					{                                                                       // si non réussi
-						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
-						break;
-					}
-					$_SESSION['ongletActif'] = 'listeOeuvresAdmin';
+				case 'verification':
 					$this->afficherEnteteAdmin();
-                    $this->afficheVue("lienHautDePage");
-					$this->afficherListeDesOeuvres();
+					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
+					$novData = $this->traiterDonnees($publicJson,"verification");//traiter donnes avec l'action verification
+					$this->afficheVerification($novData);
 					break;
+				
 					
 				
-				case 'listeOeuvresAdmin': 
-					$_SESSION['ongletActif'] = 'listeOeuvresAdmin';
-					$this->afficherEnteteAdmin();
-					$this->afficheVue("barRechercheAdmin");
-					$this->afficheVue("lienHautDePage");
-                    $this->afficherListeDesOeuvres();
-                    $this->afficheVue("footer");
-					break;
+                /////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////    ADMIN    /////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////
 					
                 
-				case 'rechercheOeuvreAdmin': 
-					if(isset($_GET['valRecherche']))
-					{
-						$data = []; // initialisation de $data
-						$this->afficherEnteteAdmin();
-						$modeleListe = new RechercheAdmin();
-						array_push($data,$modeleListe->rechercheOeuvresParPhotos($_GET['valRecherche']));
-						array_push($data,$modeleListe->rechercheOeuvresParAuteur($_GET['valRecherche']));
-						$this->afficheVue("barRechercheAdmin");
-						$this->afficheVue("listeOeuvresAdmin",$data);
-					}
-					break;
-					
-				
 				case 'permissionAdmin':
 					$_SESSION['ongletActif'] = 'permissionAdmin';
 					$this->afficherEnteteAdmin();
@@ -306,7 +358,9 @@ class Controleur
     ////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////     MÉTHODES DU CONTROLEUR     ////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////
-		
+	
+    
+    /*-- GLOBAL ----------------------------------------------------------------------------*/
     
     protected function afficheVue($nomVue, $data = null)                                // affiche la vue 
     {
@@ -320,7 +374,13 @@ class Controleur
             die("Erreur 404! La vue n'existe pas.");				
         }
     }
-	
+     
+    public function phpAlert($message)
+    {
+		// source : http://stackoverflow.com/questions/13837375/how-to-show-an-alert-box-in-php
+        echo '<script type="text/javascript">window.alert("' . $message . '")</script>';
+    }
+	 
     private function accueil()
     {
 		if(!isset($_SESSION['authentifie']))
@@ -332,16 +392,13 @@ class Controleur
 		else
 		{
 			$this->afficherEnteteAdmin();
-			$this->afficherPageGestion();
+			$this->afficheVue("barRechercheAdmin");
+			$this->afficheVue("lienHautDePage");
+            $this->afficherListeDesOeuvres();
+            $this->afficheVue("footer");
 		}
     }
-	
-	public function phpAlert($message)
-    {
-		// source : http://stackoverflow.com/questions/13837375/how-to-show-an-alert-box-in-php
-        echo '<script type="text/javascript">window.alert("' . $message . '")</script>';
-    }	
-
+ 
 	protected function afficherEnteteAdmin()
 	{
         $this->afficheVue("head");
@@ -351,18 +408,20 @@ class Controleur
         
 	}
     
-    private function afficherPageGestion()
+    
+    /*-- OEUVRES --------------------------------------------------------------------------*/
+    
+    private function afficherListeDesOeuvres()
     {
-        $this->afficheVue("gestionDebutPage");
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories        
-		$this->afficheVue("gestionCategorie", $data);
-        $this->afficheVue("gestionCarrousel");
-        $this->afficheVue("gestionFinPage");
-        $this->afficheVue("footer");   
+        // récupération du code de Nicolas d'affichage de la liste des oeuvres du côté usager
+        $data = [];                                                             // initialisation de $data
+        $modeleListe = new ModeleListe();
+        array_push($data,$modeleListe->getOeuvresParPhotos());
+        array_push($data,$modeleListe->getOeuvresParAuteur());
+        $this->afficheVue("listeOeuvresAdmin",$data); 
     }
-	
-	private function afficherFormSoumissionAdmin()
+    
+    private function afficherFormSoumissionAdmin()
 	{                                                 
         $dataSoumissions = null;
         if(isset($_GET["idSoumissionUsager"]))
@@ -441,7 +500,7 @@ class Controleur
 
         $this->afficheVue("footer");
 	}
-
+    
     private function afficherSoumissionsDesUsagers()
     {
         $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
@@ -450,15 +509,25 @@ class Controleur
         $this->afficheVue("footer"); 
     }
     
-     private function afficherListeDesOeuvres()
-     {
-         // récupération du code de Nicolas d'affichage de la liste des oeuvres du côté usager
-         $data = [];                                                             // initialisation de $data
-         $modeleListe = new ModeleListe();
-         array_push($data,$modeleListe->getOeuvresParPhotos());
-         array_push($data,$modeleListe->getOeuvresParAuteur());
-         $this->afficheVue("listeOeuvresAdmin",$data); 
-     }
+    private function afficherPageGestionCategorie()
+    {
+        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories        
+		$this->afficheVue("gestionCategorie", $data);
+        $this->afficheVue("footer");   
+    }
+	
+	
+    /*-- AFFICHAGE -----------------------------------------------------------------------*/
+
+    private function afficherPageAffichage()
+    {
+        $this->afficheVue("gestionCarrousel");
+        $this->afficheVue("footer");   
+    }
+    
+    
+    /*-- IMPORTATION ----------------------------------------------------------------------*/
     
 	private function afficheImportation()
 	{

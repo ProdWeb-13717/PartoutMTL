@@ -14,15 +14,18 @@
     window.addEventListener("load", function(){                                             // au chargement de la page
      
         /*-- SECTION GESTION CATÉGORIE ------------------------------------------------------------*/
-        if(document.querySelector(".gestionAdmin"))                                         // si la classe "gestionAdmin" existe
+        if(document.querySelector(".categorie"))                                            // si la classe "categorie" existe
         { 
             /*-- AJOUT D'UNE CATÉGORIE ------------------------------------------------------------*/
             var btnAjout = document.querySelector("#boutonAjoutCategorie");                 // récupère le bouton AJOUTER
             btnAjout.addEventListener("click", function(evt){                               // à l'événement CLIC
+                
                 /*-- RÉCUPÈRE L'ENTRÉE DU CHAMPS CATÉGORIE ----------------------------------------*/
                 var valeurCategorie = document.querySelector("[name=categorieAjout]").value;
                 
                 if(valeurCategorie != ""){                                                  // s'il y a entrée dans le champs
+                    
+                    evt.target.disabled=true;                                               // il n'y a plus d'évènements au click
                 
                     /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/
                     var data = JSON.stringify({categorie : valeurCategorie});
@@ -36,7 +39,7 @@
                     xhr.addEventListener("load", function(e){
                         console.log(e.currentTarget);
                         console.log(e.currentTarget.responseText);
-                        window.location.href = "./index.php?requete=gestion";                
+                        window.location.href = "./index.php?requete=gestionCategorie";                
                     });
                     xhr.send(data);                                                         // envoie la requête et les datas en POST
                 } 
@@ -67,7 +70,7 @@
                     xhr.addEventListener("load", function(e){
                         console.log(e.currentTarget);
                         console.log(e.currentTarget.responseText);
-                        window.location.href = "./index.php?requete=gestion";                
+                        window.location.href = "./index.php?requete=gestionCategorie";                
                     });
                     xhr.send(data);                                                         // envoie la requête et les datas en POST
                 }

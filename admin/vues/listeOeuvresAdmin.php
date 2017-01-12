@@ -13,6 +13,14 @@
 ?>
 
 <div class="listeOeuvresAdmin marginDivPrincipale adminTitre">
+    <h1 id="oeuvres" >GESTION DES OEUVRES</h1> <!-- id pour recherche -->
+    
+        <article class="liens flex-row-left liensGestionOeuvres">
+            <a href="index.php?requete=soumission">AJOUT D'OEUVRE</a>
+            <a href="index.php?requete=soumissionsDesUsagers">VOIR LES SOUMISSIONS</a>
+            <a href="index.php?requete=gestionCategorie">GESTION DES CATÉGORIES</a>
+        </article>
+    
     <h1 id="oeuvres" >LISTE DES OEUVRES</h1> <!-- id pour recherche -->
     <section class="flex-column-left">
 		<?php
