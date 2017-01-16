@@ -30,11 +30,6 @@
         <script src="./js/soumissionUsager.js"></script>
         <script src="./js/listeLien.js"></script>
         <script src="./js/carroussel.js"></script>
-        <script src="./js/mail.js"></script>
-
-        
-        <!-- Fort Awesome ------------->
-        <script src="https://use.fortawesome.com/93986164.js"></script>
 		
 		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
 		
