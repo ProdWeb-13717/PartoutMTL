@@ -16,6 +16,54 @@
         if(document.querySelector(".soumissionAdmin"))                                          // si la classe "soumissionAdmin" existe
         { 
             /*-- SOUMISSION ---------------------------------------------------------------------------*/
+            if(document.querySelector("#boutonAjout"))                                          // si le bouton SOUMETTRE existe
+            {
+                var btnSoumettre = document.querySelector("#boutonAjout");                      // récupère le bouton SOUMETTRE
+                btnSoumettre.addEventListener("click", function(evt)                            // à l'événement CLIC
+                {                                         
+                    if(validationSoumission())                                                  // valide certaines entrées, si valide
+                    {    
+                        evt.target.disabled=true;                                               // il n'y a plus d'évènements au click
+                        
+                        var data = recupereValeur();                                            // récupère les valeurs entrées lors de la soumission            
+                                    
+                        /*-- REQUÊTE AJAX -------------------------------------------------------------*/
+                        var xhr = new XMLHttpRequest();                                         // nouvelle requête
+                        
+                        xhr.open("POST", "index.php?requete=insereSoumission")                  // controleur case "requete" = "insereSoumission"
+                        //xhr.setRequestHeader("Content-type", "application/json");
+                        
+                        xhr.addEventListener("load", function(e){
+                            console.log(e.currentTarget);
+                            console.log(e.currentTarget.responseText);
+                            //window.location.href = "./index.php?requete=afficheSoumission";
+                            document.querySelector(".soumissionAdmin").innerHTML = e.currentTarget.responseText;                 
+                        });
+                        
+                        var fdDonnees = new FormData();
+                        fdDonnees.append("data", data);  
+                        
+                        var valeurPhoto = document.getElementById("photoOeuvreSoumissionAdmin");
+                        var photos      = valeurPhoto.files;
+                        
+                        for (var i = 0; i < photos.length; i++)                                 // parcours le tableau de photos 
+                        {
+                            var photo = photos[i];
+                            if (photo.type.match('image.*'))                                    // vérifie le type de file
+                            {                                     
+                                fdDonnees.append('photos', photo, photo.name);                  // ajoute la photo à la requête
+                            }
+                        }
+      
+                        xhr.send(fdDonnees);                                                    // envoie la requête et les datas en POST
+                    }
+                    else                                                                        // sinon, message de champs invalides
+                    {
+                        document.querySelector("#msgErreurSoumision").innerHTML = "Veuillez remplir correctement les champs";
+                    }  
+                });
+            }
+            
             if(document.querySelector("#boutonSoumission"))                                     // si le bouton SOUMETTRE existe
             {
                 var btnSoumettre = document.querySelector("#boutonSoumission");                 // récupère le bouton SOUMETTRE
@@ -32,7 +80,7 @@
                         var xhr = new XMLHttpRequest();                                         // nouvelle requête
                         
                         xhr.open("POST", "index.php?requete=insereSoumission")                  // controleur case "requete" = "insereSoumission"
-                        xhr.setRequestHeader("Content-type", "application/json");
+                        //xhr.setRequestHeader("Content-type", "application/json");
                         
                         xhr.addEventListener("load", function(e){
                             console.log(e.currentTarget);
@@ -40,7 +88,11 @@
                             //window.location.href = "./index.php?requete=afficheSoumission";
                             document.querySelector(".soumissionAdmin").innerHTML = e.currentTarget.responseText;                 
                         });
-                        xhr.send(data);                                                         // envoie la requête et les datas en POST
+                        
+                        var fdDonnees = new FormData();
+                        fdDonnees.append("data", data);
+ 
+                        xhr.send(fdDonnees);                                                    // envoie la requête et les datas en POST
                     }
                     else                                                                        // sinon, message de champs invalides
                     {
@@ -48,7 +100,6 @@
                     }  
                 });
             }
-        
             
             /*-- MODIFICATION -------------------------------------------------------------------------*/
             if(document.querySelector("#boutonModification"))                                   // si le bouton SOUMETTRE existe
@@ -64,14 +115,31 @@
                         var xhr = new XMLHttpRequest();                                         // nouvelle requête
                         
                         xhr.open("POST", "index.php?requete=updateModification")                // controleur case "requete" = "updateModification"
-                        xhr.setRequestHeader("Content-type", "application/json");
+                        //xhr.setRequestHeader("Content-type", "application/json");
                         
                         xhr.addEventListener("load", function(e){
                             console.log(e.currentTarget);
                             console.log(e.currentTarget.responseText);
                             document.querySelector(".soumissionAdmin").innerHTML = e.currentTarget.responseText;                 
                         });
-                        xhr.send(data);                                                         // envoie la requête et les datas en POST
+                        
+                        var fdDonnees = new FormData();
+                        fdDonnees.append("data", data);  
+                        
+                        var valeurPhoto = document.getElementById("nouvellePhotoOeuvreAdmin");
+                        var photos      = valeurPhoto.files;
+                        
+                        for (var i = 0; i < photos.length; i++)                                 // parcours le tableau de photos 
+                        {
+                            var photo = photos[i];
+                            if (photo.type.match('image.*'))                                    // vérifie le type de file
+                            {                                     
+                                fdDonnees.append('photos', photo, photo.name);                  // ajoute la photo à la requête
+                            }
+                        }
+      
+                        xhr.send(fdDonnees);
+                        //xhr.send(data);                                                       // envoie la requête et les datas en POST
                     }
                     else                                                                        // sinon, message de champs invalides
                     {
@@ -153,7 +221,7 @@
                                    longitude         : valeurLongitude,
                                    urlPhoto          : valeurUrlPhoto,
                                    description       : valeurDescription});
-        //console.log(data);
+        console.log(data);
         return data;
     }
     

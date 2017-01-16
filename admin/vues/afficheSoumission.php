@@ -52,7 +52,10 @@
             <li>Adresse civique :       <span  class="typoValeurAdmin"><?php if(isset($data['adresseCivique'])) {echo $data['adresseCivique'];}?>       </span></li>
             <li>Latitude :              <span  class="typoValeurAdmin"><?php if(isset($data['latitude'])) {echo $data['latitude'];}?>                   </span></li>
             <li>Longitude :             <span  class="typoValeurAdmin"><?php if(isset($data['longitude'])) {echo $data['longitude'];}?>                 </span></li>
-            <li>URL photo :             <span  class="typoValeurAdmin"><?php if(isset($data['urlPhoto'])) {echo $data['urlPhoto'];}?>                   </span></li>
+            
+            <li>Photo :                 <span  class="typoValeurAdmin"><?php if(isset($data['urlPhoto'])) {echo $data['urlPhoto'];}?>                   </span></li>
+            
+            
             <li>Description :           <span  class="typoValeurAdmin"><?php if(isset($data['description'])) {echo $data['description'];}?>             </span></li>
         </ul> 
     </section>

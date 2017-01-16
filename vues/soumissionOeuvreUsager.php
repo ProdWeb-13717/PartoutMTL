@@ -34,7 +34,7 @@
         <label for="parcOeuvreSoumissionUsager">Parc : </label>
         <input type="text" name="parcOeuvreSoumission" id="parcOeuvreSoumissionUsager"/>
         
-        <label for="adresseCiviqueOeuvreSoumissionUsager">dresse civique : </label>
+        <label for="adresseCiviqueOeuvreSoumissionUsager">Adresse civique : </label>
         <input type="text" name="adresseCiviqueOeuvreSoumission" id="adresseCiviqueOeuvreSoumissionUsager" multiple/>
         
         <label for="descriptionOeuvreSoumissionUsager">Description : </label>
@@ -47,8 +47,8 @@
                         http://php.net/manual/fr/features.file-upload.post-method.php
         -->
         <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-        <label for="photoOeuvreSoumissionUsager">Photo : </label>
-        <input type="file" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager"/>
+        <label for="photoOeuvreSoumissionUsager">Photo (.jpg) : </label>
+        <input type="file" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager" accept="image/jpeg"/>
     
         <label for="courrielOeuvreSoumissionUsager"><span class="couleurErreurSoumission">Courriel : </span></label>
         <input type="text" name="courrielOeuvreSoumission" id="courrielOeuvreSoumissionUsager"/>

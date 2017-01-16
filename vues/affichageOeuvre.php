@@ -6,7 +6,7 @@
                 foreach($data[1] as $valeur)
                 {	
                 ?>
-                    <img src="<?php echo $valeur["urlPhoto"];?>">
+                    <img src="<?php echo "./admin/images/" . $valeur["urlPhoto"];?>">
                 <?php
                 }   
             }

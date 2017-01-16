@@ -55,7 +55,7 @@
 					/*-- REQUÊTE AJAX -------------------------------------------------------------*/
 					var xhr = new XMLHttpRequest();                                                 // nouvelle requête
 					
-					xhr.open("POST", "index.php?requete=ajoutAdministrateur")                  // controleur case "requete" = "supprimeSoumission"
+					xhr.open("POST", "index.php?requete=ajoutAdministrateur")                       // controleur case "requete" = "supprimeSoumission"
 					xhr.setRequestHeader("Content-type", "application/json");
 					
 					xhr.addEventListener("load", function(e){

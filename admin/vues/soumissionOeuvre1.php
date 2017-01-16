@@ -9,7 +9,7 @@
 
 <!-- DÉBUT DE LA PAGE SOUMISSION D'UNE OEUVRE, TABLE Oeuvres ---------------------------------------->
 
-<div class="soumissionAdmin marginDivPrincipale adminTitre">
+<div class="soumissionAdmin marginDivPrincipale adminTitre">    
     <?php
         if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
         {

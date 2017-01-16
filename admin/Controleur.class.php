@@ -69,8 +69,9 @@ class Controleur
                 
                 case 'updateModification':                                                  // à l'envoi du formulaire
 					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-					extract($tableauContenu);                                               // convertit le JSON en variables
+					//$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
+					$tableauContenu = json_decode ($_POST['data'], true);                   // decode la string JSON dans formData
+                    extract($tableauContenu);                                               // convertit le JSON en variables
                 
                     /*-- UPDATE TABLE Oeuvres -------------------------------------------------*/
                     $modeleSoumisionAdmin = new modeleSoumission();
@@ -91,6 +92,35 @@ class Controleur
 						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 						break;
 					}
+                
+                    /*-- INSERT TABLE Photos ---------------------------------------------------*/
+                    //  sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire
+                    //              http://php.net/manual/fr/features.file-upload.post-method.php
+                    
+                    if(isset($_FILES['photos'])){                                                 // si il y a une photo
+                        $uploadDirection = './images/';
+
+                        $modeleSoumisionAdmin = new modeleSoumission();
+                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");
+                        $idPhotos++;
+                    
+                        $nomPhoto = "photo#" . $idPhotos . ".jpg";
+                        $uploadPhoto = $uploadDirection . $nomPhoto;
+                        
+                        move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
+                        
+                        /*-- INSERT urlPhoto TABLE Photos --------------------------------------*/
+                        $modeleSoumisionAdmin = new modeleSoumission();
+                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nomPhoto, $idOeuvre);                                       
+                        if(!$valide)
+				        {                                                                         // si non réussi
+                            $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                            break;
+                        }
+                    }
+                
+                    $tableauContenu['photo'] = $nomPhoto;
+                    
                     
                     $this->afficheVue("afficheSoumission", $tableauContenu); 
                 
@@ -116,7 +146,7 @@ class Controleur
 					$this->afficherListeDesOeuvres();
 					break;
                 
-                
+
                 /*-- AJOUT D'UNE OEUVRE ------------------------------------------------------*/  
                 
                 case 'soumission':                                                          // page formulaire d'ajout administrateur
@@ -128,9 +158,10 @@ class Controleur
 				
 				case "insereSoumission":                                                    // à l'envoi du formulaire
 					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-					extract($tableauContenu);                                               // convertit le JSON en variables
-					
+					//$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
+                    $tableauContenu = json_decode ($_POST['data'], true);                   // decode la string JSON dans formData
+                    extract($tableauContenu);                                               // convertit le JSON en variables
+                
 					/*-- INSERT TABLE Oeuvres -------------------------------------------------*/
 					$modeleSoumisionAdmin = new modeleSoumission();
 					$valide = $modeleSoumisionAdmin->insererSoumissionOeuvre($tableauContenu);                                       
@@ -141,13 +172,43 @@ class Controleur
 					}
 				
 					/*-- INSERT TABLE Photos ---------------------------------------------------*/
-					$modeleSoumisionAdmin = new modeleSoumission();
-					$valide = $modeleSoumisionAdmin->insererUrlPhoto($tableauContenu);
-					if(!$valide)
-					{                                                                       // si non réussi
-						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
-						break;
-					}
+                    $modeleSoumisionAdmin = new modeleSoumission();
+                    $photo = $tableauContenu["urlPhoto"];
+                    if($photo != "" || $photo != null)
+                    {
+					   $valide = $modeleSoumisionAdmin->insererUrlPhoto($photo);
+					   if(!$valide)
+					   {                                                                       // si non réussi
+					   	$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+					   	break;
+					   }
+                    }
+                
+                    //  sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire
+                    //              http://php.net/manual/fr/features.file-upload.post-method.php
+                    
+                    if(isset($_FILES['photos'])){                                                 // si il y a une photo
+                        $uploadDirection = './images/';
+ 
+                        $modeleSoumisionAdmin = new modeleSoumission();
+                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");
+                        $idPhotos++;
+                    
+                        $nomPhoto = "photo#" . $idPhotos . ".jpg";
+                        $uploadPhoto = $uploadDirection . $nomPhoto;
+                        //$nomPhoto = basename($_FILES['photos']['name']);
+                        
+                        move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
+                        
+                        /*-- INSERT urlPhoto TABLE Photos --------------------------------------*/
+                        $modeleSoumisionAdmin = new modeleSoumission();
+                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nomPhoto);                                       
+                        if(!$valide)
+				        {                                                                         // si non réussi
+                            $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                            break;
+                        }
+                    }
 					
 					/*-- INSERT TABLE Artistes -------------------------------------------------*/
 					$modeleSoumisionAdmin = new modeleSoumission();
