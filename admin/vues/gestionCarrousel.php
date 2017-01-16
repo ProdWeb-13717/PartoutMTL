@@ -7,5 +7,8 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-<section class="adminTitre">
+<div class="marginDivPrincipale adminTitre"> 
     <h1>CARROUSEL</h1>
+
+    
+</div>

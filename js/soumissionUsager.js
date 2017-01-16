@@ -20,6 +20,8 @@
                     
                 if(validationSoumission()){                                                 // valide certaines entrées, si valide
                     
+                    evt.target.disabled=true;                                               // il n'y a plus d'évènements au click
+                    
                     /*-- RÉCUPÈRE LES ENTRÉES DE LA TABLE SOUMISSION ------------------------------*/
                     var valeurTitre             = document.querySelector("[name=titreOeuvreSoumission]").value;
                     var valeurPrenomArtiste     = document.querySelector("[name=prenomArtisteOeuvreSoumission]").value;
@@ -32,8 +34,8 @@
                     var valeurParc              = document.querySelector("[name=parcOeuvreSoumission]").value;
                     var valeurAdresseCivique    = document.querySelector("[name=adresseCiviqueOeuvreSoumission]").value;
                     var valeurDescription       = document.querySelector("[name=descriptionOeuvreSoumission]").value;
-                    var valeurPhoto             = "#";
-                    //var valeurPhoto             = document.querySelector("[name=photoOeuvreSoumission]").value;
+                    var valeurPhoto             = document.getElementById("photoOeuvreSoumissionUsager");
+                    var photos                  = valeurPhoto.files;                                          
                     var valeurCourriel          = document.querySelector("[name=courrielOeuvreSoumission]").value;
                 
                     /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/
@@ -45,23 +47,34 @@
                                                parcSoumission              : valeurParc,
                                                adresseCiviqueSoumission    : valeurAdresseCivique,
                                                descriptionSoumission       : valeurDescription,
-                                               photoSoumission             : valeurPhoto,
                                                courrielSoumission          : valeurCourriel});
-                    console.log(data);                   
                     
                     /*-- REQUÊTE AJAX -------------------------------------------------------------*/
                     var xhr = new XMLHttpRequest();                                         // nouvelle requête
                     
                     xhr.open("POST", "index.php?requete=insereSoumissionUsager")            // controleur case "requete" = "insereSoumissionUsager"
-                    xhr.setRequestHeader("Content-type", "application/json");
+                    //xhr.setRequestHeader("Content-type", "application/json");
                     
                     xhr.addEventListener("load", function(e){
                         console.log(e.currentTarget);
                         console.log(e.currentTarget.responseText);
                         //window.location.href = "./index.php?requete=afficheSoumission";
                         document.querySelector(".soumissionUsager").innerHTML = e.currentTarget.responseText;                 
-                    });
-                    xhr.send(data);                                                         // envoie la requête et les datas en POST    
+                    });  
+                    
+                    var fdDonnees = new FormData();
+                    fdDonnees.append("data", data);
+                    
+                    //source : http://blog.teamtreehouse.com/uploading-files-ajax
+                    
+                    for (var i = 0; i < photos.length; i++) {                               // parcours le tableau de photos
+                        var photo = photos[i];
+                        if (photo.type.match('image.*')) {                                  // vérifie le type de file
+                            fdDonnees.append('photos', photo, photo.name);                  // ajoute la photo à la requête
+                        }
+                    }  
+                                                  
+                    xhr.send(fdDonnees);                                                    // envoie la requête et les datas en POST    
                 }
                 else                                                                        // sinon, message de champs invalides
                 {

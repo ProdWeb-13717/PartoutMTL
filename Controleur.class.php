@@ -240,6 +240,14 @@ class Controleur
 				
 				}
 				break;
+				
+			case 'carte': //**************************************************
+				$this->entete();                    
+                $modeleCarte = new Recherche();
+				$data = $modeleCarte->obtenirOeuvres();
+                $this->afficheVue("carte", $data);
+                $this->afficheVue("footer");
+                break;
              
             case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
 				$this->entete();                    
@@ -254,18 +262,34 @@ class Controleur
             case "insereSoumissionUsager":                                                    // à l'envoi du formulaire
             
                 /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-                $tableauContenu = json_decode (file_get_contents('php://input'), true);       // decode la string JSON
+                $tableauContenu = json_decode ($_POST['data'], true);                         // decode la string JSON dans formData
                 extract($tableauContenu);                                                     // convertit le JSON en variables
-                
-                //var_dump($tableauContenu);
             
                 /*-- INSERT TABLE Soumission ----------------------------------------------*/
                 $modeleSoumisionUsager = new modeleSoumissionUsager();
                 $valide = $modeleSoumisionUsager->insererSoumission($tableauContenu);                                       
                 if(!$valide)
-				{                                                           // si non réussi
+				{                                                                             // si non réussi
                     $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                     break;
+                }
+                
+                /*-- PHOTO RÉCUPÉRÉE ------------------------------------------------------*/
+                //  sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire
+                //              http://php.net/manual/fr/features.file-upload.post-method.php
+                
+                if(isset($_FILES['photos'])){                                                 // si il y a une photo
+                    $uploadDirection = './images/';
+                    $uploadPhoto = $uploadDirection . basename($_FILES['photos']['name']);  
+                    move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
+                    /*-- UPDATE photoSoumision TABLE Soumission ---------------------------*/
+                    $modeleSoumisionUsager = new modeleSoumissionUsager();
+                    $valide = $modeleSoumisionUsager->insererPhotoSoumission($uploadPhoto);                                       
+                    if(!$valide)
+				    {                                                                         // si non réussi
+                        $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                        break;
+                    }
                 }
                 
                 $vue = "remerciements";

@@ -5,19 +5,19 @@
     
     <section class="soumissionUsagerFormulaire" >
         
-        <label for="titreOeuvreSoumissionUsager"><span class="couleurErreurSoumission">TITRE : </span></label>
+        <label for="titreOeuvreSoumissionUsager"><span class="couleurErreurSoumission">Titre : </span></label>
         <input type="text" name="titreOeuvreSoumission" id="titreOeuvreSoumissionUsager"/>
         
-        <label for="prenomOeuvreSoumissionUsager">PRÉNOM DE L'ARTISTE : </label>
+        <label for="prenomOeuvreSoumissionUsager">Prénom : </label>
         <input type="text" name="prenomArtisteOeuvreSoumission" id="prenomOeuvreSoumissionUsager"/>
 
-        <label for="nomArtisteOeuvreSoumissionUsager">NOM DE L'ARTISTE : </label>
+        <label for="nomArtisteOeuvreSoumissionUsager">Nom : </label>
         <input type="text" name="nomArtisteOeuvreSoumission" id="nomArtisteOeuvreSoumissionUsager"/>
         
-        <label for="collectifOeuvreSoumissionUsager">COLLECTIF : </label>
+        <label for="collectifOeuvreSoumissionUsager">Collectif : </label>
         <input type="text" name="collectifOeuvreSoumission" id="collectifOeuvreSoumissionUsager"/>
         
-        <label for="arrondissementOeuvreSoumissionUsager">ARRONDISSEMENT : </label>
+        <label for="arrondissementOeuvreSoumissionUsager">Arrondissement : </label>
         <select name="arrondissementOeuvreSoumission" id="arrondissmentOeuvreSoumissionUsager">
 			<option value="#">Options</option>
             <?php
@@ -31,20 +31,26 @@
 			?>
         </select>
         
-        <label for="parcOeuvreSoumissionUsager">PARC : </label>
+        <label for="parcOeuvreSoumissionUsager">Parc : </label>
         <input type="text" name="parcOeuvreSoumission" id="parcOeuvreSoumissionUsager"/>
         
-        <label for="adresseCiviqueOeuvreSoumissionUsager">ADRESSE CIVIQUE : </label>
-        <input type="text" name="adresseCiviqueOeuvreSoumission" id="adresseCiviqueOeuvreSoumissionUsager"/>
+        <label for="adresseCiviqueOeuvreSoumissionUsager">dresse civique : </label>
+        <input type="text" name="adresseCiviqueOeuvreSoumission" id="adresseCiviqueOeuvreSoumissionUsager" multiple/>
         
-        <label for="descriptionOeuvreSoumissionUsager">DESCRIPTION : </label>
+        <label for="descriptionOeuvreSoumissionUsager">Description : </label>
         <textarea rows="4" style="margin-bottom: 10px; width: 337px;" name="descriptionOeuvreSoumission" id="descriptionOeuvreSoumissionUsager"></textarea>
         
-        <!-- à venir pour le sprint 3 -->
-        <!--label for="photoOeuvreSoumissionUsager">URL PHOTO : </label>
-        <input type="text" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager"/-->
+        <!-- 
+            sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire 
+                        http://blog.teamtreehouse.com/uploading-files-ajax  
+                        https://developer.mozilla.org/fr/docs/Web/API/FormData
+                        http://php.net/manual/fr/features.file-upload.post-method.php
+        -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+        <label for="photoOeuvreSoumissionUsager">Photo : </label>
+        <input type="file" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager"/>
     
-        <label for="courrielOeuvreSoumissionUsager"><span class="couleurErreurSoumission">COURRIEL : </span></label>
+        <label for="courrielOeuvreSoumissionUsager"><span class="couleurErreurSoumission">Courriel : </span></label>
         <input type="text" name="courrielOeuvreSoumission" id="courrielOeuvreSoumissionUsager"/>
 
         <span id="msgErreurSoumision"></span>

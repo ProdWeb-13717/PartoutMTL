@@ -24,6 +24,21 @@ class Recherche extends TemplateBase {
 		return "";
 	}
 	
+	public function obtenirOeuvres()
+	{
+		try
+		{
+			
+            $stmt = $this->connexion->prepare("SELECT * FROM Oeuvres");
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}
+		catch(Exception $exc)
+		{
+			return false;
+		}
+	}
+	
 	public function rechercheOeuvres($valeur, $cle = null)
 	{
 		try

@@ -44,9 +44,6 @@ class Artistes extends TemplateBase
 		}
 	}
     
-    //public function obtenirArtisteDuneOeuvre
-    
-	
 	public function insererArtiste($nom,$prenom,$collectif)
 	{		
 		try
