@@ -31,6 +31,12 @@
         <script src="./js/carroussel.js"></script>
         <script src="./js/mail.js"></script>
         
+        <!-- Font Awsome Temporaire ------------->
+        <!--<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">-->
+        
+        <!-- Fort Awsome ------------->
+        <script src="https://use.fortawesome.com/93986164.js"></script>
+        
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->
 	</head>
