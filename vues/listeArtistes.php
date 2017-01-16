@@ -1,9 +1,7 @@
 <?php
-    $nbrePage = 1;          // compte le nombre total de pages
     $nbreMaxElement = 20;   //nombre maximum de résultats par pages
     $elemCourant = 1;       //Rang d'un élément dans un pages
-    $elemTotal = 0;         //Nombre total de résultats dans la liste
-	
+	$nbrePages = 1; 		//Nombre total de pages
 	//Construction d'un tableau associatif qu'on pourra mettre en ordre alaphbétique malgré les collectifs
 	
 	$inconnu="<span class='inconnu'>(non-applicable)</span>";
@@ -70,27 +68,6 @@
 
 <section id="liste">
 	<h1 id="artistes">Liste des artistes</h1> <!-- id pour recherche -->
-    <span class="pageBalise" id="1">
-    <?php
-		if(count($toutArtiste) <= 20)
-		{
-			//echo "Résultat 1 à ".count($toutArtiste); // J'ai modifié cette partie pour suprimer l'erreur qu'on a eu pour la résultat 0
-			
-			if($toutArtiste)
-			{
-				echo "Résultats 1 à ". count($toutArtiste);
-			}
-			else
-			{
-				echo "Résultat 0 à 0";
-			}
-		}
-		else
-		{
-			echo "Résultats 1 à 20";
-		}
-	?>
-	</span>
     <div class="pageListe" id="page1">
 	<?php
 	
@@ -141,23 +118,27 @@
 			</a>
 		</div>
 		<?php
-            $elemTotal++;
-			$elemCourant++;
+            $elemCourant++;
 			if($elemCourant > $nbreMaxElement)
 			{
-				$nbrePage++;
+				$nbrePages++;
 				$elemCourant = 1;
 				?>
 					</div>
-					<span class="pageBalise" id="<?php echo $nbrePage;?>">
-					<?php
-						echo"Résultats ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement);
-					?>
-					</span>
-					<div class="pageListe pageCache" id="<?php echo "page".$nbrePage;?>">
+					<div class="pageListe pageCache" id="<?php echo "page".$nbrePages;?>">
 				<?php	
 			}
 	}
 	?>
     </div>
+</section>
+<section id="secPagination">	
+	<?php
+		for($i = 1 ; $i <= $nbrePages ; $i++)
+		{	
+			?>
+				<span class="pageBalise" id="<?php echo $i;?>"> <?php echo $i; ?> </span>
+			<?php
+		}
+	?>
 </section>
