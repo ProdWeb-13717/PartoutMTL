@@ -126,12 +126,49 @@
 
     <h3 class="espaceH3">PHOTO</h3>
 
-    <section class="flex-row-left formulaireSoumissionAdmin">
-        <article>
-            <label for="urlPhotoOeuvreAjoutAdmin">URL photo : </label>
-            <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"/>
-        </article>
-    </section>
+    <section class="flex-column-left formulaireSoumissionAdmin">
+        
+    <?php  
+        if($_GET['requete'] == "soumission" && isset($_GET['idSoumissionUsager']))
+        {
+            ?> 
+            <article>
+                <label for="urlPhotoOeuvreAjoutAdmin">URL photo : </label>
+                <input type="text" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin"
+                    value="<?php echo $data['photoSoumission']; ?>"
+                />
+            </article>  
+            <?php
+        }
+
+        if($_GET['requete'] == "soumission" && !isset($_GET['idSoumissionUsager']))
+        {
+            ?>
+            <article>
+                <input type="hidden" name="urlPhotoOeuvreAjout" value=""/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                <label for="photoOeuvreSoumissionAdmin">Photo (.jpg) : </label>
+                <input type="file" name="photoOeuvreSoumission" id="photoOeuvreSoumissionAdmin" accept="image/jpeg"/>
+            </article>
+            <?php
+        }
+   
+        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+        {
+            ?> 
+            <article class="formulaireSoumissionAdmin">
+                <input type="hidden" name="urlPhotoOeuvreAjout" value=""/>
+                <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+                <label for="nouvellePhotoOeuvreAdmin">Ajouter une photo : </label>
+                <input type="file" name="nouvellePhotoOeuvre" id="nouvellePhotoOeuvreAdmin"/><br/>
+            </article>
+            <article>
+                <label for="nouvellePhotoOeuvreAdmin">Supprimer une photo : </label>
+            </article>
+            <?php
+        }
+        ?> 
+    </section> 
 
     <h3 class="espaceH3">DESCRIPTION</h3>
 

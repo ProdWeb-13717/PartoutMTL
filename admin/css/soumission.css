@@ -78,7 +78,12 @@
 
 .numeroSoumission{
     font-size: 1.2em;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
+    width: 480px;
+}
+
+.photoOeuvreSoumission{ 
+    margin-right: 30px;
 }
 
 @media (max-width: 800px) /*ajustement menu*/
@@ -90,7 +95,12 @@
     .soumissionDesUsagersListe{
         margin-bottom: 5px;
     }
+    
+    .photoOeuvreSoumission{ 
+        margin-bottom: 10px;
+    }
 }
+
 
 /* Modification
 -------------------------------------------------------------*/

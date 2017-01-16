@@ -166,19 +166,18 @@ class modeleSoumission extends TemplateBase
         }   
     }
     
-    public function insererUrlPhoto($param, $idOeuvre = null)                   // insère l'entrée dans la table Photos
+    public function insererUrlPhoto($urlPhoto, $idOeuvre = null)                // insère l'entrée dans la table Photos
     {
         try
         {
-            if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
-			{
+            if($idOeuvre == null)                                               // demande l'id de la dernière oeuvre en soumission
+			{               
                 $idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");       // récupère l'id de l'oeuvre en soumission
-			} 
+            } 
             
             $stmt = $this->connexion->prepare("INSERT INTO Photos (urlPhoto, idOeuvre) 
                                                            VALUES (:urlPhoto, :idOeuvre)");
             
-            extract($param);                                                    // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":urlPhoto" => $urlPhoto,
@@ -351,7 +350,36 @@ class modeleSoumission extends TemplateBase
         {
             return 0;
         }
-    }   
+    } 
+    /*
+    public function modifierUrlPhoto($urlPhoto = null)
+    {
+        try
+        {  
+            if($urlPhoto == null)                                               // toujours null, demande l'id de la photo
+			{
+				$idPhoto = $this->obtenirDernier("idPhoto", "Photos");          // récupère l'id de la dernière photo
+			}
+              
+            $stmt = $this->connexion->prepare("UPDATE Photos
+                                               SET urlPhoto =  :urlPhoto
+                                               WHERE idPhoto = $idPhoto");
+            extract($param);                                                    // extrait le tableau de variables en paramètre
+            $stmt->execute(
+			array(":urlPhoto" => $idPhoto));
+            
+            return 1;		     
+        }	
+        catch(Exception $exc)
+        {
+            return 0;
+        }
+    }*/
+    
+    
+    
+    
+    
 }
 
 ?>

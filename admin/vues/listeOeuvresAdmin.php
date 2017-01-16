@@ -17,8 +17,8 @@
     
         <article class="liens flex-row-left liensGestionOeuvres">
             <a href="index.php?requete=soumission">AJOUT D'OEUVRE</a>
-            <a href="index.php?requete=soumissionsDesUsagers">VOIR LES SOUMISSIONS</a>
-            <a href="index.php?requete=gestionCategorie">GESTION DES CATÉGORIES</a>
+            <a href="index.php?requete=soumissionsDesUsagers">VOIR SOUMISSIONS</a>
+            <a href="index.php?requete=gestionCategorie">GESTION CATÉGORIES</a>
         </article>
     
     <h1 id="oeuvres" >LISTE DES OEUVRES</h1> <!-- id pour recherche -->
@@ -35,13 +35,13 @@
 						<?php 
 						if($oeuvre["urlPhoto"] != null)
 						{	?>
-							<img src=" <?php echo $oeuvre["urlPhoto"]; ?>"/>
+							<img src="./images/<?php echo $oeuvre["urlPhoto"]; ?>" height="80" width="115"/>
 							<?php
 						}
 						else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
 						{	
 							?>
-							<img src="../images/image_default_oeuvre_4.jpg" alt="image default" height="80">
+							<img src="./images/image_default_oeuvre_4.jpg" alt="image default" height="80">
 							<?php
 						}
 						?>

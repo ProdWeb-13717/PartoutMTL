@@ -35,7 +35,7 @@
                     var valeurAdresseCivique    = document.querySelector("[name=adresseCiviqueOeuvreSoumission]").value;
                     var valeurDescription       = document.querySelector("[name=descriptionOeuvreSoumission]").value;
                     var valeurPhoto             = document.getElementById("photoOeuvreSoumissionUsager");
-                    var photos                  = valeurPhoto.files;                                          
+                    var photos                  = valeurPhoto.files;
                     var valeurCourriel          = document.querySelector("[name=courrielOeuvreSoumission]").value;
                 
                     /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/
@@ -67,9 +67,11 @@
                     
                     //source : http://blog.teamtreehouse.com/uploading-files-ajax
                     
-                    for (var i = 0; i < photos.length; i++) {                               // parcours le tableau de photos
+                    for (var i = 0; i < photos.length; i++)                                 // parcours le tableau de photos
+                    {
                         var photo = photos[i];
-                        if (photo.type.match('image.*')) {                                  // vérifie le type de file
+                        if (photo.type.match('image.*'))                                    // vérifie le type de file
+                        {
                             fdDonnees.append('photos', photo, photo.name);                  // ajoute la photo à la requête
                         }
                     }  

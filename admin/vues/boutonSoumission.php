@@ -9,5 +9,21 @@
 
 <!-- FIN DE LA SOUMISSION D'UNE OEUVRE, BOUTON SOUMISSION ------------------------------------------->
 
-    <input type="button" class="bouton" id="boutonSoumission" value="SOUMETTRE" name="boutonSoumission"/>   
+<?php    
+    if($_GET['requete'] == "soumission" && !isset($_GET['idSoumissionUsager']))
+    {
+        ?>
+        <input type="button" class="bouton" id="boutonAjout" value="SOUMETTRE" name="boutonAjout"/>
+        <?php
+    }
+    
+    if($_GET['requete'] == "soumission" && isset($_GET['idSoumissionUsager']))
+    {
+        ?>
+        <input type="button" class="bouton" id="boutonSoumission" value="SOUMETTRE" name="boutonSoumission"/>
+        <?php
+    }
+?>
 </div>
+
+

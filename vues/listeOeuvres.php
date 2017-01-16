@@ -109,18 +109,24 @@ ksort($tableauAllOeuvres);
 			?>
 				<div class="elemListe">
 					<a href="./index.php?requete=afficheOeuvre&idOeuvre=<?php echo $oeuvre["idOeuvre"]?>">
-						<img src="
-							<?php 
-							if($oeuvre["urlPhoto"] != null)
-							{
-								echo $oeuvre["urlPhoto"];
-							}
-							else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
-							{
-								echo "./images/image_default_oeuvre_3.jpg";
-							}
-							?>
-						">
+                        
+                        <article class="photoOeuvre">
+                            <?php 
+                                if($oeuvre["urlPhoto"] != null)
+                                {	
+                                    ?>
+                                    <img src="./admin/images/<?php echo $oeuvre["urlPhoto"]; ?>" height="80" width="115"/>
+                                    <?php
+                                }
+                                else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
+                                {	
+                                    ?>
+                                    <img src="./admin/images/image_default_oeuvre_4.jpg" alt="image default" height="80">
+                                    <?php
+                                }
+						  ?>
+                        </article>
+                    
 						<ul>
 							<li><span class="catElemListe">Titre : </span><?php echo $oeuvre["titre"]?></li>
 							<li><span class="catElemListe">Année : </span><?php echo $oeuvre["dateFinProduction"]?></li>

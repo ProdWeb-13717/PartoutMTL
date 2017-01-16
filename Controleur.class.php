@@ -272,12 +272,19 @@ class Controleur
                 //              http://php.net/manual/fr/features.file-upload.post-method.php
                 
                 if(isset($_FILES['photos'])){                                                 // si il y a une photo
-                    $uploadDirection = './images/';
-                    $uploadPhoto = $uploadDirection . basename($_FILES['photos']['name']);  
-                    move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
-                    /*-- UPDATE photoSoumision TABLE Soumission ---------------------------*/
+                    $uploadDirection = './admin/images/';
+                    
                     $modeleSoumisionUsager = new modeleSoumissionUsager();
-                    $valide = $modeleSoumisionUsager->insererPhotoSoumission($uploadPhoto);                                       
+                    $idSoumission = $modeleSoumisionUsager->obtenirDernier("idSoumission", "Soumissions");
+                    
+                    $nomPhoto = "photoUsager" . $idSoumission . ".jpg";
+                    $uploadPhoto = $uploadDirection . $nomPhoto;
+
+                    move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
+                    
+                    /*-- UPDATE photoSoumision TABLE Soumissions --------------------------*/
+                    $modeleSoumisionUsager = new modeleSoumissionUsager();
+                    $valide = $modeleSoumisionUsager->insererPhotoSoumission($nomPhoto);                                       
                     if(!$valide)
 				    {                                                                         // si non réussi
                         $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
