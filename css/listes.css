@@ -17,18 +17,39 @@
 	margin:0;
 }
 
-#liste span.pageBalise{
-    display: block;
-    margin: 0 auto;
-    margin-top: 0.5em;
-    font-family: 'Muli', sans-serif;
+#secPagination 
+{
+	display:flex;
+	flex-direction:row;
+	justify-content: center;
+	margin: 10px 0;
+}
+
+#secPagination span.pageBalise{
+    display:block;
+	width:2em;
+	font-family: 'Muli', sans-serif;
     font-size: 0.9em;
     letter-spacing: 0.25em;
     color: grey;
+	margin: 0 5px;
+	text-align:center;
 }
 
-#liste span.pageBalise:hover{
+#secPagination span.pageBalise.pageSelect{
     color: black;
+	font-weight:bolder;
+    cursor: pointer;
+	background-color:#C8FDFD;
+	border-radius:50%;
+}
+
+#secPagination span.pageBalise:hover{
+    color: black;
+	font-weight:bolder;
+    cursor: pointer;
+	background-color:#C8FDFD;
+	border-radius:50%;
 }
 
 div.elemListe{
@@ -36,11 +57,7 @@ div.elemListe{
 }
 
 div.elemListe:hover{
-	background-color:#dfefdf;
-}
-
-#liste span.pageBalise:hover{
-    cursor: pointer;
+	background-color:#F0FDFD;
 }
 
 span.catElemListe{
@@ -87,8 +104,7 @@ span.inconnu{
 .elemListe img{
 	height:auto;
 	max-width:10em;
-	border: 2px solid #016737;
-	border-radius:10px 0 10px 0;
+	border: 2px solid #f1f1f1;
 	margin-right :45px;
 	box-shadow: 5px 5px 5px #888888;
 }
@@ -146,7 +162,7 @@ li, ul{
 
 /* Téléphone ----------------------------- */
 @media (max-width: 480px) {
-    #liste span.pageBalise{
+    #secPagination span.pageBalise{
         max-width: 50%;
     }
     
