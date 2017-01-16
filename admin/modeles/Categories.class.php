@@ -43,7 +43,6 @@ class Categories extends TemplateBase
 		try
 		{	
             $stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomCategorie) VALUES(:categorie)");
-            extract($categorie);                                                   // extrait le tableau de variables en paramètre
             $stmt->bindParam(":categorie", $categorie);
 			$stmt->execute();
 			

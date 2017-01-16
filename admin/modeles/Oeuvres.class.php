@@ -208,26 +208,6 @@ class Oeuvres extends TemplateBase
 		}
 	}
 	
-	/*public function completerOeuvre($numInt,$idCat,$idArron)
-	{
-		try
-		{	
-			$stmt = $this->connexion->prepare("UPDATE ". $this->getTable() ." SET idCategorie = :idCat, idArrondissement= :idArron WHERE noInterne = :numInt");
-			$stmt->execute(array(
-			
-				"idCat"					=>$idCat,
-				"idArron"				=>$idArron,
-				"numInt"				=>$numInt
-			
-			));
-			return 1;
-		}
-		catch(Exception $exc)
-		{
-			return 0;
-		}
-	}*/
-	
 	public function inclureArtistesOeuvres($oeuvreJson,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes)
 	{
 
