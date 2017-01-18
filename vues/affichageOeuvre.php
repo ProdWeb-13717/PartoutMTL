@@ -46,32 +46,34 @@
                 {
                 ?>
                 <li>
-                    <?php 
-                    if($auteur["prenomArtiste"] != "")
-                    {
-                        echo $auteur["prenomArtiste"];
-                        
-                        if($auteur["nomArtiste"] != "")
+                    <a href="./index.php?requete=listeOeuvreParAuteurId&idArtiste=<?php echo $auteur["idArtiste"]; ?>">
+                        <?php 
+                        if($auteur["prenomArtiste"] != "")
                         {
-                            echo" ".$auteur["nomArtiste"];
+                            echo $auteur["prenomArtiste"];
+
+                            if($auteur["nomArtiste"] != "")
+                            {
+                                echo" ".$auteur["nomArtiste"];
+                            }
                         }
-                    }
-                    else
-                    {
-                        if($auteur["nomArtiste"] != "")
+                        else
                         {
-                            echo $auteur["nomArtiste"];
+                            if($auteur["nomArtiste"] != "")
+                            {
+                                echo $auteur["nomArtiste"];
+                            }
                         }
-                    }
-                    
-                    if($auteur["collectif"] != "")
-                    {
-                        if($auteur["prenomArtiste"] == "" && $auteur["nomArtiste"] == "")
-                        {	
-                            echo $auteur["collectif"]." (collectif)";
+
+                        if($auteur["collectif"] != "")
+                        {
+                            if($auteur["prenomArtiste"] == "" && $auteur["nomArtiste"] == "")
+                            {	
+                                echo $auteur["collectif"]." (collectif)";
+                            }
                         }
-                    }
-                    ?>
+                        ?>
+                    </a>
                 </li>
                 <?php
                 }

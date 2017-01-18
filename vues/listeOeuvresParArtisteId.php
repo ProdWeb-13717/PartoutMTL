@@ -1,12 +1,16 @@
-﻿<!--Variables pour se retrouver dans le dénombrement des résultats de la variable $data-->
+<!--Variables pour se retrouver dans le dénombrement des résultats de la variable $data-->
 <?php
 $precendent = 0;        // permettra de savoir l'ID de l'oeuvre traité précédemment
-$nbrePage = 1;          // compte le nombre total de pages
+
 $nbreMaxElement = 20;   //nombre maximum de résultats par pages
+
 $elemCourant = 1;       //Rang d'un élément dans un pages
-$elemTotal = 0;         //Nombre total de résultats dans la liste
+
 $tableauAllOeuvres = []; 	//tableau associatif qui contiendra toutes les oeuvres pour ensuite les ordonner en ordre alphabétique
+
 $sansTitreIndex = 1;
+
+$nbrePages = 1;          // compte le nombre total de pages
 
 //On construit le tableau de toutes les oeuvres qu'on mettra en ordre alphabétique après
 foreach($data[0] as $photo)
@@ -98,19 +102,34 @@ ksort($tableauAllOeuvres);
 
 <!--Construire la liste en divisant les résultats en page de 20 résultats-->
 <section id="liste">
-	<h1 id="oeuvres" >Liste des oeuvres</h1> <!-- id pour recherche -->
-	<span class="pageBalise" id="1">
-	<?php
-		if(count($data[2]) <= 20)
-		{
-			echo "Résultats 1 à ".count($data[2]);
-		}
-		else
-		{
-			echo "Résultats 1 à 20";
-		}
-	?>
-	</span>
+	<h1 id="oeuvres" >Liste des oeuvres par
+    <?php
+        $nomTitre = "";
+
+        if($data[2][0]["prenomArtiste"] != "")
+        {
+            $nomTitre = " ".$data[2][0]["prenomArtiste"];
+
+            if($data[2][0]["nomArtiste"] != "")
+            {
+                $nomTitre= $nomTitre." ".$data[2][0]["nomArtiste"];
+            }
+        }
+
+        else if($data[2][0]["nomArtiste"] != "")
+        {
+            $nomTitre = " ".$data[2][0]["nomArtiste"];
+        }
+
+        else if($data[2][0]["collectif"] != "" && ($data[2][0]["prenomArtiste"] == "" && $data[2][0]["nomArtiste"] == ""))
+        {
+            $nomTitre = " ".$data[2][0]["collectif"]." (collectif)";
+        }
+        echo $nomTitre
+        
+    ?>
+    </h1> <!-- id pour recherche -->
+    
 	<div class="pageListe" id="page1">
 	<?php
 		foreach($tableauAllOeuvres as $oeuvre)
@@ -118,7 +137,7 @@ ksort($tableauAllOeuvres);
 			foreach($data[2] as $oeuvreID)
 			{
 				//echo $oeuvreID;
-				if($oeuvre["idOeuvre"] == $oeuvreID)
+				if($oeuvre["idOeuvre"] == $oeuvreID["idOeuvre"])
 				{
 					?>
 						<div class="elemListe">
@@ -131,7 +150,7 @@ ksort($tableauAllOeuvres);
 										}
 										else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
 										{
-											echo "http://galaxy.mobity.net/uploads/148/logo/1399898656.png";
+											echo './admin/images/image_default_oeuvre_4.jpg" alt="image default';
 										}
 									?>
 								">
@@ -155,24 +174,36 @@ ksort($tableauAllOeuvres);
 						</div>
 					<?php
 					
-					$elemTotal++;
 					$elemCourant++;
-					if($elemCourant > $nbreMaxElement)
-					{
-						$nbrePage++;
-						$elemCourant = 1;
-						?>
-							</div>
-							<span class="pageBalise" id="<?php echo $nbrePage;?>">
-							<?php
-								echo"Résultats ".($elemTotal+1)." à ".($elemTotal+$nbreMaxElement);
-							?>
-							</span>
-							<div class="pageListe pageCache" id="<?php echo "page".$nbrePage;?>">
-						<?php	
-					}	
+                    if($elemCourant > $nbreMaxElement)
+                    {
+                        $nbrePages++;
+                        $elemCourant = 1;
+                        ?>
+                            </div>
+                            <div class="pageListe pageCache" id="<?php echo "page".$nbrePages;?>">
+                        <?php	
+                    }
 				}		
 			}
 		}
 	?>
+</section>
+<section id="secPagination">	
+<?php
+    for($i = 1 ; $i <= $nbrePages ; $i++)
+    {	
+        ?>
+            <span id="<?php echo $i;?>" class="pageBalise
+                <?php
+                    if($i == 1)
+                    {
+                        echo " pageSelect";
+                    }
+
+                ?>
+            "> <?php echo $i; ?> </span>
+        <?php
+    }
+?>
 </section>

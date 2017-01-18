@@ -56,6 +56,7 @@ class Controleur
 					array_push($data,$modeleListe->getOeuvresParPhotos());
 					array_push($data,$modeleListe->getOeuvresParAuteur());
 					array_push($data, $modeleListe->getOeuvresParAuteurId($_GET['idArtiste']));
+                    
 					if($data[0] != 0 && $data[1] != 0 && $data[2] != 0)
 					{
 						if(count($data) != 0)
