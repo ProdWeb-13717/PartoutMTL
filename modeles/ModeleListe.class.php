@@ -68,12 +68,14 @@ class ModeleListe extends TemplateBase
 	{
 		try
 		{
-			$stmt = $this->connexion->prepare("SELECT ArtistesOeuvres.idOeuvre
+			$stmt = $this->connexion->prepare("SELECT *
 											   FROM ArtistesOeuvres
+                                               JOIN Artistes
+                                               ON ArtistesOeuvres.idArtiste = Artistes.idArtiste
 											   WHERE ArtistesOeuvres.idArtiste = ".$idArtiste."
 											   ORDER BY ArtistesOeuvres.idOeuvre");
 			$stmt->execute();
-			return $stmt->fetchAll(PDO::FETCH_COLUMN);
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
 		}	
 		catch(Exception $exc)
 		{
