@@ -239,3 +239,26 @@ footer span.footIcon i{
     font-size: 1.75em;
     margin-left: 10px;
 }
+
+/*Page contact
+-------------------------------------------------------------*/
+#contact ul{
+    list-style-type: none;
+}
+
+#contact ul li{
+    font-family: 'Muli', sans-serif;
+    color: grey;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 20%
+}
+
+span.contactInfo{
+    font-family: 'Fjalla One', sans-serif;
+    color: black;
+    margin-left: 10px;
+}
+

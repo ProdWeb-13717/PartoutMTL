@@ -1,6 +1,6 @@
     <footer>
         <div>
-            <a href="">Contactez nous</a>
+            <a href="./index.php?requete=contact">Contactez nous</a>
             <span class="footIcon">
 				<i class="partout partout-instagram"></i>
                 <i class="partout partout-facebook-official"></i>
