@@ -57,34 +57,6 @@ class modeleSoumission extends TemplateBase
 		}
 	}
     
-    /////////////////////////////////   SOUMISSION   ////////////////////////////////////////////
-    /*
-    public function obtenirDerniereSoumission()                                 // récupère toutes les entrées de la dernière soumission???
-    {
-		// function pas fini (test)
-        try
-		{
-            $idDernierOeuvre = $this->obtenirDernierIdOeuvre();
-            $idArrondissement = $this->obtenirArrondissementOeuvre($idDernierOeuvre);
-            $idCategorie = $this->obtenirCategorieOeuvre($idDernierOeuvre);
-            
-            $stmt = $this->connexion->prepare("SELECT titre, titreVariante, nomArrondissement, nomCategorie
-                                               FROM Oeuvres
-                                               JOIN Arrondissements ON Oeuvres.idArrondissement
-                                               JOIN Categories ON Oeuvres.idCategorie
-                                               WHERE idOeuvre = $idDernierOeuvre
-                                               AND Arrondissements.idArrondissement = $idArrondissement
-                                               AND Categories.idCategorie = $idCategorie");
-											   
-            $stmt->execute();
-            return $stmt->fetchAll();
-        }
-		catch(Exception $exc)
-		{
-			return 0;
-		}
-    }*/
-    
     
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      INSERT     //////////////////////////////////////////
@@ -350,35 +322,24 @@ class modeleSoumission extends TemplateBase
         {
             return 0;
         }
-    } 
-    /*
-    public function modifierUrlPhoto($urlPhoto = null)
+    }
+
+    public function modifierOeuvreArtiste($idOeuvre, $idArtiste)
     {
         try
         {  
-            if($urlPhoto == null)                                               // toujours null, demande l'id de la photo
-			{
-				$idPhoto = $this->obtenirDernier("idPhoto", "Photos");          // récupère l'id de la dernière photo
-			}
-              
-            $stmt = $this->connexion->prepare("UPDATE Photos
-                                               SET urlPhoto =  :urlPhoto
-                                               WHERE idPhoto = $idPhoto");
-            extract($param);                                                    // extrait le tableau de variables en paramètre
-            $stmt->execute(
-			array(":urlPhoto" => $idPhoto));
-            
-            return 1;		     
-        }	
+            $stmt = $this->connexion->prepare("UPDATE ArtistesOeuvres
+                                               SET idArtiste = :idArtiste
+                                               WHERE idOeuvre = $idOeuvre");
+            $stmt->execute(array(":idArtiste" => $idArtiste));
+        
+            return 1;
+        }
         catch(Exception $exc)
         {
             return 0;
         }
-    }*/
-    
-    
-    
-    
+    }
     
 }
 

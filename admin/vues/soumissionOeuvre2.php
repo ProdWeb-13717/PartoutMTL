@@ -1,3 +1,6 @@
+<!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres --------------------------------------------->
+
+
 <?php
 	/// *** SECURITE DE LA PAGE *** ///////////////////////////
 	if(!isset($_SESSION['authentifie']))
@@ -7,12 +10,12 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-<!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres --------------------------------------------->
+    <!-- FIN DE PRODUCTION -------------------------------------------------------------------------->
     <article class="espaceHaut10">
         <label for="dateFinProductionOeuvreAjoutAdmin">Fin de production : </label>
         <input type="date" name="dateFinProductionOeuvreAjout" id="dateFinProductionOeuvreAjoutAdmin"
             <?php  
-                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                         // si "modification"
                 {
                     foreach($data as $oeuvre)
                     {

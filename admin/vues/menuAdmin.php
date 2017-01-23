@@ -11,7 +11,6 @@
 	$onglets = 
 	[
 		'oeuvresAdmin' => "",
-        'artistesAdmin'=> "",
         'affichage' => "",
 		'importation'  => "", 
         'permissionAdmin' => ""
@@ -22,7 +21,6 @@
 <nav id="menuAdmin" class="menu">
     <ul class="row menu">
         <li class="<?php echo $onglets['oeuvresAdmin']; ?>" ><a href="index.php?requete=oeuvresAdmin">OEUVRES</a></li>
-        <li class="<?php echo $onglets['artistesAdmin']; ?>" ><a href="index.php?requete=artistesAdmin">ARTISTES</a></li>
         <li class="<?php echo $onglets['affichage']; ?>" ><a href="index.php?requete=affichage">AFFICHAGE</a></li>
         <li class="<?php echo $onglets['importation']; ?>" ><a href="index.php?requete=importation">IMPORTATION</a></li> 
 		<?php

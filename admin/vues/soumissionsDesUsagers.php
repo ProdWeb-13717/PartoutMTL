@@ -25,14 +25,14 @@
 				            <?php 
 				                if($soumission["photoSoumission"] != null)
 				                {	?>
-				                	<img src="./images/<?php echo $soumission["photoSoumission"]; ?>" height="80" width="115"/>
+				                	<img src="../images/<?php echo $soumission["photoSoumission"]; ?>" height="80" width="115"/>
 				                	<?php
 				                }
                                 
 				                else if($soumission["photoSoumission"] == null || $soumission["photoSoumission"] == "")
 				                {	
 				                	?>
-				                	<img src="./images/image_default_oeuvre_4.jpg" alt="image default" height="80">
+				                	<img src="../images/image_default_oeuvre_4.jpg" alt="image default" height="80">
 				                	<?php
 				                }
 				            ?>
