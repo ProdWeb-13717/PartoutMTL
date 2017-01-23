@@ -141,14 +141,18 @@ li, ul{
 	min-height:10em;
 	margin:0 auto;
 	padding:1em;
-	display:flex;
+	/*display:flex;
 	flex-direction: row;
 	justify-content: space-around;
-	align-items:center;
+	align-items:center;*/
+    display: block;
+    text-align: center;
 }
 
 #sectionImage img{
 	max-height: 10em;
+    max-width: 20%;
+    display: inline;
 }
 
 #sectionImage span{
