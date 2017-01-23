@@ -1,4 +1,4 @@
-<!-- DÉBUT DE LA PAGE SOUMISSION D'UNE OEUVRE, TABLE Oeuvres ---------------------------------------->
+<!-- PAGE SOUMISSION D'UNE OEUVRE USAGER, TABLE Soumissions ----------------------------------------->
 
 <section class="column centre soumissionUsager">
     <h1 class="texteCentre">SUGGÉRER UNE OEUVRE</h1>
@@ -21,7 +21,7 @@
         <select name="arrondissementOeuvreSoumission" id="arrondissmentOeuvreSoumissionUsager">
 			<option value="#">Options</option>
             <?php
-			/*-- pour toutes les datas récupérées de la table Arrondissements ------------------------------*/
+			/*-- RÉCUPÈRE LES DONNÉES DE LA TABLE Arrondissements -----------------------------------*/
 			foreach($data as $arrondissement)                                       
 			{
 				?>
@@ -40,12 +40,13 @@
         <label for="descriptionOeuvreSoumissionUsager">Description : </label>
         <textarea rows="4" style="margin-bottom: 10px; width: 337px;" name="descriptionOeuvreSoumission" id="descriptionOeuvreSoumissionUsager"></textarea>
         
-        <!-- 
-            sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire 
+        <!-- SOUMISSION D'UNE PHOTO (JPEG SEULEMENT) ------------------------------------------------->
+         
+        <!-- sources :  https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire 
                         http://blog.teamtreehouse.com/uploading-files-ajax  
                         https://developer.mozilla.org/fr/docs/Web/API/FormData
-                        http://php.net/manual/fr/features.file-upload.post-method.php
-        -->
+                        http://php.net/manual/fr/features.file-upload.post-method.php ---------------->
+        
         <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
         <label for="photoOeuvreSoumissionUsager">Photo (.jpg) : </label>
         <input type="file" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager" accept="image/jpeg"/>

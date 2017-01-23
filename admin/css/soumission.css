@@ -54,6 +54,11 @@
     line-height: 1.5em;
 }
 
+.imgAfficheSoumissionsAdmin{
+    padding-top: 15px;
+    padding-bottom: 25px;
+}
+
 .afficheSoumissionsAdmin article{
     margin-top: 50px;
     
@@ -106,6 +111,12 @@
 -------------------------------------------------------------*/
 
 #boutonModification{
+    margin-bottom: 20px;
+}
+
+.suppressionPhoto{
+    width: 500px;
+    margin-top: 10px;
     margin-bottom: 20px;
 }
 

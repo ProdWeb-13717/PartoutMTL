@@ -115,13 +115,14 @@ ksort($tableauAllOeuvres);
                                 if($oeuvre["urlPhoto"] != null)
                                 {	
                                     ?>
-                                    <img src="./admin/images/<?php echo $oeuvre["urlPhoto"]; ?>" height="80" width="115"/>
+                                    <img src="./images/<?php echo $oeuvre["urlPhoto"]; ?>" height="80" width="115"/>
+                                    
                                     <?php
                                 }
                                 else if($oeuvre["urlPhoto"] == null || $oeuvre["urlPhoto"] == "")
                                 {	
                                     ?>
-                                    <img src="./admin/images/image_default_oeuvre_4.jpg" alt="image default" height="80">
+                                    <img src="./images/image_default_oeuvre_4.jpg" alt="image default" height="80">
                                     <?php
                                 }
 						  ?>

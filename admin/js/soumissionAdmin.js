@@ -124,8 +124,33 @@
                         });
                         
                         var fdDonnees = new FormData();
-                        fdDonnees.append("data", data);  
+                        fdDonnees.append("data", data);
                         
+                        /*-- SUPPRESSION DE PHOTOS ----------------------------------------------------*/
+                        var photosExistantes = document.querySelectorAll("[name=supprimerPhotoCheckbox]");
+                        
+                        for (var i = 0; i < photosExistantes.length; i++)
+                        {
+                            var photoASupprimer = photosExistantes[i];
+                            var tableauDePhotosASupprimer = [];
+                            
+                            if(photoASupprimer.checked == true)
+                            {
+                                console.log(photoASupprimer.value); 
+                                
+                                //push
+                                //fdDonnees.append('photoASupprimer', photoASupprimer.value);
+                               
+                                // ??? comment append un tableau ???
+                                
+                                //fdDonnees.append('photoASupprimer' + [i], photoASupprimer.value); 
+                                //fdDonnees.append('photoASupprimer', photoASupprimer[i], photoASupprimer.value); 
+                            }
+                        }
+                        
+                        //fdDonnees.append('photoASupprimer', JSON.stringify);
+                    
+                        /*-- AJOUT DE PHOTOS ----------------------------------------------------------*/
                         var valeurPhoto = document.getElementById("nouvellePhotoOeuvreAdmin");
                         var photos      = valeurPhoto.files;
                         
@@ -137,7 +162,9 @@
                                 fdDonnees.append('photos', photo, photo.name);                  // ajoute la photo à la requête
                             }
                         }
-      
+                        
+                        console.log(fdDonnees);
+                        
                         xhr.send(fdDonnees);
                         //xhr.send(data);                                                       // envoie la requête et les datas en POST
                     }
@@ -196,7 +223,15 @@
         var valeurArrondissement    = document.querySelector("[name=arrondissementOeuvreAjout]").value;
         
         /*-- RÉCUPÈRE L'ENTRÉE DE LA TABLE PHOTOS -------------------------------------*/
-        var valeurUrlPhoto          = document.querySelector("[name=urlPhotoOeuvreAjout]").value;
+        if(document.querySelector("[name=accepterPhotoSoumiseCheckbox]").checked == true){
+            var valeurUrlPhoto      = document.querySelector("[name=urlPhotoOeuvreAjout]").value;
+        }
+        else{
+            var valeurUrlPhoto      = "";
+        }
+        
+        /*-- RÉCUPÈRE L'ID DE LA SOUMISSION VENANT D'UN USAGER ------------------------*/
+        var valeurIdSoumission      = document.querySelector("[name=idSoumissionUsager]").value;
                 
         /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/
         var data = JSON.stringify({idOeuvre          : valeurId,
@@ -220,8 +255,9 @@
                                    latitude          : valeurLatitude,
                                    longitude         : valeurLongitude,
                                    urlPhoto          : valeurUrlPhoto,
-                                   description       : valeurDescription});
-        console.log(data);
+                                   description       : valeurDescription,
+                                   idSoumissionUsager: valeurIdSoumission});
+        //console.log(data);
         return data;
     }
     

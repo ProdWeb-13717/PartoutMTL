@@ -113,6 +113,12 @@ CREATE TABLE IF NOT EXISTS Carroussel(
     PRIMARY KEY (idCaroussel)
 );
 
+CREATE TABLE IF NOT EXISTS CourrielsUsagers(
+    idCourrielUsager int AUTO_INCREMENT NOT NULL,
+	courrielUsager VARCHAR(200) NOT NULL,
+    PRIMARY KEY (idCourrielUsager)
+);
+
 
 INSERT into Categories (nomCategorie) VALUES 
 			("Sculpture"),
