@@ -4,6 +4,8 @@
     - Entête
     - Carousel
     - Accueil
+    - Pied de page
+    - Page contact
 -------------------------------------------------------------*/
 
 
@@ -127,7 +129,7 @@
     margin-bottom: 100px;
 }
 
-#carousel span{
+#carousel a{
 	color :white;
 	font-size:1.2em;
 	position:absolute;
