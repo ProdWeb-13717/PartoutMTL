@@ -53,7 +53,7 @@
                 divCarousel.style.backgroundImage = 'url(./images/'+toutURL[compteurCar]+')';
 
                 document.getElementById("descrCar").href = toutLien[compteurCar];
-                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+" "+toutDescr[compteurCar];
+                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+"<br/>"+toutDescr[compteurCar];
                 
                 compteurCar ++;
             }
@@ -63,7 +63,7 @@
                 divCarousel.style.backgroundImage = 'url(./images/'+toutURL[compteurCar]+')';
 
                 document.getElementById("descrCar").href = toutLien[compteurCar];
-                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+" "+toutDescr[compteurCar];
+                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+"<br/>"+toutDescr[compteurCar];
                 
                 compteurCar  = 0;
             }  

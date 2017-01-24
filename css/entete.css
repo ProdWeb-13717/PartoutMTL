@@ -54,6 +54,13 @@
   }
 }
 
+@media (max-width: 480px) {
+    .ligne{
+        width: 0%;
+    }
+}
+
+
 /* Fade in logo
 -------------------------------------------------------------*/
 
@@ -163,7 +170,7 @@ src fade in : http://stackoverflow.com/questions/11679567/using-css-for-fade-in-
 @media (max-width: 800px) {
     
     .entete{
-        height: 180px;
+        height: 200px;
     }
     
     .menu{
@@ -174,120 +181,3 @@ src fade in : http://stackoverflow.com/questions/11679567/using-css-for-fade-in-
         flex-flow: column;
     }
 }
-
-
-/* Téléphone ----------------------------- */
-@media (max-width: 480px) {
-
-   
-}
-
-
-//////////////////////////////////////////////////////////////
-
-/*
-#blanch{
-    color : white;
-}
-*/
-
-/*
-#menuUser{
-    margin-top : -39px;
-}
-
-#menuUser ul{
-    background-color : #4d4d4d;
-    padding-top : 50px;
-}
-
-#menuUser li{
-    display : inline-block;
-    list-style-type : none;
-    margin-top : 30px;
-    margin-right : 10px;
-    width : 120px;
-    padding-top : 15px;
-    text-align:center;
-    background-color : white;
-    //background-color : #547968;
-    //border : solid black 2px;
-}
-#menuUser #liRecherche{
-    width : 150px;
-}
-
-#menuUser a{
-    text-decoration: none;
-    color : black; 
-}
-
-#menuUser a:hover{
-    color : #009999;
-}
-
-#menuUser .actif { 
-    display : inline-block;
-    padding-top : 40px;
-    color: black;
-    pointer-events:none;
-    //border : solid black 1px;
-}
-
-#titreUser{
-    position: absolute;
-    color : white;
-    top: 97px;
-	font-style: italic;
-	font-weight:normal;
-    margin-left : 150px;
-    letter-spacing: 4px;   
-}
-
-#menuAccueil{
-    margin-top: -39px;
-}
-*/
-
-/*#menuAcceuil ul{*/
-
-
-
-
-/*
-#menuAccueil li{
-    display: inline-block;
-    list-style-type: none;
-    margin-top: 30px;
-    margin-right : 10px;
-    width: 100px;
-    padding-top: 15px;
-    text-align: left;
-    /*background-color: white;*/
-}
-
-/*
-#menuAccueil a{
-    text-decoration: none;
-    /*color: #4d4d4d; */
-    /*color: white; 
-}
-*/
-/*
-#menuAccueil a:hover{
-    color: #009999;
-}
-
-#menuAccueil .actif { 
-    display: inline-block;
-    padding-top: 40px;
-    color: black;
-    pointer-events: none;
-}
-*/
-
-
-
-
-
-

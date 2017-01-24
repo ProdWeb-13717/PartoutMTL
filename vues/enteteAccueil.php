@@ -8,7 +8,7 @@
         </section>
         <div class="ligne ligne_glisse"></div>
         <nav id="menuAcceuil" class='entete'> 
-            <ul class="row menu">   
+            <ul class="row menu flex-row">   
                 <li><a href="index.php?requete=acceuil">ACCUEIL</a></li>
                 <li><a href="index.php?requete=listeArtistes">ARTISTES</a></li>
                 <li><a href="index.php?requete=listeOeuvres">OEUVRES</a></li>

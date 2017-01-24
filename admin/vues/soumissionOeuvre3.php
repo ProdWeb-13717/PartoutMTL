@@ -139,16 +139,18 @@
         /*-- AJOUT D'UNE PHOTO SOUMISE PAR UN USAGER -----------------------------------------------*/
         if($_GET['requete'] == "soumission" && isset($_GET['idSoumissionUsager']))
         {
+            if($data["photoSoumission"] != "" || $data["photoSoumission"] != null){
             ?> 
-            <article>
-                <input type="hidden" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin" value="<?php echo $data['photoSoumission']; ?>"/>
-                <img src="../images/<?php echo $data["photoSoumission"]; ?>" height="150" width="200" class="imgAfficheSoumissionsAdmin"/>
-                <article class="flex-row-left">
-                    <label for="accepterPhotoSoumise">Accepter la photo soumise</label>
-                    <input type="checkbox" name="accepterPhotoSoumiseCheckbox" id="accepterPhotoSoumise" value="photoSoumise" checked>
-                </article>
-            </article>  
+                <article>
+                    <input type="hidden" name="urlPhotoOeuvreAjout" id="urlPhotoOeuvreAjoutAdmin" value="<?php echo $data['photoSoumission']; ?>"/>
+                    <img src="../images/<?php echo $data["photoSoumission"]; ?>" height="150" width="200" class="imgAfficheSoumissionsAdmin"/>
+                    <article class="flex-row-left">
+                        <label for="accepterPhotoSoumise">Accepter la photo soumise</label>
+                        <input type="checkbox" name="accepterPhotoSoumiseCheckbox" id="accepterPhotoSoumise" value="photoSoumise" checked>
+                    </article>
+                </article>  
             <?php
+            }
         }
 
         /*-- FORMULAIRE D'AJOUT ---------------------------------------------------------------------*/

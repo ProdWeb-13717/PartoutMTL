@@ -1,7 +1,9 @@
 <!-- PAGE SOUMISSION D'UNE OEUVRE USAGER, TABLE Soumissions ----------------------------------------->
 
+
 <section class="column centre soumissionUsager">
-    <h1 class="texteCentre">SUGGÉRER UNE OEUVRE</h1>
+    
+    <h1 class="">Suggérer une oeuvre</h1>
     
     <section class="soumissionUsagerFormulaire" >
         
@@ -51,7 +53,7 @@
         <label for="photoOeuvreSoumissionUsager">Photo (.jpg) : </label>
         <input type="file" name="photoOeuvreSoumission" id="photoOeuvreSoumissionUsager" accept="image/jpeg"/>
     
-        <label for="courrielOeuvreSoumissionUsager"><span class="couleurErreurSoumission">Courriel : </span></label>
+        <label for="courrielOeuvreSoumissionUsager"><span class="couleurErreurSoumission">Votre courriel : </span></label>
         <input type="text" name="courrielOeuvreSoumission" id="courrielOeuvreSoumissionUsager"/>
 
         <span id="msgErreurSoumision"></span>
