@@ -36,8 +36,6 @@
         <!-- Fort Awesome ------------->
         <script src="https://use.fortawesome.com/93986164.js"></script>
 		
-		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
-		
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->
 	</head>
