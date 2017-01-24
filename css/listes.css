@@ -135,29 +135,37 @@ li, ul{
 }
 
 #sectionImage{
-	border:solid 5px #009999;
-	border-radius: 25px;
 	max-width:50%;
-	min-height:10em;
+    min-height: 10em;
 	margin:0 auto;
-	padding:1em;
-	/*display:flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items:center;*/
-    display: block;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center
+}
+
+#sectionImage article{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
 }
 
 #sectionImage img{
 	max-height: 10em;
     max-width: 20%;
-    display: inline;
+    padding: 0 5px;
 }
 
 #sectionImage span{
 	color:#b5b5b5;
 	font-style:italic;
+}
+
+@media (max-width: 800px) {
+    #sectionImage{
+        max-width:90%;
+    }
 }
 
 
