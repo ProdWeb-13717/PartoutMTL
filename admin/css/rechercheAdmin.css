@@ -7,12 +7,11 @@
 
 #barRecherche{
     position: absolute;
+    width: 461px;
     right: 0px;
     margin-right: 22px;
 	color: #4d4d4d;
 }
-
-
 
 .inputRecherche{
     width: 300px;
@@ -24,9 +23,8 @@
     }
     
     #barRecherche{
-        margin-right: 0px;
-    }
-    
+        margin-right: -110px;
+    }  
 }
 
 #msgResultat{

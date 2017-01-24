@@ -22,7 +22,7 @@
 	display:flex;
 	flex-direction:row;
 	justify-content: center;
-	margin: 10px 0;
+	margin: 20px 0px 150px 0px;
 }
 
 #secPagination span.pageBalise{
@@ -141,10 +141,6 @@ li, ul{
 	min-height:10em;
 	margin:0 auto;
 	padding:1em;
-	/*display:flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items:center;*/
     display: block;
     text-align: center;
 }
@@ -160,28 +156,40 @@ li, ul{
 	font-style:italic;
 }
 
+.photoOeuvre{ 
+    margin-right: 0px;
+}
+
+.informationOeuvre{
+    width: 100%;
+    //border: solid red 1px;
+}
 
 /* Media queries
 -------------------------------------------------------------*/
 
-/* Téléphone ----------------------------- */
-@media (max-width: 480px) {
-    #secPagination span.pageBalise{
-        max-width: 50%;
-    }
-    
+@media (max-width: 600px) {    
     .elemListe a{
-        flex-direction: column;
-    }
-    
-    .elemListe ul{
-        max-width: 50%;
+        padding-left: 0px;
+        width: 400px;
     }
     
     .elemListe img{
-        max-width:8em;
-        margin: 0 0 30px 0;
+	   max-width:20em;
+
+}
+
+/* Téléphone ----------------------------- */
+@media (max-width: 480px) {    
+    .elemListe a{
+        padding-left: 0px;
+        width: 400px;
     }
+    
+    .elemListe img{
+	   max-width:15em;
+
+}
     
 }
 

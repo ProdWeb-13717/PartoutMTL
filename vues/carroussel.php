@@ -39,7 +39,7 @@
 			<input type = "hidden" id="toutTitre" value = "<?php echo $titreCar?>"/>
 			<input type = "hidden" id="toutDescr" value = "<?php echo $descrCar?>"/>
 			<input type = "hidden" id="toutLien" value = "<?php echo $urlCar?>"/>
-			<form class="rechercheAcceuil">
+			<form class="rechercheAcceuil recherchePageAccueil">
 				<input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
 				<input type="button" id="btnRecherche" value="Rechercher"/>
 			</form>

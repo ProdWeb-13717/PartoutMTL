@@ -107,10 +107,13 @@ ksort($tableauAllOeuvres);
 		foreach($tableauAllOeuvres as $oeuvre)
 		{
 			?>
-				<div class="elemListe">
-					<a href="./index.php?requete=afficheOeuvre&idOeuvre=<?php echo $oeuvre["idOeuvre"]?>">
-                        
+				<!--div class="elemListe"-->
+                    
+                <div class="elemListe flex-row-left-user">
+					<!-- PHOTOS DES OEUVRES --------------------------------------------------------->
+					
                         <article class="photoOeuvre">
+                            <a href="./index.php?requete=afficheOeuvre&idOeuvre=<?php echo $oeuvre["idOeuvre"]?>">
                             <?php 
                                 if($oeuvre["urlPhoto"] != null)
                                 {	
@@ -125,9 +128,10 @@ ksort($tableauAllOeuvres);
                                     <img src="./images/image_default_oeuvre_4.jpg" alt="image default" height="80">
                                     <?php
                                 }
-						  ?>
+                            ?>
                         </article>
-                    
+                            
+                        <article class="informationOeuvre">
 						<ul>
 							<li><span class="catElemListe">Titre : </span><?php echo $oeuvre["titre"]?></li>
 							<li><span class="catElemListe">Année : </span><?php echo $oeuvre["dateFinProduction"]?></li>
@@ -144,6 +148,7 @@ ksort($tableauAllOeuvres);
 								</ul>
 							</li>
 						</ul>
+                        </article>
 					</a>
 				</div>
 			<?php

@@ -15,8 +15,6 @@ var urlrecherche = window.location.toString(); //prendre URL
         var oeuvres = document.getElementById("oeuvres");                                   // prendre le titre de vue 'liste oeuvres' dans la recherche simple sur les oeuvres
         var artistes = document.getElementById("artistes");                                 // prendre le titre de vue 'liste artistes' dans la recherche simple sur les artistes
         var acceuil = document.getElementById("carousel");                                  // prendre la vue 'carousel' dans la recherche simple pour afficher la resultat de recherche pour la page d'accueil
-        var msgResultat = document.getElementById("msgResultat");                           // la balise pour afficher un message pour la résultat de recherche
-        var msg="";
         
         if(btnRecherche || motRecherche)
         { // la recherche simple
@@ -89,27 +87,17 @@ var urlrecherche = window.location.toString(); //prendre URL
                     
                     params = "requete=rechercheOeuvreAdmin&valRecherche=" + txtRecherche;
                     xhr.open("GET", urlrecherche+"?"+params, true);
-                    
-                    msg ='dans la liste des oeuvres';
                 }
                 //2ème étape - spécifier la fonction de callback
                 xhr.addEventListener("readystatechange", function()
                                     {
                     
-                    
                     if(xhr.readyState === 4)
                     {
-                        
                         if(xhr.status === 200)
                         {
                             //les données ont été reçues
-                            
                             document.querySelector("body").innerHTML = xhr.responseText;
-                            if(msgResultat.value!="")
-                            {
-                                msgResultat.innerHTML ="";
-                            }
-                            msgResultat.innerHTML ='Le résultat de la recherche '+msg+' pour "'+txtRecherche+' ":';
                             Recherche();
                             
                         }
