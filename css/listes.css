@@ -135,10 +135,8 @@ li, ul{
 }
 
 #sectionImage{
-	border:solid 5px #009999;
-	border-radius: 25px;
 	max-width:50%;
-	min-height:10em;
+    min-height: 10em;
 	margin:0 auto;
 	padding:1em;
     display: block;
@@ -148,7 +146,7 @@ li, ul{
 #sectionImage img{
 	max-height: 10em;
     max-width: 20%;
-    display: inline;
+    padding: 0 5px;
 }
 
 #sectionImage span{
@@ -165,6 +163,7 @@ li, ul{
     //border: solid red 1px;
 }
 
+
 /* Media queries
 -------------------------------------------------------------*/
 
@@ -176,7 +175,7 @@ li, ul{
     
     .elemListe img{
 	   max-width:20em;
-
+    }
 }
 
 /* Téléphone ----------------------------- */
@@ -188,8 +187,7 @@ li, ul{
     
     .elemListe img{
 	   max-width:15em;
-
-}
+    }
     
 }
 

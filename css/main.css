@@ -219,8 +219,14 @@
         width: 200px;
     }
     
+    
+}
+
+@media (max-width: 480px) {
+
     .recherchePageAccueil{
-        margin-left: -200px;
+        margin-left: -150px;
+
     }
 }
 

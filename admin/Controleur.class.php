@@ -386,25 +386,25 @@ class Controleur
                 case 'importation':
 					$_SESSION['ongletActif'] = 'importation';
 					$this->afficherEnteteAdmin();
-					$misJourData = $this->obtenirMiseAJour();
-					$this->afficheImportation($misJourData);
+					$misJourData = $this->obtenirMiseAJour();														// Obtienne la liste du dernières mis à jours
+					$this->afficheImportation($misJourData);														// Affiche la liste du dernières mis à jours
 					break;
 					
 					
 				case 'importationok':
 					$this->afficherEnteteAdmin();
-					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-					$novData = $this->importation($publicJson,"importationBD");//traiter donnes avec l'action importation
-					$this-> enregistrerImportation($novData);
-					$this->afficheImportationOK($novData);                                                   
+					$publicJson = $this->obtenirJSON();																//Obtiene le string JSON du site des donnés publiques
+					$novData = $this->importation($publicJson,"importationBD");										//Appele le module importation
+					$this-> enregistrerImportation($novData);														//Garde qui a fait l'importation sur la table mis a jour
+					$this->afficheImportationOK($novData);                                                   		//Montre le résultat d'importation
 					break;   
                     
 
 				case 'verification':
 					$this->afficherEnteteAdmin();
-					$publicJson = $this->obtenirJSON();//cet variable contienne les donnes en format JSON
-					$novData = $this->importation($publicJson,"verification");//traiter donnes avec l'action importation
-					$this->afficheVerification($novData);
+					$publicJson = $this->obtenirJSON();																//cet variable contienne les donnes en format JSON
+					$novData = $this->importation($publicJson,"verification");										//Appele le module importation
+					$this->afficheVerification($novData);															//Montre le résultat de verification
 					break;
 				
 					
@@ -680,44 +680,44 @@ class Controleur
     
     /*-- IMPORTATION ----------------------------------------------------------------------*/
     
-	private function afficheImportation($data)
+	private function afficheImportation($data)																			//Montre les vues de l'action importation
 	{
 		$this->afficheVue("afficheImportation");
 		$this->afficheVue("historiqueBD",$data);
         $this->afficheVue("footer"); 
 	}	
 
-	private function afficheImportationOK($data)
+	private function afficheImportationOK($data)																		//Montre les vues de l'action importation OK
 	{
 		$this->afficheVue("afficheImportationOK",$data);
 		$this->afficheVue("footer");
 	}
 	
-	private function afficheVerification($data)
+	private function afficheVerification($data)																			//Montre les vues de l'action verification
 	{
 		$this->afficheVue("afficheVerification",$data);
         $this->afficheVue("footer"); 
 	}
 	
-	private function obtenirJSON()
+	private function obtenirJSON()																						//Module pour obtenir le JSON
 	{
 		$oRemote = new Donnesremote();
 		return $oRemote->getpublicJSON();
 	}
 	
-	private function obtenirMiseAJour()
+	private function obtenirMiseAJour()																					
 	{
 		$oMisaJour = new MiseaJour();
-		return $oMisaJour->obtenirXenregistrement(10,"MiseAJours","idMiseAJour");
+		return $oMisaJour->obtenirXenregistrement(10,"MiseAJours","idMiseAJour");										//Module pour obtenir les 10 dernières rangées de la table mise jour
 	}
 	
 	private function importation($jSon,$action)
 	{
 		$oImportation = new Importation();
-		return $oImportation->traiterDonnees($jSon,$action);
+		return $oImportation->traiterDonnees($jSon,$action);															//Traitement de donnes en comparisant contre le JSON
 	}
 	    
-    private function enregistrerImportation($donnes)
+    private function enregistrerImportation($donnes)																	//Enregistre qui a fait la dernière mis a jour
 	{
 		$oMisaJour = new MiseaJour();
 		$oMisaJour->enregistrement($donnes);

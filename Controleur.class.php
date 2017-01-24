@@ -122,6 +122,7 @@ class Controleur
 						if(count($data) != 0)
 						{
 							$this->afficheVue("affichageOeuvre",$data);
+                            $this->afficheVue("footer");
 						}
 						else
 						{
