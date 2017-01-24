@@ -31,38 +31,6 @@ class Controleur
 					$this->accueil();  	
 					break;	
 
-                
-                /////////////////////////////////////////////////////////////////////////////////////
-				/////////////////////////////////    ARTISTES    ////////////////////////////////////
-				/////////////////////////////////////////////////////////////////////////////////////
-				
-				
-				//Affichage de la liste de tous les artistes	
-				case 'artistesAdmin':
-					$data = []; // initialisation de $data
-					$_SESSION['ongletActif'] = 'oeuvresAdmin';
-					$this->afficherEnteteAdmin();
-					$this->afficheVue("barRechercheAdmin");
-					//$this->afficheVue("lienHautDePage");  **********************???????????????????? 
-					$modeleListe = new ModeleListe();
-					$data = $modeleListe->getArtisteTout();
-					$this->afficheVue("listeArtistes",$data);
-					$this->afficheVue("footer");
-					break;
-				
-				case 'rechercheArtistesAdmin': 
-					if(isset($_GET['valRecherche']))
-					{
-						$data = []; // initialisation de $data
-						$this->afficherEnteteAdmin();
-						$modeleListe = new RechercheAdmin();
-						$data = $modeleListe->rechercheArtisteTout($_GET['valRecherche']);
-						$this->afficheVue("barRechercheAdmin");
-						$this->afficheVue("listeArtistes",$data);
-					}
-					break;
-                
-                
             
 				/////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////    OEUVRES    ////////////////////////////////////

@@ -93,31 +93,10 @@ var urlrecherche = window.location.toString(); //prendre URL
                     
                     msg ='dans la liste des oeuvres';
                 }
-                else if(categorieDeRecherche=="artistes"){
-                    
-                    console.log("categorieDeRecherche : "+categorieDeRecherche)
-                    
-                    params = "requete=rechercheArtistesAdmin&valRecherche=" + txtRecherche;
-                    xhr.open("GET", urlrecherche+"?"+params, true);
-                    
-                    msg ='dans la liste des aristes';
-                }
-                else if(categorieDeRecherche=="acceuil"){
-                    
-                    console.log("categorieDeRecherche : "+categorieDeRecherche)
-                    
-                    params = "requete=rechercheAccueil&valRecherche=" + txtRecherche;
-                    xhr.open("GET", urlrecherche+"?"+params, true);
-                    
-                    msg ='dans les listes des artistes et des oeuvres';
-                }
-                
                 //2ème étape - spécifier la fonction de callback
                 xhr.addEventListener("readystatechange", function()
                                     {
                     
-                    //var imgload = $("#imgload");
-                    //imgload.show();
                     
                     if(xhr.readyState === 4)
                     {
