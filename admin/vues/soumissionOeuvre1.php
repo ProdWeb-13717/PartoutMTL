@@ -10,7 +10,7 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-
+<!-- DIVISION GLOBALE ------------------------------------------------------------------------------>
 <div class="soumissionAdmin marginDivPrincipale adminTitre">
     
     <!-- VÉRIFIE L'URL, LE FORMULAIRE EST UTILISÉ POUR L'AJOUT ET LA MODIFICATION D'OEUVRE --------->
@@ -19,14 +19,15 @@
         {
            echo "<h1>MODIFIER UNE OEUVRE</h1>";
         }
-        else                                                                                                    // sinon
+        else                                                                                                    // si "ajout"
         {
             echo "<h1>AJOUTER UNE OEUVRE</h1>";
         }
     ?>
     
-    <!-- SECTION OEUVRE ---------------------------------------------------------------------------->
+    <!-- SECTION DU FORMULAIRE --------------------------------------------------------------------->
     <section class="flex-column-left">
+        <!-- SECTION OEUVRE ------------------------------------------------------------------------>
         <h3>OEUVRE</h3>
         
         <!-- ID ------------------------------------------------------------------------------------>

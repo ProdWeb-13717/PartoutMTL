@@ -7,9 +7,9 @@
     
     function Recherche(){ 
         
-        var btnRecherche = document.getElementById("btnRecherche");                         //bouton de submit dans la recherche simple
-        var btnRechercheAvance = document.getElementById("btnRechercheAvance");             //bouton de submit dans la recherche avancé
-        var motRecherche = document.getElementById("motRecherche");                         //le mot recherché 
+        var btnRecherche = document.getElementById("btnRecherche");                         // bouton de submit dans la recherche simple
+        var btnRechercheAvance = document.getElementById("btnRechercheAvance");             // bouton de submit dans la recherche avancé
+        var motRecherche = document.getElementById("motRecherche");                         // le mot recherché 
         var categorieRecherche = document.getElementById("categorieRecherche");             // la balise select de catégorie dans la recherche avancé
         var souscategorieRecherche = document.getElementById("souscategorieRecherche");     // la balise select de sou-catégorie dans la recherche avancé
         var labelSouCategorie = document.getElementById("labelSouCategorie");         		// la balise label pour sou-catégorie dans la recherche avancé

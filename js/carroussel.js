@@ -47,7 +47,8 @@
             if(((compteurCar + 1)%taille) != 0)
             {
                 console.log(compteurCar +" on monte");
-                divCarousel.style.backgroundImage = 'url('+toutURL[compteurCar]+')';
+                divCarousel.style.backgroundImage = 'url(./images/'+toutURL[compteurCar]+')';
+                //divCarousel.style.backgroundImage = 'url('+toutURL[compteurCar]+')';
                 
                 document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+" "+toutDescr[compteurCar];
                 
@@ -56,7 +57,8 @@
             else if(((compteurCar + 1)%taille) == 0)
             {
                 console.log(compteurCar +" on recommence");
-                divCarousel.style.backgroundImage = 'url('+toutURL[compteurCar]+')';
+                divCarousel.style.backgroundImage = 'url(./images/'+toutURL[compteurCar]+')';
+                //divCarousel.style.backgroundImage = 'url('+toutURL[compteurCar]+')';
                 
                 document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+" "+toutDescr[compteurCar];
                 

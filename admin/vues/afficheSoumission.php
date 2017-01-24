@@ -1,3 +1,6 @@
+<!-- AFFICHE LES DÉTAILS DE LA SOUMISSION POUR CONFIRMER SES ENTRÉES -------------------------------->
+
+
 <?php
 	/// *** SECURITE DE LA PAGE *** ///////////////////////////
 	if(!isset($_SESSION['authentifie']))
@@ -7,10 +10,10 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-<!-- AFFICHE LES DÉTAILS DE LA SOUMISSION POUR CONFIRMER SES ENTRÉES -------------------------------->
-
 
 <div class="afficheSoumissionsAdmin adminTitre">    
+    
+    <!-- VÉRIFIE L'URL, LA VALIDATION EST UTILISÉ POUR L'AJOUT ET LA MODIFICATION D'OEUVRE --------->
     <?php
         if($_GET['requete'] == "updateModification")
         {
@@ -25,7 +28,7 @@
     <section class="flex-column-left">
         <h3>DÉTAILS</h3>
         <ul>
-            <li>                        <span  class="typoValeurAdmin"><?php 
+            <li><!--Image-->            <span  class="typoValeurAdmin"><?php 
                                             if(isset($data['urlPhoto']) && $data['urlPhoto'] != "")
                                             {
                                                 ?> 

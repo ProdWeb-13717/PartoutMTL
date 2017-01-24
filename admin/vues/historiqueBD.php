@@ -8,8 +8,6 @@
 ?>
 
 
-<!-- PAGE GESTION AJOUTER UNE CATÉGORIE, TABLE Categories ------------------------------------------->
-
 <div class="marginDivPrincipale">
 
 	<section class="categorie adminTitre">
@@ -23,28 +21,27 @@
 				}
 				else
 				{
-			?>	
+                    ?>	
 					<table id="tablehistorique">
-					<tr>
-						<th class="tetetableau">Date et temps</th>
-						<th class="tetetableau">Total Oeuvres</th>
-						<th class="tetetableau">Administrateur</th>
-					</tr>
-				<?php
+                        <tr>
+                            <th class="tetetableau">Date et temps</th>
+                            <th class="tetetableau">Total Oeuvres</th>
+                            <th class="tetetableau">Administrateur</th>
+                        </tr>
+				    <?php
 					for($i=0;$i<$datalength;$i++)
 					{
-				?>
-					<tr>
-						<th><?php echo $data[$i]['dateMiseAJour']?></th>
-						<th><?php echo $data[$i]['nbOeuvres']?></th>
-						<th><?php echo $data[$i]['nomUsagerAdmin']?></th>
-					</tr>
-				<?php
+				    ?>
+                        <tr>
+                            <th><?php echo $data[$i]['dateMiseAJour']?></th>
+                            <th><?php echo $data[$i]['nbOeuvres']?></th>
+                            <th><?php echo $data[$i]['nomUsagerAdmin']?></th>
+                        </tr>
+				    <?php
 					}
 				}
-				?>
+            ?>
 					</table>
 		</section>
 	</section>
-	
 </div>

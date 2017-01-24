@@ -11,47 +11,47 @@
 //IIFE
 (function(){
     
-    window.addEventListener("load", function(){                                             // au chargement de la page
+    window.addEventListener("load", function(){                                                         // au chargement de la page
      
         /*-- SECTION GESTION CATÉGORIE ------------------------------------------------------------*/
-        if(document.querySelector(".categorie"))                                            // si la classe "categorie" existe
+        if(document.querySelector(".categorie"))                                                        // si la classe "categorie" existe
         { 
             /*-- AJOUT D'UNE CATÉGORIE ------------------------------------------------------------*/
-            var btnAjout = document.querySelector("#boutonAjoutCategorie");                 // récupère le bouton AJOUTER
-            btnAjout.addEventListener("click", function(evt){                               // à l'événement CLIC
+            var btnAjout = document.querySelector("#boutonAjoutCategorie");                             // récupère le bouton AJOUTER
+            btnAjout.addEventListener("click", function(evt){                                           // à l'évènement CLIC
                 
                 /*-- RÉCUPÈRE L'ENTRÉE DU CHAMPS CATÉGORIE ----------------------------------------*/
                 var valeurCategorie = document.querySelector("[name=categorieAjout]").value;
                 
-                if(valeurCategorie != ""){                                                  // s'il y a entrée dans le champs
+                if(valeurCategorie != ""){                                                              // s'il y a entrée dans le champs
                     
-                    evt.target.disabled=true;                                               // il n'y a plus d'évènements au click
+                    evt.target.disabled=true;                                                           // il n'y a plus d'évènements au click
                 
                     /*-- LES ENTRÉES DANS UN JSON TRADUIT EN STRING -------------------------------*/
                     var data = JSON.stringify({categorie : valeurCategorie});
                     
                     /*-- REQUÊTE AJAX -------------------------------------------------------------*/
-                    var xhr = new XMLHttpRequest();                                         // nouvelle requête
+                    var xhr = new XMLHttpRequest();                                                     // nouvelle requête
                     
-                    xhr.open("POST", "index.php?requete=ajoutCategorie")                    // controleur case "requete" = "ajoutCategorie"
+                    xhr.open("POST", "index.php?requete=ajoutCategorie")                                // controleur case "requete" = "ajoutCategorie"
                     xhr.setRequestHeader("Content-type", "application/json");
                     
-                    xhr.addEventListener("load", function(e){
+                    xhr.addEventListener("load", function(e){                                           // à l'évènement LOAD de la requête AJAX
                         console.log(e.currentTarget);
                         console.log(e.currentTarget.responseText);
-                        window.location.href = "./index.php?requete=gestionCategorie";                
+                        window.location.href = "./index.php?requete=gestionCategorie";                  // charge la page gestionCategorie                
                     });
-                    xhr.send(data);                                                         // envoie la requête et les datas en POST
+                    xhr.send(data);                                                                     // envoie la requête et les datas en POST
                 } 
-                else                                                                        // sinon, message de champs invalides
+                else                                                                                    // sinon, message de champs invalides
                 {
                     document.querySelector("#msgErreurSoumision").innerHTML = "Veuillez remplir le champs";
                 }
             });
             
             /*-- SUPPRESSION D'UNE CATÉGORIE ------------------------------------------------------*/
-            var btnAjout = document.querySelector("#boutonSuppressionCategorie");           // récupère le bouton SUPPRIMER
-            btnAjout.addEventListener("click", function(evt){                               // à l'événement CLIC
+            var btnAjout = document.querySelector("#boutonSuppressionCategorie");                       // récupère le bouton SUPPRIMER
+            btnAjout.addEventListener("click", function(evt){                                           // à l'évènement CLIC
                 
                 /*-- RÉCUPÈRE L'ENTRÉE DU CHAMPS CATÉGORIE ----------------------------------------*/
                 var valeurSelectCategorie = document.querySelector("[name=categorieSuppression]").value;
@@ -62,19 +62,19 @@
                     var data = JSON.stringify({categorie : valeurSelectCategorie});
                     
                     /*-- REQUÊTE AJAX -------------------------------------------------------------*/
-                    var xhr = new XMLHttpRequest();                                         // nouvelle requête
+                    var xhr = new XMLHttpRequest();                                                     // nouvelle requête
                     
-                    xhr.open("POST", "index.php?requete=supprimerCategorie")                // controleur case "requete" = "supprimerCategorie"
+                    xhr.open("POST", "index.php?requete=supprimerCategorie")                            // controleur case "requete" = "supprimerCategorie"
                     xhr.setRequestHeader("Content-type", "application/json");
                     
-                    xhr.addEventListener("load", function(e){
+                    xhr.addEventListener("load", function(e){                                           // à l'évènement LOAD de la requête AJAX
                         console.log(e.currentTarget);
                         console.log(e.currentTarget.responseText);
-                        window.location.href = "./index.php?requete=gestionCategorie";                
+                        window.location.href = "./index.php?requete=gestionCategorie";                  // charge la page gestionCategorie                
                     });
-                    xhr.send(data);                                                         // envoie la requête et les datas en POST
+                    xhr.send(data);                                                                     // envoie la requête et les datas en POST
                 }
-                else                                                                        // sinon, message de champs invalides
+                else                                                                                    // sinon, message de champs invalides
                 {
                     document.querySelector("#msgErreurSoumision").innerHTML = "Veuillez choisir une catégorie";
                 }

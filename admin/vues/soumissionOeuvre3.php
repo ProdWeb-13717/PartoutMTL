@@ -1,3 +1,6 @@
+<!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres ---------------------------------------------> 
+
+
 <?php
 	/// *** SECURITE DE LA PAGE *** ///////////////////////////
 	if(!isset($_SESSION['authentifie']))
@@ -7,65 +10,23 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-<!-- SUITE DE LA SOUMISSION D'UNE OEUVRE, TABLE Oeuvres --------------------------------------------->   
-
-
-<?php
-    //var_dump($data);
-    //var_dump($data[0]["parc"]);
-    //var_dump($data[1][0]["idPhoto"]);
-
-/*
-array(2) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1290" ["titre"]=> string(3) "dfg" ["titreVariante"]=> string(0) "" ["dateFinProduction"]=> NULL ["dateAccession"]=> NULL ["nomCollection"]=> string(10) "Art public" ["modeAcquisition"]=> string(0) "" ["materiaux"]=> string(0) "" ["technique"]=> string(0) "" ["dimensions"]=> string(0) "" ["parc"]=> string(0) "" ["batiment"]=> string(0) "" ["adresseCivique"]=> string(0) "" ["latitude"]=> NULL ["longitude"]=> NULL ["description"]=> string(0) "" ["numeroAccession"]=> NULL ["noInterne"]=> NULL ["idCategorie"]=> string(2) "68" ["idArrondissement"]=> string(2) "72" ["idArtiste"]=> string(3) "973" ["prenomArtiste"]=> string(3) "dfg" ["nomArtiste"]=> string(0) "" ["collectif"]=> string(0) "" ["nomArrondissement"]=> string(39) "Côte-des-Neiges–Notre-Dame-de-Grâce" ["nomCategorie"]=> string(17) "Design industriel" } 
-           [1]=> array(1) { [0]=> array(3) { ["idPhoto"]=> string(3) "393" ["urlPhoto"]=> string(13) "photo_393.jpg" ["idOeuvre"]=> string(4) "1290" } } }
-
-
-array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1290" ["titre"]=> string(3) "dfg" ["titreVariante"]=> string(0) "" ["dateFinProduction"]=> NULL ["dateAccession"]=> NULL ["nomCollection"]=> string(10) "Art public" ["modeAcquisition"]=> string(0) "" ["materiaux"]=> string(0) "" ["technique"]=> string(0) "" ["dimensions"]=> string(0) "" ["parc"]=> string(0) "" ["batiment"]=> string(0) "" ["adresseCivique"]=> string(0) "" ["latitude"]=> NULL ["longitude"]=> NULL ["description"]=> string(0) "" ["numeroAccession"]=> NULL ["noInterne"]=> NULL ["idCategorie"]=> string(2) "68" ["idArrondissement"]=> string(2) "72" ["idArtiste"]=> string(3) "973" ["prenomArtiste"]=> string(3) "dfg" ["nomArtiste"]=> string(0) "" ["collectif"]=> string(0) "" ["nomArrondissement"]=> string(39) "Côte-des-Neiges–Notre-Dame-de-Grâce" ["nomCategorie"]=> string(17) "Design industriel" } }
-
-
-
-
-array(2) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(6) "xcvxcv" ["titreVariante"]=> string(0) "" ["dateFinProduction"]=> NULL ["dateAccession"]=> NULL ["nomCollection"]=> string(10) "Art public" ["modeAcquisition"]=> string(0) "" ["materiaux"]=> string(0) "" ["technique"]=> string(0) "" ["dimensions"]=> string(0) "" ["parc"]=> string(0) "" ["batiment"]=> string(0) "" ["adresseCivique"]=> string(0) "" ["latitude"]=> NULL ["longitude"]=> NULL ["description"]=> string(0) "" ["numeroAccession"]=> NULL ["noInterne"]=> NULL ["idCategorie"]=> string(2) "65" ["idArrondissement"]=> string(2) "83" ["idArtiste"]=> string(4) "1021" ["prenomArtiste"]=> string(4) "xzcz" ["nomArtiste"]=> string(0) "" ["collectif"]=> string(0) "" ["nomArrondissement"]=> string(7) "LaSalle" ["nomCategorie"]=> string(21) "Bois/menuiserie d'art" } 
-           [1]=> array(2) { [0]=> array(3) { ["idPhoto"]=> string(3) "381" ["urlPhoto"]=> string(13) "photo_381.jpg" ["idOeuvre"]=> string(4) "1280" } [1]=> array(3) { ["idPhoto"]=> string(3) "380" ["urlPhoto"]=> string(13) "photo_380.jpg" ["idOeuvre"]=> string(4) "1280" } } }
-
-array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(6) "xcvxcv" ["titreVariante"]=> string(0) "" ["dateFinProduction"]=> NULL ["dateAccession"]=> NULL ["nomCollection"]=> string(10) "Art public" ["modeAcquisition"]=> string(0) "" ["materiaux"]=> string(0) "" ["technique"]=> string(0) "" ["dimensions"]=> string(0) "" ["parc"]=> string(0) "" ["batiment"]=> string(0) "" ["adresseCivique"]=> string(0) "" ["latitude"]=> NULL ["longitude"]=> NULL ["description"]=> string(0) "" ["numeroAccession"]=> NULL ["noInterne"]=> NULL ["idCategorie"]=> string(2) "65" ["idArrondissement"]=> string(2) "83" ["idArtiste"]=> string(4) "1021" ["prenomArtiste"]=> string(4) "xzcz" ["nomArtiste"]=> string(0) "" ["collectif"]=> string(0) "" ["nomArrondissement"]=> string(7) "LaSalle" ["nomCategorie"]=> string(21) "Bois/menuiserie d'art" } }
-
-*/
-
-?>
-
 
     <section class="flex-row-left formulaireSoumissionAdmin">
+        
+        <!-- PARC ----------------------------------------------------------------------------------->
         <article class="formulaireSoumissionAdminGauche">
             <label for="parcOeuvreAjoutAdmin">Parc : </label>
             <input type="text" name="parcOeuvreAjout" id="parcOeuvreAjoutAdmin"
                 <?php 
-                    if(isset($_GET["idSoumissionUsager"]))
+                    if(isset($_GET["idSoumissionUsager"]))                                                          // si ajout d'une soumission d'un usager, écrit le parc dans le input TEXT
                     {
                         ?>
                         value="<?php echo $data['parcSoumission']; ?>"
 				        <?php
                     }
 
-                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                             // si "modification", écrit le parc dans le input TEXT
                     {
-                        //foreach($data as $oeuvre)
-                        //foreach($data as $oeuvres => $oeuvre)    
-                        //foreach($data[0] as $oeuvre)
-                        //foreach ($data as $oeuvres) 
-                        //{
-/*
-                            foreach ($data[0] as $oeuvre)
-                            {
-                                if ($oeuvre['parc'] != NULL)
-                                {
-                                    ?>
-                                    value="<?php echo $oeuvre['parc']; ?>"
-                                    <?php
-                                }
-                            }
-*/
-                        //}
 
                         if ($data[0]["parc"]!= NULL)
                         {
@@ -77,24 +38,15 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
                 ?> 
             />
         </article>
-    
+        
+        <!-- BÂTIMENT ------------------------------------------------------------------------------->
         <article class="espaceHaut10">
             <label for="batimentOeuvreAjoutAdmin">Bâtiment : </label>
             <input type="text" name="batimentOeuvreAjout" id="batimentOeuvreAjoutAdmin"
                 <?php  
 
-                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
-                    {
-/*
-                        foreach($data as $oeuvre)
-                        {
-                            if ($oeuvre['batiment'] != NULL){
-                                ?>
-                                value="<?php echo $oeuvre['batiment']; ?>"
-                                <?php
-                            }
-                        }
- */                   
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                             // si "modification", écrit le bâtiment dans le input TEXT
+                    {                
                         if ($data[0]["batiment"]!= NULL)
                         {
                             ?>
@@ -108,29 +60,21 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
     </section>
 
     <section class="flex-row-left formulaireSoumissionAdmin">
+        
+        <!-- ADRESSE CIVIQUE ------------------------------------------------------------------------>
         <article>
             <label for="adresseCiviqueOeuvreAjoutAdmin">Adresse civique : </label>
             <input type="text" name="adresseCiviqueOeuvreAjout" id="adresseCiviqueOeuvreAjoutAdmin"
                 <?php 
-                    if(isset($_GET["idSoumissionUsager"]))
+                    if(isset($_GET["idSoumissionUsager"]))                                                          // si ajout d'une soumission d'un usager, écrit l'adresse dans le input TEXT
                     {
                         ?>
                         value="<?php echo $data['adresseCiviqueSoumission']; ?>"
                         <?php
                     }
 
-                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
-                    {
-/*
-                        foreach($data as $oeuvre)
-                        {
-                            if ($oeuvre['adresseCivique'] != NULL){
-                                ?>
-                                value="<?php echo $oeuvre['adresseCivique']; ?>"
-                                <?php
-                            }
-                        }
-*/                         
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                             // si "modification", écrit l'adresse dans le input TEXT
+                    {           
                         if ($data[0]["adresseCivique"]!= NULL)
                         {
                             ?>
@@ -138,30 +82,21 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
                             <?php
                         }  
                     }
-
                 ?> 
             />
         </article>
     </section>
 
     <section class="flex-row-left formulaireSoumissionAdmin">
+        
+        <!-- LATITUDE ------------------------------------------------------------------------------>
         <article class="formulaireSoumissionAdminGauche">
             <label for="latitudeOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Latitude : </span></label>
             <input type="text" name="latitudeOeuvreAjout" id="latitudeOeuvreAjoutAdmin" placeholder= "45.0000"
                 <?php 
 
-                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
-                    {
-/*
-                        foreach($data as $oeuvre)
-                        {
-                            if ($oeuvre['latitude'] != NULL){
-                                ?>
-                                value="<?php echo $oeuvre['latitude']; ?>"
-                                <?php
-                            }
-                        }
-*/                                  
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                             // si "modification", écrit la latitude dans le input TEXT
+                    {                               
                         if ($data[0]["latitude"]!= NULL)
                         {
                             ?>
@@ -174,22 +109,14 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
         </article>
     
         <article class="espaceHaut10">
+            
+            <!-- LONGITUDE -------------------------------------------------------------------------->
             <label for="longitudeOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Longitude : </span></label>
             <input type="text" name="longitudeOeuvreAjout" id="longitudeOeuvreAjoutAdmin" placeholder= "-73.0000"
                 <?php 
 
-                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
-                    {
-/*
-                        foreach($data as $oeuvre)
-                        {
-                            if ($oeuvre['longitude'] != NULL){
-                                ?>
-                                value="<?php echo $oeuvre['longitude']; ?>"
-                                <?php
-                            }
-                        }
- */                       
+                    if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                             // si "modification", écrit la longitude dans le input TEXT
+                    {                       
                         if ($data[0]["longitude"]!= NULL)
                         {
                             ?>
@@ -202,11 +129,14 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
         </article>
     </section>
 
+    <!-- SECTION PHOTO ------------------------------------------------------------------------------>
     <h3 class="espaceH3">PHOTO(S)</h3>
 
     <section class="flex-column-left formulaireSoumissionAdmin">
         
-    <?php  
+    <?php 
+        
+        /*-- AJOUT D'UNE PHOTO SOUMISE PAR UN USAGER -----------------------------------------------*/
         if($_GET['requete'] == "soumission" && isset($_GET['idSoumissionUsager']))
         {
             ?> 
@@ -221,13 +151,13 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
             <?php
         }
 
+        /*-- FORMULAIRE D'AJOUT ---------------------------------------------------------------------*/
         if($_GET['requete'] == "soumission" && !isset($_GET['idSoumissionUsager']))
         {
             ?>
             <article>
                 <input type="hidden" name="urlPhotoOeuvreAjout" value=""/>
                 <input type="hidden" name="accepterPhotoSoumiseCheckbox">
-                
                 
                 <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                 <label for="photoOeuvreSoumissionAdmin">Photo (.jpg) : </label>
@@ -236,6 +166,7 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
             <?php
         }
    
+        /*-- MODIFICATION D'UNE OEUVRE ---------------------------------------------------------------*/
         if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
         {
             ?> 
@@ -260,7 +191,6 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
                 <input type="hidden" name="urlPhotoOeuvreAjout" value=""/>
                 <input type="hidden" name="accepterPhotoSoumiseCheckbox">
                 
-                
                 <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                 <label for="nouvellePhotoOeuvreAdmin">Ajouter une photo : </label>
                 <input type="file" name="nouvellePhotoOeuvre" id="nouvellePhotoOeuvreAdmin"/><br/>
@@ -270,24 +200,16 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
         ?> 
     </section> 
 
+    <!-- SECTION DESCRIPTION -------------------------------------------------------------------------->
     <h3 class="espaceH3">DESCRIPTION</h3>
 
     <textarea rows="4" style="width: 337px;" name="descriptionOeuvreAjout" id="descriptionOeuvreAjoutAdmin"><?php
-        if(isset($_GET["idSoumissionUsager"]))
+        if(isset($_GET["idSoumissionUsager"]))                                                                      // si ajout d'une soumission d'un usager, écrit la description dans le input TEXTAREA
         {
             echo $data['descriptionSoumission'];
         }
-        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                                         // si "modification", écrit la description dans le input TEXTAREA
         {
-/*
-            foreach($data as $oeuvre)
-            {
-                if ($oeuvre['description'] != NULL)
-                {
-                    echo $oeuvre['description'];
-                }
-            }
-*/
             if ($data[0]["description"]!= NULL)
             {
                 ?>
@@ -299,5 +221,5 @@ array(1) { [0]=> array(26) { ["idOeuvre"]=> string(4) "1280" ["titre"]=> string(
 
     <span id="msgErreurSoumision"></span>
 
-<!-- fin section class="flex-column-left" -->
+<!-- FIN DE LA SECTION DU FORMULAIRE ------------------------------------------------------------------->
 </section>

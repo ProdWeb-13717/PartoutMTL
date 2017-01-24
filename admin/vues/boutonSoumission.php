@@ -1,3 +1,5 @@
+<!-- FIN DE LA SOUMISSION D'UNE OEUVRE, BOUTON SOUMISSION ------------------------------------------->
+
 <?php
 	/// *** SECURITE DE LA PAGE *** ///////////////////////////
 	if(!isset($_SESSION['authentifie']))
@@ -7,9 +9,10 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-<!-- FIN DE LA SOUMISSION D'UNE OEUVRE, BOUTON SOUMISSION ------------------------------------------->
 
-<?php    
+<?php
+    /*-- BOUTON LORSQUE AJOUT D'UNE SOUMISSION -----------------------------------------------------*/
+    
     if($_GET['requete'] == "soumission" && !isset($_GET['idSoumissionUsager']))
     {
         ?>
@@ -18,6 +21,7 @@
         <?php
     }
     
+    /*-- BOUTON LORSQUE AJOUT D'UNE SOUMISSION D'UN USAGER -----------------------------------------*/
     if($_GET['requete'] == "soumission" && isset($_GET['idSoumissionUsager']))
     {
         ?>
@@ -26,6 +30,8 @@
         <?php
     }
 ?>
+
+<!-- FIN DE LA DIVISION GLOBALE ---------------------------------------------------------------------->
 </div>
 
 
