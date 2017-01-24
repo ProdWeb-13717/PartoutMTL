@@ -9,8 +9,7 @@ var urlrecherche = window.location.toString(); //prendre URL
         Recherche();
     });
     
-    function Recherche(){ 
-        
+    function Recherche(){  
         var btnRecherche = document.getElementById("btnRecherche");                         //bouton de submit dans la recherche simple
         var motRecherche = document.getElementById("motRecherche");                         //le mot recherché 
         var oeuvres = document.getElementById("oeuvres");                                   // prendre le titre de vue 'liste oeuvres' dans la recherche simple sur les oeuvres

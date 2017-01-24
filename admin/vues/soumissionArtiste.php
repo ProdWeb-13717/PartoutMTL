@@ -11,12 +11,12 @@
 ?>
 
 
-<!-- SECTION ARTISTE ------------------------------------------------------------------------------->
+<!-- SECTION ARTISTE (OBLIGATOIRE) ------------------------------------------------------------------>
 <h3 class="espaceH3">ARTISTE</h3>
 
 <section class="flex-row-left formulaireSoumissionAdmin">
     
-    <!-- PRÉNOM ------------------------------------------------------------------------------------>
+    <!-- PRÉNOM ------------------------------------------------------------------------------------->
     <article class="formulaireSoumissionAdminGauche">
         <label for="prenomArtisteOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Prénom : </span></label>
         <input type="text" name="prenomArtisteOeuvreAjout" id="prenomArtisteOeuvreAjoutAdmin"
@@ -43,7 +43,7 @@
         />
     </article>
     
-    <!-- NOM -------------------------------------------------------------------------------------->
+    <!-- NOM --------------------------------------------------------------------------------------->
     <article class="espaceHaut10">
         <label for="nomArtisteOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Nom : </span></label>
         <input type="text" name="nomArtisteOeuvreAjout" id="nomArtisteOeuvreAjoutAdmin"
@@ -73,7 +73,7 @@
 
 <section class="flex-row-left formulaireSoumissionAdmin">
     
-    <!-- COLLECTIF -------------------------------------------------------------------------------->
+    <!-- COLLECTIF --------------------------------------------------------------------------------->
     <article>
     <label for="collectifOeuvreAjoutAdmin"><span class="couleurErreurSoumission">Collectif : </span></label>
     <input type="text" name="collectifOeuvreAjout" id="collectifOeuvreAjoutAdmin"

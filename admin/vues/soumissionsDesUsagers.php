@@ -1,3 +1,6 @@
+<!-- AFFICHAGE DES SOUMISSIONS DES USAGERS, TABLE Soumissions --------------------------------------->
+
+
 <?php
 	/// *** SECURITE DE LA PAGE *** ///////////////////////////
 	if(!isset($_SESSION['authentifie']))
@@ -7,20 +10,20 @@
 	///////////////////////////////////////////////////////////
 ?>    
 
-<!-- AFFICHAGE DES SOUMISSIONS DES USAGERS, TABLE Soumissions --------------------------------------->
 
 <div class="soumissionsUsager marginDivPrincipale adminTitre">
     <h1>SOUMISSIONS DES USAGERS</h1>
 	<section class="afficheSoumissionsUsagers">
         <ul>
             <?php
+            /*-- LISTES DES OEUVRES SOUMISES ------------------------------------------------------*/
             foreach($data as $soumission)
             {
                 ?>
                 <ul class='soumissionDesUsagers' name='soumissionDunUsager' id="<?php echo $soumission['idSoumission']?>">
                     <section class="flex-row-left">       
                         
-                        
+                        <!-- PHOTOS DES OEUVRES SOUMISES ------------------------------------------->
                         <article class="photoOeuvreSoumission">
 				            <?php 
 				                if($soumission["photoSoumission"] != null)
@@ -38,24 +41,29 @@
 				            ?>
                         </article>
                         
+                        <!-- DÉTAILS DES OEUVRES SOUMISES, S'AFFICHE SI EXISTANTE ------------------>
                         <article class="soumissionDesUsagersListe">
-                    
+                            
+                            <!-- NUMÉRO DE LA SOUMISSION ------------------------------------------->
                             <li>
 				                <span  class="numeroSoumission">
 				                	SOUMISSION # <?php echo $soumission["idSoumission"]?>         
 				                </span>
 				            </li>
-				
+				            
+                            <!-- TITRE (OBLIGATOIRE) ----------------------------------------------->
                             <li>Titre : <span  class="typoValeurAdmin"><?php echo $soumission["titreSoumission"]?></span></li>
                 
                             <?php
+                                /*-- PRÉNOM -------------------------------------------------------*/
                                 if($soumission["prenomArtisteSoumission"])
                                 {
                                     ?>
                                     <li>Prénom artiste : <span  class="typoValeurAdmin"><?php echo $soumission["prenomArtisteSoumission"]?></span></li>
                                     <?php   
                                 }
-  
+                
+                                /*-- NOM ----------------------------------------------------------*/
                                 if($soumission["nomArtisteSoumission"])
                                 {
                                     ?>
@@ -63,13 +71,15 @@
                                     <?php   
                                 }
 
+                                /*-- COLLECTIF ----------------------------------------------------*/
                                 if($soumission["collectifSoumission"])
                                 {
                                     ?>
                                     <li>Collectif : <span  class="typoValeurAdmin"><?php echo $soumission["collectifSoumission"]?></span></li>
                                     <?php   
                                 }
-
+                
+                                /*-- COLLECTIF ----------------------------------------------------*/
                                 if($soumission["idArrondissementSoumission"])
                                 {
                                     ?>
@@ -85,6 +95,7 @@
                                     <?php   
                                 }
 
+                                /*-- PARC ----------------------------------------------------------*/
                                 if($soumission["parcSoumission"])
                                 {
                                     ?>
@@ -92,6 +103,7 @@
                                     <?php   
                                 }
 
+                                /*-- ADRESSE CIVIQUE -----------------------------------------------*/
                                 if($soumission["adresseCiviqueSoumission"])
                                 {
                                     ?>
@@ -99,6 +111,7 @@
                                     <?php   
                                 }
 
+                                /*-- DESCRIPTION ---------------------------------------------------*/
                                 if($soumission["descriptionSoumission"])
                                 {
                                     ?>
@@ -106,6 +119,7 @@
                                     <?php   
                                 }
 
+                                /*-- PHOTO ---------------------------------------------------------*/
                                 if($soumission["photoSoumission"])
                                 {
                                     ?>
@@ -114,9 +128,12 @@
                                 }
                             ?>
                     
+                            <!-- COURRIEL (OBLIGATOIRE) --------------------------------------------->
                             <li>Courriel : <span  class="typoValeurAdmin"><?php echo $soumission["courrielSoumission"]?></span></li>
             
                         </article>
+                        
+                        <!-- OPTIONS DE GESTION POUR CHAQUE OEUVRE ---------------------------------->
                         <article  class="liens">
                             <a href="./index.php?requete=soumission&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">AJOUTER</a>
                             <a href="./index.php?requete=supprimeSoumissionUsager&idSoumissionUsager=<?php echo $soumission["idSoumission"]?>">SUPPRIMER</a>

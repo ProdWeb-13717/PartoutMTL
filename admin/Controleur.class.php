@@ -67,50 +67,47 @@ class Controleur
                     break;
                 
                 
-                case 'updateModification':                                                                             // à l'envoi du formulaire
+                case 'updateModification':                                                                              // à l'envoi du formulaire
 					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
 					//$tableauContenu = json_decode (file_get_contents('php://input'), true);
-					$tableauContenu = json_decode ($_POST['data'], true);                                              // decode la string JSON dans formData
-                    extract($tableauContenu);                                                                          // convertit le JSON en variables
+					$tableauContenu = json_decode ($_POST['data'], true);                                               // decode la string JSON dans formData
+                    extract($tableauContenu);                                                                           // convertit le JSON en variables
                 
                     /*-- UPDATE TABLE Oeuvres -------------------------------------------------*/
-                    $modeleSoumisionAdmin = new modeleSoumission();
-                    $valide = $modeleSoumisionAdmin->modifierOeuvre($tableauContenu);                                       
+                    $modeleSoumisionAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+                    $valide = $modeleSoumisionAdmin->modifierOeuvre($tableauContenu);                                   // modifie les entrées de la table Oeuvres avec les données en paramètre                                       
 					if(!$valide)
-					{                                                                                                  // si non réussi
+					{                                                                                                   // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 						break;
 					}
                     
                     /*-- UPDATE TABLE Artistes ------------------------------------------------*/
-					
-                    $modeleSoumisionAdmin = new modeleSoumission();
-					$existe = $modeleSoumisionAdmin->verifierArtiste($tableauContenu);                                  // vérifie si le nom de l'artiste une fois modifié existe dans la base de données
+                    $modeleSoumisionAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+					$existe = $modeleSoumisionAdmin->verifierArtiste($tableauContenu);                                  // vérifie si le nom de l'artiste une fois modifié existe dans la base de données, s'il existe, retourne son id
 					if($existe)                                                                                         // s'il existe
                     {
-                        //var_dump($existe);
-                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "$modeleSoumision"
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
 				        $artisteDeLOeuvre = $modeleSoumisionAdmin->obtenir($idOeuvre, "idOeuvre", "ArtistesOeuvres");   // récupère l'id de l'artiste à modifier associé à l'id de l'oeuvre
                         $artisteAModifier = $artisteDeLOeuvre['idArtiste'];
                         
                         if($artisteAModifier != $existe)                                                                // si l'id de l'artiste à modifier n'est pas le même que l'id de l'artiste ayant le même nom une fois modifié
                         {
-                            $modeleSoumisionAdmin = new modeleSoumission();                                             // appelle modèle "$modeleSoumision"
+                            $modeleSoumisionAdmin = new modeleSoumission();                                             // appelle modèle "modeleSoumision"
 				            $artisteDeLOeuvre = $modeleSoumisionAdmin->modifierOeuvreArtiste($idOeuvre, $existe);       // associe l'id de l'oeuvre à l'id de l'artiste présent dans la table ArtistesOeuvres
                             if(!$valide)
 				            {                                                                                           // si non réussi
                                 $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                                 break;
 				            }    
-                        }
-                        
+                        } 
                     }
                     if($existe== NULL)
                     {
-                        $modeleSoumisionAdmin = new modeleSoumission();
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
 				        $artisteDeLOeuvre = $modeleSoumisionAdmin->obtenir($idOeuvre, "idOeuvre", "ArtistesOeuvres");   // récupère l'id de l'artiste à modifier associé à l'id de l'oeuvre
                         $artisteAModifier = $artisteDeLOeuvre['idArtiste'];
-                        $valide = $modeleSoumisionAdmin->modifierArtiste($tableauContenu, $artisteAModifier);                                       
+                        $valide = $modeleSoumisionAdmin->modifierArtiste($tableauContenu, $artisteAModifier);           // modifie les entrées de la table Artistes avec les données en paramètre
 				        if(!$valide)
 				        {                                                                                               // si non réussi
                             $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
@@ -120,57 +117,51 @@ class Controleur
                     
                     /*-- DELETE PHOTOS TABLE Photos -------------------------------------------*/
                     if(isset($_POST['photoASupprimer']))
-                    {
+                    {   
+                        $tableauDePhotos = json_decode ($_POST['photoASupprimer'], true);                               // decode la string JSON dans photoASupprimer
                         
-                        $photoASupprimer = $_POST['photoASupprimer'];
-                        //var_dump($photoASupprimer);
-                        
-                        // ??? comment récupétrer le tableau ???
-                        
-                        
-                        $modeleCategorieAdmin = new modeleSoumission();
-                        $valide = $modeleCategorieAdmin->supprimer($photoASupprimer, "idPhoto", "Photos");
-                        if(!$valide)
-                        {                                                                       // si non réussi
-                            $this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
-                            break;
-                        } 
-                        
+                        foreach ($tableauDePhotos as $photoASupprimer)                                                  // pour chaque photos à supprimer
+                        {
+                            $modeleCategorieAdmin = new modeleSoumission();                                             // appelle modèle "modeleSoumision"
+                            $valide = $modeleCategorieAdmin->supprimer($photoASupprimer, "idPhoto", "Photos");          // supprime la photo
+                            if(!$valide)
+                            {                                                                                           // si non réussi
+                                $this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
+                                break;
+                            }
+                        }
                     }
-
                 
                     /*-- INSERT PHOTOS TABLE Photos -------------------------------------------*/
                     //  sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire
                     //              http://php.net/manual/fr/features.file-upload.post-method.php
                     
-                    if(isset($_FILES['photos']))                                                    // si il y a une photo
+                    if(isset($_FILES['photos']))                                                                        // si il y a une photo
                     {
-                        $uploadDirection = '../images/';
-
-                        $modeleSoumisionAdmin = new modeleSoumission();
-                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");
-                        $idPhotos++;
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
+                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");                         // obtient l'id de la dernière photo inscrite dans la tabe Photos
+                        $idPhotos++;                                                                                    // additionne 1 à ce chiffre
                     
-                        $nomPhoto = "photo_" . $idPhotos . ".jpg";
-                        $uploadPhoto = $uploadDirection . $nomPhoto;
+                        $uploadDirection = '../images/';                                                                // emplacement de la photo
+                        $nomPhoto = "photo_" . $idPhotos . ".jpg";                                                      // nom de la photo
+                        $uploadPhoto = $uploadDirection . $nomPhoto;                                                    // nom complet de la photo
                         
-                        move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
+                        move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);                                // charge la photo à son emplacement avec son nouveau nom
                         
                         $tableauContenu["urlPhoto"] = $nomPhoto;
                         
-                        /*-- INSERT urlPhoto TABLE Photos --------------------------------------*/
-                        $modeleSoumisionAdmin = new modeleSoumission();
-                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nomPhoto, $idOeuvre);                                       
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
+                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nomPhoto, $idOeuvre);                         // associe l'oeuvre et la photo dans la table Photos                                        
                         if(!$valide)
-				        {                                                                         // si non réussi
+				        {                                                                                               // si non réussi
                             $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                             break;
                         }
                         
-                        $tableauContenu['photo'] = $nomPhoto;
+                        $tableauContenu['photo'] = $nomPhoto;                                                           // ajoute le nom de la photo à la variable $tableauContenu
                     }
                     
-                    $this->afficheVue("afficheSoumission", $tableauContenu); 
+                    $this->afficheVue("afficheSoumission", $tableauContenu);                                            // affiche la vue afficheSoumission avec les données placées en paramètre
                 
                     break;
                 
@@ -178,140 +169,137 @@ class Controleur
                 /*-- SUPPRESSION D'UNE OEUVRE -------------------------------------------------*/
                 
                 case 'supprimeOeuvre':
-					$oeuvreASupprimer = ($_GET['idOeuvre']);
+					$oeuvreASupprimer = ($_GET['idOeuvre']);                                                            // récupère l'id de l'oeuvre à supprimer
 					
 					/*-- DELETE TABLE Oeuvre --------------------------------------------------*/
-					$modeleCategorieAdmin = new modeleSoumission();
-					$valide = $modeleCategorieAdmin->supprimer($oeuvreASupprimer, "idOeuvre", "Oeuvres");
+					$modeleCategorieAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+					$valide = $modeleCategorieAdmin->supprimer($oeuvreASupprimer, "idOeuvre", "Oeuvres");               // supprime l'oeuvre 
 					if(!$valide)
-					{                                                                       // si non réussi
+					{                                                                                                   // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
 						break;
 					}
-					$_SESSION['ongletActif'] = 'oeuvresAdmin';
+                
+					$_SESSION['ongletActif'] = 'oeuvresAdmin';                                                          // rafraichi la page
 					$this->afficherEnteteAdmin();
                     $this->afficheVue("lienHautDePage");
 					$this->afficherListeDesOeuvres();
 					break;
                 
 
-                /*-- AJOUT D'UNE OEUVRE ------------------------------------------------------*/  
+                /*-- AJOUT D'UNE OEUVRE -------------------------------------------------------*/  
                 
-                case 'soumission':                                                          // page formulaire d'ajout administrateur
+                case 'soumission':                                                                                      // page formulaire d'ajout administrateur
 					$_SESSION['ongletActif'] = 'oeuvresAdmin';
 					$this->afficherEnteteAdmin();
 					$this->afficherFormSoumissionAdmin();             
 					break;
 				
 				
-				case "insereSoumission":                                                    // à l'envoi du formulaire
+				case "insereSoumission":                                                                                // à l'envoi du formulaire
 					/*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-					//$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-                    $tableauContenu = json_decode ($_POST['data'], true);                   // decode la string JSON dans formData
-                    extract($tableauContenu);                                               // convertit le JSON en variables
+					//$tableauContenu = json_decode (file_get_contents('php://input'), true);
+                    $tableauContenu = json_decode ($_POST['data'], true);                                               // decode la string JSON dans formData
+                    extract($tableauContenu);                                                                           // convertit le JSON en variables
                 
 					/*-- INSERT TABLE Oeuvres -------------------------------------------------*/
-					$modeleSoumisionAdmin = new modeleSoumission();
-					$valide = $modeleSoumisionAdmin->insererSoumissionOeuvre($tableauContenu);                                       
+					$modeleSoumisionAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+					$valide = $modeleSoumisionAdmin->insererSoumissionOeuvre($tableauContenu);                          // écrit la soumission dans la base de données                                      
 					if(!$valide)
-					{                                                                       // si non réussi
+					{                                                                                                   // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 						break;
 					}
 				
-					/*-- INSERT TABLE Photos ---------------------------------------------------*/                  
-                    $photo = $tableauContenu["urlPhoto"];
-                    if($photo != "" || $photo != null)
-                    {
-                        $nomPhoto = "../images/" . $photo;
+					/*-- INSERT TABLE Photos                 
+                         PHOTO VENANT D'UNE SOUMISSION D'UN USAGER -----------------------------*/
+                    $photo = $tableauContenu["urlPhoto"];                                                               // récupère la photo
+                    if($photo != "" || $photo != null)                                                                  // s'il y a une photo soumise
+                    {   
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
+                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");                         // obtient l'id de la dernière photo inscrite dans la tabe Photos
+                        $idPhotos++;                                                                                    // additionne 1 à ce chiffre
                         
-                        $modeleSoumisionAdmin = new modeleSoumission();
-                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");
-                        $idPhotos++;
-                        $nouveauNomPhoto = "photo_" . $idPhotos . ".jpg";
+                        $nomPhoto = "../images/" . $photo;                                                              // nom de la photo
+                        $nouveauNomPhoto = "photo_" . $idPhotos . ".jpg";                                               // nouveau nom de la photo
+                        rename($nomPhoto, "../images/" . $nouveauNomPhoto);                                             // renomme la photo
                         
-                        rename($nomPhoto, "../images/" . $nouveauNomPhoto);
-                        
-                        $modeleSoumisionAdmin = new modeleSoumission();
-                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nouveauNomPhoto);
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
+                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nouveauNomPhoto);                             // écrit le nouveau nom de la photo dans la table Photos
                         if(!$valide)
-                        {                                                                       // si non réussi
-					   	$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                        {                                                                                               // si non réussi
+					   	   $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 					   	break;
 					   }
                     }
                 
-
+                    /*-- PHOTO VENANT D'UN AJOUT ADMIN -----------------------------------------*/
                     //  sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire
                     //              http://php.net/manual/fr/features.file-upload.post-method.php
-                    
-                    if(isset($_FILES['photos'])){                                                 // si il y a une photo
-                        $uploadDirection = '../images/';
- 
-                        $modeleSoumisionAdmin = new modeleSoumission();
-                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");
-                        $idPhotos++;
-                    
-                        $nomPhoto = "photo_" . $idPhotos . ".jpg";
-                        $uploadPhoto = $uploadDirection . $nomPhoto;
-                        //$nomPhoto = basename($_FILES['photos']['name']);
+                    if(isset($_FILES['photos'])){                                                                       // si il y a une photo
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
+                        $idPhotos = $modeleSoumisionAdmin->obtenirDernier("idPhoto", "Photos");                         // obtient l'id de la dernière photo inscrite dans la tabe Photos
+                        $idPhotos++;                                                                                    // additionne 1 à ce chiffre
                         
-                        move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);
+                        $uploadDirection = '../images/';                                                                // emplacement de la photo
+                        $nomPhoto = "photo_" . $idPhotos . ".jpg";                                                      // nom de la photo
+                        $uploadPhoto = $uploadDirection . $nomPhoto;                                                    // nom complet de la photo
                         
-                        $tableauContenu["urlPhoto"] = $nomPhoto;
+                        move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);                                // charge la photo à son emplacement avec son nouveau nom
                         
-                        /*-- INSERT urlPhoto TABLE Photos --------------------------------------*/
-                        $modeleSoumisionAdmin = new modeleSoumission();
-                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nomPhoto);                                       
+                        $tableauContenu["urlPhoto"] = $nomPhoto;                                                        // ajoute le nom de la photo à la variable $tableauContenu
+                        
+                        $modeleSoumisionAdmin = new modeleSoumission();                                                 // appelle modèle "modeleSoumision"
+                        $valide = $modeleSoumisionAdmin->insererUrlPhoto($nomPhoto);                                    // écrit le nom de la photo dans la table Photos                                           
                         if(!$valide)
-				        {                                                                         // si non réussi
+				        {                                                                                               // si non réussi
                             $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                             break;
                         }
                     }
 					
 					/*-- INSERT TABLE Artistes -------------------------------------------------*/
-					$modeleSoumisionAdmin = new modeleSoumission();
-					$existe = $modeleSoumisionAdmin->verifierArtiste($tableauContenu);      // vérifie si l'artiste existe dans la db
-					if($existe == NULL){                                                    // s'il n'existe pas
-						$modele = new modeleSoumission();
-						$valide = $modele->insererSoumissionArtiste($tableauContenu);
+					$modeleSoumisionAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+					$existe = $modeleSoumisionAdmin->verifierArtiste($tableauContenu);                                  // vérifie si l'artiste existe dans la base de données, s'il existe, retourne son id
+					if($existe == NULL){                                                                                // s'il n'existe pas
+						$modele = new modeleSoumission();                                                               // appelle modèle "modeleSoumision"
+						$valide = $modele->insererSoumissionArtiste($tableauContenu);                                   // écrit le nom de l'artiste
 						if(!$valide)
-						{                                                                   // si non réussi
+						{                                                                                               // si non réussi
 							$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 							break;
 						}
 					}
 					
 					/*-- INSERT TABLE ArtistesOeuvres ------------------------------------------*/
-					$modeleSoumisionAdmin = new modeleSoumission();
-					$valide = $modeleSoumisionAdmin->insererSoumissionArtisteOeuvres($existe);
+					$modeleSoumisionAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+					$valide = $modeleSoumisionAdmin->insererSoumissionArtisteOeuvres($existe);                          // associe l'artiste à l'oeuvre dans la table ArtistesOeuvres
 					if(!$valide)
-					{                                                                       // si non réussi
+					{                                                                                                   // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 						break;
 					}
                 
                     /*-- SUPPRIME LA SOUMISSION DE L'USAGER, TABLE Soumissions ----------------*/ 
-                    $idSoumissionUsager = $tableauContenu["idSoumissionUsager"];
-                    if($idSoumissionUsager != "")
+                    $idSoumissionUsager = $tableauContenu["idSoumissionUsager"];                                        // récupère l'id de la soumission
+                    if($idSoumissionUsager != "")                                                                       // s'il y a une soumission
                     {
-                        $modele = new modeleSoumission();
-						$valide = $modele->supprimer($idSoumissionUsager, "idSoumission", "Soumissions");
+                        $modele = new modeleSoumission();                                                               // appelle modèle "modeleSoumision"
+						$valide = $modele->supprimer($idSoumissionUsager, "idSoumission", "Soumissions");               // supprime la soumission
 						if(!$valide)
-						{                                                                   // si non réussi
+						{                                                                                               // si non réussi
 							$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
 							break;
 						}
                     }
 					
-					$this->afficheVue("afficheSoumission", $tableauContenu);    
+					$this->afficheVue("afficheSoumission", $tableauContenu);                                            // appelle la vue afficheSoumission avec les données placées en paramètre 
 					break;
                 
 
 				/*-- OEUVRES SOUMISES PAR LES USAGERS -----------------------------------------*/
                 
-                case 'soumissionsDesUsagers':                                               // page affichage des soumissions des usagers
+                case 'soumissionsDesUsagers':                                                                           // page affichage des soumissions des usagers
 					$_SESSION['ongletActif'] = 'oeuvresAdmin';
 					$this->afficherEnteteAdmin();
                     $this->afficheVue("lienHautDePage");
@@ -320,17 +308,18 @@ class Controleur
                 
                 
                 case 'supprimeSoumissionUsager':
-					$soumissionASupprimer = ($_GET['idSoumissionUsager']);
+					$soumissionASupprimer = ($_GET['idSoumissionUsager']);                                              // récupère l'id de la soumission à supprimer
 					
 					/*-- DELETE TABLE Soumissions ---------------------------------------------*/
-					$modeleCategorieAdmin = new modeleSoumission();
-					$valide = $modeleCategorieAdmin->supprimer($soumissionASupprimer, "idSoumission", "Soumissions");
+					$modeleCategorieAdmin = new modeleSoumission();                                                     // appelle modèle "modeleSoumision"
+					$valide = $modeleCategorieAdmin->supprimer($soumissionASupprimer, "idSoumission", "Soumissions");   // supprime la soumission
 					if(!$valide)
-					{                                                                       // si non réussi
+					{                                                                                                   // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
 						break;
 					}
-					$_SESSION['ongletActif'] = 'soumission';
+                
+					$_SESSION['ongletActif'] = 'soumission';                                                            // rafraichi la page
 					$this->afficherEnteteAdmin();
                     $this->afficheVue("lienHautDePage");
 					$this->afficherSoumissionsDesUsagers();
@@ -347,14 +336,14 @@ class Controleur
                 
                 
 				case 'ajoutCategorie':
-					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-					extract($tableauContenu);                                               // convertit le JSON en variables
-					
+					$tableauContenu = json_decode (file_get_contents('php://input'), true);                            // decode la string JSON
+                    extract($tableauContenu);                                                                          // convertit le JSON en variables
+
 					/*-- INSERT TABLE Categories -----------------------------------------------*/
-					$modeleCategorieAdmin = new Categories();
-					$valide = $modeleCategorieAdmin->insererCategorie($tableauContenu);                                       
+                    $modeleCategorieAdmin = new Categories();                                                          // appelle modèle "Categories"
+					$valide = $modeleCategorieAdmin->insererCategorie($tableauContenu['categorie']);                   // écrit la nouvelle catégorie dans la table Catégories                                    
 					if(!$valide)
-					{                                                                       // si non réussi
+					{                                                                                                  // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la demande d'ajout d'une catégorie.");
 						break;
 					}
@@ -362,15 +351,15 @@ class Controleur
 				
 					
 				case 'supprimerCategorie':
-					$tableauContenu = json_decode (file_get_contents('php://input'), true); // decode la string JSON
-					extract($tableauContenu);                                               // convertit le JSON en variables
-					$categorieASupprimer = $tableauContenu['categorie'];
+					$tableauContenu = json_decode (file_get_contents('php://input'), true);                            // decode la string JSON
+					extract($tableauContenu);                                                                          // convertit le JSON en variables
+					$categorieASupprimer = $tableauContenu['categorie'];                                               // récupère la catégorie à supprimer
 					
 					/*-- DELETE TABLE Categories ----------------------------------------------*/
-					$modeleCategorieAdmin = new Categories();
-					$valide = $modeleCategorieAdmin->supprimer($categorieASupprimer);                                       
+					$modeleCategorieAdmin = new Categories();                                                          // appelle modèle "Categories"
+					$valide = $modeleCategorieAdmin->supprimer($categorieASupprimer);                                  // supprime la catégorie                                      
 					if(!$valide)
-					{                                                                       // si non réussi
+					{                                                                                                  // si non réussi
 						$this->phpAlert("Désolé, il y a eu un problème lors de la demande de suppression d'une catégorie.");
 						break;
 					}
@@ -561,7 +550,7 @@ class Controleur
     private function afficherListeDesOeuvres()
     {
         // récupération du code de Nicolas d'affichage de la liste des oeuvres du côté usager
-        $data = [];                                                             // initialisation de $data
+        $data = [];                                                                                                     // initialisation de $data
         $modeleListe = new ModeleListe();
         array_push($data,$modeleListe->getOeuvresParPhotos());
         array_push($data,$modeleListe->getOeuvresParAuteur());
@@ -571,99 +560,98 @@ class Controleur
     private function afficherFormSoumissionAdmin()
 	{                                                 
         $dataSoumissions = null;
-        if(isset($_GET["idSoumissionUsager"]))
+        if(isset($_GET["idSoumissionUsager"]))                                                                          // s'il s'agit d'une soumission d'un usager
         {
-            $idSoumissionUsager = ($_GET["idSoumissionUsager"]);
-            $modeleSoumisionAdmin = new modeleSoumission();                             // appelle modeleSoumission
-            $dataSoumissions = $modeleSoumisionAdmin->obtenir($idSoumissionUsager, "idSoumission", "Soumissions");     // récupère la table Soumissions
+            $idSoumissionUsager = ($_GET["idSoumissionUsager"]);                                                        // s'il s'agit d'une soumission d'un usager
+            $modeleSoumisionAdmin = new modeleSoumission();                                                             // appelle modèle "modeleSoumision"
+            $dataSoumissions = $modeleSoumisionAdmin->obtenir($idSoumissionUsager, "idSoumission", "Soumissions");      // récupère l'arrondissement associé à cet oeuvre
             $choixArrondissement = $dataSoumissions['idArrondissementSoumission'];
         }
         
-        $this->afficheVue("soumissionOeuvre1", $dataSoumissions);                       // input : titre et titre variante
+        $this->afficheVue("soumissionOeuvre1", $dataSoumissions);                                                       // input : titre et titre variante
         
-        $this->afficheVue("soumissionArtiste", $dataSoumissions);                       // input : prenom, nom, collectif
+        $this->afficheVue("soumissionArtiste", $dataSoumissions);                                                       // input : prenom, nom, collectif
         
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories                                                 
-        $this->afficheVue("soumissionCategorie", $data);                                // select : catégories
+        $modeleSoumisionAdmin = new modeleSoumission();                                                                 // appelle modèle "modeleSoumision"
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");                                       // récupère la table Categories                                                 
+        $this->afficheVue("soumissionCategorie", $data);                                                                // select : catégories
                                                              
-		$this->afficheVue("soumissionOeuvre2");                                         // input : fin production, accession, matériaux,
-                                                                                        //         technique, dimension
+		$this->afficheVue("soumissionOeuvre2");                                                                         // input : fin production, accession, matériaux,
+                                                                                                                        //         technique, dimension
         
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements                                   
-        if(isset($_GET["idSoumissionUsager"]))
+        $modeleSoumisionAdmin = new modeleSoumission();                                                                 // appelle modèle "modeleSoumision"
+		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");                             // récupère la table Arrondissements                                   
+        if(isset($_GET["idSoumissionUsager"]))                                                                          // s'il s'agit d'une soumission d'un usager
         {
-            $data['choix'] = $choixArrondissement;
+            $data['choix'] = $choixArrondissement;                                                                      // place la valeur de l'arrondissement dans le tableau data
         }
-        $this->afficheVue("soumissionArrondissement", $data);                           // select : arrondissements
+        $this->afficheVue("soumissionArrondissement", $data);                                                           // select : arrondissements
 
-		$this->afficheVue("soumissionOeuvre3", $dataSoumissions);                       // inputs : parc, batiment, adresse, latitude,
-                                                                                        //          longitude
+		$this->afficheVue("soumissionOeuvre3", $dataSoumissions);                                                       // inputs : parc, batiment, adresse, latitude,
+                                                                                                                        //          longitude
         
-        $this->afficheVue("boutonSoumission");                                          // bouton soumission
+        $this->afficheVue("boutonSoumission");                                                                          // bouton soumission
         
         $this->afficheVue("footer");
 	}
 
     private function afficherFormModificationAdmin()
 	{                                                 
-        $dataOeuvreAModifie = null;
+        $dataOeuvreAModifie = null;                                                                                     // initialise la variable $dataOeuvreAModifie à null
         
-        $idOeuvre = ($_GET["idOeuvre"]);
-        $modeleModificationAdmin = new ModeleListe();                                   // appelle modeleSoumission
-        $dataOeuvreAModifie = $modeleModificationAdmin->getOeuvresParID($idOeuvre);     // récupère toutes les infos d'une oeuvre spécifiée par son ID
+        $idOeuvre = ($_GET["idOeuvre"]);                                                                                // récupère l'id de l'oeuvre
+        $modeleModificationAdmin = new ModeleListe();                                                                   // appelle modèle "modeleSoumision"
+        $dataOeuvreAModifie = $modeleModificationAdmin->getOeuvresParID($idOeuvre);                                     // récupère toutes les infos d'une oeuvre spécifiée par son ID
         foreach($dataOeuvreAModifie as $oeuvre){
-            $choixCategorie = $oeuvre['idCategorie'];
-            $choixArrondissement = $oeuvre['idArrondissement'];
+            $choixCategorie = $oeuvre['idCategorie'];                                                                   // récupère l'id de la catégorie associé à cette oeuvre
+            $choixArrondissement = $oeuvre['idArrondissement'];                                                         // récupère l'id de l'arrondissement associé à cette oeuvre
         }
         
-        $this->afficheVue("soumissionOeuvre1", $dataOeuvreAModifie);                    // input : titre et titre variante
+        $this->afficheVue("soumissionOeuvre1", $dataOeuvreAModifie);                                                    // input : titre et titre variante
         
-        $this->afficheVue("soumissionArtiste", $dataOeuvreAModifie);                    // input : prenom, nom, collectif
+        $this->afficheVue("soumissionArtiste", $dataOeuvreAModifie);                                                    // input : prenom, nom, collectif
 
 
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories                                                 
-        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+        $modeleSoumisionAdmin = new modeleSoumission();                                                                 // appelle modèle "modeleSoumision"
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");                                       // récupère la table Categories                                                 
+        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                                             // s'il s'agit d'une modification d'une oeuvre
         {
-            $data['choix'] = $choixCategorie;
+            $data['choix'] = $choixCategorie;                                                                           // place la valeur de la catégorie dans le tableau data
         }
-        $this->afficheVue("soumissionCategorie", $data);                                // select : catégories
+        $this->afficheVue("soumissionCategorie", $data);                                                                // select : catégories
         
-		$this->afficheVue("soumissionOeuvre2", $dataOeuvreAModifie);                    // input : fin production, accession, matériaux,
-                                                                                        //         technique, dimension
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements                                   
-        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))
+		$this->afficheVue("soumissionOeuvre2", $dataOeuvreAModifie);                                                    // input : fin production, accession, matériaux,
+                                                                                                                        //         technique, dimension
+        $modeleSoumisionAdmin = new modeleSoumission();                                                                 // appelle modèle "modeleSoumision"
+		$data = $modeleSoumisionAdmin->obtenirTous("Arrondissements", "nomArrondissement");                             // récupère la table Arrondissements                                   
+        if($_GET['requete'] == "modifieOeuvre" && isset($_GET['idOeuvre']))                                             // s'il s'agit d'une modification d'une oeuvre
         {
-            $data['choix'] = $choixArrondissement;
+            $data['choix'] = $choixArrondissement;                                                                      // place la valeur de l'arrondissement dans le tableau data
         }
-        $this->afficheVue("soumissionArrondissement", $data);                           // select : arrondissements
-
+        $this->afficheVue("soumissionArrondissement", $data);                                                           // select : arrondissements
         
-        $modeleListe = new ModeleListe();
-        array_push($dataOeuvreAModifie,$modeleListe->getPhotoParIDOeuvre($idOeuvre));
-		$this->afficheVue("soumissionOeuvre3", $dataOeuvreAModifie);                    // inputs : parc, batiment, adresse, latitude,
-                                                                                        //          longitude
-        $this->afficheVue("boutonModification");                                        // bouton modification
+        $modeleListe = new ModeleListe();                                                                               // appelle modèle "modeleListe"
+        array_push($dataOeuvreAModifie, $modeleListe->getPhotoParIDOeuvre($idOeuvre));                                  // récupère la ou les photos de l'oeuvre
+		$this->afficheVue("soumissionOeuvre3", $dataOeuvreAModifie);                                                    // inputs : parc, batiment, adresse, latitude,
+                                                                                                                        //          longitude
+        $this->afficheVue("boutonModification");                                                                        // bouton modification
 
         $this->afficheVue("footer");
 	}
     
     private function afficherSoumissionsDesUsagers()
     {
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Soumissions","idSoumission");       // récupère la table Soumissions
-        $this->afficheVue("soumissionsDesUsagers", $data);
+        $modeleSoumisionAdmin = new modeleSoumission();                                                                 // appelle modèle "modeleSoumision"
+		$data = $modeleSoumisionAdmin->obtenirTous("Soumissions","idSoumission");                                       // récupère la table Soumissions
+        $this->afficheVue("soumissionsDesUsagers", $data);                                                              // affiche la vue soumissionsDesUsagers avec les données placées en paramètre 
         $this->afficheVue("footer"); 
     }
     
     private function afficherPageGestionCategorie()
     {
-        $modeleSoumisionAdmin = new modeleSoumission();                                 // appelle modeleSoumission
-		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");       // récupère la table Categories        
-		$this->afficheVue("gestionCategorie", $data);
+        $modeleSoumisionAdmin = new modeleSoumission();                                                                 // appelle modèle "modeleSoumision"
+		$data = $modeleSoumisionAdmin->obtenirTous("Categories", "nomCategorie");                                       // récupère la table Categories        
+		$this->afficheVue("gestionCategorie", $data);                                                                   // affiche la vue gestionCategorie avec les données placées en paramètre
         $this->afficheVue("footer");   
     }
 	
@@ -721,7 +709,6 @@ class Controleur
 	{
 		$oMisaJour = new MiseaJour();
 		return $oMisaJour->obtenirXenregistrement(10,"MiseAJours","idMiseAJour");
-		
 	}
 	
 	private function importation($jSon,$action)
