@@ -1,7 +1,7 @@
-var url = window.location.toString(); //prendre URL  
-	if (url.indexOf("?") > 0) {
-		var url = url.substring(0, url.indexOf("?"));
-		console.log(url);
+var urlrecherche = window.location.toString(); //prendre URL  
+	if (urlrecherche.indexOf("?") > 0) {
+		var urlrecherche = urlrecherche.substring(0, urlrecherche.indexOf("?"));
+		console.log(urlrecherche);
 	}
 
 (function(){ 
@@ -25,10 +25,22 @@ var url = window.location.toString(); //prendre URL
         var msgResultat = document.getElementById("msgResultat");                           // la balise pour afficher un message pour la résultat de recherche
         var msg="";
         
-        if(btnRecherche)
+        if(btnRecherche || motRecherche)
         { // la recherche simple
             
-            btnRecherche.onclick = function(){
+            motRecherche.onkeydown  = function(ev){ // Si on enter dans input de recherche
+				
+				
+				ev = ev || window.event;
+				console.log("Keydown");
+				
+				if (ev.keyCode == 13) {
+					ev.preventDefault();
+					console.log("Enter");
+					btnRecherche.click();
+				}					
+			};
+			btnRecherche.onclick = function(){
                 
                 if(oeuvres)
                 {
@@ -54,7 +66,8 @@ var url = window.location.toString(); //prendre URL
                         rechercheSimple("acceuil");
                     }
                 }
-            };		
+            };
+			
         }
         if(categorieRecherche)
         { 															   // générer les options de souscategorieRecherche
@@ -190,8 +203,20 @@ var url = window.location.toString(); //prendre URL
                 }
             }
         }
-        if(btnRechercheAvance){ // la recherche avancé
+        if(btnRechercheAvance || motRechercheAvance){ // la recherche avancé
             
+			motRechercheAvance.onkeydown  = function(ev){ // Si on enter dans input de recherche
+				
+				
+				ev = ev || window.event;
+				console.log("Keydown avance");
+				
+				if (ev.keyCode == 13) {
+					ev.preventDefault();
+					console.log("Enter avance");
+					btnRechercheAvance.click();
+				}					
+			};
             btnRechercheAvance.onclick = function(){
                 
                 if(motRechercheAvance.value!="")
@@ -215,7 +240,7 @@ var url = window.location.toString(); //prendre URL
         var xhr;
         xhr = new XMLHttpRequest();
         
-        var valueRecherche=document.getElementById("motRecherche");
+        var valueRecherche= motRecherche;
         
         if(xhr)
         {	
@@ -229,7 +254,7 @@ var url = window.location.toString(); //prendre URL
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
                     params = "requete=rechercheOeuvre&valRecherche=" + txtRecherche;
-                    xhr.open("GET", url+"?"+params, true);
+                    xhr.open("GET", urlrecherche+"?"+params, true);
                     
                     msg ='dans la liste des oeuvres';
                 }
@@ -237,7 +262,7 @@ var url = window.location.toString(); //prendre URL
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
                     params = "requete=rechercheArtistes&valRecherche=" + txtRecherche;
-                    xhr.open("GET", url+"?"+params, true);
+                    xhr.open("GET", urlrecherche+"?"+params, true);
                     
                     msg ='dans la liste des aristes';
                 }
@@ -245,7 +270,7 @@ var url = window.location.toString(); //prendre URL
                     
                     console.log("categorieDeRecherche : "+categorieDeRecherche)
                     params = "requete=rechercheAccueil&valRecherche=" + txtRecherche;
-                    xhr.open("GET", url+"?"+params, true);
+                    xhr.open("GET", urlrecherche+"?"+params, true);
                     
                     msg ='dans les listes des artistes et des oeuvres';
                 }
@@ -306,23 +331,23 @@ var url = window.location.toString(); //prendre URL
                     if(souCategorieDerecherche=="artiste")
                     {
                         params = "requete=rechercheAvanceArtistesOeuvres&valRecherche="+ txtRecherche;
-                        xhr.open("GET", url+"?"+params, true);
+                        xhr.open("GET", urlrecherche+"?"+params, true);
                     }
                     else if(souCategorieDerecherche=="nomArrondissement")
                     {	
                         params = "requete=rechercheAvanceArtistesOeuvresArrondissements&valRecherche="+ txtRecherche;
-                        xhr.open("GET", url+"?"+params, true);
+                        xhr.open("GET", urlrecherche+"?"+params, true);
                         
                     }
                     else if(souCategorieDerecherche=="nomCategorie")
                     {
                         params = "requete=rechercheAvanceArtistesOeuvresCategories&valRecherche="+ txtRecherche;
-                        xhr.open("GET", url+"?"+params, true);
+                        xhr.open("GET", urlrecherche+"?"+params, true);
                     }
                     else
                     {
                         params = "requete=rechercheAvanceOeuvres&valRecherche="+ txtRecherche+"&cleRecherche="+souCategorieDerecherche;
-                        xhr.open("GET", url+"?"+params, true);
+                        xhr.open("GET", urlrecherche+"?"+params, true);
                     }
                     
                     msg = 'de '+souCategorieDerecherche+' dans la liste des oeuvres';
@@ -330,7 +355,7 @@ var url = window.location.toString(); //prendre URL
                 else if(categorieDeRecherche=="Artistes"){
                     
                     params = "requete=rechercheAvanceArtistes&valRecherche="+ txtRecherche+"&cleRecherche="+souCategorieDerecherche;
-                    xhr.open("GET", url+"?"+params, true);
+                    xhr.open("GET", urlrecherche+"?"+params, true);
                     msg = 'de '+souCategorieDerecherche+' dans la liste des aristes';
                 }
                 
@@ -370,4 +395,5 @@ var url = window.location.toString(); //prendre URL
         }	
     }
 })();
+
 
