@@ -176,6 +176,60 @@ li, ul{
     .elemListe img{
 	   max-width:20em;
     }
+    
+    #secPagination{
+        display: block;
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+        
+    }
+    
+    #secPagination span.pageBalise{
+    display:inline;
+	width:2em;
+	font-family: 'Muli', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.25em;
+    color: grey;
+	margin: 0 5px;
+	text-align:center;
+    }
+    
+    #sectionImage{
+	max-width:90%;
+    min-height: 10em;
+	margin:0 auto;
+	padding:1em;
+    display: block;
+    text-align: center;
+    }
+
+    #sectionImage img{
+        max-height: 10em;
+        max-width: 40%;
+        padding: 5px;
+    }
+    
+}
+
+@media (max-width: 800px) {    
+    
+    #sectionImage{
+	max-width:90%;
+    min-height: 10em;
+	margin:0 auto;
+	padding:1em;
+    display: block;
+    text-align: center;
+    }
+
+    #sectionImage img{
+        max-height: 10em;
+        max-width: 40%;
+        padding: 5px;
+    }
+    
 }
 
 /* Téléphone ----------------------------- */
@@ -188,6 +242,38 @@ li, ul{
     .elemListe img{
 	   max-width:15em;
     }
+     
+    #secPagination{
+        display: block;
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+    }
     
+    #secPagination span.pageBalise{
+    display:inline;
+	width:2em;
+	font-family: 'Muli', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.25em;
+    color: grey;
+	margin: 0 5px;
+	text-align:center;
+    }  
+    
+    #sectionImage{
+	max-width:90%;
+    min-height: 10em;
+	margin:0 auto;
+	padding:1em;
+    display: block;
+    text-align: center;
+    }
+
+    #sectionImage img{
+        max-height: 10em;
+        max-width: 40%;
+        padding: 5px;
+    }
 }
 
