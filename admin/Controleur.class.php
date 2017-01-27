@@ -376,7 +376,18 @@ class Controleur
 					$this->afficherEnteteAdmin();
 					$this->afficherPageAffichage();
 					break;
-                
+						
+				case 'ajouterImageCarroussel':
+					$_SESSION['ongletActif'] = 'affichage';
+					$this->afficherEnteteAdmin();
+					$this->ajouterImageCarroussel();
+					break;
+				
+				case 'suprimerImageCarroussel':
+					$_SESSION['ongletActif'] = 'affichage';
+					$this->afficherEnteteAdmin();
+					$this->suprimerImageCarroussel();
+					break;
                 
                 /////////////////////////////////////////////////////////////////////////////////////
                 ////////////////////////////////    IMPORTATION    //////////////////////////////////
@@ -406,8 +417,8 @@ class Controleur
 					$novData = $this->importation($publicJson,"verification");										//Appele le module importation
 					$this->afficheVerification($novData);															//Montre le résultat de verification
 					break;
+
 				
-					
                 /////////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////    ADMIN    /////////////////////////////////////
                 /////////////////////////////////////////////////////////////////////////////////////
@@ -464,23 +475,33 @@ class Controleur
 					
 				case 'AutentificationAdmin':
 					$admin = new Admin();
-					//$_GET['requete'] = "accueil";
 					$resultat = $admin->verificationAutentificationAdmin();
-					if($resultat)
-					{
-						unset($_POST['usager']);
-						unset($_POST['pass']);
-					}
-					if($resultat == false)
+					if($resultat == 0)
 					{
 						$this->afficheVue("head");
 						$this->afficheVue("enteteAdmin");
 						$this->afficheVue('FormAutentificationAdmin');
 					}
+					else if($resultat == 1)
+					{
+						$this->afficheVue("head");
+						$this->afficheVue("enteteAdmin");
+						$this->afficheVue('changerMotDePasse');
+					}
 					else
 					{
+						unset($_POST['usager']);
+						unset($_POST['pass']);
 						$this->accueil();
 					}
+					echo $resultat;
+					break;
+					
+				
+				case 'changerMotDePasse':
+					$admin = new Admin();
+					$resulta = $admin->changementPasse($_POST['usager'], $_POST['pass']);
+					header('Location: index.php?requete=affichage');
 					break;
 					
 					
@@ -655,14 +676,35 @@ class Controleur
         $this->afficheVue("footer");   
     }
 	
-	
     /*-- AFFICHAGE -----------------------------------------------------------------------*/
 
     private function afficherPageAffichage()
     {
-        $this->afficheVue("gestionCarrousel");
+		$modelCarroussel = new Carroussel();
+		$data = $modelCarroussel->obtenirTous();
+        $this->afficheVue("gestionCarrousel", $data);
+		$modelCarroussel = new Carroussel();
+		$data = $modelCarroussel->obtenirTousImages();
+        $this->afficheVue("gestionAjoutCarrousel", $data);
         $this->afficheVue("footer");   
     }
+	
+	private function suprimerImageCarroussel()
+	{
+		$modelCarroussel = new Carroussel();
+		$data = $modelCarroussel->supprimer($_GET['idCaroussel']);
+		header('Location: index.php?requete=affichage');
+	}
+	
+	private function ajouterImageCarroussel()
+	{
+		$modelCarroussel = new Carroussel();
+		$data = $modelCarroussel->ajouterImageCarroussel($_POST['carrousselAjoutTitre'],$_POST['choixPhoto'],$_POST['idOeuvre']);
+		unset($_POST['carrousselAjoutTitre']);
+		unset($_POST['choixPhoto']);
+		unset($_POST['idOeuvre']);
+		header('Location: index.php?requete=affichage');
+	}
     
     
     /*-- ADMIN ---------------------------------------------------------------------------*/
