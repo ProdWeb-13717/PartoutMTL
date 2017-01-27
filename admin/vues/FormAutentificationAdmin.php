@@ -17,9 +17,17 @@
 		
 	<div class="largeur100 margin-hauteur100">
 		<form class="autentificationForm" name="autentificationForm" method="POST">
-			<label for="usager">NOM USAGER : </label><input type="text" name="usager"/>	
+			<label for="usager">
+				<input type="text" name="usager"/>
+				<br>
+				NOM USAGER
+			</label>
 			<br><br>
-			<label for="pass">MOT DE PASSE : </label><input type="password" name="pass"/>	
+			<label for="pass">
+				<input type="password" name="pass"/>	
+				<br>
+				MOT DE PASSE
+			</label>
 			<input type="hidden" name="grainSel" value="<?php echo $_SESSION["grainDeSel"];?>"/>
 			<br><br><br>
 			<input type="button" value="SOUMETTRE" id="BoutonEncrypte" class="bouton"/>

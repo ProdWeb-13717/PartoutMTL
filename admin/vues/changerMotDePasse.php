@@ -80,12 +80,14 @@
 	
 		})();
 	</script>
-		
+<div class="categorie marginDivPrincipale adminTitre"> 
+    <h1>CHANGER LE NOUVEAU MOT DE PASSE</h1>
 	<div class="largeur100 margin-hauteur100">
 		<form class="changementMDP" name="changementMDP" method="POST">
 			<label for="pass">NOUVEAU MOT DE PASSE </label><input type="password" id="pass" name="pass"/><span id="nouveauPassErreur" ></span>	
 			<br>
-			<label for="pass2">VÉRIFICATION </label><input type="password" id="pass2" name="pass2"/><span id="verificationPassErreur" ></span>
+			<br>
+			<label for="pass2">CONFIRMATION </label><input type="password" id="pass2" name="pass2"/><span id="verificationPassErreur" ></span>
 			<input type="hidden" name="usager" value="<?php echo $_POST["usager"];?>"/>
 			<br><br><br>
 			<input type="button" value="SOUMETTRE" id="BoutonChangeMDP" class="bouton"/>
@@ -96,3 +98,5 @@
 		<input type="hidden" name="pass"/>		
 	</form>
 	<br>
+</div>
+

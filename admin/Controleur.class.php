@@ -494,7 +494,7 @@ class Controleur
 						unset($_POST['pass']);
 						$this->accueil();
 					}
-					echo $resultat;
+					//echo $resultat;
 					break;
 					
 				
