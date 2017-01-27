@@ -676,7 +676,6 @@ class Controleur
         $this->afficheVue("footer");   
     }
 	
-	
     /*-- AFFICHAGE -----------------------------------------------------------------------*/
 
     private function afficherPageAffichage()

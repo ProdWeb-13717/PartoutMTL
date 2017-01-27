@@ -10,7 +10,6 @@
 	///////////////////////////////////////////////////////////
 ?>
 
-
 <div class="marginDivPrincipale adminTitre"> 
 
 	<section class="flex-column-left ">
@@ -52,6 +51,6 @@
 		}
 		?>
     </section>
-	
+
     
 </div>
