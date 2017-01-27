@@ -63,27 +63,4 @@
     <input type="button" class="boutonSoummissionUsager" id="boutonSoumission" value="SOUMETTRE" name="boutonSoumission"/>   
 </section>
         
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
         
