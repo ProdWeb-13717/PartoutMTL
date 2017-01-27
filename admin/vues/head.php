@@ -34,4 +34,5 @@
         <script src="./js/gestionAdmin.js"></script>
         <script src="./js/rechercheAJAX.js"></script>
         <script src="./js/formAjoutAdministrateur.js"></script>
+        <script src="./js/carroussel.js"></script>
 	</head>

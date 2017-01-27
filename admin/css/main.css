@@ -24,6 +24,7 @@
     letter-spacing: 1px;
     margin:0;
 	padding:0;
+	list-style-type : none;
 }
 
 a{
@@ -329,7 +330,6 @@ a{
 	background-color : white;
     display : inline-block;
     color: black;
-    pointer-events: none;
 	border-left : solid white 2px;
     border-right : solid white 2px;
     border-top : solid white 2px;
@@ -338,8 +338,15 @@ a{
 }
 
 .menu li.actif a{
-	//color : #016737;
     color: #1f2a33;
+}
+
+.menu li.actif:hover {
+	margin-top: 30px;
+}
+
+.menu li.actif:hover a{
+	padding-top: 10px;
 }
 
 @media (max-width: 800px) /*ajustement menu*/
