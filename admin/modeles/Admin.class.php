@@ -41,13 +41,25 @@ class Admin extends TemplateBase
 	
 	public function innitialisationPasse($nomUsagerAdmin)
 	{
-		$pass = md5('1234');
+		$pass = $_SESSION['MotDePasseDefault'];
 		$stmt = $this->connexion->prepare('UPDATE Administrateurs SET motPasseAdmin = :pass WHERE nomUsagerAdmin = :usager');
 		$stmt->bindParam(":usager", $nomUsagerAdmin);
 		$stmt->bindParam(":pass", $pass);
 		$stmt->execute();
 		return true;
 
+	}
+	
+	public function changementPasse($usager, $pass)
+	{
+		$pass = $_POST['pass'];
+		$stmt = $this->connexion->prepare('UPDATE Administrateurs SET motPasseAdmin = :pass WHERE nomUsagerAdmin = :usager');
+		$stmt->bindParam(":usager", $usager);
+		$stmt->bindParam(":pass", $pass);
+		$stmt->execute();
+		$_SESSION["authentifie"] = $_POST["usager"];
+		$_SESSION["niveauAdmin"] = $this->ObtenirNiveauAdmin($_POST["usager"]);
+		header('Location: index.php');
 	}
 	
 	public function modifieNiveauAdmin($nomUsagerAdmin, $niveau)
@@ -74,15 +86,29 @@ class Admin extends TemplateBase
 		
 			if($motDePasseGrainSel == $_POST["pass"])
 			{
-				$_SESSION["authentifie"] = $_POST["usager"];
-				$_SESSION["niveauAdmin"] = $this->ObtenirNiveauAdmin($_POST["usager"]);
-				return true;
-			}
-			else
-			{
-				return false;
+				$defaultMDP = $this->verificationMotDePasseDefault($motDePasseMD5);
+				if($defaultMDP)
+				{
+					return 1;
+				}
+				else
+				{
+					$_SESSION["authentifie"] = $_POST["usager"];
+					$_SESSION["niveauAdmin"] = $this->ObtenirNiveauAdmin($_POST["usager"]);
+					return 2;
+				}
 			}
 		}
+		return 0;
+	}
+	
+	public function verificationMotDePasseDefault($pass)
+	{
+		if($pass == $_SESSION['MotDePasseDefault'])
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public function ObtenirMotDePasseAdmin($usager)

@@ -29,7 +29,7 @@ class modeleSoumission extends TemplateBase
     ////////////////////////////////      SELECT      /////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
 
-    public function verifierArtiste($param)                                     // récupère l'id d'un artiste s'il est présent dans la table
+    public function verifierArtiste($param)                                                             // récupère l'id d'un artiste s'il est présent dans la table
 	{		
 		try
 		{
@@ -37,10 +37,10 @@ class modeleSoumission extends TemplateBase
                                                FROM Artistes 
                                                WHERE prenomArtiste = :prenomArtiste 
                                                  AND nomArtiste    = :nomArtiste 
-                                                 AND collectif     = :collectif"); // est-ce qu'il y a concordance ?
+                                                 AND collectif     = :collectif");                      // est-ce qu'il y a concordance ?
 												 
             //référence : http://php.net/manual/en/function.extract.php
-            extract($param);                                                    // extrait le tableau de variables en paramètre
+            extract($param);                                                                            // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":prenomArtiste" => $prenomArtiste,
@@ -49,7 +49,7 @@ class modeleSoumission extends TemplateBase
 			);
 			
             $data = $stmt->fetch();
-            return $data['idArtiste'];                                          // retourne l'id de l'artiste s'il existe, sinon null
+            return $data['idArtiste'];                                                                  // retourne l'id de l'artiste s'il existe, sinon null
 		}
 		catch(Exception $exc)
 		{
@@ -57,41 +57,13 @@ class modeleSoumission extends TemplateBase
 		}
 	}
     
-    /////////////////////////////////   SOUMISSION   ////////////////////////////////////////////
-    /*
-    public function obtenirDerniereSoumission()                                 // récupère toutes les entrées de la dernière soumission???
-    {
-		// function pas fini (test)
-        try
-		{
-            $idDernierOeuvre = $this->obtenirDernierIdOeuvre();
-            $idArrondissement = $this->obtenirArrondissementOeuvre($idDernierOeuvre);
-            $idCategorie = $this->obtenirCategorieOeuvre($idDernierOeuvre);
-            
-            $stmt = $this->connexion->prepare("SELECT titre, titreVariante, nomArrondissement, nomCategorie
-                                               FROM Oeuvres
-                                               JOIN Arrondissements ON Oeuvres.idArrondissement
-                                               JOIN Categories ON Oeuvres.idCategorie
-                                               WHERE idOeuvre = $idDernierOeuvre
-                                               AND Arrondissements.idArrondissement = $idArrondissement
-                                               AND Categories.idCategorie = $idCategorie");
-											   
-            $stmt->execute();
-            return $stmt->fetchAll();
-        }
-		catch(Exception $exc)
-		{
-			return 0;
-		}
-    }*/
-    
     
     ///////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////      INSERT     //////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////////////////
 
     
-    public function insererSoumissionOeuvre($param)                             // insère les entrées d'une soumission dans la table Oeuvres
+    public function insererSoumissionOeuvre($param)                                                     // insère les entrées d'une soumission dans la table Oeuvres
     {
         try
         {   
@@ -136,7 +108,7 @@ class modeleSoumission extends TemplateBase
                 :idArrondissement
             )");
             
-            extract($param);                                                    // extrait le tableau de variables en paramètre
+            extract($param);                                                                            // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":titre"             => $titre, 
@@ -166,19 +138,18 @@ class modeleSoumission extends TemplateBase
         }   
     }
     
-    public function insererUrlPhoto($param, $idOeuvre = null)                   // insère l'entrée dans la table Photos
+    public function insererUrlPhoto($urlPhoto, $idOeuvre = null)                                        // insère l'entrée dans la table Photos
     {
         try
         {
-            if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
-			{
-                $idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");       // récupère l'id de l'oeuvre en soumission
-			} 
+            if($idOeuvre == null)                                                                       // demande l'id de la dernière oeuvre en soumission
+			{               
+                $idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");                               // récupère l'id de l'oeuvre en soumission
+            } 
             
             $stmt = $this->connexion->prepare("INSERT INTO Photos (urlPhoto, idOeuvre) 
                                                            VALUES (:urlPhoto, :idOeuvre)");
             
-            extract($param);                                                    // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":urlPhoto" => $urlPhoto,
@@ -193,7 +164,7 @@ class modeleSoumission extends TemplateBase
         }   
     }
 
-    public function insererSoumissionArtiste($param)                            // insère les entrées dans la table Artiste, appelé si l'artiste n'existe pas
+    public function insererSoumissionArtiste($param)                                                    // insère les entrées dans la table Artiste, appelé si l'artiste n'existe pas
     {
         try
         {
@@ -210,7 +181,7 @@ class modeleSoumission extends TemplateBase
                 :collectif
 			)");
 			
-            extract($param);                                                    // extrait le tableau de variables en paramètre
+            extract($param);                                                                            // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":prenomArtiste" => $prenomArtiste,
@@ -226,19 +197,19 @@ class modeleSoumission extends TemplateBase
         }   
     }
     
-    public function insererSoumissionArtisteOeuvres($idArtiste = null, $idOeuvre = null)    // table lien N:M artiste / oeuvre 
+    public function insererSoumissionArtisteOeuvres($idArtiste = null, $idOeuvre = null)                // table lien N:M artiste / oeuvre 
     {
         try
         {
-            if($idArtiste == null)                                              // si l'artiste n'existe pas dans la table
+            if($idArtiste == null)                                                                      // si l'artiste n'existe pas dans la table
 			{
-				$idArtiste = $this->obtenirDernier("idArtiste", "Artistes");    // récupère l'id du dernier artiste soumis
+				$idArtiste = $this->obtenirDernier("idArtiste", "Artistes");                            // récupère l'id du dernier artiste soumis
                 
 			}
             
-            if($idOeuvre == null)                                               // toujours null, demande l'id de l'oeuvre en soumission
+            if($idOeuvre == null)                                                                       // toujours null, demande l'id de l'oeuvre en soumission
 			{
-				$idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");       // récupère l'id de l'oeuvre en soumission
+				$idOeuvre = $this->obtenirDernier("idOeuvre", "Oeuvres");                               // récupère l'id de l'oeuvre en soumission
 			}
             
             $stmt = $this->connexion->prepare("INSERT INTO ArtistesOeuvres  
@@ -272,7 +243,7 @@ class modeleSoumission extends TemplateBase
     ///////////////////////////////////////////////////////////////////////////////////////////
     
     
-    public function modifierOeuvre($param)
+    public function modifierOeuvre($param)                                                              // modifie les entrées de la table Oeuvres passées en paramètre
     {
         try
         {  
@@ -295,7 +266,7 @@ class modeleSoumission extends TemplateBase
                                                    idCategorie =        :idCategorie,
                                                    idArrondissement =   :idArrondissement
                                                WHERE idOeuvre = :idOeuvre");
-            extract($param);                                                    // extrait le tableau de variables en paramètre
+            extract($param);                                                                            // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":idOeuvre"          => $idOeuvre,
@@ -328,7 +299,7 @@ class modeleSoumission extends TemplateBase
     }
     
     
-    public function modifierArtiste($param, $idArtiste)
+    public function modifierArtiste($param, $idArtiste)                                             // modifie les entrées de la table Artistes passées en paramètre
     {
         try
         {  
@@ -337,7 +308,7 @@ class modeleSoumission extends TemplateBase
                                                    nomArtiste =     :nomArtiste,
                                                    collectif =      :collectif
                                                WHERE idArtiste = $idArtiste");
-            extract($param);                                                    // extrait le tableau de variables en paramètre
+            extract($param);                                                                        // extrait le tableau de variables en paramètre
             $stmt->execute(
 			array(
 				":prenomArtiste" => $prenomArtiste,
@@ -351,7 +322,25 @@ class modeleSoumission extends TemplateBase
         {
             return 0;
         }
-    }   
+    }
+
+    public function modifierOeuvreArtiste($idOeuvre, $idArtiste)                                    // modifie les entrées de la table OeuvresArtistes passées en paramètre
+    {
+        try
+        {  
+            $stmt = $this->connexion->prepare("UPDATE ArtistesOeuvres
+                                               SET idArtiste = :idArtiste
+                                               WHERE idOeuvre = $idOeuvre");
+            $stmt->execute(array(":idArtiste" => $idArtiste));
+        
+            return 1;
+        }
+        catch(Exception $exc)
+        {
+            return 0;
+        }
+    }
+    
 }
 
 ?>

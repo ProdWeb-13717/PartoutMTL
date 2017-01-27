@@ -2,6 +2,7 @@
 	$imagesURL = "";
 	$titreCar = "";
 	$descrCar = "";
+    $urlCar = "";
 	$longueur = count($data);
 
 	for ($i = 0 ; $i < $longueur ; $i++)
@@ -23,6 +24,12 @@
 		{
 			$descrCar = $descrCar."~";
 		}
+        
+        $urlCar = $urlCar.$data[$i]["urlLien"];
+		if($i != ($longueur-1))
+		{
+			$urlCar = $urlCar."~";
+		}
 	}
 ?>
 
@@ -31,11 +38,12 @@
 			<input type = "hidden" id="toutURL" value = "<?php echo $imagesURL?>"/>
 			<input type = "hidden" id="toutTitre" value = "<?php echo $titreCar?>"/>
 			<input type = "hidden" id="toutDescr" value = "<?php echo $descrCar?>"/>
-			<form class="rechercheAcceuil">
+			<input type = "hidden" id="toutLien" value = "<?php echo $urlCar?>"/>
+			<form class="rechercheAcceuil recherchePageAccueil">
 				<input id='motRecherche' placeholder="Rechercher une oeuvre/ un(e) artiste" name="rechercheOeuvre" type='text'  />	
 				<input type="button" id="btnRecherche" value="Rechercher"/>
 			</form>
 			
-			<span id="descrCar"></span>
+			<a id="descrCar"></a>
 		</div>
 </section>

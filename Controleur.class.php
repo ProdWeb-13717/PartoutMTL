@@ -18,10 +18,30 @@ class Controleur
 	{
 		switch ($_GET['requete']) 
 		{
-			case 'accueil':
+			
+            /////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////    ACCUEIL    ////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////
+            
+            
+            case 'accueil':
 				$this->accueil(); // option quand get requete est accueil
 				break;
-				
+
+            
+            case 'contact':
+                $this->afficheVue("head");
+                $this->afficheVue("enteteAccueil");
+                $this->afficheVue("contact");
+                $this->afficheVue("footer");
+                break;
+    
+    
+            /////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////    ARTISTES    ////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////
+            
+            
 			//Affichage de la liste de tous les artistes	
             case 'listeArtistes':
 				$data = []; // initialisation de $data
@@ -32,7 +52,13 @@ class Controleur
 				$this->afficheVue("listeArtistes",$data);
                 $this->afficheVue("footer");
 				break;
-				
+            
+            
+            /////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////    OEUVRES    ////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////
+			
+            
 			//Affichage de la liste de toutes les oeuvres
 			case 'listeOeuvres':  
 				$data = []; // initialisation de $data
@@ -56,6 +82,7 @@ class Controleur
 					array_push($data,$modeleListe->getOeuvresParPhotos());
 					array_push($data,$modeleListe->getOeuvresParAuteur());
 					array_push($data, $modeleListe->getOeuvresParAuteurId($_GET['idArtiste']));
+                    
 					if($data[0] != 0 && $data[1] != 0 && $data[2] != 0)
 					{
 						if(count($data) != 0)
@@ -95,6 +122,7 @@ class Controleur
 						if(count($data) != 0)
 						{
 							$this->afficheVue("affichageOeuvre",$data);
+                            $this->afficheVue("footer");
 						}
 						else
 						{
@@ -111,8 +139,13 @@ class Controleur
 					echo "<h1>!!! ERREUR !!! : Un ID d'oeuvre est requis pour cette requête... </h1>";
 				}
 				break;
-				
-				
+			
+            
+            /////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////    RECHERCHE    ///////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////
+			
+            
 			case 'rechercheAvance': // la recherche Avance
 				$this->entete();
 				$this->afficheVue("rechercheAvance");
@@ -233,56 +266,105 @@ class Controleur
 				
 				}
 				break;
+            
+            
+            /////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////    CARTE    /////////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////
+            
 				
-			case 'carte': //**************************************************
+			case 'carte':
 				$this->entete();                    
                 $modeleCarte = new Recherche();
 				$data = $modeleCarte->obtenirOeuvres();
                 $this->afficheVue("carte", $data);
                 $this->afficheVue("footer");
                 break;
+            
+            
+            /////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////    SOUMISSION    //////////////////////////////////
+            /////////////////////////////////////////////////////////////////////////////////////
+            
              
-            case 'soumissionOeuvre':                                                          // page formulaire de soumission usager
+            case 'soumissionOeuvre':                                                                        // page formulaire de soumission usager
 				$this->entete();                    
-                $modeleSoumisionUsager = new modeleSoumissionUsager();                        // appelle modeleSoumission
-                $data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");   // récupère la table Arrondissements
-                $vue = "soumissionOeuvreUsager";
-                $this->afficheVue($vue, $data);
-                $this->afficheVue("footer");
+                $modeleSoumisionUsager = new modeleSoumissionUsager();                                      // appelle "modeleSoumissionUsager"
+                $data = $modeleSoumisionUsager->obtenirTous("Arrondissements", "nomArrondissement");        // récupère la table Arrondissements
+                $this->afficheVue("soumissionOeuvreUsager", $data);                                         // affiche la vue avec les arrondissements en datas                              
+                $this->afficheVue("footer");                                                                // affiche le footer
                 break;
             
+            case "insereSoumissionUsager":                                                                  // à l'envoi du formulaire
             
-            case "insereSoumissionUsager":                                                    // à l'envoi du formulaire
+                /*-- DATA RÉCUPÉRÉES ---------------------------------------------------------*/
+                $tableauContenu = json_decode ($_POST['data'], true);                                       // decode la string JSON dans formData
+                extract($tableauContenu);                                                                   // convertit le JSON récupé en variables
             
-                /*-- DATA RÉCUPÉRÉES ------------------------------------------------------*/
-                $tableauContenu = json_decode (file_get_contents('php://input'), true);       // decode la string JSON
-                extract($tableauContenu);                                                     // convertit le JSON en variables
-                
-                //var_dump($tableauContenu);
-            
-                /*-- INSERT TABLE Soumission ----------------------------------------------*/
-                $modeleSoumisionUsager = new modeleSoumissionUsager();
-                $valide = $modeleSoumisionUsager->insererSoumission($tableauContenu);                                       
+                /*-- INSERT TABLE Soumission -------------------------------------------------*/
+                $modeleSoumisionUsager = new modeleSoumissionUsager();                                      // appelle "modeleSoumission"
+                $valide = $modeleSoumisionUsager->insererSoumission($tableauContenu);                       // appelle la fonction "insererSoumission" avec les variables récupérées en paramètres                                     
                 if(!$valide)
-				{                                                           // si non réussi
+				{                                                                                           // si non réussi
                     $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
                     break;
                 }
                 
-                $vue = "remerciements";
+                /*-- PHOTO RÉCUPÉRÉE ---------------------------------------------------------*/
+                //  sources :   https://openclassrooms.com/courses/upload-de-fichiers-par-formulaire
+                //              http://php.net/manual/fr/features.file-upload.post-method.php
+                
+                if(isset($_FILES['photos'])){                                                               // si il y a une photo
+                    $uploadDirection = './images/';                                                         // chemin relatif de l'emplacement où sera uploader la photo
+                    
+                    $modeleSoumisionUsager = new modeleSoumissionUsager();                                  // appelle "modeleSoumissionUsager"
+                    $idSoumission = $modeleSoumisionUsager->obtenirDernier("idSoumission", "Soumissions");  // obtient le dernier id de la table Soumissions
+                    
+                    $nomPhoto = "photoUsager" . $idSoumission . ".jpg";                                     // le nouveau nom de la photo aura cet id récupéré concaténé
+                    $uploadPhoto = $uploadDirection . $nomPhoto;                                            // nom et adresse complète de la photo
+
+                    move_uploaded_file($_FILES['photos']['tmp_name'], $uploadPhoto);                        // la photo est uploader à son emplacement
+                    
+                    /*-- INSERT photoSoumision TABLE Soumissions -----------------------------*/
+                    $modeleSoumisionUsager = new modeleSoumissionUsager();                                  // appelle "modeleSoumissionUsager"
+                    $valide = $modeleSoumisionUsager->insererPhotoSoumission($nomPhoto);                    // insere le nom de la phot dans la base de donnée, table Soumissions                                     
+                    if(!$valide)                                                                            // si non réussi
+				    {
+                        $this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+                        break;
+                    }
+                }
+            
+                /*-- INSERT TABLE CourrielsUsagers -------------------------------------------*/
+                $modeleSoumisionUsager = new modeleSoumissionUsager();                                      // appelle "modeleSoumissionUsager"
+				$existe = $modeleSoumisionUsager->verifierCourrielUsager($tableauContenu);                  // vérifie si le courriel existe dans la base de données
+				if($existe == NULL){                                                                        // s'il n'existe pas
+					$modele = new modeleSoumissionUsager();                                                 // appelle "modeleSoumissionUsager"
+					$valide = $modele->insererCourrielUsager($tableauContenu);                              // insère cet email dans la base de données, table CourrielsUsagers
+					if(!$valide)                                                                            // si non réussi
+					{
+						$this->phpAlert("Désolé, il y a eu un problème lors de la soumission.");
+						break;
+					}
+				}
+                
+                $vue = "remerciements";                                                                     // lorsque la soumission est complété, l'usager voit un message de remerciements à l'écran
                 $this->afficheVue($vue);    
                 break;    
 				
 				
             default:
-				$this->accueil(); // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
+				$this->accueil();                                                                           // option quand get requete n'existe pas ou c'est incorrect(ça vais montrer la page d'accueil quand même)
 				break;  
 		}
 	}
 
-	////////////////////////////////////////////////////////////////////////////////////////
-    ////////////////////////     MÉTHODES DU CONTROLEUR     ////////////////////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////     MÉTHODES DU CONTROLEUR     ////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////
+	
+    
+    /*-- GLOBAL ------------------------------------------------------------------------------*/
     
     protected function afficheVue($nomVue, $data = null)
 	{
@@ -303,6 +385,9 @@ class Controleur
 		$this->afficheVue("head");
 		$this->afficheVue("enteteUser");
 	}
+    
+    
+    /*-- PAGE D'ACCUEIL -----------------------------------------------------------------------*/
 	
 	private function accueil()
 	{

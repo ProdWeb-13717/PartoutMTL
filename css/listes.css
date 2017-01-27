@@ -17,18 +17,39 @@
 	margin:0;
 }
 
-#liste span.pageBalise{
-    display: block;
-    margin: 0 auto;
-    margin-top: 0.5em;
-    font-family: 'Muli', sans-serif;
+#secPagination 
+{
+	display:flex;
+	flex-direction:row;
+	justify-content: center;
+	margin: 20px 0px 150px 0px;
+}
+
+#secPagination span.pageBalise{
+    display:block;
+	width:2em;
+	font-family: 'Muli', sans-serif;
     font-size: 0.9em;
     letter-spacing: 0.25em;
     color: grey;
+	margin: 0 5px;
+	text-align:center;
 }
 
-#liste span.pageBalise:hover{
+#secPagination span.pageBalise.pageSelect{
     color: black;
+	font-weight:bolder;
+    cursor: pointer;
+	background-color:#C8FDFD;
+	border-radius:50%;
+}
+
+#secPagination span.pageBalise:hover{
+    color: black;
+	font-weight:bolder;
+    cursor: pointer;
+	background-color:#C8FDFD;
+	border-radius:50%;
 }
 
 div.elemListe{
@@ -36,11 +57,7 @@ div.elemListe{
 }
 
 div.elemListe:hover{
-	background-color:#dfefdf;
-}
-
-#liste span.pageBalise:hover{
-    cursor: pointer;
+	background-color:#F0FDFD;
 }
 
 span.catElemListe{
@@ -87,8 +104,7 @@ span.inconnu{
 .elemListe img{
 	height:auto;
 	max-width:10em;
-	border: 2px solid #016737;
-	border-radius:10px 0 10px 0;
+	border: 2px solid #f1f1f1;
 	margin-right :45px;
 	box-shadow: 5px 5px 5px #888888;
 }
@@ -119,20 +135,18 @@ li, ul{
 }
 
 #sectionImage{
-	border:solid 5px #009999;
-	border-radius: 25px;
 	max-width:50%;
-	min-height:10em;
+    min-height: 10em;
 	margin:0 auto;
 	padding:1em;
-	display:flex;
-	flex-direction: row;
-	justify-content: space-around;
-	align-items:center;
+    display: block;
+    text-align: center;
 }
 
 #sectionImage img{
 	max-height: 10em;
+    max-width: 20%;
+    padding: 0 5px;
 }
 
 #sectionImage span{
@@ -140,28 +154,126 @@ li, ul{
 	font-style:italic;
 }
 
+.photoOeuvre{ 
+    margin-right: 0px;
+}
+
+.informationOeuvre{
+    width: 100%;
+    //border: solid red 1px;
+}
+
 
 /* Media queries
 -------------------------------------------------------------*/
 
-/* Téléphone ----------------------------- */
-@media (max-width: 480px) {
-    #liste span.pageBalise{
-        max-width: 50%;
-    }
-    
+@media (max-width: 600px) {    
     .elemListe a{
-        flex-direction: column;
-    }
-    
-    .elemListe ul{
-        max-width: 50%;
+        padding-left: 0px;
+        width: 400px;
     }
     
     .elemListe img{
-        max-width:8em;
-        margin: 0 0 30px 0;
+	   max-width:20em;
     }
     
+    #secPagination{
+        display: block;
+        width: 50%;
+        text-align: center;
+        margin: 0 auto;
+        
+    }
+    
+    #secPagination span.pageBalise{
+    display:inline;
+	width:2em;
+	font-family: 'Muli', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.25em;
+    color: grey;
+	margin: 0 5px;
+	text-align:center;
+    }
+    
+    #sectionImage{
+	max-width:90%;
+    min-height: 10em;
+	margin:0 auto;
+	padding:1em;
+    display: block;
+    text-align: center;
+    }
+
+    #sectionImage img{
+        max-height: 10em;
+        max-width: 40%;
+        padding: 5px;
+    }
+    
+}
+
+@media (max-width: 800px) {    
+    
+    #sectionImage{
+	max-width:90%;
+    min-height: 10em;
+	margin:0 auto;
+	padding:1em;
+    display: block;
+    text-align: center;
+    }
+
+    #sectionImage img{
+        max-height: 10em;
+        max-width: 40%;
+        padding: 5px;
+    }
+    
+}
+
+/* Téléphone ----------------------------- */
+@media (max-width: 480px) {    
+    .elemListe a{
+        padding-left: 0px;
+        width: 400px;
+    }
+    
+    .elemListe img{
+	   max-width:15em;
+    }
+     
+    #secPagination{
+        display: block;
+        width: 80%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    
+    #secPagination span.pageBalise{
+    display:inline;
+	width:2em;
+	font-family: 'Muli', sans-serif;
+    font-size: 0.9em;
+    letter-spacing: 0.25em;
+    color: grey;
+	margin: 0 5px;
+	text-align:center;
+    }  
+    
+    #sectionImage{
+	max-width:90%;
+    min-height: 10em;
+	margin:0 auto;
+	padding:1em;
+    display: block;
+    text-align: center;
+    }
+
+    #sectionImage img{
+        max-height: 10em;
+        max-width: 40%;
+        padding: 5px;
+    }
 }
 

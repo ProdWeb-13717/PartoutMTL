@@ -3,9 +3,9 @@
 //IIFE
 (function(){
     
-    window.addEventListener("load", function()
-                            {
-        var secListe = document.getElementById("liste");
+    window.addEventListener("load", function(){
+		
+        var secListe = document.getElementById("secPagination");
         
         if(secListe)
         {
@@ -26,6 +26,16 @@
                     $pageVisible = document.getElementById("page"+idVisible);
                     $pageVisible.classList.remove("pageCache");
                     window.scrollTo(0,0); //scroll vers le haut de la page
+					
+					//sert à mettre un highlignt sur la balise de la page sélectionnée.
+					var toutebalise= document.querySelectorAll("#secPagination span.pageBalise");
+					
+					for(var i = 0 ; i < toutebalise.length ; i++)
+                    {
+                        toutebalise[i].classList.remove("pageSelect");
+                    }
+					
+					eTarget.classList.add("pageSelect");
                 }
             });
         }

@@ -1,13 +1,28 @@
+<?php
+    $compteurPhoto = 0;
+?>
+
 <section id="oeuvreIndi">
 	<section id="sectionImage">
+         <article>
         <?php
             if(count($data[1]) != 0)
             {
-                foreach($data[1] as $valeur)
+                foreach($data[1] as $cle => $valeur)
                 {	
                 ?>
-                    <img src="<?php echo $valeur["urlPhoto"];?>">
+                    <img src="<?php echo "./images/" . $valeur["urlPhoto"];?>">
                 <?php
+                    $compteurPhoto++;
+                    
+                    if($compteurPhoto == 3 && $cle != (count($data[1]))-1)
+                    {
+                     ?>
+                        </article>
+                        <article>
+                    <?php
+                        $compteurPhoto=0;
+                    }
                 }   
             }
             else
@@ -17,6 +32,7 @@
                 <?php
             }
         ?>
+        </article>
 	</section>
 	<ul class="elementOeuvre">
         <?php
@@ -46,32 +62,34 @@
                 {
                 ?>
                 <li>
-                    <?php 
-                    if($auteur["prenomArtiste"] != "")
-                    {
-                        echo $auteur["prenomArtiste"];
-                        
-                        if($auteur["nomArtiste"] != "")
+                    <a href="./index.php?requete=listeOeuvreParAuteurId&idArtiste=<?php echo $auteur["idArtiste"]; ?>">
+                        <?php 
+                        if($auteur["prenomArtiste"] != "")
                         {
-                            echo" ".$auteur["nomArtiste"];
+                            echo $auteur["prenomArtiste"];
+
+                            if($auteur["nomArtiste"] != "")
+                            {
+                                echo" ".$auteur["nomArtiste"];
+                            }
                         }
-                    }
-                    else
-                    {
-                        if($auteur["nomArtiste"] != "")
+                        else
                         {
-                            echo $auteur["nomArtiste"];
+                            if($auteur["nomArtiste"] != "")
+                            {
+                                echo $auteur["nomArtiste"];
+                            }
                         }
-                    }
-                    
-                    if($auteur["collectif"] != "")
-                    {
-                        if($auteur["prenomArtiste"] == "" && $auteur["nomArtiste"] == "")
-                        {	
-                            echo $auteur["collectif"]." (collectif)";
+
+                        if($auteur["collectif"] != "")
+                        {
+                            if($auteur["prenomArtiste"] == "" && $auteur["nomArtiste"] == "")
+                            {	
+                                echo $auteur["collectif"]." (collectif)";
+                            }
                         }
-                    }
-                    ?>
+                        ?>
+                    </a>
                 </li>
                 <?php
                 }

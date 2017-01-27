@@ -11,11 +11,13 @@
             toutURL = document.getElementById("toutURL").value;				//on va chercher la string contenant les url d'images
             toutTitre = document.getElementById("toutTitre").value;			//on va chercher la string contenant les titres d'images
             toutDescr = document.getElementById("toutDescr").value;			//on va chercher la string contenant les descriptions d'images
+            toutLien = document.getElementById("toutLien").value;			//on va chercher la string contenant les liens vers la pages d'oeuvres
             
             //on split les strings sur le caractère ~ pour en faire des tableaux
             toutURL = toutURL.split('~');
             toutTitre = toutTitre.split('~');
             toutDescr = toutDescr.split('~');
+            toutLien = toutLien.split('~');
             
             //taille des tableaux
             taille = toutURL.length;
@@ -47,18 +49,21 @@
             if(((compteurCar + 1)%taille) != 0)
             {
                 console.log(compteurCar +" on monte");
-                divCarousel.style.backgroundImage = 'url('+toutURL[compteurCar]+')';
-                
-                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+" "+toutDescr[compteurCar];
+
+                divCarousel.style.backgroundImage = 'url(./images/'+toutURL[compteurCar]+')';
+
+                document.getElementById("descrCar").href = toutLien[compteurCar];
+                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+"<br/>"+toutDescr[compteurCar];
                 
                 compteurCar ++;
             }
             else if(((compteurCar + 1)%taille) == 0)
             {
                 console.log(compteurCar +" on recommence");
-                divCarousel.style.backgroundImage = 'url('+toutURL[compteurCar]+')';
-                
-                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+" "+toutDescr[compteurCar];
+                divCarousel.style.backgroundImage = 'url(./images/'+toutURL[compteurCar]+')';
+
+                document.getElementById("descrCar").href = toutLien[compteurCar];
+                document.getElementById("descrCar").innerHTML = toutTitre[compteurCar]+"<br/>"+toutDescr[compteurCar];
                 
                 compteurCar  = 0;
             }  

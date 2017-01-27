@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="./css/entete.css" type="text/css" media="screen">
         <link rel="stylesheet" href="./css/soumissionUsager.css" type="text/css" media="screen">
 		<link rel="stylesheet" href="./css/listes.css" type="text/css" media="screen">
+		<link rel="stylesheet" href="./css/carte.css" type="text/css" media="screen">
         
         <!-- Google font ------------> 
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
@@ -29,8 +30,11 @@
         <script src="./js/soumissionUsager.js"></script>
         <script src="./js/listeLien.js"></script>
         <script src="./js/carroussel.js"></script>
-		
-		<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+        <script src="./js/mail.js"></script>
+
+        
+        <!-- Fort Awesome ------------->
+        <script src="https://use.fortawesome.com/93986164.js"></script>
 		
         <!-- JQUERY -----------------> 
         <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script-->

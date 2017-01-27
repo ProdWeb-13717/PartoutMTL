@@ -1,9 +1,14 @@
 /*  TABLE DES MATIÈRES
     - Typo CSS
     - Global
+    - Flexbox
+    - Marges
     - Entête
-    - Carousel
+    - Barre de recherche 
     - Accueil
+    - Carousel
+    - Pied de page
+    - Page contact
 -------------------------------------------------------------*/
 
 
@@ -23,6 +28,72 @@
 *{
     font-family: 'Fjalla One', sans-serif;
     letter-spacing: 1px;
+}
+
+
+/* Flexbox
+-------------------------------------------------------------*/
+.row{
+    display: flex;
+    flex-flow: row;
+}
+
+.column{
+    display: flex;
+    flex-flow: column;
+}
+
+.centre{
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-end{
+    align-self: flex-end;
+}
+
+.flex-row-left-user{
+	display: flex;
+	flex-direction: 	row;
+	flex-wrap:			nowrap;
+	justify-content: 	left;
+	align-items: 		center;
+	align-content: 		center;
+}
+
+@media (max-width: 600px) {
+    .flex-row-left-user{
+	   flex-direction:     column;
+	   justify-content:    left;
+	   align-items:        flex-start;
+	   align-content:      flex-start;
+    }
+}
+
+
+/* Marges
+-------------------------------------------------------------*/
+
+.marginDivPrincipale{
+    margin-top : 50px;
+    margin-left: 40px;
+}
+
+@media (max-width: 480px) {
+    .marginDivPrincipale{
+        margin-left: 20px;
+    
+    }
+}
+
+.espaceHaut30{
+    margin-top: 0px;
+}
+
+@media (max-width: 800px) {    
+    .espaceHaut30{
+        margin-top: 30px;
+    }
 }
 
 
@@ -54,9 +125,8 @@
     padding-top : 15px;
     text-align:center;
     background-color : white;
-    //background-color : #547968;
-    //border : solid black 2px;
 }
+
 #menuUser #liRecherche{
     width : 150px; 
 }
@@ -88,51 +158,82 @@
     letter-spacing: 4px;   
 }
 
-#btnRecherche , #btnRechercheAvance{
-	background-color: #4d4d4d;
-	text-align: center;
-	color: white;
-	width: 150px;
+
+/* Barre de recherche
+-------------------------------------------------------------*/
+
+#barRecherche p{
+    display: inline;
+    font-family: 'Muli', sans-serif;
 }
 
-#motRecherche, #motRechercheAvance{
-	width: 350px;
-}
-
-#msgResultat{
-	color : #009999;
-	text-align: center;
-	
+#barRecherche select{
+    border-radius: 5px;
 }
 
 .selectRechercheAvance{
-	margin-right: 10px;
+	font-family: 'Muli', sans-serif;
+    margin-right: 10px;
 }
 
+.selectRechercheAvance option{
+    font-family: 'Muli', sans-serif;
+}
 
-/* Carousel
--------------------------------------------------------------*/
+#labelSouCategorie select{
+    border-radius: 5px;
+}
 
-#carousel{ 
-	background: url(../images/Acceuil_1.jpg) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	width: 100%;
-	max-height: 500px;
-	margin: 0;
+#motRecherche, #motRechercheAvance{
+    width: 350px;
+    font-family: 'Muli', sans-serif;
+    border : solid #000033 2px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#btnRecherche, #btnRechercheAvance{
+	font-family: 'Muli', sans-serif;
 	text-align: center;
-	position:relative;
-    margin-bottom: 100px;
+    background-color: #000033;
+	color: white;
+	width: 120px;
+    border : solid transparent 2px;
+    border-radius: 5px;
 }
 
-#carousel span{
-	color :white;
-	font-size:1.2em;
-	position:absolute;
-	bottom: 1em;
-	left:1em;
+#btnRecherche:hover{
+	background-color: white;
+	color: #000033;
+    border: solid #000033 2px;;
+}
+
+#btnRechercheAvance:hover{
+	background-color: white;
+	color: #000033;
+    border: solid #000033 2px;; 
+}
+
+@media (max-width: 800px) {
+    #motRecherche, #motRechercheAvance{
+        width: 200px;
+    }
+    
+    
+}
+
+@media (max-width: 480px) {
+
+    .recherchePageAccueil{
+        margin-left: -150px;
+
+    }
+}
+
+#msgResultat{
+    font-family: 'Muli', sans-serif;
+	color : #009999;
+	text-align: center;
 }
 
 
@@ -190,5 +291,138 @@
 #apropos{
 	padding: 20px;
 	width: 100%
-}	
+}
+
+
+/* Carousel
+-------------------------------------------------------------*/
+
+#carousel{ 
+	background: url(../images/Acceuil_1.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	width: 100%;
+	height: 700px;
+	margin: 0;
+	text-align: center;
+	position:relative;
+    margin-bottom: 40px;
+}
+
+#carousel a{
+	color :white;
+	font-size:1.2em;
+	position:absolute;
+	bottom: 1em;
+	left: 1em;
+}
+
+#descrCar{
+    margin-bottom: 100px;
+    margin-left: 50px;
+    text-decoration: none;
+    font-size: 2em;
+    letter-spacing: 0.15em;
+    text-align: left;
+}
+
+@media (max-width: 800px){
+    #descrCar{
+        margin-bottom: 180px;
+        margin-left: 10px;
+    }
+}
+
+
+/*Pied de page
+-------------------------------------------------------------*/
+footer{
+	height: 120px;
+    margin-top: 25px;
+    /* source du dégradé : http://www.w3schools.com/css/tryit.asp?filename=trycss3_gradient-linear_diagonal */
+    background-color: #050515;
+    background: #050515;                                                /* Par défaut si le navigateur ne prend pas le dégradé */    
+    background: -webkit-linear-gradient(left top, #050515, #000033);    /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(bottom right, #050515, #000033);     /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(bottom right, #050515, #000033);   /* Firefox 3.6 - 15 */
+    background: linear-gradient(to bottom right, #050515, #000033);     /* Syntaxe standard */
+	
+	color:white;
+	font-family: 'Muli', sans-serif;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  
+}
+
+footer div:first-child{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    min-width: 100%;
+    margin:  1em 1.5em 0 0;
+    line-height: 30px;
+}
+
+footer div:first-child a:link,footer div:first-child a:visited,footer div:first-child a:hover, footer div:first-child a:active{
+    color:white;
+	font-family: 'Muli', sans-serif;
+    text-decoration: none;
+}
+
+footer span.pied:last-child{
+   font-size: 10px;
+    align-self: center;
+}
+
+footer span.footIcon i{
+    font-size: 1.75em;
+    margin-left: 10px;
+}
+
+/*Page contact
+-------------------------------------------------------------*/
+
+.pageContact{
+    padding-bottom: 230px;
+}
+
+#contact{
+    list-style-type: none;
+    
+}
+
+.contactsTitre{
+    display: inline-block;
+    font-family: 'Muli', sans-serif;
+    color: grey;
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.contactInfo{
+    display: inline-block;
+    letter-spacing: 0.1em;
+    color: black;
+}
+
+#adresse{
+    list-style-type: none;
+    margin-top: -32px;
+    margin-left: 60px;
+
+}
+
+@media (max-width: 480px) {
+    #contact{
+        margin-left: -40px;
+    
+    }
+}
+
 

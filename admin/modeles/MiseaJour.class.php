@@ -25,11 +25,34 @@ class MiseaJour extends TemplateBase
 		return "MiseAJours";
 	}
 	
-	public function enregistrement($donnes)
-	{	
-		$momentImportation = date("Y-m-d H:i:s");// obtienne le moment de l'importation de donnés pour le garder dans la table des historiques
-		$this->insererMiseAJour($momentImportation,$donnes["Oeuvres"],$_SESSION['authentifie']);
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      SELECT      /////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////// 
+	
+	
+	public function obtenirXenregistrement($nEnrg,$table,$cle)
+	{
+		try
+		{
+			if($table == null)
+			{
+				$table = $this->getTable();
+			}
+            $stmt = $this->connexion->prepare("SELECT * FROM " . $table . " ORDER BY " . $cle ." DESC LIMIT ".$nEnrg);
+			$stmt->execute();
+			return $stmt->fetchAll();
+		}
+		catch(Exception $exc)
+		{
+			return false;
+		}
 	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      INSERT     //////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
 	
 	public function insererMiseAJour($date,$nOeuvres,$usager)
 	{
@@ -51,6 +74,16 @@ class MiseaJour extends TemplateBase
 		}
 	}
 	
+	///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      MÉTHODES     ////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public function enregistrement($donnes)
+	{	
+		$momentImportation = date("Y-m-d H:i:s");// obtienne le moment de l'importation de donnés pour le garder dans la table des historiques
+		$this->insererMiseAJour($momentImportation,$donnes["OeuvresTotal"],$_SESSION['authentifie']);
+	}
 	
 }
 

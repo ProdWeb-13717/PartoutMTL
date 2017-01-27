@@ -25,6 +25,11 @@ class Oeuvres extends TemplateBase
 		return "Oeuvres";
 	}
 	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      SELECT      /////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////// 
+	
 	public function obtenirOeuvre($noInterne)
 	{		
 		try
@@ -39,76 +44,11 @@ class Oeuvres extends TemplateBase
 			return false;
 		}
 	}
+		
+	///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      INSERT     //////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
 	
-	public function traiterOeuvre($oeuvre,$arrondissements,$categories)
-	{		
-		//Effacer les spaces des valeurs numeriques pour eviter des conflits
-		$oeuvre->CoordonneeLatitude = trim($oeuvre->CoordonneeLatitude);
-		$oeuvre->CoordonneeLongitude = trim($oeuvre->CoordonneeLongitude);
-		
-		
-		//Conversion de les donnes en date time
-		
-		$expDate = "/-?([0-9]{10,13})/";//Expression reguliere pour obtenir le timestamp
-		if($oeuvre->DateFinProduction != null)
-		{
-			preg_match($expDate, $oeuvre->DateFinProduction, $resultat);
-			$oeuvre->DateFinProduction = date("Y-m-d", $resultat[0]/1000);
-		}
-		if($oeuvre->DateAccession != null)
-		{
-			preg_match($expDate, $oeuvre->DateAccession, $resultat);
-			$oeuvre->DateAccession = date("Y-m-d", $resultat[0]/1000);	
-		}
-		
-		//Obtenir l'id de la categorie de l'oeuvre
-		
-		$noCategories = count($categories);
-		for($i=0;$i<$noCategories;$i++)
-		{
-			if($oeuvre->SousCategorieObjet == $categories[$i]["nomCategorie"])
-			{
-				$idCat = $categories[$i]["idCategorie"];
-				break;
-			}
-			
-		}
-		
-		//Obtenir l'id d'arrondissement de l'oeuvre
-		
-		$noArrondissements = count($arrondissements);
-		for($i=0;$i<$noArrondissements;$i++)
-		{
-			if($oeuvre->Arrondissement == $arrondissements[$i]["nomArrondissement"])
-			{
-				$idArron = $arrondissements[$i]["idArrondissement"];
-				break;
-			}
-			
-		}
-		
-		$insertion = $this->insererOeuvre
-		(
-			$oeuvre->Titre,
-			$oeuvre->TitreVariante,
-			$oeuvre->DateFinProduction,
-			$oeuvre->DateAccession,
-			$oeuvre->NomCollection,
-			$oeuvre->ModeAcquisition,
-			$oeuvre->Materiaux,
-			$oeuvre->Technique,
-			$oeuvre->DimensionsGenerales,
-			$oeuvre->Parc,
-			$oeuvre->Batiment,
-			$oeuvre->AdresseCivique,
-			$oeuvre->CoordonneeLatitude,
-			$oeuvre->CoordonneeLongitude,
-			$oeuvre->NumeroAccession,
-			$oeuvre->NoInterne,
-			$idCat,
-			$idArron
-		);
-	}
 	
 	public function insererOeuvre
 	(
@@ -208,16 +148,16 @@ class Oeuvres extends TemplateBase
 		}
 	}
 	
-	/*public function completerOeuvre($numInt,$idCat,$idArron)
+	
+	public function insererArtistesOeuvres($idArt,$idOeuvre)
 	{
 		try
 		{	
-			$stmt = $this->connexion->prepare("UPDATE ". $this->getTable() ." SET idCategorie = :idCat, idArrondissement= :idArron WHERE noInterne = :numInt");
+			$stmt = $this->connexion->prepare("INSERT INTO ArtistesOeuvres (idArtiste,idOeuvre) VALUES (:idArt, :idOeuvre)");
 			$stmt->execute(array(
 			
-				"idCat"					=>$idCat,
-				"idArron"				=>$idArron,
-				"numInt"				=>$numInt
+				"idArt"				=>$idArt,
+				"idOeuvre"			=>$idOeuvre
 			
 			));
 			return 1;
@@ -226,7 +166,83 @@ class Oeuvres extends TemplateBase
 		{
 			return 0;
 		}
-	}*/
+	}
+	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      MÉTHODES     ////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	public function traiterOeuvre($oeuvre,$arrondissements,$categories)
+	{		
+		//Effacer les spaces vides au debut et a la fin des valeurs numeriques pour eviter des conflits
+		$oeuvre->CoordonneeLatitude = trim($oeuvre->CoordonneeLatitude);
+		$oeuvre->CoordonneeLongitude = trim($oeuvre->CoordonneeLongitude);
+		
+		
+		//Conversion de les donnes en date time
+		
+		$expDate = "/-?([0-9]{10,13})/";//Expression reguliere pour obtenir le timestamp
+		if($oeuvre->DateFinProduction != null)
+		{
+			preg_match($expDate, $oeuvre->DateFinProduction, $resultat);
+			$oeuvre->DateFinProduction = date("Y-m-d", $resultat[0]/1000);
+		}
+		if($oeuvre->DateAccession != null)
+		{
+			preg_match($expDate, $oeuvre->DateAccession, $resultat);
+			$oeuvre->DateAccession = date("Y-m-d", $resultat[0]/1000);	
+		}
+		
+		//Obtenir l'id de la categorie de l'oeuvre
+		
+		$noCategories = count($categories);
+		for($i=0;$i<$noCategories;$i++)
+		{
+			if($oeuvre->SousCategorieObjet == $categories[$i]["nomCategorie"])
+			{
+				$idCat = $categories[$i]["idCategorie"];
+				break;
+			}
+			
+		}
+		
+		//Obtenir l'id d'arrondissement de l'oeuvre
+		
+		$noArrondissements = count($arrondissements);
+		for($i=0;$i<$noArrondissements;$i++)
+		{
+			if($oeuvre->Arrondissement == $arrondissements[$i]["nomArrondissement"])
+			{
+				$idArron = $arrondissements[$i]["idArrondissement"];
+				break;
+			}
+			
+		}
+		
+		$insertion = $this->insererOeuvre
+		(
+			$oeuvre->Titre,
+			$oeuvre->TitreVariante,
+			$oeuvre->DateFinProduction,
+			$oeuvre->DateAccession,
+			$oeuvre->NomCollection,
+			$oeuvre->ModeAcquisition,
+			$oeuvre->Materiaux,
+			$oeuvre->Technique,
+			$oeuvre->DimensionsGenerales,
+			$oeuvre->Parc,
+			$oeuvre->Batiment,
+			$oeuvre->AdresseCivique,
+			$oeuvre->CoordonneeLatitude,
+			$oeuvre->CoordonneeLongitude,
+			$oeuvre->NumeroAccession,
+			$oeuvre->NoInterne,
+			$idCat,
+			$idArron
+		);
+	}
 	
 	public function inclureArtistesOeuvres($oeuvreJson,$listeOeuvres,$qOeuvres,$listeArtistes,$qArtistes)
 	{
@@ -257,26 +273,6 @@ class Oeuvres extends TemplateBase
 		}
 		
 	}
-	
-	public function insererArtistesOeuvres($idArt,$idOeuvre)
-	{
-		try
-		{	
-			$stmt = $this->connexion->prepare("INSERT INTO ArtistesOeuvres (idArtiste,idOeuvre) VALUES (:idArt, :idOeuvre)");
-			$stmt->execute(array(
-			
-				"idArt"				=>$idArt,
-				"idOeuvre"			=>$idOeuvre
-			
-			));
-			return 1;
-		}
-		catch(Exception $exc)
-		{
-			return 0;
-		}
-	}
-	
 	
 }
 

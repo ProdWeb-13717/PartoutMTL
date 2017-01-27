@@ -22,12 +22,17 @@ class Artistes extends TemplateBase
 	{
 		return "Artistes";
 	}
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      SELECT      /////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
 	
 	public function obtenirArtiste($nom,$prenom,$collectif)
 	{		
 		try
 		{	
-			$stmt = $this->connexion->prepare("SELECT * FROM " . $this->getTable() . " WHERE nomArtiste = :nom AND prenomArtiste = :prenom AND collectif = :collectif");
+			$stmt = $this->connexion->prepare("SELECT * FROM " . $this->getTable() . 
+                                              "WHERE nomArtiste = :nom AND prenomArtiste = :prenom AND collectif = :collectif");
 			$stmt->execute(
 			array(
 			
@@ -44,14 +49,17 @@ class Artistes extends TemplateBase
 		}
 	}
     
-    //public function obtenirArtisteDuneOeuvre
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////      INSERT     //////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////
     
-	
+    
 	public function insererArtiste($nom,$prenom,$collectif)
 	{		
 		try
 		{	
-			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() ." (nomArtiste,prenomArtiste,collectif) VALUES(:nom, :prenom, :collectif)");
+			$stmt = $this->connexion->prepare("INSERT INTO ". $this->getTable() . "(nomArtiste,prenomArtiste,collectif) 
+                                               VALUES(:nom, :prenom, :collectif)");
 			$stmt->execute(
 			array(
 				":nom"          => $nom, 

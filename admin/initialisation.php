@@ -15,7 +15,10 @@
  */
   
 	session_start();
-  
+	if(empty($_SESSION['MotDePasseDefault']))
+	{
+		$_SESSION['MotDePasseDefault'] = md5('1234');
+	}
   
 	if(empty($_GET['requete']))
 	{
