@@ -81,7 +81,7 @@
 		})();
 	</script>
 <div class="categorie marginDivPrincipale adminTitre"> 
-    <h1>CHANGER LE NOUVEAU MOT DE PASSE</h1>
+    <h1>MODIFIER VOTRE MOT DE PASSE</h1>
 	<div class="largeur100 margin-hauteur100">
 		<form class="changementMDP" name="changementMDP" method="POST">
 			<label for="pass">NOUVEAU MOT DE PASSE </label><input type="password" id="pass" name="pass"/><span id="nouveauPassErreur" ></span>	
@@ -97,6 +97,7 @@
 		<input type="hidden" name="usager"/>		
 		<input type="hidden" name="pass"/>		
 	</form>
+	<span>* Votre mot de passe doit comprendre minimalement 6 carractères et commencer par une lettre</span>
 	<br>
 </div>
 
