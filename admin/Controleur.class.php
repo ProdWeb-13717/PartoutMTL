@@ -378,10 +378,39 @@ class Controleur
 					break;
 						
 				case 'ajouterImageCarroussel':
-					$_SESSION['ongletActif'] = 'affichage';
-					$this->afficherEnteteAdmin();
-					$this->ajouterImageCarroussel();
-					break;
+                    if(isset($_GET['id']))
+                    { 
+                        $modelCarroussel = new Carroussel();                                                            // appelle modèle "Carroussel"
+                        $rangePhoto = $modelCarroussel->obtenir($_GET['id'], "idPhoto", "Photos");                      // récupère les infos de la photo dans sa table
+                        $idOeuvre = $rangePhoto['idOeuvre'];
+                        $urlPhoto = $rangePhoto['urlPhoto'];   
+                        
+                        $modelCarroussel = new Carroussel();                                                            // appelle modèle "Carroussel"
+                        $titrePhoto = $modelCarroussel->obtenirTitreImages($idOeuvre);                                  // récupère le titre de l'oeuvre
+
+                        $modelCarroussel = new Carroussel();                                                            // appelle modèle "Carroussel"
+                        $idDeLArtiste = $modelCarroussel->obtenirIdArtiste($idOeuvre, "idOeuvre", "ArtistesOeuvres");   // récupère l'id de l'artiste
+     
+                        $modelCarroussel = new Carroussel();                                                            // appelle modèle "Carroussel"
+                        $artisteOeuvrePhoto = $modelCarroussel->obtenir($idDeLArtiste, "idArtiste", "Artistes");        // récupère le nom de l'artiste ou du collectif
+                        $artistesOeuvre = "";
+    
+                        if($artisteOeuvrePhoto['prenomArtiste'] != NULL)    {   $artistesOeuvre .=  $artisteOeuvrePhoto['prenomArtiste'] . " ";};
+                        if($artisteOeuvrePhoto['nomArtiste'] != NULL)       {   $artistesOeuvre .=  $artisteOeuvrePhoto['nomArtiste'] . " "; };
+                        if($artisteOeuvrePhoto['collectif'] != NULL) {   $artistesOeuvre .=  $artisteOeuvrePhoto['collectif']; };
+
+                        $modelCarroussel = new Carroussel();                                                            // appelle modèle "Carroussel"
+                        $data = $modelCarroussel->ajouterImageCarroussel($titrePhoto,$urlPhoto,$idOeuvre, $artistesOeuvre); // insère la photo dans le carrousel avec ses informations
+
+                        header('Location: index.php?requete=affichage');
+                        break;
+                    }
+                    else
+                    {
+                        header('Location: index.php?requete=affichage');
+                        break;
+                    }
+					
 				
 				case 'suprimerImageCarroussel':
 					$_SESSION['ongletActif'] = 'affichage';
@@ -696,16 +725,6 @@ class Controleur
 		header('Location: index.php?requete=affichage');
 	}
 	
-	private function ajouterImageCarroussel()
-	{
-		$modelCarroussel = new Carroussel();
-		$data = $modelCarroussel->ajouterImageCarroussel($_POST['carrousselAjoutTitre'],$_POST['choixPhoto'],$_POST['idOeuvre']);
-		unset($_POST['carrousselAjoutTitre']);
-		unset($_POST['choixPhoto']);
-		unset($_POST['idOeuvre']);
-		header('Location: index.php?requete=affichage');
-	}
-    
     
     /*-- ADMIN ---------------------------------------------------------------------------*/
     

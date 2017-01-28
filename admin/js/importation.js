@@ -12,7 +12,7 @@
 (function(){
     
    
-   window.addEventListener("load", function(){                                          // au chargement de la page
+   window.addEventListener("load", function(){                                              // au chargement de la page
      
        if(document.querySelector(".optionBDContainer"))
        {    

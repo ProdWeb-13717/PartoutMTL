@@ -3,8 +3,6 @@
     - Global
     - Flexbox
     - Marges
-    - Couleur texte 
-    - Couleur background
     - Logo
     - Menu
     - Deconnection Admin
@@ -188,35 +186,10 @@ a{
 }
 
 
-/* Couleur texte
--------------------------------------------------------------*/
-
-.blanc{
-	color : white;
-}
-
-.vert{
-	color: #016737;
-}
-
-
-/* Couleur background
--------------------------------------------------------------
-.fondVert{
-	//background-color: #016737;
-    //background-color: #313e54;
-}
-
-.fondBlanc{
-	background-color: white;
-}
-*/
-
 /* Logo
 -------------------------------------------------------------*/
 #logo{
     font-size : 3.5em;
-    //color : #016737;
     color: #1f2a33;
     margin-top : 40px;
     margin-left : 40px;
@@ -236,7 +209,6 @@ a{
 
 .ligneLogo{
 	margin-top : -23px;
-	//background-color: #016737;
     background-color: #1f2a33; 
 	height: 50px;
 }
@@ -276,6 +248,7 @@ a{
 
 /* Menu 
 -------------------------------------------------------------*/
+
 .LigneCouleurMenu
 {
 	//background-color: #016737;
@@ -330,6 +303,7 @@ a{
 	background-color : white;
     display : inline-block;
     color: black;
+    pointer-events: none;
 	border-left : solid white 2px;
     border-right : solid white 2px;
     border-top : solid white 2px;
@@ -338,15 +312,8 @@ a{
 }
 
 .menu li.actif a{
+	//color : #016737;
     color: #1f2a33;
-}
-
-.menu li.actif:hover {
-	margin-top: 30px;
-}
-
-.menu li.actif:hover a{
-	padding-top: 10px;
 }
 
 @media (max-width: 800px) /*ajustement menu*/
@@ -410,7 +377,6 @@ a{
 	top: 10px;
 	right: 20px;
 	align-content: flex-end;
-	//color : #016737; 
 	color : #1f2a33; 
 	text-align: right;
 }
@@ -429,7 +395,6 @@ a{
     #nomUsager{
         font-size: 0.8em;
     }
-    
 }
 
 
@@ -491,7 +456,6 @@ a{
     left: 75.5%;
     padding: 5px 20px;
 	margin : 20px;
-    //background-color: #016737;
     background-color: #1f2a33;
 	border : solid transparent 2px;
 }
@@ -525,19 +489,6 @@ li{
 }
 
 
-/* Formulaire
--------------------------------------------------------------*/
-/*
-.form{
-    //width: 570px;
-    width: 100%;
-    color : black;
-    padding-left: 100px;
-    padding-top : 20px;
-    padding-bottom: 20px;
-}
-*/
-
 /* Accueil - Connection Admin
 -------------------------------------------------------------*/
 #deconnectionAdmin{
@@ -556,9 +507,6 @@ li{
 }
 
 .autentificationForm{
-	//width: 570px;
-	//width: 60%;
-    //color : #016737;
     color : #1f2a33;
 	display: flex;
 	flex-direction: column;

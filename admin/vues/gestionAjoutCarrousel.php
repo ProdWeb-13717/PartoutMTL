@@ -17,13 +17,9 @@
         
         <!-- AJOUTER UNE CATÉGORIE ------------------------------------------------------------------->
         <article class="espaceADroite10">
-            <h1>AJOUTER UNE IMAGE AU CARROUSSEL</h1>
+            <h1>AJOUTER UNE IMAGE AU CARROUSEL</h1>
 			<form method="POST" id="carrousselAjoutForm" action="index.php?requete=ajouterImageCarroussel">
-				<label for="carrousselAjoutTitre" class="labelCategorie">Titre : 
-					<input type="text" name="carrousselAjoutTitre" id="carrousselAjoutTitre"/>
-				</label>
-				<br>
-				
+
 				<?php
 				$nb = 0;
 				foreach($data as $photo)
@@ -35,9 +31,18 @@
 						<?php
 					}
 					?>
+					<input type="hidden" name="idOeuvre" class="idOeuvre" value="<?php echo $photo['idOeuvre']; ?>"/>
+					<h3 name="carrousselAjoutTitre" id="carrousselAjoutTitre">
+						<?php 
+                            $modelCarroussel = new Carroussel();
+                            $titrePhoto = $modelCarroussel->obtenirTitreImages($photo['idOeuvre']);
+                            echo $titrePhoto;
+                        ?>
+                    </h3>
+					
+					<br>
 					<label for="choixPhoto">
 						<input type="radio" name="choixPhoto" class="choixPhoto" value="<?php echo $photo['idPhoto']; ?>"/>
-						<input type="hidden" name="idOeuvre" class="idOeuvre" value="<?php echo $photo['idOeuvre']; ?>"/>
 					
 						<img src="../images/<?php echo $photo["urlPhoto"]; ?>" height="60" width="110"/>
 					</label>

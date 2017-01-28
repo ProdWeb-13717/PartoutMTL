@@ -1,4 +1,4 @@
-﻿
+
 	<script type="text/javascript"> 
 		(function()
 		{
@@ -97,7 +97,7 @@
 		<input type="hidden" name="usager"/>		
 		<input type="hidden" name="pass"/>		
 	</form>
-	<span>* Votre mot de passe doit comprendre minimalement 6 carractères et commencer par une lettre</span>
+	<span>* Votre mot de passe doit comprendre minimalement 6 caractères, commencer par une lettre majuscule et comprendre un chiffre</span>
 	<br>
 </div>
 

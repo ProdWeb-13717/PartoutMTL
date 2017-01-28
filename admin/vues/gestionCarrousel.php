@@ -18,9 +18,7 @@
 		if($data)
 		{
 			foreach($data as $carroussel)
-			{	
-				
-				//$monUtilisateur = $utilisateur["idOeuvre"];
+			{
 				?>
 				<section id='<?php echo $carroussel["idCaroussel"]?>' class="elemListe flex-column-left espaceHaut10">
 					
@@ -29,14 +27,9 @@
 						<img src="../images/<?php echo $carroussel["urlPhoto"]; ?>" height="220" width="345"/>
 					</article>
 					
-					<article  class="liens espaceHaut10 flex-row-left">
+					<article  class="liens imgCarrouselAdmin flex-row-left">
 						<a href="./index.php?requete=suprimerImageCarroussel&idCaroussel=<?php echo $carroussel["idCaroussel"]?>">SUPPRIMER</a>
 					</article>
-					
-					<article>
-					
-					</article>
-					
 					
 				</section>
 				<?php
@@ -46,7 +39,7 @@
 		else
 		{
 			?>
-			<span>le carrousel ne coutien aucune image présentement</span>
+			<span>Le carrousel ne coutient aucune image présentement</span>
 			<?php
 		}
 		?>

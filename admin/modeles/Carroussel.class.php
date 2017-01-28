@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Class Modele
  * Modèle de classe modèle. Dupliquer et modifier pour votre usage.
@@ -31,20 +31,19 @@ class Carroussel extends TemplateBase
     ///////////////////////////////////////////////////////////////////////////////////////////
 	
 	
-	public function ajouterImageCarroussel($titre,$idPhoto,$idOeuvre)
+	public function ajouterImageCarroussel($titre, $urlPhoto, $idOeuvre, $nomArtiste)
 	{
 		try
 		{	
-			$urlPhoto = "photo_" . $idPhoto . ".jpg";
-			$urlLien = "index.php?requete=afficheOeuvre&idOeuvre=1271" . $idOeuvre;
-			$stmt = $this->connexion->prepare("INSERT INTO Carroussel (titre,urlPhoto, urlLien) VALUES (:titre, :urlPhoto, :urlLien)");
+			$urlLien = "index.php?requete=afficheOeuvre&idOeuvre=" . $idOeuvre;
+			$stmt = $this->connexion->prepare("INSERT INTO Carroussel (titre,urlPhoto, urlLien, description) VALUES (:titre, :urlPhoto, :urlLien, :nomArtiste)");
 			$stmt->execute(array(
-			
-				"titre"				=>$titre,
-				"urlPhoto"			=>$urlPhoto,
-				"urlLien"			=>$urlLien
-			
+				":titre"			=> $titre,
+				":urlPhoto"			=> $urlPhoto,
+				":urlLien"			=> $urlLien,
+                ":nomArtiste"       => $nomArtiste
 			));
+            
 			return 1;
 		}
 		catch(Exception $exc)
@@ -66,8 +65,38 @@ class Carroussel extends TemplateBase
 			return array();
 		}
 	}
-	
-
+    
+    public function obtenirTitreImages($idOeuvre)
+	{
+		try
+		{	
+			$stmt = $this->connexion->prepare("SELECT titre FROM Oeuvres
+                                               WHERE idOeuvre = $idOeuvre");
+			$stmt->execute();
+            $data = $stmt->fetch();
+            return $data['titre']; 
+		}
+		catch(Exception $exc)
+		{
+			return array();
+		}
+	}
+        
+    public function obtenirIdArtiste($idOeuvre)
+	{
+		try
+		{	
+			$stmt = $this->connexion->prepare("SELECT idArtiste FROM ArtistesOeuvres
+                                               WHERE idOeuvre = $idOeuvre ");
+			$stmt->execute();
+            $data = $stmt->fetch();
+            return $data['idArtiste']; 
+		}
+		catch(Exception $exc)
+		{
+			return array();
+		}
+	}
 	
 }
 

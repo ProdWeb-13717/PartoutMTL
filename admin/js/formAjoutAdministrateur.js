@@ -19,8 +19,7 @@
             {
                 //console.log(evt.target.firstChild.nextSibling.nodeValue);
 				
-				
-			//valeur qui requeille les info du formulaire; ////////////////////////////////////
+            //valeur qui requeille les info du formulaire; ////////////////////////////////////
 				var prenom 			= document.getElementById("AjoutAdminPrenom").value;
 				var nom 			= document.getElementById("AjoutAdminNom").value;
 				var nomUsager 		= document.getElementById("AjoutAdminUsager").value;
@@ -75,8 +74,6 @@
 								var niveau = niveauAdmins[n].checked;
 							}
 						}
-						
-						
 						
 						window.location.href = "./index.php?requete=permissionAdmin";               
 					});

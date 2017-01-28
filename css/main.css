@@ -218,15 +218,12 @@
     #motRecherche, #motRechercheAvance{
         width: 200px;
     }
-    
-    
 }
 
 @media (max-width: 480px) {
 
     .recherchePageAccueil{
         margin-left: -150px;
-
     }
 }
 
@@ -326,6 +323,12 @@
     font-size: 2em;
     letter-spacing: 0.15em;
     text-align: left;
+    transition: color 0.5s ease;
+}
+
+#descrCar:hover{
+    
+    color: #000033;
 }
 
 @media (max-width: 800px){
