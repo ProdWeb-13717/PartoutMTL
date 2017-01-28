@@ -123,6 +123,20 @@ li, ul{
 
 /* Affichage individuel d'oeuvre
 -------------------------------------------------------------*/
+
+.elementOeuvre{
+    margin-bottom: 100px;
+}
+
+.elementOeuvre a{
+    text-decoration: none;
+    color: black;
+}
+
+.elementOeuvre a:hover{
+    color: #009999;
+}
+
 #oeuvreIndi ul.elementOeuvre{
 	list-style-type: none;
 }
@@ -130,12 +144,8 @@ li, ul{
 	margin-bottom:0.5em;
 }
 
-#oeuvreIndi ul.elementOeuvre li span{
-	font-size:1.5em;
-}
-
 #sectionImage{
-	max-width:50%;
+	//max-width:50%;
     min-height: 10em;
 	margin:0 auto;
 	padding:1em;
@@ -145,8 +155,10 @@ li, ul{
 
 #sectionImage img{
 	max-height: 10em;
-    max-width: 20%;
-    padding: 0 5px;
+    max-width: 80%;
+    padding: 10px;
+    border: solid #000033 1px;
+    margin: 10px;
 }
 
 #sectionImage span{
@@ -160,7 +172,6 @@ li, ul{
 
 .informationOeuvre{
     width: 100%;
-    //border: solid red 1px;
 }
 
 
@@ -186,50 +197,15 @@ li, ul{
     }
     
     #secPagination span.pageBalise{
-    display:inline;
-	width:2em;
-	font-family: 'Muli', sans-serif;
-    font-size: 0.9em;
-    letter-spacing: 0.25em;
-    color: grey;
-	margin: 0 5px;
-	text-align:center;
+        display:inline;
+        width:2em;
+        font-family: 'Muli', sans-serif;
+        font-size: 0.9em;
+        letter-spacing: 0.25em;
+        color: grey;
+        margin: 0 5px;
+        text-align:center;
     }
-    
-    #sectionImage{
-	max-width:90%;
-    min-height: 10em;
-	margin:0 auto;
-	padding:1em;
-    display: block;
-    text-align: center;
-    }
-
-    #sectionImage img{
-        max-height: 10em;
-        max-width: 40%;
-        padding: 5px;
-    }
-    
-}
-
-@media (max-width: 800px) {    
-    
-    #sectionImage{
-	max-width:90%;
-    min-height: 10em;
-	margin:0 auto;
-	padding:1em;
-    display: block;
-    text-align: center;
-    }
-
-    #sectionImage img{
-        max-height: 10em;
-        max-width: 40%;
-        padding: 5px;
-    }
-    
 }
 
 /* Téléphone ----------------------------- */
@@ -251,29 +227,14 @@ li, ul{
     }
     
     #secPagination span.pageBalise{
-    display:inline;
-	width:2em;
-	font-family: 'Muli', sans-serif;
-    font-size: 0.9em;
-    letter-spacing: 0.25em;
-    color: grey;
-	margin: 0 5px;
-	text-align:center;
+        display:inline;
+        width:2em;
+        font-family: 'Muli', sans-serif;
+        font-size: 0.9em;
+        letter-spacing: 0.25em;
+        color: grey;
+        margin: 0 5px;
+        text-align:center;
     }  
-    
-    #sectionImage{
-	max-width:90%;
-    min-height: 10em;
-	margin:0 auto;
-	padding:1em;
-    display: block;
-    text-align: center;
-    }
-
-    #sectionImage img{
-        max-height: 10em;
-        max-width: 40%;
-        padding: 5px;
-    }
 }
 
